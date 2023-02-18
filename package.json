@@ -1,0 +1,19 @@
+{
+  "name": "serenify",
+  "version": "1.0.0",
+  "description": "capstone project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruolin8/serenify.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ruolin8/serenify/issues"
+  },
+  "homepage": "https://github.com/ruolin8/serenify#readme"
+}
