@@ -1,5 +1,6 @@
 # serenify
 
 1. Clone the Repo
-2. npm i in terminal to install packages
-3. npm start to view website
+2. cd into my-app
+3. npm i to install packages
+4. npm start to view website
