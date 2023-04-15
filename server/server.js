@@ -3,9 +3,9 @@ const app = express();
 const cors = require("cors");
 
 //middleware
-app.use(express.json);
 app.use(cors());
+app.use(express.json);
 
 //ROUTES//
-app.use("/login", require());
-app.use;
+app.use("/login", require("./routers/login"));
+app.use("/dashboard", require("./routers/dashboard"));

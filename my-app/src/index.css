@@ -2,10 +2,14 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
+body,
+#root {
+  margin: 0 auto;
   background-color: #e5e8ea;
   font-family: "Noto Sans", sans-serif;
+  width: 400px;
+  height: 100vh;
+  border: 1px solid red;
 }
 
 h1,
