@@ -7,6 +7,15 @@
   /* background-color: red; */
 }
 
+.container h1 {
+  margin-top: 10%;
+}
+
+.top-landing {
+  width: 100%;
+  height: auto;
+}
+
 .green-bg {
   height: 40%;
   width: 100%;

@@ -1,12 +1,17 @@
 import React, { useState, useContext } from "react";
 import * as ROUTES from "../../constants/routes";
 import "./Home.css";
+import "../../index.css";
+import toplayer from "../../images/toplayer.png";
 
 export function Home() {
   return (
     <>
       <div class="container">
-        <div class="green-bg">test</div>
+        <img src={toplayer} alt="landing page" class="top-landing" />
+        {/* <div class="green-bg">test</div> */}
+        <h1>Welcome to Serenify</h1>
+        <i class="bi bi-arrow-right-circle"></i>
       </div>
     </>
   );

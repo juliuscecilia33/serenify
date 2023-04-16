@@ -7,9 +7,9 @@ const pool = new Pool({
   port: 5432,
   ssl: true,
 });
-pool.connect(function (err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
+// pool.connect(function (err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
 
 module.exports = pool;

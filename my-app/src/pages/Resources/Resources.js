@@ -5,9 +5,9 @@ import Nav from "../Nav/Nav.js";
 export function Resources() {
   return (
     <>
-      <header>
-        <Nav />
-      </header>
+      {/* <header> */}
+      {/* <Nav /> */}
+      {/* </header> */}
 
       <body>
         <div className="post">

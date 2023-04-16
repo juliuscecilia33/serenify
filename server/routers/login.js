@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
     } = req.body;
 
     let newUser = await pool.query(
-      "INSERT INTO tbluser (useremail, username, userpassword, logintime, portrait, blocklist, blockedlist, reportcount) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+      "INSERT INTO tbluser (userEmail, userName, userPassword, loginTime, portrait, blockList, blockedList, reportColunt) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
       [
         useremail,
         username,
@@ -49,6 +49,15 @@ router.post("/", async (req, res) => {
     // //4. assign jwt token
     // const token = jwtGenerator(newUser.rows[0].user_id);
 
+    res.json("Sucessfully added user");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get("/test", async (req, res) => {
+  try {
     res.json("Sucessfully added user");
   } catch (err) {
     console.error(err.message);
