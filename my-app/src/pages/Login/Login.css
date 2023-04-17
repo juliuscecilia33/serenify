@@ -15,10 +15,8 @@
   margin-top: 10%;
 }
 
-.username_input,
-.password_input {
+input {
   border-radius: 8px;
-  fill: #eceeed;
-  padding: 15px auto 15px 20px;
-  background: red;
+  background: #eceeed;
+  padding-inline: 15px;
 }

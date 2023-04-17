@@ -5,10 +5,23 @@
   display: flex;
   justify-content: space-between;
   align-items: end;
-  padding: 10px 15px;
+  padding: 10px 20px;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .logo-image {
   width: 120px;
+  height: auto;
+  margin-bottom: 3px;
+}
+
+.logout-image {
+  width: 24px;
   height: auto;
 }
