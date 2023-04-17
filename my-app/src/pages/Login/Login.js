@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import * as ROUTES from "../../constants/routes";
-// import "../../index.css";
 import "./Login.css";
 import toplayer from "../../images/toplayer.png";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 export function Login() {
   return (
@@ -12,7 +12,7 @@ export function Login() {
         <h1>Log in</h1>
         <input class="username_input" placeholder="Username" />
         <input class="password_input" placeholder="Password" />
-        <button>Enter</button>
+        <button>< ChevronRightIcon></button>
       </div>
     </>
   );

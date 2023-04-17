@@ -1,13 +1,12 @@
 import React, { useState, useContext } from "react";
 import * as ROUTES from "../../constants/routes";
-import Nav from "../Nav/Nav.js";
+import { Navbar } from "../../components/index";
 
 export function User() {
   return (
     <>
-      <header>
-        <Nav />
-      </header>
+      <Navbar />
+
       <h1>User Profile</h1>
     </>
   );

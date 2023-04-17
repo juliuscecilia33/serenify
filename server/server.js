@@ -21,5 +21,6 @@ pool
 app.use(express.json());
 
 app.use("/users", require("./routers/users"));
+app.use("/posts", require("./routers/posts"));
 
 app.listen(3005, () => console.log("Server listening on port 3005"));
