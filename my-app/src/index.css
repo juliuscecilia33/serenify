@@ -7,9 +7,9 @@ body,
   margin: 0 auto;
   background-color: #e5e8ea;
   font-family: "Noto Sans", sans-serif;
-  width: 420px;
-  height: 100vh;
-  border: 1px solid red;
+  width: 390px;
+  height: 844px;
+  /* border: 1px solid red; */
 }
 
 h1,

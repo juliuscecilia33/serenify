@@ -10,8 +10,6 @@ export function Home() {
       <div class="container">
         <img src={toplayer} alt="landing page" class="top-landing" />
         {/* <div class="green-bg">test</div> */}
-        <h1>Welcome to Serenify</h1>
-        <i class="bi bi-arrow-right-circle"></i>
       </div>
     </>
   );

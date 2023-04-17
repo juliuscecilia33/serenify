@@ -1,6 +1,5 @@
 export { Login } from "./Login/Login";
 export { Home } from "./Home/Home";
 export { Register } from "./Register/Register";
-export { Resources } from "./Resources/Resources";
-export { Feed } from "./Feed/Feed";
+export { Prompt } from "./Prompt/Prompt";
 export { User } from "./User/User";

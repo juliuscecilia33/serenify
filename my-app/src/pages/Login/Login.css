@@ -4,11 +4,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: red; */
-}
-
-.container h1 {
-  margin-top: 10%;
 }
 
 .top-landing {
@@ -16,9 +11,14 @@
   height: auto;
 }
 
-.green-bg {
-  height: 40%;
-  width: 100%;
-  background-color: #44836c;
+.container h1 {
+  margin-top: 10%;
 }
-/*  yea bro we should just keep doing what were doing lmao */
+
+.username_input,
+.password_input {
+  border-radius: 8px;
+  fill: #eceeed;
+  padding: 15px auto 15px 20px;
+  background: red;
+}
