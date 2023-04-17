@@ -2,18 +2,18 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-// create post route
+// 1. create post route
 // like count to 0
 
-// get post route
+// 2. get post route
 
-// comment on post route
+// 3. comment on post route
 
-// delete post route
+// 4. delete post route
 
-// edit post route
+// 5. edit post route(save for later)
 
-// update like count for post (url)
+// 6. update like count for post (url)
 // router.put("/:postid")
 
 module.exports = router;
