@@ -39,7 +39,7 @@ export function Prompt() {
     //use promptDate to find the content
     async function getSelectedPromptContent() {
       try{
-        const res = await apiClient.get(`baseURL/:${selectedPromptDate}`);
+        const res = await apiClient.get(`baseURL/prompt/${selectedPromptDate}`);
         setSelectedPromptContent(res.promptDescription);
       } catch (err) {
         setErrMessage("The date of prompt is invalid, or the prompt does not exist T_T");
