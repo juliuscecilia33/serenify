@@ -11,6 +11,10 @@ const pool = new Pool({
   ssl: true,
 });
 
+const cors = require("cors");
+
+app.use(cors());
+
 pool
   .connect()
   .then(() => console.log("Connected to PostgreSQL database"))
