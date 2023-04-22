@@ -22,21 +22,40 @@ router.post("/create", async(req, res) => {
 });
 
 //Get a promptid and promptDescription by promptDate
-router.get("/", async(req, res) => {
+router.get("/:promptid", async(req, res) => {
     try{
-        const { promptDate } = req.body;
+        const { promptid } = req.params;
+        //const { promptDate } = req.body;
 
-        const getPromptId = await pool.query(
-            "SELECT promptid, promptDescription FROM tblPrompt WHERE promptDate = $1",
-            [promptDate]
+        const getPromptInfo = await pool.query(
+            "SELECT promptDate, promptDescription FROM tblPrompt WHERE promptid = $1",
+            [promptid]
         );
 
-        res.json(getPromptId.rows[0]);
+        res.json(getPromptInfo.rows[0]);
     } catch(err) {
         console.error(err.message);
         res.status(500).send("Server Error");
     }
 });
+
+//get promptid by the promptDate DEFAULT
+router.get("/:promptDate", async(req, res) => {
+    try {
+        const { promptDate } = req.params;
+        //const { promptDate } = req.body;
+
+        const getPromptId = await pool.query(
+            "SELECT promptid FROM tblPrompt WHERE promptDate = $1",
+            [promptDate]
+        );
+
+        res.json(getPromptId.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+})
 
 //Delete a prompt            -->I am not sure we should delete this by promptid or promptdate, since the id is really long and complex
 //                           -->So every time we want to get something relates to the prompt, we need to get the id first

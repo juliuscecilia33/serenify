@@ -5,3 +5,28 @@
   flex-direction: column;
   align-items: center;
 }
+
+.sample {
+  justify-content: center;
+}
+
+.post {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  width: 90%;
+  gap: 15px;
+  margin: auto;
+}
+
+.post h2 {
+  margin: 15px;
+}
+
+.post h3 {
+  margin: -7px 15px 15px 15px;
+}
+
+.expand {
+  display: block;
+  margin: auto 15px 10px auto;
+}
