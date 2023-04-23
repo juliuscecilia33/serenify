@@ -4,114 +4,57 @@ import apiClient from "../../instance/config";
 import * as ROUTES from "../../constants/routes";
 import { Navbar } from "../../components/index";
 import Calendar from "../../components/calendar";
-import { BsFilterRight, BsChevronUp, BsChevronDown } from "react-icons/bs";
+import { BsChevronDown } from "react-icons/bs";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
-  //const [promptInfo, setPromptInfo] = useState("");
-  // const [defaultPromptContent, setDefaultPromptContent] = useState("");
-  // const [defaultPromptDate, setDefaultPromptDate] = useState(null);
-  // const [errMessage, setErrMessage] = useState("");
+  const [promptDescription, setPromptDescription] = useState("");
+  const [defaultPromptDate, setDefaultPromptDate] = useState(
+    new Date().toLocaleDateString().replace(/\//g, "-")
+  );
+  const [errMessage, setErrMessage] = useState("");
+  // const [dateValue, setDateValue] =
+  //   (React.useState < Dayjs) | (null > dayjs("2022-04-17"));
 
-  // // setDefaultPromptDate(new Date().toLocaleDateString().replace(/\//g, "-")); //default is today
-  // console.log("default prompt date:", defaultPromptDate);
-
-  // const getCompanies = async () => {
-  //   await axios
-  //     .get("http://localhost:5000/company/", {
-  //       headers: {
-  //         jwt_token: localStorage.token,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       setCompanies(response.data);
-  //     })
-  //     .catch((error) => {
-  //       setError(error.message);
-  //       console.error("There was an error!", error);
-  //     });
-  // };
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getDefaultPromptContent = async () => {
-    await axios
-      .get(`http://localhost:3005/prompt/all`)
-      .then((response) => {
-        console.log("response: ", response);
-      })
-      .catch((error) => {
-        // setErrMessage(error.message);
-        console.error(error.message);
-      });
-    // const res = await apiClient
-    //   .get(`/:${defaultPromptDate}`)
-    //   .then((response) => {
-    //     console.log("response: ", response);
-    //   })
-    //   .catch((err) => {
-    //     setDefaultPromptContent(res.promptDescription);
-    //     setErrMessage(
-    //       "We have not published the prompt for today, please wait~"
-    //     );
-    //     console.err(err.message);
-    //   });
+    if (defaultPromptDate) {
+      //console.log("default prompt date:", defaultPromptDate);
+      const res = await apiClient
+        .get(`/prompt/:${defaultPromptDate}`)
+        .then((response) => {
+          console.log("response: ", response.data.promptdescription);
+          setPromptDescription(response.data.promptdescription);
+        })
+        .catch((err) => {
+          setErrMessage(
+            "We have not published the prompt for today, please wait~"
+          );
+          console.err(err.message);
+        });
+    }
+  };
+
+  const selectedPromptDate = (date) => {
+    setDefaultPromptDate(date);
   };
 
   useEffect(() => {
     //use promptDate to find the content
     getDefaultPromptContent();
-  }, []);
-
-  //user selectable
-  const [selectedPromptContent, setSelectedPromptContent] = useState("");
-  const [selectedPromptDate, setSelectedPromptDate] = useState(null);
-
-  // useEffect(() => {
-  //   if (defaultPromptDate) {
-  //     //use promptDate to find the content
-  //     async function getSelectedPromptContent() {
-  //       try {
-  //         const res = await apiClient.get(
-  //           `/prompt/${selectedPromptDate}`
-  //         );
-  //         setSelectedPromptContent(res.promptDescription);
-  //       } catch (err) {
-  //         setErrMessage(
-  //           "The date of prompt is invalid, or the prompt does not exist T_T"
-  //         );
-  //         console.err(err.message);
-  //         setErrMessage(err.message);
-  //       }
-  //     }
-  //   }
-  //   // getSelectedPromptContent();
-  // }, [selectedPromptDate]);
+  }, [getDefaultPromptContent]);
 
   return (
     <>
       <div class="container">
         <Navbar />
         <h1>Posts</h1>
-        <button>
-          <BsFilterRight />
-        </button>
         <div class="post">
-          <h2>Don't eat before bed</h2>
-          <h3>2h ago</h3>
-          <button class="expand">
-            <BsChevronUp />
-          </button>
+          <h2>{promptDescription ? promptDescription : "Loading Prompt..."}</h2>
         </div>
 
-        <div class="post-expand">
-          <button class="report">Report</button>
-          <h3>Report</h3>
-          <div class="like-c">
-            <button class="like">Like</button>
-            <button class="comment">Like</button>
-          </div>
-
-          <Calendar dateCallBack={selectedPromptDate} />
-        </div>
+        <Calendar dateCallBack={selectedPromptDate} />
       </div>
     </>
   );

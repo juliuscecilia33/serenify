@@ -80,7 +80,7 @@ nav li a:hover {
   transition: 0.3s ease-in-out;
 }
 
-.post:first-child {
+/* .post:first-child {
   margin-top: 150px;
 }
 
@@ -97,4 +97,4 @@ nav li a:hover {
 
 .post-text .body-2 {
   margin-top: -10px;
-}
+} */

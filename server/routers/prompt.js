@@ -22,35 +22,34 @@ router.post("/create", async (req, res) => {
 });
 
 //Get a promptid and promptDescription by promptDate
-router.get("/:promptid", async (req, res) => {
-  try {
-    const { promptid } = req.params;
-    //const { promptDate } = req.body;
+// router.get("/:promptid", async (req, res) => {
+//   try {
+//     const { promptid } = req.params;
+//     //const { promptDate } = req.body;
 
-    const getPromptInfo = await pool.query(
-      "SELECT promptDate, promptDescription FROM tblPrompt WHERE promptid = $1",
-      [promptid]
-    );
+//     const getPromptInfo = await pool.query(
+//       "SELECT promptDate, promptDescription FROM tblPrompt WHERE promptid = $1",
+//       [promptid]
+//     );
 
-    res.json(getPromptInfo.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
+//     res.json(getPromptInfo.rows[0]);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
 
-//Get a promptid and promptDescription by promptDate
-router.get("/all", async (req, res) => {
+router.get("/allprompts", async (req, res) => {
   try {
     // const { promptid } = req.params;
     //const { promptDate } = req.body;
 
-    const getPromptInfo = await pool.query("SELECT * FROM tblPrompt");
+    const getAllPrompts = await pool.query("SELECT * FROM tblPrompt");
 
-    res.json(getPromptInfo.rows[0]);
+    res.json(getAllPrompts.rows[0]);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(500).send("Server Error asdfkajsdlfkaj");
   }
 });
 
@@ -60,12 +59,12 @@ router.get("/:promptDate", async (req, res) => {
     const { promptDate } = req.params;
     //const { promptDate } = req.body;
 
-    const getPromptId = await pool.query(
-      "SELECT promptid FROM tblPrompt WHERE promptDate = $1",
+    const getPromptInfo = await pool.query(
+      "SELECT promptDescription FROM tblPrompt WHERE promptDate = $1",
       [promptDate]
     );
 
-    res.json(getPromptId.rows[0]);
+    res.json(getPromptInfo.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

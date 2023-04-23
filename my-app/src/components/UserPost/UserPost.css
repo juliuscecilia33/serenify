@@ -1,0 +1,53 @@
+.post-container {
+  width: 365px;
+  padding: 15px 25px;
+  background-color: green;
+  background: #ffffff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  border: 1.5px solid #6f4483;
+}
+
+.profile-pic img {
+  width: 24px;
+  height: auto;
+}
+
+.date_posted {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.2px;
+  color: #4f4f4f;
+  margin-left: 0.5rem;
+}
+
+.middle-section {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.post_text {
+  width: 80%;
+}

@@ -7,17 +7,17 @@ const instance = axios.create({
 
 instance.defaults.headers.common["Content_Type"] = "application/json";
 //transformJSONResponse
-instance.defaults.transformResponse = [
-  (data) => {
-    let transformData;
-    try {
-      transformData = JSON.parse(data);
-    } catch {
-      console.log("This data is not JSON!");
-      transformData = data;
-    }
-    return transformData;
-  },
-];
+// instance.defaults.transformResponse = [
+//   (data) => {
+//     let transformData;
+//     try {
+//       transformData = JSON.parse(data);
+//     } catch {
+//       console.log("This data is not JSON!");
+//       transformData = data;
+//     }
+//     return transformData;
+//   },
+// ];
 
 export default instance;

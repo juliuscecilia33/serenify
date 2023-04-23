@@ -1,43 +1,61 @@
 import React, { useState, useRef } from "react";
-import DatePicker from 'react-datepicker';
-import addDays from 'date-fns/addDays';
-import CloseButton from 'react-bootstrap/CloseButton';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+//import dayjs, { Dayjs } from "dayjs";
 
 function Calendar(props) {
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [showCalendar, setShowCalendar] = useState(false);
-    //const inputRef = useRef(null);
-    
-    const handleChange = (date) => {
-        setSelectedDate(date);
-        props.dateCallBack(selectedDate);
-    };
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showCalendar, setShowCalendar] = useState(false);
 
-    return(
-        <div>
-            <input
-                type="date"
-                value={selectedDate ? selectedDate.toDateString() : ""}
-                onClick={() => setShowCalendar(true)}
-            />
-            <button className="btn btn-primary">Select</button>
+  const disablePastDt = (current) => {
+    return current.isBefore(new Date());
+  };
 
-            {showCalendar ? (
-                <div className='calendar'>
-                    <CloseButton onClick = {() => setShowCalendar(false)}/>
-                    <div className="form-group">
-                        <DatePicker
-                            selected={ selectedDate }
-                            onChange={ handleChange }
-                            name="Select Date"
-                            dateFormat="MM/dd/yyyy"
-                            maxDate = {new Date()}
-                        />
-                    </div>
-                </div>
-            ) : ''}
-        </div>
-    )
+  //console.log(value);
+  //const inputRef = useRef(null);
+
+  // const handleChange = (date) => {
+  //   setSelectedDate(date);
+  //   console.log(date);
+  // };
+
+  const handleClick = () => {
+    props.dateCallBack(selectedDate.toLocaleDateString().replace(/\//g, "-"));
+    console.log(
+      "changed to:" + selectedDate.toLocaleDateString().replace(/\//g, "-")
+    );
+  };
+
+  return (
+    <div>
+      {/* <input
+        type="date"
+        value={selectedDate ? selectedDate.toLocaleDateString() : ""}
+        onClick={() => setShowCalendar(true)}
+      /> */}
+
+      <DatePicker
+        selected={selectedDate}
+        onChange={(date) => setSelectedDate(date)}
+        maxDate={new Date()}
+        isValidDate={disablePastDt}
+        style={{ width: 200 }}
+      />
+
+      <button variant="contained" onClick={handleClick}>
+        Select
+      </button>
+
+      {/* //showCalendar ? (
+//         <div className="calendar">
+//           <DatePicker />
+//         </div>
+//       ) : (
+//         ""
+//       )} */}
+    </div>
+  );
 }
 
 export default Calendar;
