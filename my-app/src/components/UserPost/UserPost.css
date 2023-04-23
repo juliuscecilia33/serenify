@@ -41,13 +41,39 @@
 
 .middle-section {
   width: 100%;
-  margin: 20px 0;
+  margin: 25px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 8px;
 }
 
 .post_text {
-  width: 80%;
+  width: 90%;
+  padding-right: 5px;
+}
+
+.button-container {
+  /* width: 50%; */
+  display: flex;
+  align-items: center;
+}
+
+.button-container p {
+  margin-left: 5px;
+}
+
+.expanded-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.expanded-section button {
+  margin-left: 30px;
 }

@@ -28,7 +28,7 @@ router.post("/register", async (req, res) => {
     }
 
     let newUser = await pool.query(
-      "INSERT INTO tbluser (userEmail, userName, userPassword, loginTime, portrait, blockList, blockedList, reportCount) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+      "INSERT INTO tbluser (useremail, userpassword, loginTime) VALUES ($1, $2, $3) RETURNING *",
       [useremail, userpassword, logintime]
     );
 
@@ -89,7 +89,7 @@ router.put("/logintime", async (req, res) => {
     if (user.rows.length === 0) {
       return res.status(401).json("User does not exist...");
     }
-    
+
     //put in the new login time
     const time = await pool.query(
       "UPDATE tbluser SET logintime = $1 WHERE userEmail = $2",
@@ -105,8 +105,8 @@ router.put("/logintime", async (req, res) => {
 });
 
 //get user info by useremail
-router.get("/:useremail", async(req, res) => {
-  try{
+router.get("/:useremail", async (req, res) => {
+  try {
     const { useremail } = req.params;
 
     //check whether user exist
@@ -133,7 +133,7 @@ router.get("/:useremail", async(req, res) => {
 });
 
 //Delete a user by useremail
-router.delete("/:useremail", async(req, res) => {
+router.delete("/:useremail", async (req, res) => {
   try {
     const { useremail } = req.params;
 
@@ -146,7 +146,7 @@ router.delete("/:useremail", async(req, res) => {
     if (user.rows.length === 0) {
       return res.status(401).json("User does not exist...");
     }
-    
+
     //if user exists, delete the user and return the email
     const deleteUser = await pool.query(
       "DELETE FROM tblUser WHERE userid = $1",

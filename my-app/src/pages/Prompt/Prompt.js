@@ -14,13 +14,12 @@ export function Prompt() {
     new Date().toLocaleDateString().replace(/\//g, "-")
   );
   const [errMessage, setErrMessage] = useState("");
-  // const [dateValue, setDateValue] =
-  //   (React.useState < Dayjs) | (null > dayjs("2022-04-17"));
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getDefaultPromptContent = async () => {
     if (defaultPromptDate) {
       //console.log("default prompt date:", defaultPromptDate);
+
       const res = await apiClient
         .get(`/prompt/:${defaultPromptDate}`)
         .then((response) => {
@@ -51,7 +50,16 @@ export function Prompt() {
         <Navbar />
         <h1>Posts</h1>
         <div class="post">
-          <h2>{promptDescription ? promptDescription : "Loading Prompt..."}</h2>
+          <h2>
+            {promptDescription ? (
+              promptDescription
+            ) : (
+              <div>
+                <p>"We do not have prompt for this day...</p>
+                <p>sorry T_T"</p>
+              </div>
+            )}
+          </h2>
         </div>
 
         <Calendar dateCallBack={selectedPromptDate} />

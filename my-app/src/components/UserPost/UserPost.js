@@ -19,7 +19,13 @@ import duck from "../../images/animals/ant.png";
 import elephant from "../../images/animals/elephant.png";
 import falcon from "../../images/animals/falcon.png";
 import fish from "../../images/animals/fish.png";
-import { BsChevronUp, BsChevronDown } from "react-icons/bs";
+import {
+  BsChevronUp,
+  BsChevronDown,
+  BsHeart,
+  BsChatRight,
+  BsExclamationOctagon,
+} from "react-icons/bs";
 
 export function UserPost(postData) {
   const wordBank = [
@@ -44,6 +50,8 @@ export function UserPost(postData) {
     fish,
   ];
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   function getRandomAnimal() {
     let randomNumber = Math.floor(Math.random() * wordBank.length);
 
@@ -60,13 +68,36 @@ export function UserPost(postData) {
         <p className="date_posted">2h ago</p>
       </div>
       <div className="middle-section">
-        <p className="post_text">Sample text</p>
+        <p className="post_text">
+          Don’t eat before bed :) just finished a sandwich
+        </p>
 
-        <button className="post-expand">
-          <BsChevronDown />
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="post-expand"
+        >
+          {isExpanded ? <BsChevronUp /> : <BsChevronDown />}
         </button>
       </div>
-      <div className="comment-section"></div>
+      {isExpanded && (
+        <div className="expanded-section">
+          <div>Report Button</div>
+          <div className="buttons">
+            <div className="button-container">
+              <button>
+                <BsHeart />
+              </button>
+              <p>1401</p>
+            </div>
+            <div className="button-container">
+              <button>
+                <BsChatRight />
+                <p>234</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

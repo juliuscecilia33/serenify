@@ -4,36 +4,41 @@ const pool = require("../db");
 
 // 1. create post route
 // like count to 0
-router.post("/create", async(req, res) => {
-    try{
-        const { postDescription, attachment, postComment, userid, promptid } = req.body;
-        //Generate TIMESTAMP
-        const postTime = new Date().toLocaleString();
+router.post("/create", async (req, res) => {
+  try {
+    const { postDescription, attachment, userid, promptid } = req.body;
+    //Generate TIMESTAMP
+    const postTime = new Date().toLocaleString();
 
-        //check if the prompt exists
-        const checkPrompt = await pool.query(
-            "SELECT * FROM tblPrompt WHERE promptid = $1", [promptid]
-        );
+    //check if the prompt exists
+    const checkPrompt = await pool.query(
+      "SELECT * FROM tblPrompt WHERE promptid = $1",
+      [promptid]
+    );
 
-        if(checkPrompt.rows.length == 0) {
-            return res.status(401).json("The prompt does not exist...");
-        };
-        
-        //create the post
-        const createPost = await pool.query(
-            "INSERT INTO tblPost (postDescription, attachment, postTime, postComment, userid, promptid) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-            [ postDescription, attachment, postTime, postComment, userid, promptid ]
-        );
-
-        res.json("Successfully upload a new post");
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Server Error");
+    if (checkPrompt.rows.length == 0) {
+      return res.status(401).json("The prompt does not exist...");
     }
-})
 
+    //create the post
+    const createPost = await pool.query(
+      "INSERT INTO tblPost (postDescription, attachment, postTime, userid, promptid) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [postDescription, attachment, postTime, userid, promptid]
+    );
+
+    res.json("Successfully upload a new post");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 // 2. get post route
+router.get("/:postid", async (req, res) => {
+  const { postid } = req.params;
+
+  // const x
+});
 
 // 3. comment on post route
 
@@ -44,13 +49,9 @@ router.post("/create", async(req, res) => {
 // 6. update like count for post (url)
 // router.put("/:postid")
 
-
 //7. Delete a post
 
 module.exports = router;
-
-
-
 
 // //generate postTime function
 // function pgFormatDate(date) {
@@ -78,3 +79,5 @@ module.exports = router;
 // }
 // postTime = pgFormatDate(new Date());
 // //check the prompt is correct
+
+// 3. comment on post route
