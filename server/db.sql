@@ -23,6 +23,8 @@ CREATE TABLE tblPost (
 );
 ALTER TABLE tblPost
 DROP COLUMN postComments;
+ALTER TABLE tblPost
+ADD COLUMN postLike INT DEFAULT 0 NOT NULL;
 
 CREATE TABLE tblComment(
     commentid UUID DEFAULT uuid_generate_v4() UNIQUE PRIMARY KEY,
