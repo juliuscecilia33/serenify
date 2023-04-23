@@ -42,7 +42,7 @@ export function Prompt() {
   useEffect(() => {
     //use promptDate to find the content
     getDefaultPromptContent();
-  }, [getDefaultPromptContent]);
+  }, [defaultPromptDate]);
 
   return (
     <>
