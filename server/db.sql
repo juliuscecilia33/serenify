@@ -43,11 +43,4 @@ CREATE TABLE tblReport_Post (
     postid UUID REFERENCES tblPost(postid) NOT NULL
 );
 
-ALTER TABLE tblPost
-DROP COLUMN postComments;
-
-SELECT * FROM tblComment;
-
-ALTER TABLE tblcomment
-ADD COLUMN postid uuid REFERENCES tblPost(postid) NOT NULL;
 

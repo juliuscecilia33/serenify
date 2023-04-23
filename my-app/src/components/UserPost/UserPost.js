@@ -81,7 +81,12 @@ export function UserPost(postData) {
       </div>
       {isExpanded && (
         <div className="expanded-section">
-          <div>Report Button</div>
+          <div className="report_button">
+            <button>
+              <BsExclamationOctagon />
+            </button>
+            <p>Report</p>
+          </div>
           <div className="buttons">
             <div className="button-container">
               <button>
@@ -92,8 +97,8 @@ export function UserPost(postData) {
             <div className="button-container">
               <button>
                 <BsChatRight />
-                <p>234</p>
               </button>
+              <p>234</p>
             </div>
           </div>
         </div>

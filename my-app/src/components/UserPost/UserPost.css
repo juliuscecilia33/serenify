@@ -29,6 +29,14 @@
   height: auto;
 }
 
+.report_button {
+  display: flex;
+}
+
+.report_button button {
+  margin-right: 7px;
+}
+
 .date_posted {
   font-style: normal;
   font-weight: 400;
@@ -62,6 +70,10 @@
   margin-left: 5px;
 }
 
+.button-container button {
+  margin-right: 5px;
+}
+
 .expanded-section {
   width: 100%;
   display: flex;
@@ -72,8 +84,5 @@
   width: 50%;
   display: flex;
   align-items: center;
-}
-
-.expanded-section button {
-  margin-left: 30px;
+  justify-content: space-around;
 }
