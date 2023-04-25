@@ -5,3 +5,4 @@ export const RESOURCES = "/resources";
 export const USER = "/user";
 export const PROMPT = "/prompt";
 export const HOMEVTWO = "/homevtwo";
+export const POST = "/post";
