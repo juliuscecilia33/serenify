@@ -7,7 +7,7 @@ export function HomeVTwo() {
       <img
         className="logo"
         alt={"Logo"}
-        src={"../../src/images/logo2.png"}
+        src={"../../images/logo2.png"}
       />
       <div className="log-in">Log in</div>
       <div className="s1">
@@ -90,7 +90,8 @@ export function HomeVTwo() {
           className="cat"
           alt={"Cat"}
           src={
-            "https://anima-uploads.s3.amazonaws.com/projects/64480ae0ca3bfce771e46398/releases/6448516f8ae30cff1df92e11/img/cat.svg"
+            // "https://anima-uploads.s3.amazonaws.com/projects/64480ae0ca3bfce771e46398/releases/6448516f8ae30cff1df92e11/img/cat.svg"
+            "../../images/Cat.png"
           }
         />
       </div>
