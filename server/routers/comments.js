@@ -30,12 +30,57 @@ router.post("/create", async (req, res) => {
   }
 });
 
-//2. get comments
+//2. get comments by postid
+router.get("/:postid", async(req, res) => {
+  try {
+    const { postid } = req.params;
+    
+    const commentList = await pool.query(
+      "SELECT * FROM tblComment WHERE postid = $1",
+      [postid]
+    );
+
+    res.json("These are the comments under" + postid + ":" + commentList);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  } 
+});
+
+//get a comment
+router.get("/:commentid", async(req, res) => {
+  try {
+    const { commentid } = req.params;
+
+    const commentInfo = await pool.query(
+      "SELECT * FROM tblComment WHERE commentid = $1",
+      [commentid]
+    );
+
+    res.json(commentInfo.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 //3. delete comment
+router.delete("/:commentid", async(req, res) => {
+  try {
+    const { commentid } = req.params;
+
+    const deleteComment = await pool.query(
+      "DELETE FROM tblComment WHERE commentid = $1",
+      [commentid]
+    );
+    
+    res.json("Successfully delete comment");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 //4. edit a comment
-
-//
 
 module.exports = router;

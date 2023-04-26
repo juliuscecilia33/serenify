@@ -53,14 +53,14 @@ router.get("/allprompts", async (req, res) => {
   }
 });
 
-//get promptid by the promptDate DEFAULT
+//get promptDes by the promptDate DEFAULT
 router.get("/:promptDate", async (req, res) => {
   try {
     const { promptDate } = req.params;
     //const { promptDate } = req.body;
 
     const getPromptInfo = await pool.query(
-      "SELECT promptDescription FROM tblPrompt WHERE promptDate = $1",
+      "SELECT * FROM tblPrompt WHERE promptDate = $1",
       [promptDate]
     );
 

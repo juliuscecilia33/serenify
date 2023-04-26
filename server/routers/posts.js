@@ -33,7 +33,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-// 2. get post route
+// 2. get post 
 router.get("/:postid", async (req, res) => {
   try {
     const { postid } = req.params;

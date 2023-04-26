@@ -1,11 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import axios from "axios";
 import apiClient from "../../instance/config";
 import * as ROUTES from "../../constants/routes";
 import { Navbar } from "../../components/index";
 import Calendar from "../../components/calendar";
-import { BsChevronDown } from "react-icons/bs";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
@@ -13,11 +10,12 @@ export function Prompt() {
   const [defaultPromptDate, setDefaultPromptDate] = useState(
     new Date().toLocaleDateString().replace(/\//g, "-")
   );
+  const [promptid, setPrompid] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getDefaultPromptContent = async () => {
-    if (defaultPromptDate) {
+    //if (defaultPromptDate)
       //console.log("default prompt date:", defaultPromptDate);
 
       const res = await apiClient
@@ -25,6 +23,7 @@ export function Prompt() {
         .then((response) => {
           console.log("response: ", response.data.promptdescription);
           setPromptDescription(response.data.promptdescription);
+          setPrompid(response.data.promptid);
         })
         .catch((err) => {
           setErrMessage(
@@ -32,7 +31,6 @@ export function Prompt() {
           );
           console.err(err.message);
         });
-    }
   };
 
   const selectedPromptDate = (date) => {
@@ -63,6 +61,7 @@ export function Prompt() {
         </div>
 
         <Calendar dateCallBack={selectedPromptDate} />
+        {/* <CreatePost pormptid/> */}
       </div>
     </>
   );
