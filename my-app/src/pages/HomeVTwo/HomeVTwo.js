@@ -1,13 +1,100 @@
-import React, { useState, useContext } from "react";
-import { Navbar } from "../../components/index";
+import React from "react";
+import "./HomeVTwo.css";
 
 export function HomeVTwo() {
   return (
-    <>
-      <div class="container">
-        <Navbar />
-        <h1>This is HomeVTwo</h1>
+    <div className="content">
+      <img
+        className="logo"
+        alt={"Logo"}
+        src={"../../images/logo2.png"}
+      />
+      <div className="log-in">Log in</div>
+      <div className="s1">
+        <h1 className="big">
+          Hello
+          <br />
+          &lt;･◡･&gt;!
+          <br />
+          <br />I am Serenify.
+          <br />
+          ---------
+        </h1>
       </div>
-    </>
+      <div className="s2">
+        <h1 className="big">
+          Your 
+        </h1>
+        <p className="small smallcross">
+          &nbsp;Online&nbsp;
+          <br /> 
+          &nbsp;Anonymous&nbsp;
+          <br /> 
+          &nbsp;Mental Health&nbsp;
+          <br /> 
+          &nbsp;Prompt Based&nbsp;
+          <br />
+        </p>
+        <h1 className="big">
+          Forum.
+          <br />
+          ---------
+        </h1>
+      </div>
+      <div className="s3">
+        <p className="small">
+          &nbsp;I like to
+        </p>
+        <h1 className="big">
+          Scroll
+        </h1>
+        <p className="small">
+          &nbsp;and
+        </p>
+        <h1 className="big">
+          Hold
+        </h1>
+        <span className="small">
+          <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Try it~^
+          <br />
+        </span>
+        <h1 className="big">
+          ---------
+        </h1>
+        <img
+          className="wheel"
+          alt={"Wheel"}
+          src={
+            "https://anima-uploads.s3.amazonaws.com/projects/64480ae0ca3bfce771e46398/releases/6448516f8ae30cff1df92e11/img/wheel.svg"
+          }
+        />
+      </div>
+      <div className="s3">
+        <p className="small">
+          &nbsp;You can
+          <br /> 
+          &nbsp;Pet this cat 
+          <br /> 
+          &nbsp;To move forward.
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <h1 className="big">
+            ---------
+          </h1>
+        </p>
+        <img
+          className="cat"
+          alt={"Cat"}
+          src={
+            // "https://anima-uploads.s3.amazonaws.com/projects/64480ae0ca3bfce771e46398/releases/6448516f8ae30cff1df92e11/img/cat.svg"
+            "../../images/Cat.png"
+          }
+        />
+      </div>
+    </div>
   );
 }

@@ -1,7 +1,88 @@
-.container {
-  height: 100%;
-  width: 100%;
+.content {
+  align-items: center;
+  background-color: #ece8d1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 2600px;
+  padding: 20px;
+  position: relative;
+  width: 390px;
+}
+
+.logo {
+  height: 24px;
+  left: 32px;
+  position: absolute;
+  top: 69px;
+  width: 31px;
+}
+
+.log-in {
+  color: #000000;
+  font-family: "Oswald", Helvetica;
+  font-size: 23px;
+  font-weight: 400;
+  left: 308px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-decoration: underline;
+  top: 68px;
+  white-space: nowrap;
+}
+
+.big {
+font-family: 'Oswald';
+font-style: normal;
+font-weight: 500;
+font-size: 100px;
+line-height: 100%;
+color: #000000;
+}
+
+.small {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 130%;
+  color: #000000;
+}
+
+.s1 {
+  padding: 140px 0px 0px;
+}
+
+.s2 {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.s3 {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: center;
+  position: relative;
+}
+
+.smallcross {
+  text-decoration: line-through;
+}
+
+.wheel {
+  height: 75px;
+  left: 205px;
+  position: absolute;
+  top: 250px;
+  width: 75px;
+}
+
+.cat {
+  height: 200px;
+  left: 20px;
+  position: absolute;
+  top: 240px;
+  width: 198px;
 }
