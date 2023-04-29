@@ -3,6 +3,7 @@ import apiClient from "../../instance/config";
 import * as ROUTES from "../../constants/routes";
 import { Navbar } from "../../components/index";
 import Calendar from "../../components/calendar";
+import pencil from "../../images/pencil.png";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
@@ -11,7 +12,7 @@ export function Prompt() {
     new Date().toLocaleDateString().replace(/\//g, "-")
   );
   const [promptid, setPrompid] = useState("");
-  const [errMessage, setErrMessage] = useState("");
+  const [havePrompt, setHavePrompt] = useState(false);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getDefaultPromptContent = async () => {
@@ -24,6 +25,10 @@ export function Prompt() {
           console.log("response: ", response.data.promptdescription);
           setPromptDescription(response.data.promptdescription);
           setPrompid(response.data.promptid);
+          
+          if(response.data.promptDescription !== null) {
+            setHavePrompt(true)
+          }
         })
         .catch((err) => {
           setErrMessage(
@@ -42,14 +47,18 @@ export function Prompt() {
     getDefaultPromptContent();
   }, [defaultPromptDate]);
 
+  const createPostInfo = {
+    promptid, 
+  }
+
   return (
-    <>
+    <div>
       <div class="container">
         <Navbar />
         <h1>Posts</h1>
         <div class="post">
           <h2>
-            {promptDescription ? (
+            {havePrompt ? (
               promptDescription
             ) : (
               <div>
@@ -61,8 +70,13 @@ export function Prompt() {
         </div>
 
         <Calendar dateCallBack={selectedPromptDate} />
-        {/* <CreatePost pormptid/> */}
+        
+        <div>
+          <b>
+            {havePrompt ? (<CreatePostButton />) : null}
+          </b>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
