@@ -5,6 +5,10 @@ import { Navbar } from "../../components/index";
 import "./CreatePost.css";
 import Box from "@mui/joy/Box";
 import Textarea from "@mui/joy/Textarea";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import FormHelperText from "@mui/joy/FormHelperText";
 
 export function CreatePost(props) {
   const [postDescription, setPostDescription] = useState("");
@@ -15,7 +19,8 @@ export function CreatePost(props) {
     <div>
       <div className="container">
         <h1>Create post</h1>
-        <label>
+        <FormControl>
+          <FormLabel>Label</FormLabel>
           <Textarea
             color="warning"
             disabled={false}
@@ -26,7 +31,10 @@ export function CreatePost(props) {
             onChange={(textValue) => setPostDescription(textValue)}
             value={postDescription}
           />
-          {/* <Textarea
+          <FormHelperText>This is a helper text.</FormHelperText>
+        </FormControl>
+
+        {/* <Textarea
             name="Post area"
             rows={7}
             cols={35}
@@ -34,7 +42,6 @@ export function CreatePost(props) {
             placeholder="Leave Your Thoughts here..."
             
           /> */}
-        </label>
       </div>
     </div>
   );
