@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./calendar.css";
 
 //import dayjs, { Dayjs } from "dayjs";
 
@@ -34,7 +35,7 @@ function Calendar(props) {
         value={selectedDate ? selectedDate.toLocaleDateString() : ""}
         onClick={() => setShowCalendar(true)}
       /> */}
-
+{/* 
       <DatePicker
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}
@@ -45,7 +46,20 @@ function Calendar(props) {
 
       <button variant="contained" onClick={handleClick}>
         Select
+      </button> */}
+
+      <div className="calendar-container">
+      <DatePicker
+        className="calendar-input"
+        selected={selectedDate}
+        onChange={(date) => setSelectedDate(date)}
+        maxDate={new Date()}
+        isValidDate={disablePastDt}
+      />
+      <button className="calendar-button" onClick={handleClick}>
+        Select
       </button>
+    </div>
 
       {/* //showCalendar ? (
 //         <div className="calendar">

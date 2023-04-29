@@ -122,20 +122,3 @@ router.put("/:promptid", async (req, res) => {
 });
 
 module.exports = router;
-
-////generate prompt time
-// function pgFormatDate(date) {
-//     function zeroPad(d) {
-//     return ("0" + d).slice(-2);
-//     }
-
-//     var parsed = new Date(date);
-
-//     return (
-//     parsed.getUTCFullYear().toString() +
-//     "-" +
-//     zeroPad(parsed.getMonth() + 1).toString() +
-//     "-" +
-//     zeroPad(parsed.getDate()).toString()
-//     );
-// }
