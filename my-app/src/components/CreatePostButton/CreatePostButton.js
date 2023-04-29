@@ -1,27 +1,29 @@
 import "./CreatePostButton.css";
-import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import pencil from "../../images/pencil.png";
 
-export function CreatePostButton() {
-    const [isOpen, setIsOpen] = useState(false);
+export function CreatePostButton(promptid) {
+  //navigate to the create post page
+  const navigate = useNavigate();
+  const goToCreatePost = (props) => {
+    navigate("/createPost");
+    console.log("props:", props);
+  };
 
-    //navigate to the exercise intro page
-    const navigate = useNavigate();
-    const goToCreatePost = (exerciseProfile) => {
-        navigate("/intro/" + exerciseProfile.exerciseName);
-    }
+  const createPostInfo = {
+    promptid,
+    //,
+    //localStorage.getItem(userid);
+  };
 
-    return (
-        <div>
-            <button
-             onClick={() => setIsOpen(true)}
-            >
-                <img src={pencil} alt="pencil click to add post" />
-            </button>
+  return (
+    <div>
+      <button onClick={() => goToCreatePost(createPostInfo)}>
+        <img src={pencil} alt="pencil click to add post" />
+      </button>
 
-            {isOpen && <CreatePost />}
-            {/* <CreatePost pormptid/> */}
-        </div>
-    )
+      {/* <CreatePost pormptid/> */}
+    </div>
+  );
 }
-

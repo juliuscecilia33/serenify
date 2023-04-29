@@ -15,7 +15,7 @@ router.get("/test", async (req, res) => {
 // Register New User
 router.post("/register", async (req, res) => {
   try {
-    const { useremail, userpassword, logintime } = req.body;
+    const { useremail, userpassword } = req.body;
 
     //check whether useremail has already been registered
     const user = await pool.query(
@@ -27,12 +27,14 @@ router.post("/register", async (req, res) => {
       return res.status(401).json("User has already existed...");
     }
 
+    const loginTime = new Date().toLocaleString();
+
     let newUser = await pool.query(
-      "INSERT INTO tbluser (useremail, userpassword, loginTime) VALUES ($1, $2, $3) RETURNING *",
-      [useremail, userpassword, logintime]
+      "INSERT INTO tbluser (useremail, userpassword, logintime) VALUES ($1, $2, $3) RETURNING *",
+      [useremail, userpassword, loginTime]
     );
 
-    res.json("Sucessfully added user");
+    res.json(newUser.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -43,6 +45,9 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { useremail, userpassword } = req.body;
 
+  console.log("user email from login: ", useremail);
+  console.log("user password from login: ", userpassword);
+
   try {
     const user = await pool.query(
       "SELECT * FROM tbluser WHERE userEmail = $1",
@@ -50,6 +55,7 @@ router.post("/login", async (req, res) => {
     );
 
     if (user.rows.length === 0) {
+      console.log("wrong email");
       return res.status(401).json("Invalid Credential");
     }
 
@@ -58,12 +64,13 @@ router.post("/login", async (req, res) => {
     //   user.rows[0].user_password
     // );
 
-    if (user.rows[0].userPassword !== userpassword) {
+    if (user.rows[0].userpassword !== userpassword) {
+      console.log("wrong password");
       return res.status(401).json("Invalid Credential");
     }
 
     // const jwtToken = jwtGenerator(user.rows[0].user_id);
-    return res.json("logged in");
+    return res.json(user.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

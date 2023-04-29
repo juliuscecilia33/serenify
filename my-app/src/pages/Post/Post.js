@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Navbar, UserPost } from "../../components/index";
+import { Navbar, UserPost } from "../../components";
 import "./Post.css";
 import { BsFilterRight } from "react-icons/bs";
 

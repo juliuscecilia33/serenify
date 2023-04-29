@@ -3,7 +3,7 @@ import apiClient from "../../instance/config";
 import * as ROUTES from "../../constants/routes";
 import { Navbar } from "../../components/index";
 import Calendar from "../../components/calendar";
-import pencil from "../../images/pencil.png";
+import { CreatePostButton } from "../../components";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
@@ -14,28 +14,27 @@ export function Prompt() {
   const [promptid, setPrompid] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
 
+  console.log("have prompt:", havePrompt);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getDefaultPromptContent = async () => {
     //if (defaultPromptDate)
-      //console.log("default prompt date:", defaultPromptDate);
+    //console.log("default prompt date:", defaultPromptDate);
 
-      const res = await apiClient
-        .get(`/prompt/:${defaultPromptDate}`)
-        .then((response) => {
-          console.log("response: ", response.data.promptdescription);
-          setPromptDescription(response.data.promptdescription);
-          setPrompid(response.data.promptid);
-          
-          if(response.data.promptDescription !== null) {
-            setHavePrompt(true)
-          }
-        })
-        .catch((err) => {
-          setErrMessage(
-            "We have not published the prompt for today, please wait~"
-          );
-          console.err(err.message);
-        });
+    const res = await apiClient
+      .get(`/prompt/:${defaultPromptDate}`)
+      .then((response) => {
+        console.log("response: ", response.data.promptdescription);
+        setPromptDescription(response.data.promptdescription);
+        setPrompid(response.data.promptid);
+
+        if (response.data.promptdescription) {
+          setHavePrompt(true);
+        }
+      })
+      .catch((err) => {
+        console.err(err.message);
+      });
   };
 
   const selectedPromptDate = (date) => {
@@ -45,36 +44,36 @@ export function Prompt() {
   useEffect(() => {
     //use promptDate to find the content
     getDefaultPromptContent();
-  }, [defaultPromptDate]);
+  }, [selectedPromptDate, havePrompt]);
 
   const createPostInfo = {
-    promptid, 
-  }
+    promptid,
+    //,
+    //localStorage.getItem(userid);
+  };
 
   return (
     <div>
       <div class="container">
         <Navbar />
         <h1>Posts</h1>
-        <div class="post">
-          <h2>
-            {havePrompt ? (
-              promptDescription
-            ) : (
-              <div>
-                <p>"We do not have prompt for this day...</p>
-                <p>sorry T_T"</p>
-              </div>
-            )}
-          </h2>
-        </div>
+        {/* <div class="post"> */}
+        <h2>
+          {havePrompt ? (
+            promptDescription
+          ) : (
+            <div>
+              <p>"We do not have prompt for this day...</p>
+              <p>sorry T_T"</p>
+            </div>
+          )}
+        </h2>
+        {/* </div> */}
 
         <Calendar dateCallBack={selectedPromptDate} />
-        
+
         <div>
-          <b>
-            {havePrompt ? (<CreatePostButton />) : null}
-          </b>
+          <b>{havePrompt ? <CreatePostButton {...createPostInfo} /> : null}</b>
         </div>
       </div>
     </div>
