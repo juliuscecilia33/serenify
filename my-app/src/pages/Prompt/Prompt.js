@@ -52,28 +52,26 @@ export function Prompt() {
 
   return (
     <div>
-      <div className="container">
-        <Navbar />
-        <h1>Posts</h1>
+      <Navbar />
+      <h1>Posts</h1>
 
-        <h2>
-          {havePrompt ? (
-            promptDescription
-          ) : (
-            <div>
-              <p>"We do not have prompt for this day...</p>
-              <p>sorry T_T"</p>
-            </div>
-          )}
-        </h2>
+      <h2>
+        {havePrompt ? (
+          promptDescription
+        ) : (
+          <div>
+            <p>"We do not have prompt for this day...</p>
+            <p>sorry T_T"</p>
+          </div>
+        )}
+      </h2>
 
-        <div className="calendar">
-          <Calendar dateCallBack={selectedPromptDate} />
-        </div>
+      <div className="calendar">
+        <Calendar dateCallBack={selectedPromptDate} />
+      </div>
 
-        <div>
-          <b>{havePrompt ? <CreatePostButton {...createPostInfo} /> : null}</b>
-        </div>
+      <div>
+        <b>{havePrompt ? <CreatePostButton {...createPostInfo} /> : null}</b>
       </div>
     </div>
   );

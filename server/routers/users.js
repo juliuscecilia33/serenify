@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
   try {
     const { useremail, userpassword } = req.body;
 
-    //check whether useremail has already been registered
+    // check whether useremail has already been registered
     const user = await pool.query(
       "SELECT * FROM tbluser WHERE userEmail = $1",
       [useremail]

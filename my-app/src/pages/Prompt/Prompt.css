@@ -1,4 +1,4 @@
-.container {
+/* .container {
   max-width: 1000px;
   margin: auto;
   padding: 0 20px;
@@ -19,7 +19,7 @@ h2 {
   margin-top: 50px;
 }
 
-/* .calendar button {
+.calendar button {
   background-color: #508f56;
   color: #fff;
   padding: 10px 20px;
@@ -34,10 +34,10 @@ button:hover {
   background-color: #20371b;
   color: #508f56;
   border: 1px solid #508f56;
-} */
+}
 
 p {
   text-align: center;
   font-size: 24px;
   margin-top: 30px;
-}
+} */

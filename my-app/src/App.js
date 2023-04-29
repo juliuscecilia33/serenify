@@ -1,16 +1,7 @@
 import * as ROUTES from "./constants/routes";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {
-  Login,
-  Home,
-  Register,
-  User,
-  Prompt,
-  HomeVTwo,
-  Post,
-  CreatePost,
-} from "./pages";
+import { Login, Home, Register, User, Prompt, HomeVTwo, Post } from "./pages";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Authentication } from "./context/Authentication";
 
@@ -44,7 +35,7 @@ function App() {
             <Route path={ROUTES.PROMPT} element={<Prompt />} />
             <Route path={ROUTES.HOMEVTWO} element={<HomeVTwo />} />
             <Route path={ROUTES.POST} element={<Post />} />
-            <Route path={ROUTES.CREATEPOST} element={<CreatePost />} />
+            {/* <Route path={ROUTES.CREATEPOST} element={<CreatePost />} /> */}
           </Routes>
         </BrowserRouter>
       </ChakraProvider>
