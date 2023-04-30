@@ -9,6 +9,15 @@ router.post("/create", async (req, res) => {
 
     const promptDate = new Date().toLocaleDateString(); //.split('T')[0];
 
+    const checkDate = await pool.query(
+      "SELECT * FROM tblPrompt WHERE promptDate  = $1",
+      [promptDate]
+    );
+
+    if (checkDate.rows.length !== 0) {
+      return res.status(401).json("Prompt already posted for today");
+    }
+
     const uploadPrompt = await pool.query(
       "INSERT INTO tblPrompt (promptDescription, promptDate) VALUES ($1, $2) RETURNING *",
       [promptDescription, promptDate]

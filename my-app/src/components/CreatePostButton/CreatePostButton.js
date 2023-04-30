@@ -1,5 +1,5 @@
 import "./CreatePostButton.css";
-import React from "react";
+import React, { useState } from "react";
 //import { useNavigate } from "react-router-dom";
 import pencil from "../../images/pencil.png";
 import { CreatePost } from "../../pages/CreatePost/CreatePost";
@@ -12,19 +12,27 @@ export function CreatePostButton(promptid) {
   //   console.log("props:", props);
   // };
 
+  const [showPencil, setShowPencil] = useState(true);
+
   const createPostInfo = {
     promptid,
     //,
     //localStorage.getItem(userid);
   };
 
+  const handleClick = () => {
+    setShowPencil(false);
+  };
+
   return (
     <div>
-      <button onClick={() => <CreatePost createPostInfo={createPostInfo} />}>
-        <img src={pencil} alt="pencil click to add post" />
-      </button>
-
-      {/* <CreatePost pormptid/> */}
+      {showPencil ? (
+        <button onClick={handleClick}>
+          <img src={pencil} alt="pencil click to add post" />
+        </button>
+      ) : (
+        <CreatePost createPostInfo={createPostInfo} />
+      )}
     </div>
   );
 }

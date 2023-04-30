@@ -26,14 +26,14 @@ router.post("/create", async (req, res) => {
       [postDescription, attachment, postTime, userid, promptid]
     );
 
-    res.json("Successfully upload a new post");
+    res.json("Successfully post~~~");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
 
-// 2. get post 
+// 2. get post
 router.get("/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
@@ -44,6 +44,17 @@ router.get("/:postid", async (req, res) => {
     );
 
     res.json(postInfo.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get("/all", async (req, res) => {
+  try {
+    const allPosts = await pool.query("SELECT * FROM tblPost");
+
+    res.json(allPosts.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

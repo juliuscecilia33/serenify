@@ -12,7 +12,7 @@ export function Prompt() {
   const [defaultPromptDate, setDefaultPromptDate] = useState(
     new Date().toLocaleDateString().replace(/\//g, "-")
   );
-  const [promptid, setPrompid] = useState("");
+  const [promptid, setPromptid] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
 
   console.log("have prompt:", havePrompt);
@@ -24,7 +24,7 @@ export function Prompt() {
       .then((response) => {
         console.log("response: ", response.data.promptdescription);
         setPromptDescription(response.data.promptdescription);
-        setPrompid(response.data.promptid);
+        setPromptid(response.data.promptid);
 
         if (response.data.promptdescription) {
           setHavePrompt(true);
@@ -45,9 +45,7 @@ export function Prompt() {
   }, [selectedPromptDate, havePrompt]);
 
   const createPostInfo = {
-    promptid,
-    //,
-    //localStorage.getItem(userid);
+    promptid, //localStorage.getItem(userid);
   };
 
   return (

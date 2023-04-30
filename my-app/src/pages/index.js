@@ -6,3 +6,4 @@ export { User } from "./User/User";
 export { HomeVTwo } from "./HomeVTwo/HomeVTwo";
 export { Post } from "./Post/Post";
 export { CreatePost } from "./CreatePost/CreatePost";
+export { Report } from "./Report/Report";

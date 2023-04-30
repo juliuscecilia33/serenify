@@ -1,9 +1,19 @@
 import * as ROUTES from "./constants/routes";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login, Home, Register, User, Prompt, HomeVTwo, Post } from "./pages";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  Login,
+  Home,
+  Register,
+  User,
+  Prompt,
+  HomeVTwo,
+  Post,
+  Report,
+} from "./pages";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Authentication } from "./context/Authentication";
+import { ProtectedRoute } from "./helpers/protectedroute";
 
 function App() {
   const checkAuthenticated = () => {
@@ -35,7 +45,7 @@ function App() {
             <Route path={ROUTES.PROMPT} element={<Prompt />} />
             <Route path={ROUTES.HOMEVTWO} element={<HomeVTwo />} />
             <Route path={ROUTES.POST} element={<Post />} />
-            {/* <Route path={ROUTES.CREATEPOST} element={<CreatePost />} /> */}
+            <Route path={ROUTES.REPORT} element={<Report />} />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>
