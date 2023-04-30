@@ -97,7 +97,7 @@ export function CreatePost(props) {
               onChange={handleChange}
               value={postDescription}
               resize={"none"}
-              isDisabled={!isValid}
+              //isDisabled={!isValid}
             />
             <div>{`characters: ${wordCount.length}/${maxLength}`}</div>
             {isValid ? (
