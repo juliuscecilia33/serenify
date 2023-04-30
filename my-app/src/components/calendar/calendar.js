@@ -7,7 +7,8 @@ import "./calendar.css";
 
 function Calendar(props) {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [showCalendar, setShowCalendar] = useState(false);
+  //const [showCalendar, setShowCalendar] = useState(false);
+  
 
   const disablePastDt = (current) => {
     return current.isBefore(new Date());
@@ -26,6 +27,7 @@ function Calendar(props) {
     console.log(
       "changed to:" + selectedDate.toLocaleDateString().replace(/\//g, "-")
     );
+    props.setShowPencil(true);
   };
 
   return (

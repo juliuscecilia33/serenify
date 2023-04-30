@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 
+
 export function CreatePost(props) {
   const [postDescription, setPostDescription] = useState("");
   const [attachment, setAttachment] = useState(null);
@@ -20,22 +21,31 @@ export function CreatePost(props) {
   const [helperText, setHelperText] = useState("");
   const [wordCount, setWordCount] = useState("");
   const [isValid, setIsVaild] = useState(true);
+  const [moreThan500, setMoreThan500] = useState(false);
   const toast = useToast();
   //const [toastText, setToastText] = useState("Successfully Post~^_^~");
   const maxLength = 500;
   //   const [userid, setUserid] = useState();
+  
 
   const handleChange = (textValue) => {
     setPostDescription(textValue.target.value);
     if (textValue.target.value.length <= maxLength) {
       setIsVaild(true);
-      setHelperText(defaultHelperText);
+      if(textValue.target.value.length === maxLength) {
+        setHelperText("No more Characters~~~");
+      } else {
+        setHelperText(defaultHelperText);
+      }
       setWordCount(textValue.target.value);
+      setMoreThan500(false);
     } else {
       setIsVaild(false);
       setHelperText("Exceeded Character Limitation T_T");
+      setMoreThan500(true);
     }
   };
+
 
   useEffect(() => {
     const keyDownHandler = (event) => {
@@ -90,26 +100,32 @@ export function CreatePost(props) {
   return (
     <div>
       <div className="container">
-        <FormControl>
+        <FormControl isInvalid={isValid}>
           <FormLabel htmlFor="your-thought">
             <Textarea
               placeholder="Leave your thoughts here.."
               onChange={handleChange}
               value={postDescription}
               resize={"none"}
-              //isDisabled={!isValid}
+              errorBorderColor="red"
             />
-            <div>{`characters: ${wordCount.length}/${maxLength}`}</div>
-            {isValid ? (
-              <FormHelperText id="your-thought-hepler">
-                {helperText}
-              </FormHelperText>
-            ) : (
-              <FormErrorMessage>{helperText}</FormErrorMessage>
-            )}
+            <span style={{color: moreThan500 ? 'red' : ''}}>
+              {`characters: ${wordCount.length}/${maxLength}`}
+              </span>
+            {isValid ? 
+              (
+                <FormHelperText id="your-thought-hepler">
+                  {helperText}
+                </FormHelperText>
+              ) 
+              : 
+              (
+                <FormErrorMessage>{JSON.stringify(helperText)}</FormErrorMessage>
+              )
+            }
             <Button onSubmit={handleSubmit}>
-              <ArrowForwardIcon />
-            </Button>
+              <ArrowForwardIcon /> 
+            </Button> 
           </FormLabel>
         </FormControl>
       </div>
@@ -133,21 +149,21 @@ export function CreatePost(props) {
 //   /* <FormHelperText>This is a helper text.</FormHelperText> */
 // }
 // {
-//   /* <Textarea
-//             color="primary"
-//             minRows={2}
-//             multiline
-//             placeholder="Leave Your Thoughts Here..."
-//             size="lg"
-//             variant="plain"
-//             value={postDescription}
-//             onChange={handleChange}
-//             endDecorator={
-//             <Typography level="body3" sx={{ ml: 'auto' }}>
-//               {`${wordCount.length}/${maxLength}`}
-//             </Typography>
-//               }
-//           /> */
+  /* <Textarea
+            color="primary"
+            minRows={2}
+            multiline
+            placeholder="Leave Your Thoughts Here..."
+            size="lg"
+            variant="plain"
+            value={postDescription}
+            onChange={handleChange}
+            endDecorator={
+            <Typography level="body3" sx={{ ml: 'auto' }}>
+              {`${wordCount.length}/${maxLength}`}
+            </Typography>
+              }
+          /> */
 // }
 // {
 //   /* <Grid>

@@ -5,6 +5,7 @@ import { Navbar } from "../../components/index";
 import Calendar from "../../components/calendar/calendar";
 import { CreatePostButton } from "../../components";
 import "./Prompt.css";
+import { useForceUpdate } from "framer-motion";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
@@ -14,6 +15,7 @@ export function Prompt() {
   );
   const [promptid, setPromptid] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
+  const [showPencil, setShowPencil] = useState(false);
 
   console.log("have prompt:", havePrompt);
 
@@ -28,6 +30,8 @@ export function Prompt() {
 
         if (response.data.promptdescription) {
           setHavePrompt(true);
+        } else {
+          setHavePrompt(false);
         }
       })
       .catch((err) => {
@@ -65,11 +69,11 @@ export function Prompt() {
       </h2>
 
       <div className="calendar">
-        <Calendar dateCallBack={selectedPromptDate} />
+        <Calendar dateCallBack={selectedPromptDate} setShowPencil={setShowPencil} />
       </div>
 
       <div>
-        <b>{havePrompt ? <CreatePostButton {...createPostInfo} /> : null}</b>
+        <b>{havePrompt&&showPencil ? <CreatePostButton {...createPostInfo} showPencil={showPencil} setShowPencil={setShowPencil}/> : null}</b>
       </div>
     </div>
   );
