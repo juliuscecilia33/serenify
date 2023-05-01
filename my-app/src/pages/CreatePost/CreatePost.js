@@ -13,8 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 
-
-export function CreatePost(props) {
+export function CreatePost({ promptid, showPencil, setShowPencil }) {
   const [postDescription, setPostDescription] = useState("");
   const [attachment, setAttachment] = useState(null);
   const defaultHelperText = "Share your thoughts~~~";
@@ -26,13 +25,12 @@ export function CreatePost(props) {
   //const [toastText, setToastText] = useState("Successfully Post~^_^~");
   const maxLength = 500;
   //   const [userid, setUserid] = useState();
-  
 
   const handleChange = (textValue) => {
     setPostDescription(textValue.target.value);
     if (textValue.target.value.length <= maxLength) {
       setIsVaild(true);
-      if(textValue.target.value.length === maxLength) {
+      if (textValue.target.value.length === maxLength) {
         setHelperText("No more Characters~~~");
       } else {
         setHelperText(defaultHelperText);
@@ -43,21 +41,20 @@ export function CreatePost(props) {
       setIsVaild(false);
       setHelperText("Exceeded Character Limitation T_T");
       setMoreThan500(true);
+      toast({
+        title: "oops *_*",
+        description: "Exceeded Character Limitation T_T",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+      });
     }
   };
 
-
   useEffect(() => {
-    const keyDownHandler = (event) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        // 👇️ call submit function here
-        handleSubmit();
-      }
-    };
-    document.addEventListener("keydown", keyDownHandler);
+    document.addEventListener("keydown", keyDownHandler());
     return () => {
-      document.removeEventListener("keydown", keyDownHandler);
+      document.removeEventListener("keydown", keyDownHandler());
     };
   }, []);
 
@@ -68,8 +65,8 @@ export function CreatePost(props) {
           .post("/posts/create", {
             postDescription: postDescription,
             attachment: attachment,
-            userid: props.userid,
-            promptid: props.promptid,
+            userid: "",
+            promptid: promptid,
           })
           .then((response) => {
             toast({
@@ -80,13 +77,16 @@ export function CreatePost(props) {
               isClosable: true,
             });
           })
-          .catch((err) => {
-            console.err(err.message);
+          .catch((error) => {
+            console.error(error.message);
           });
+
+        setShowPencil(true);
       } else {
         toast({
-          title: "error message",
-          description: helperText,
+          title:
+            "You typed too much bitch, get ur ass back and change your shit and then try",
+          description: JSON.stringify(helperText),
           status: "error",
           duration: 2500,
           isClosable: true,
@@ -100,7 +100,7 @@ export function CreatePost(props) {
   return (
     <div>
       <div className="container">
-        <FormControl isInvalid={isValid}>
+        <FormControl isInvalid={!isValid}>
           <FormLabel htmlFor="your-thought">
             <Textarea
               placeholder="Leave your thoughts here.."
@@ -109,81 +109,23 @@ export function CreatePost(props) {
               resize={"none"}
               errorBorderColor="red"
             />
-            <span style={{color: moreThan500 ? 'red' : ''}}>
+            <span style={{ color: moreThan500 ? "red" : "" }}>
               {`characters: ${wordCount.length}/${maxLength}`}
-              </span>
-            {isValid ? 
-              (
-                <FormHelperText id="your-thought-hepler">
-                  {helperText}
-                </FormHelperText>
-              ) 
-              : 
-              (
-                <FormErrorMessage>{JSON.stringify(helperText)}</FormErrorMessage>
-              )
-            }
-            <Button onSubmit={handleSubmit}>
-              <ArrowForwardIcon /> 
-            </Button> 
+            </span>
+
+            {isValid && (
+              <FormHelperText id="your-thought-hepler">
+                {helperText}
+              </FormHelperText>
+            )}
+
+            <FormErrorMessage>{JSON.stringify(helperText)}</FormErrorMessage>
+            <Button onClick={handleSubmit}>
+              <ArrowForwardIcon />
+            </Button>
           </FormLabel>
         </FormControl>
       </div>
     </div>
   );
 }
-// {
-//   /* <TextField
-//           type="text"
-//           color="primary"
-//           minRows={2}
-//           multiline
-//           placeholder="Leave Your Thoughts Here..."
-//           label="Your Thoughts~"
-//           size="lg"
-//           value={postDescription}
-//           onChange={handleChange}
-//         /> */
-// }
-// {
-//   /* <FormHelperText>This is a helper text.</FormHelperText> */
-// }
-// {
-  /* <Textarea
-            color="primary"
-            minRows={2}
-            multiline
-            placeholder="Leave Your Thoughts Here..."
-            size="lg"
-            variant="plain"
-            value={postDescription}
-            onChange={handleChange}
-            endDecorator={
-            <Typography level="body3" sx={{ ml: 'auto' }}>
-              {`${wordCount.length}/${maxLength}`}
-            </Typography>
-              }
-          /> */
-// }
-// {
-//   /* <Grid>
-//               <Textarea
-//                 label="Create Post"
-//                 minRows={8}
-//                 fullWidth="true"
-//                 placeholder="Leave your thoughts here.."
-//                 onChange={handleChange}
-//                 value={postDescription}
-//                 helperText={helperText}
-//                 animated="true"
-//                 shadow="true"
-//                 bordered="true"
-//                 borderWeight="light"
-//               />
-//                <div>{`characters: ${wordCount.length}/${maxLength}`}</div>
-//           </Grid> */
-// }
-
-// {
-//   /* <Typography variant="caption">{`${wordCount.length}/${maxLength}`}</Typography> */
-// }

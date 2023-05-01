@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import pencil from "../../images/pencil.png";
 import { CreatePost } from "../../pages/CreatePost/CreatePost";
 
-export function CreatePostButton(promptid, props) {
+export function CreatePostButton({ promptid, showPencil, setShowPencil }) {
   //navigate to the create post page
   // const navigate = useNavigate();
   // const goToCreatePost = (props) => {
@@ -12,24 +12,30 @@ export function CreatePostButton(promptid, props) {
   //   console.log("props:", props);
   // };
 
+  console.log("create post button props: ", showPencil);
+
   const createPostInfo = {
     promptid,
     //,
     //localStorage.getItem(userid);
+    showPencil,
+    setShowPencil,
   };
 
-  const handleClick = () => {
-    props.setShowPencil(false);
+  const handleClick = (e) => {
+    e.preventDefault();
+    setShowPencil(false);
+    console.log("after click: ", showPencil);
   };
 
   return (
     <div>
-      {props.showPencil ? (
-        <button onClick={handleClick}>
+      {showPencil ? (
+        <button onClick={(e) => handleClick(e)}>
           <img src={pencil} alt="pencil click to add post" />
         </button>
       ) : (
-        <CreatePost createPostInfo={createPostInfo} />
+        <CreatePost {...createPostInfo} />
       )}
     </div>
   );

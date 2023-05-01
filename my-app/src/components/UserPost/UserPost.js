@@ -50,12 +50,17 @@ export function UserPost(postData) {
     fish,
   ];
 
+  console.log("post data from prop: ", postData.postData.postid);
+  if (postData) {
+    console.log("post data id5555 : ", postData.postData.postid);
+  }
+
   const [isExpanded, setIsExpanded] = useState(false);
 
   function getRandomAnimal() {
     let randomNumber = Math.floor(Math.random() * wordBank.length);
 
-    console.log("random animal: ", wordBank[randomNumber]);
+    // console.log("random animal: ", wordBank[randomNumber]);
     return wordBank[randomNumber];
   }
 
@@ -65,12 +70,10 @@ export function UserPost(postData) {
         <div className="profile-pic">
           <img src={getRandomAnimal()} alt="Animal" />
         </div>
-        <p className="date_posted">2h ago</p>
+        <p className="date_posted">{postData.postData.posttime}</p>
       </div>
       <div className="middle-section">
-        <p className="post_text">
-          Don’t eat before bed :) just finished a sandwich
-        </p>
+        <p className="post_text">{postData.postData.postdescription}</p>
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
@@ -92,7 +95,7 @@ export function UserPost(postData) {
               <button>
                 <BsHeart />
               </button>
-              <p>1401</p>
+              <p>{postData.postData.postlike}</p>
             </div>
             <div className="button-container">
               <button>

@@ -33,6 +33,19 @@ router.post("/create", async (req, res) => {
   }
 });
 
+//get all the post
+//get all first, then id
+router.get("/all", async (req, res) => {
+  try {
+    const allPosts = await pool.query("SELECT * FROM tblPost");
+
+    res.json(allPosts.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // 2. get post
 router.get("/:postid", async (req, res) => {
   try {
@@ -44,17 +57,6 @@ router.get("/:postid", async (req, res) => {
     );
 
     res.json(postInfo.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-router.get("/all", async (req, res) => {
-  try {
-    const allPosts = await pool.query("SELECT * FROM tblPost");
-
-    res.json(allPosts.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
