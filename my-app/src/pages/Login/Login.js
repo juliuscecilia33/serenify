@@ -65,6 +65,7 @@ export function Login() {
           class="password_input"
           onChange={(e) => setUserPassword(e.target.value)}
           placeholder="Password"
+          type="Password"
         />
         {/* <button>
           <Icon mt={16} boxSize={10} as={ChevronRightIcon} />

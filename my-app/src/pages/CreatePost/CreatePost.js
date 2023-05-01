@@ -52,6 +52,11 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
   };
 
   useEffect(() => {
+    const keyDownHandler = async (e) => {
+      if (e.key === "Enter") {
+        await handleSubmit();
+      }
+    };
     document.addEventListener("keydown", keyDownHandler());
     return () => {
       document.removeEventListener("keydown", keyDownHandler());
@@ -62,30 +67,42 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
     try {
       if (isValid) {
         await apiClient
-          .post("/posts/create", {
-            postDescription: postDescription,
-            attachment: attachment,
-            userid: "",
-            promptid: promptid,
-          })
+          .post(
+            "/posts/create",
+            {
+              postDescription: postDescription,
+              attachment: attachment,
+              userid: localStorage.getItem("userid"),
+              promptid: promptid,
+            }
+            //console.log(localStorage.getItem("userid"))
+          )
           .then((response) => {
+            console.log("response successful: ", response);
+          })
+          .catch((error) => {
+            console.error("error from handle submit: ", error.message);
             toast({
-              title: "Account created.",
-              description: response,
-              status: "success",
+              title: "Something wrong...",
+              description: "Sorry, the server is wrong*_*",
+              status: "error",
               duration: 2500,
               isClosable: true,
             });
-          })
-          .catch((error) => {
-            console.error(error.message);
           });
+
+        toast({
+          title: "Yeah, a new post~",
+          description: "Your post was successfully posted!",
+          status: "success",
+          duration: 2500,
+          isClosable: true,
+        });
 
         setShowPencil(true);
       } else {
         toast({
-          title:
-            "You typed too much bitch, get ur ass back and change your shit and then try",
+          title: "Oops",
           description: JSON.stringify(helperText),
           status: "error",
           duration: 2500,
@@ -99,7 +116,7 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
 
   return (
     <div>
-      <div className="container">
+      <div className="container flex">
         <FormControl isInvalid={!isValid}>
           <FormLabel htmlFor="your-thought">
             <Textarea
@@ -113,14 +130,15 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
               {`characters: ${wordCount.length}/${maxLength}`}
             </span>
 
-            {isValid && (
-              <FormHelperText id="your-thought-hepler">
-                {helperText}
-              </FormHelperText>
-            )}
+            {isValid && <FormHelperText>{helperText}</FormHelperText>}
 
-            <FormErrorMessage>{JSON.stringify(helperText)}</FormErrorMessage>
-            <Button onClick={handleSubmit}>
+            <FormErrorMessage>{helperText}</FormErrorMessage>
+            <Button
+              colorScheme="teal"
+              onClick={(e) => {
+                handleSubmit(e);
+              }}
+            >
               <ArrowForwardIcon />
             </Button>
           </FormLabel>

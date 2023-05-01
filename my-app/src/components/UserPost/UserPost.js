@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./UserPost.css";
+
 import ant from "../../images/animals/ant.png";
 import bear from "../../images/animals/bear.png";
 import bird from "../../images/animals/bird.png";
@@ -19,6 +20,8 @@ import duck from "../../images/animals/ant.png";
 import elephant from "../../images/animals/elephant.png";
 import falcon from "../../images/animals/falcon.png";
 import fish from "../../images/animals/fish.png";
+import axios from "axios";
+
 import {
   BsChevronUp,
   BsChevronDown,
@@ -28,6 +31,9 @@ import {
 } from "react-icons/bs";
 
 export function UserPost(postData) {
+  const [postLiked, setPostLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(postData.postData.postlike);
+
   const wordBank = [
     ant,
     bear,
@@ -56,6 +62,12 @@ export function UserPost(postData) {
   }
 
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleLikePost = (e) => {
+    e.preventDefault();
+
+    console.log(postData.postData.postid);
+  };
 
   function getRandomAnimal() {
     let randomNumber = Math.floor(Math.random() * wordBank.length);
@@ -92,10 +104,10 @@ export function UserPost(postData) {
           </div>
           <div className="buttons">
             <div className="button-container">
-              <button>
+              <button onClick={(e) => handleLikePost(e)}>
                 <BsHeart />
               </button>
-              <p>{postData.postData.postlike}</p>
+              <p>{likeCount}</p>
             </div>
             <div className="button-container">
               <button>

@@ -5,6 +5,7 @@ import logouticon from "../../images/logout.png";
 import { Authentication } from "../../context/Authentication";
 import { useNavigate } from "react-router";
 import * as ROUTES from "../../constants/routes";
+import { Link } from "react-router-dom";
 
 export function Navbar() {
   const { isAuthenticated, setAuth } = useContext(Authentication);
@@ -27,9 +28,11 @@ export function Navbar() {
           <img class="logout-image" src={logouticon} alt="Logout" />
         </button>
       ) : (
-        <button>
-          <p>Login</p>
-        </button>
+        <Link to={ROUTES.LOGIN}>
+          <button>
+            <p>Login</p>
+          </button>
+        </Link>
       )}
     </div>
   );
