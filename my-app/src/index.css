@@ -80,6 +80,13 @@ nav li a:hover {
   transition: 0.3s ease-in-out;
 }
 
+button:hover {
+  background: none;
+  background-color: none;
+  border: none;
+  color: none;
+}
+
 /* .post:first-child {
   margin-top: 150px;
 }

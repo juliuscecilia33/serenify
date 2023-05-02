@@ -13,7 +13,13 @@ import {
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 
-export function CreatePost({ promptid, showPencil, setShowPencil }) {
+export function CreatePost({
+  promptid,
+  showPencil,
+  setShowPencil,
+  postSubmitted,
+  setPostSubmitted,
+}) {
   const [postDescription, setPostDescription] = useState("");
   const [attachment, setAttachment] = useState(null);
   const defaultHelperText = "Share your thoughts~~~";
@@ -51,6 +57,7 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
     }
   };
 
+<<<<<<< HEAD
   const keyDownHandler = async (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -65,35 +72,55 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
       document.removeEventListener("keydown", keyDownHandler());
     };
   }, []);
+=======
+  const keyDownHandler = async (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+  // useEffect(() => {
+
+  //   document.addEventListener("keydown", keyDownHandler());
+  //   return () => {
+  //     document.removeEventListener("keydown", keyDownHandler());
+  //   };
+  // }, []);
+>>>>>>> d9db50f093de3cc8716c0c69e6c65bfd16e27a3b
 
   const handleSubmit = async (e) => {
     try {
       if (isValid) {
         await apiClient
-          .post("/posts/create", {
-            postDescription: postDescription,
-            attachment: attachment,
-            userid: "",
-            promptid: promptid,
-          })
+          .post(
+            "/posts/create",
+            {
+              postDescription: postDescription,
+              attachment: attachment,
+              userid: localStorage.getItem("userid"),
+              promptid: promptid,
+            }
+            //console.log(localStorage.getItem("userid"))
+          )
           .then((response) => {
-            toast({
-              title: "Account created.",
-              description: response,
-              status: "success",
-              duration: 2500,
-              isClosable: true,
-            });
+            console.log("response successful: ", response);
           })
           .catch((error) => {
-            console.error(error.message);
+            console.error("error from handle submit: ", error.message);
           });
 
+        toast({
+          title: "Yeah, a new post~",
+          description: "Your post was successfully posted!",
+          status: "success",
+          duration: 2500,
+          isClosable: true,
+        });
+
         setShowPencil(true);
+        setPostSubmitted(!postSubmitted);
       } else {
         toast({
-          title:
-            "You typed too much bitch, get ur ass back and change your shit and then try",
+          title: "Oops",
           description: JSON.stringify(helperText),
           status: "error",
           duration: 2500,
@@ -107,8 +134,8 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
 
   return (
     <div>
-      <div className="container">
-        <FormControl isInvalid={!isValid}>
+      <div className="container flex">
+        <FormControl isInvalid={!isValid} onKeyPress={keyDownHandler}>
           <FormLabel htmlFor="your-thought">
             <Textarea
               placeholder="Leave your thoughts here.."
@@ -121,14 +148,15 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
               {`characters: ${wordCount.length}/${maxLength}`}
             </span>
 
-            {isValid && (
-              <FormHelperText id="your-thought-hepler">
-                {helperText}
-              </FormHelperText>
-            )}
+            {isValid && <FormHelperText>{helperText}</FormHelperText>}
 
-            <FormErrorMessage>{JSON.stringify(helperText)}</FormErrorMessage>
-            <Button onClick={handleSubmit}>
+            <FormErrorMessage>{helperText}</FormErrorMessage>
+            <Button
+              colorScheme="teal"
+              onClick={(e) => {
+                handleSubmit(e);
+              }}
+            >
               <ArrowForwardIcon />
             </Button>
           </FormLabel>

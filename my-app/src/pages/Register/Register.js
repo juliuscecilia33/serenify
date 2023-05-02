@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import * as ROUTES from "../../constants/routes";
-import "../Login/Login.css";
+import "../Register/Register.css";
 import toplayer from "../../images/toplayer.png";
 import { Icon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Authentication } from "../../context/Authentication";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Logo from "../../images/logo2.png";
+import { useToast } from "@chakra-ui/react";
 
 export function Register() {
   const [userEmail, setUserEmail] = useState("");
@@ -14,6 +16,7 @@ export function Register() {
   const [loading, setLoading] = useState(false);
   const { isAuthenticated, setAuth } = useContext(Authentication);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -46,7 +49,16 @@ export function Register() {
           setAuth(false);
           setLoading(false);
         }
-        navigate(ROUTES.HOME);
+
+        toast({
+          title: "Welcome!",
+          description: "Account Successfully Created! :D",
+          status: "success",
+          duration: 2500,
+          isClosable: true,
+        });
+
+        navigate(ROUTES.PROMPT);
       })
       .catch((error) => {
         console.error("There was an error!", error);
@@ -55,29 +67,40 @@ export function Register() {
 
   return (
     <>
-      <div class="container">
-        <img src={toplayer} alt="landing page" class="top-landing" />
-        <h1>Sign up</h1>
-        <input
-          onChange={(e) => setUserEmail(e.target.value)}
-          class="username_input"
-          placeholder="Email"
-        />
-        <input
-          onChange={(e) => setUserPassword(e.target.value)}
-          class="password_input"
-          placeholder="Password"
-          type="Password"
-        />
-        <input
-          onChange={(e) => setUserConfirmPassword(e.target.value)}
-          class="password_input_again"
-          placeholder="Confirm Password"
-          type="Password"
-        />
-        <button onClick={(e) => handleRegister(e)}>
-          <Icon mt={16} boxSize={10} as={ChevronRightIcon} />
-        </button>
+      <div className="signup-signup">
+        <div className="signup-content">
+          <img className="signup-logo" alt={"Logo"} src={Logo} />
+          <div className="signup-log-in">Log In</div>
+          <div className="signup-tag" />
+          <div className="signup-b">
+            <h1 className="signup-text-wrapper">Sign up:</h1>
+          </div>
+          <div className="signup-b-2">
+            <input
+              className="signup-div"
+              placeholder="Email"
+              onChange={(e) => setUserEmail(e.target.value)}
+            />
+            <input
+              onChange={(e) => setUserPassword(e.target.value)}
+              className="signup-text-wrapper-2"
+              placeholder="Password"
+              type="Password"
+            />
+            <input
+              onChange={(e) => setUserConfirmPassword(e.target.value)}
+              className="signup-text-wrapper-2"
+              placeholder="Confirm Password"
+              type="Password"
+            />
+            <button
+              onClick={(e) => handleRegister(e)}
+              className="signup-text-wrapper-3"
+            >
+              -&gt;
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./UserPost.css";
+
 import ant from "../../images/animals/ant.png";
 import bear from "../../images/animals/bear.png";
 import bird from "../../images/animals/bird.png";
@@ -19,15 +20,23 @@ import duck from "../../images/animals/ant.png";
 import elephant from "../../images/animals/elephant.png";
 import falcon from "../../images/animals/falcon.png";
 import fish from "../../images/animals/fish.png";
+
+import axios from "axios";
+
 import {
   BsChevronUp,
   BsChevronDown,
   BsHeart,
   BsChatRight,
   BsExclamationOctagon,
+  BsHeartFill,
 } from "react-icons/bs";
 
 export function UserPost(postData) {
+  const [postLiked, setPostLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(postData.postData.postlike);
+  const [usersLiked, setUsersLiked] = useState(postData.postData.likedusers);
+
   const wordBank = [
     ant,
     bear,
@@ -50,12 +59,30 @@ export function UserPost(postData) {
     fish,
   ];
 
-  console.log("post data from prop: ", postData.postData.postid);
-  if (postData) {
-    console.log("post data id5555 : ", postData.postData.postid);
+  console.log("post data - user liked: ", typeof postData.postData.likedusers);
+  console.log("post data - user liked: ", postData.postData.likedusers);
+  console.log("users liked: ", usersLiked);
+  console.log("local storage user id: ", localStorage.getItem("userid"));
+  if (usersLiked) {
+    console.log(
+      "includes console: ",
+      usersLiked.includes(localStorage.getItem("userid"))
+    );
   }
 
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleIncrementLike = (e) => {
+    e.preventDefault();
+
+    console.log("increment like");
+  };
+
+  const handleDecrementLike = (e) => {
+    e.preventDefault();
+
+    console.log("decrement like");
+  };
 
   function getRandomAnimal() {
     let randomNumber = Math.floor(Math.random() * wordBank.length);
@@ -92,10 +119,19 @@ export function UserPost(postData) {
           </div>
           <div className="buttons">
             <div className="button-container">
-              <button>
-                <BsHeart />
-              </button>
-              <p>{postData.postData.postlike}</p>
+              {postData.postData.likedusers &&
+              postData.postData.likedusers.includes(
+                localStorage.getItem("userid")
+              ) ? (
+                <button onClick={(e) => handleDecrementLike(e)}>
+                  <BsHeartFill />
+                </button>
+              ) : (
+                <button onClick={(e) => handleIncrementLike(e)}>
+                  <BsHeart />
+                </button>
+              )}
+              <p>{likeCount}</p>
             </div>
             <div className="button-container">
               <button>

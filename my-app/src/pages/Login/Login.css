@@ -1,4 +1,131 @@
-.container {
+.login-login {
+  align-items: center;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  min-width: 390px;
+  position: relative;
+}
+
+.login-content {
+  align-items: center;
+  align-self: stretch;
+  background-color: #ece8d1;
+  display: flex;
+  flex-direction: column;
+  gap: 66px;
+  height: 950px;
+  padding: 20px 24px;
+  position: relative;
+}
+
+.login-logo {
+  height: 24px;
+  left: 32px;
+  position: absolute;
+  top: 69px;
+  width: 31px;
+}
+
+.login-text-wrapper {
+  color: #282828;
+  cursor: pointer;
+  font-family: "Oswald", Helvetica;
+  font-size: 23px;
+  font-weight: 400;
+  left: 304px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-decoration: underline;
+  top: 69px;
+  white-space: nowrap;
+  width: 62px;
+}
+
+.login-tag {
+  height: 110px;
+  min-width: 342px;
+  position: relative;
+}
+
+.login-b {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  height: 90px;
+  position: relative;
+}
+
+.login-h-1 {
+  align-self: stretch;
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 90px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 90px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.login-b-2 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 66px;
+  position: relative;
+  width: fit-content;
+}
+
+.login-div {
+  color: #686868;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: 342px;
+  background: none;
+  outline: none;
+}
+
+.login-text-wrapper-2 {
+  color: #686868;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  position: relative;
+  white-space: nowrap;
+  background: none;
+  width: 342px;
+  border: none;
+  outline: none;
+}
+
+.login-text-wrapper-3 {
+  color: #282828;
+  cursor: pointer;
+  font-family: "Oswald", Helvetica;
+  font-size: 90px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 90px;
+  position: relative;
+  text-align: right;
+  white-space: nowrap;
+  width: 342px;
+  border: none;
+}
+
+/* .container {
   height: 100%;
   width: 100%;
   display: flex;
@@ -26,4 +153,4 @@ input {
 .login_button {
   margin-top: 2rem;
   font-size: 3rem;
-}
+} */

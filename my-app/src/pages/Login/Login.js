@@ -7,6 +7,8 @@ import { BsArrowRightCircle } from "react-icons/bs";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Authentication } from "../../context/Authentication";
+import Logo from "../../images/logo2.png";
+import { useToast } from "@chakra-ui/react";
 
 export function Login() {
   const [userEmail, setUserEmail] = useState("");
@@ -14,6 +16,8 @@ export function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, setAuth } = useContext(Authentication);
+  const [loginError, setLoginError] = useState(false);
+  const toast = useToast();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -41,10 +45,20 @@ export function Login() {
           setAuth(false);
           setLoading(false);
         }
-        navigate(ROUTES.HOME);
+
+        toast({
+          title: "You are Logged in!",
+          description: "You successfully logged in! :D",
+          status: "success",
+          duration: 2500,
+          isClosable: true,
+        });
+
+        navigate(ROUTES.PROMPT);
       })
       .catch((error) => {
         console.error("There was an error!", error);
+        setLoginError(true);
       });
   };
 
@@ -52,27 +66,34 @@ export function Login() {
   console.log("Password: ", userPassword);
 
   return (
-    <>
-      <div className="container">
-        <img src={toplayer} alt="landing page" class="top-landing" />
-        <h1>Log in</h1>
-        <input
-          class="username_input"
-          onChange={(e) => setUserEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          class="password_input"
-          onChange={(e) => setUserPassword(e.target.value)}
-          placeholder="Password"
-        />
-        {/* <button>
-          <Icon mt={16} boxSize={10} as={ChevronRightIcon} />
-        </button> */}
-        <button onClick={(e) => handleLogin(e)} className="login_button">
-          <BsArrowRightCircle />
-        </button>
+    <div className="login-login">
+      <div className="login-content">
+        <img className="login-logo" alt={"Logo"} src={Logo} />
+        <div className="login-text-wrapper">Sign up</div>
+        <div className="login-tag" />
+        <div className="login-b">
+          <h1 className="login-h-1">Login:</h1>
+        </div>
+        <div className="login-b-2">
+          <input
+            onChange={(e) => setUserEmail(e.target.value)}
+            className="login-div"
+            placeholder="Email"
+          />
+          <input
+            onChange={(e) => setUserPassword(e.target.value)}
+            className="login-text-wrapper-2"
+            placeholder="Password"
+            type="Password"
+          />
+          <button
+            onClick={(e) => handleLogin(e)}
+            className="login-text-wrapper-3"
+          >
+            -&gt;
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
