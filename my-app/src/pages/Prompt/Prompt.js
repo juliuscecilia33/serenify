@@ -14,9 +14,10 @@ export function Prompt() {
   const [defaultPromptDate, setDefaultPromptDate] = useState(
     new Date().toLocaleDateString().replace(/\//g, "-")
   );
+  const [localStorageDate, setLocalStorageDate] = useState("");
   const [promptid, setPromptid] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
-  const [showPencil, setShowPencil] = useState(false);
+  const [showPencil, setShowPencil] = useState(true);
 
   console.log("prompt id: ", promptid);
 
@@ -40,13 +41,30 @@ export function Prompt() {
           console.error("There was an error!", error);
         });
     }
+    setPostsForPrompt(null);
   };
 
   useEffect(() => {
     gettPostsForCertainPrompt();
   }, [promptid]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  //Transfer the date from LocalStorage to date datatype
+  useEffect(() => {
+    if (localStorage.getItem("promptDate")) {
+      // console.log(
+      //   "prompt date from local storage: ",
+      //   localStorage.getItem("promptDate")
+      // );
+      //setLocalStorageDate(new Date(localStorage.getItem("promptDate")));
+      // console.log("type for new Date(): ", typeof new Date());
+      // console.log("type for local storage date: ", typeof localStorageDate);
+      setDefaultPromptDate(
+        new Date(localStorage.getItem("promptDate"))
+          .toLocaleDateString()
+          .replace(/\//g, "-")
+      );
+    }
+  }, [localStorage.getItem("promptDate")]);
 
   const selectedPromptDate = (date) => {
     setDefaultPromptDate(date);
@@ -65,6 +83,7 @@ export function Prompt() {
             setHavePrompt(true);
           } else {
             setHavePrompt(false);
+            setShowPencil(false);
           }
         })
         .catch((err) => {

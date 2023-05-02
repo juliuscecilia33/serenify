@@ -63,6 +63,31 @@ router.get("/:postid", async (req, res) => {
   }
 });
 
+router.get("/:postid/checkifliked", async (req, res) => {
+  try {
+    const { postid } = req.params;
+    const { userid } = req.body;
+
+    // const checkIfUserHasLiked = await pool.query(
+    //   "SELECT * FROM tbluser WHERE '769156ac-405a-4d93-bea3-781bc3f7dec1' = ANY(postsliked) AND userid = '76f8fe50-06bb-4553-9b28-a453fac37712'"
+    // );
+
+    const checkIfUserHasLiked = await pool.query(
+      "SELECT * FROM tbluser WHERE $1 = ANY(postsliked) AND userid = $2",
+      [postid, userid]
+    );
+
+    if (checkIfUserHasLiked.rows.length > 0) {
+      return res.json(true);
+    }
+
+    res.json(false);
+  } catch (error) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // 3. update like count for post (url)
 // router.put("/:postid")
 router.put("/:postid/likeincremented", async (req, res) => {
@@ -75,13 +100,10 @@ router.put("/:postid/likeincremented", async (req, res) => {
       [postid]
     );
 
-    const checkIfUserHasLiked = await pool.query(
-      "SELECT * FROM tbluser WHERE '769156ac-405a-4d93-bea3-781bc3f7dec1' = ANY(postsliked) AND userid = '76f8fe50-06bb-4553-9b28-a453fac37712'"
+    const updateLikedUsers = await pool.query(
+      "UPDATE tblpost SET likedusers = ARRAY_APPEND(likedusers, $1) WHERE postid = $2",
+      [userid, postid]
     );
-
-    if (checkIfUserHasLiked.rows.length > 0) {
-      return res.json("User has already liked");
-    }
 
     const updateUserPostsLiked = await pool.query(
       "UPDATE tblUser SET postsLiked = ARRAY_APPEND(postsliked, $1) WHERE userid = $2",

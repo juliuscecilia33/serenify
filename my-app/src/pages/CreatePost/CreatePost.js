@@ -51,17 +51,18 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
     }
   };
 
-  useEffect(() => {
-    const keyDownHandler = async (e) => {
-      if (e.key === "Enter") {
-        await handleSubmit();
-      }
-    };
-    document.addEventListener("keydown", keyDownHandler());
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler());
-    };
-  }, []);
+  const keyDownHandler = async (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+  // useEffect(() => {
+
+  //   document.addEventListener("keydown", keyDownHandler());
+  //   return () => {
+  //     document.removeEventListener("keydown", keyDownHandler());
+  //   };
+  // }, []);
 
   const handleSubmit = async (e) => {
     try {
@@ -82,13 +83,6 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
           })
           .catch((error) => {
             console.error("error from handle submit: ", error.message);
-            toast({
-              title: "Something wrong...",
-              description: "Sorry, the server is wrong*_*",
-              status: "error",
-              duration: 2500,
-              isClosable: true,
-            });
           });
 
         toast({
@@ -117,7 +111,7 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
   return (
     <div>
       <div className="container flex">
-        <FormControl isInvalid={!isValid}>
+        <FormControl isInvalid={!isValid} onKeyPress={keyDownHandler}>
           <FormLabel htmlFor="your-thought">
             <Textarea
               placeholder="Leave your thoughts here.."

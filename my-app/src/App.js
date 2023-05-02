@@ -44,7 +44,6 @@ function App() {
             <Route path={ROUTES.USER} element={<User />} />
             <Route path={ROUTES.PROMPT} element={<Prompt />} />
             <Route path={ROUTES.HOMEVTWO} element={<HomeVTwo />} />
-            <Route path={ROUTES.POST} element={<Post />} />
             <Route path={ROUTES.REPORT} element={<Report />} />
           </Routes>
         </BrowserRouter>
