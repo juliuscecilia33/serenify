@@ -21,6 +21,8 @@ export function Prompt() {
 
   console.log("prompt id: ", promptid);
 
+  console.log("show pencil outside: ", showPencil);
+
   const [postsForPrompt, setPostsForPrompt] = useState();
 
   const gettPostsForCertainPrompt = async () => {
@@ -81,10 +83,13 @@ export function Prompt() {
 
           if (response.data.promptdescription) {
             setHavePrompt(true);
+            // setShowPencil(true);
           } else {
             setHavePrompt(false);
-            setShowPencil(false);
+            // setShowPencil(false);
           }
+
+          console.log("show pencil inside useEffect: ", showPencil);
         })
         .catch((err) => {
           console.err(err.message);
