@@ -18,6 +18,7 @@ export function Prompt() {
   const [promptid, setPromptid] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
   const [showPencil, setShowPencil] = useState(true);
+  const [postSubmitted, setPostSubmitted] = useState(false);
 
   console.log("prompt id: ", promptid);
 
@@ -48,7 +49,7 @@ export function Prompt() {
 
   useEffect(() => {
     gettPostsForCertainPrompt();
-  }, [promptid]);
+  }, [promptid, postSubmitted]);
 
   //Transfer the date from LocalStorage to date datatype
   useEffect(() => {
@@ -103,6 +104,8 @@ export function Prompt() {
     promptid, //localStorage.getItem(userid);
     showPencil,
     setShowPencil,
+    postSubmitted,
+    setPostSubmitted,
   };
 
   return (

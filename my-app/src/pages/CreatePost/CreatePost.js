@@ -13,7 +13,13 @@ import {
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 
-export function CreatePost({ promptid, showPencil, setShowPencil }) {
+export function CreatePost({
+  promptid,
+  showPencil,
+  setShowPencil,
+  postSubmitted,
+  setPostSubmitted,
+}) {
   const [postDescription, setPostDescription] = useState("");
   const [attachment, setAttachment] = useState(null);
   const defaultHelperText = "Share your thoughts~~~";
@@ -94,6 +100,7 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
         });
 
         setShowPencil(true);
+        setPostSubmitted(!postSubmitted);
       } else {
         toast({
           title: "Oops",

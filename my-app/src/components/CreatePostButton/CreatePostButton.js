@@ -4,7 +4,13 @@ import React, { useState, useEffect } from "react";
 import pencil from "../../images/pencil.png";
 import { CreatePost } from "../../pages/CreatePost/CreatePost";
 
-export function CreatePostButton({ promptid, showPencil, setShowPencil }) {
+export function CreatePostButton({
+  promptid,
+  showPencil,
+  setShowPencil,
+  postSubmitted,
+  setPostSubmitted,
+}) {
   //navigate to the create post page
   // const navigate = useNavigate();
   // const goToCreatePost = (props) => {
@@ -16,6 +22,8 @@ export function CreatePostButton({ promptid, showPencil, setShowPencil }) {
     promptid,
     showPencil,
     setShowPencil,
+    postSubmitted,
+    setPostSubmitted,
   };
 
   const handleClick = (e) => {
