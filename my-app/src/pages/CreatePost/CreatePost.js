@@ -51,6 +51,14 @@ export function CreatePost({ promptid, showPencil, setShowPencil }) {
     }
   };
 
+  const keyDownHandler = async (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      // 👇️ call submit function here
+      await handleSubmit();
+    }
+  };
+
   useEffect(() => {
     document.addEventListener("keydown", keyDownHandler());
     return () => {
