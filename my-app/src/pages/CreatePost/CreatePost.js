@@ -57,22 +57,6 @@ export function CreatePost({
     }
   };
 
-<<<<<<< HEAD
-  const keyDownHandler = async (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      // 👇️ call submit function here
-      await handleSubmit();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", keyDownHandler());
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler());
-    };
-  }, []);
-=======
   const keyDownHandler = async (e) => {
     if (e.key === "Enter") {
       handleSubmit();
@@ -85,7 +69,6 @@ export function CreatePost({
   //     document.removeEventListener("keydown", keyDownHandler());
   //   };
   // }, []);
->>>>>>> d9db50f093de3cc8716c0c69e6c65bfd16e27a3b
 
   const handleSubmit = async (e) => {
     try {
