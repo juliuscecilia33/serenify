@@ -22,26 +22,26 @@
   font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
-  left: 308px;
+  left: 290px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
   text-decoration: underline;
-  top: 68px;
+  top: 66px;
   white-space: nowrap;
 }
 
 .big {
-font-family: 'Oswald';
-font-style: normal;
-font-weight: 500;
-font-size: 100px;
-line-height: 100%;
-color: #000000;
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 100px;
+  line-height: 100%;
+  color: #000000;
 }
 
 .small {
-  font-family: 'Oswald';
+  font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
   font-size: 50px;

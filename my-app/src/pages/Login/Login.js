@@ -16,6 +16,7 @@ export function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, setAuth } = useContext(Authentication);
+  const [loginError, setLoginError] = useState(false);
   const toast = useToast();
 
   const handleLogin = async (e) => {
@@ -44,17 +45,20 @@ export function Login() {
           setAuth(false);
           setLoading(false);
         }
-        navigate(ROUTES.HOMEVTWO);
+
+        toast({
+          title: "You are Logged in!",
+          description: "You successfully logged in! :D",
+          status: "success",
+          duration: 2500,
+          isClosable: true,
+        });
+
+        navigate(ROUTES.PROMPT);
       })
       .catch((error) => {
         console.error("There was an error!", error);
-        toast({
-          title: "oops *_*",
-          description: error,
-          status: "warning",
-          duration: 2000,
-          isClosable: true,
-        });
+        setLoginError(true);
       });
   };
 

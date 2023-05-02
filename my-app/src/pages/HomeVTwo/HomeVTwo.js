@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./HomeVTwo.css";
 import Logo from "../../images/logo2.png";
 import Cat from "../../images/Cat.png";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
+import { Authentication } from "../../context/Authentication";
+import { useNavigate } from "react-router";
 
 export function HomeVTwo() {
+  const { isAuthenticated, setAuth } = useContext(Authentication);
+  const navigate = useNavigate();
+
+  const logout = (e) => {
+    e.preventDefault();
+
+    localStorage.removeItem("userid");
+    console.log("User logged out");
+
+    navigate(ROUTES.LOGIN);
+  };
+
   return (
     <div className="content">
       <img className="logo" alt={"Logo"} src={Logo} />
-      <Link to={ROUTES.LOGIN}>
-        <div className="log-in">Log in</div>
-      </Link>
+      {isAuthenticated ? (
+        <button onClick={(e) => logout(e)}>
+          <div className="log-in">Sign Out</div>
+        </button>
+      ) : (
+        <Link to={ROUTES.LOGIN}>
+          <div className="log-in">Log in</div>
+        </Link>
+      )}
+
       <div className="s1">
         <h1 className="big">
           Hello
