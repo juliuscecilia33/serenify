@@ -19,6 +19,7 @@ export function Prompt() {
   const [havePrompt, setHavePrompt] = useState(false);
   const [showPencil, setShowPencil] = useState(true);
   const [postSubmitted, setPostSubmitted] = useState(false);
+  const [refreshPosts, setPostsRefresh] = useState(false);
 
   console.log("prompt id: ", promptid);
 

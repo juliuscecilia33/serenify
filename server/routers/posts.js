@@ -143,18 +143,18 @@ router.delete("/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
 
-    const deletePostInfo = await pool.query(
-      "SELECT postDescription WHERE postid = $1",
-      [postid]
-    );
-    const deletePostDes = JSON.stringify(deletePostInfo.rows[0]);
+    // const deletePostInfo = await pool.query(
+    //   "SELECT postDescription WHERE postid = $1",
+    //   [postid]
+    // );
+    // const deletePostDes = JSON.stringify(deletePostInfo.rows[0]);
 
     const deletePost = await pool.query(
       "DELETE FROM tblPost WHERE postid = $1",
       [postid]
     );
 
-    res.json("Successfully delete the post: " + deletePostDes);
+    res.json("Successfully deleted post");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

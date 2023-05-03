@@ -30,6 +30,7 @@ import {
   BsChatRight,
   BsExclamationOctagon,
   BsHeartFill,
+  BsFillTrash3Fill,
 } from "react-icons/bs";
 
 export function UserPost(postData) {
@@ -72,6 +73,12 @@ export function UserPost(postData) {
 
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const handleDeletePost = (e) => {
+    e.preventDefault();
+
+    console.log("Deleted Post");
+  };
+
   const handleIncrementLike = (e) => {
     e.preventDefault();
 
@@ -101,8 +108,10 @@ export function UserPost(postData) {
       </div>
       <div className="middle-section">
         <p className="post_text">{postData.postData.postdescription}</p>
-        {postData.postData.attachment ? (<img src={postData.postData.attachment} alt="post_image"/>) : null}
-        
+        {postData.postData.attachment ? (
+          <img src={postData.postData.attachment} alt="post_image" />
+        ) : null}
+
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="post-expand"
@@ -139,6 +148,13 @@ export function UserPost(postData) {
                 <BsChatRight />
               </button>
               <p>234</p>
+            </div>
+            <div className="button-container">
+              {postData.postData.userid === localStorage.getItem("userid") && (
+                <button onClick={(e) => handleDeletePost(e)}>
+                  <BsFillTrash3Fill />
+                </button>
+              )}
             </div>
           </div>
         </div>
