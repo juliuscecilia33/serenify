@@ -33,6 +33,33 @@ import {
   BsFillTrash3Fill,
 } from "react-icons/bs";
 
+function timeSince(date) {
+  var seconds = Math.floor((new Date() - date) / 1000);
+
+  var interval = seconds / 31536000;
+
+  if (interval > 1) {
+    return Math.floor(interval) + " years";
+  }
+  interval = seconds / 2592000;
+  if (interval > 1) {
+    return Math.floor(interval) + " months";
+  }
+  interval = seconds / 86400;
+  if (interval > 1) {
+    return Math.floor(interval) + " days";
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    return Math.floor(interval) + " hours";
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    return Math.floor(interval) + " minutes";
+  }
+  return Math.floor(seconds) + " seconds";
+}
+
 export function UserPost(postData, refreshPosts, setPostsRefresh) {
   const [postLiked, setPostLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(postData.postData.postlike);
@@ -60,8 +87,9 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
     fish,
   ];
 
-  console.log("post data - user liked: ", typeof postData.postData.likedusers);
+  console.log("post time: ", typeof postData.postData.posttime);
   console.log("post data - user liked: ", postData.postData.likedusers);
+
   console.log("users liked: ", usersLiked);
   console.log("local storage user id: ", localStorage.getItem("userid"));
   if (usersLiked) {
@@ -87,7 +115,7 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
         console.error("There was an error!", error);
       });
 
-    // setPostsRefresh(!refreshPosts);
+    setPostsRefresh(!refreshPosts);
 
     console.log("Deleted Post");
   };
@@ -117,7 +145,9 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
         <div className="profile-pic">
           <img src={getRandomAnimal()} alt="Animal" />
         </div>
-        <p className="date_posted">{postData.postData.posttime}</p>
+        <p className="date_posted">
+          {timeSince(new Date(postData.postData.posttime))} ago
+        </p>
       </div>
       <div className="middle-section">
         <p className="post_text">{postData.postData.postdescription}</p>
