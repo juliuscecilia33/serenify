@@ -137,7 +137,14 @@ export function Prompt() {
       </div>
 
       {postsForPrompt &&
-        postsForPrompt.map((post, id) => <UserPost postData={post} key={id} />)}
+        postsForPrompt.map((post, id) => (
+          <UserPost
+            refreshPosts={refreshPosts}
+            setPostsRefresh={setPostsRefresh}
+            postData={post}
+            key={id}
+          />
+        ))}
     </div>
   );
 }

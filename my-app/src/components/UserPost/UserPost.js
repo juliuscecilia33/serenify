@@ -33,7 +33,7 @@ import {
   BsFillTrash3Fill,
 } from "react-icons/bs";
 
-export function UserPost(postData) {
+export function UserPost(postData, refreshPosts, setPostsRefresh) {
   const [postLiked, setPostLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(postData.postData.postlike);
   const [usersLiked, setUsersLiked] = useState(postData.postData.likedusers);
@@ -75,6 +75,19 @@ export function UserPost(postData) {
 
   const handleDeletePost = (e) => {
     e.preventDefault();
+
+    console.log("make sure postid exists: ", postData.postData.postid);
+
+    axios
+      .delete(`http://localhost:3005/posts/${postData.postData.postid}`)
+      .then((response) => {
+        console.log("delete response: ", response);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+
+    // setPostsRefresh(!refreshPosts);
 
     console.log("Deleted Post");
   };
