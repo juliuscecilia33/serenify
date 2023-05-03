@@ -101,7 +101,8 @@ export function UserPost(postData) {
       </div>
       <div className="middle-section">
         <p className="post_text">{postData.postData.postdescription}</p>
-
+        {postData.postData.attachment ? (<img src={postData.postData.attachment} alt="post_image"/>) : null}
+        
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="post-expand"
