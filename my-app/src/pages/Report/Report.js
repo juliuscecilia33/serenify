@@ -9,17 +9,16 @@ export function Report() {
   const [optionFourSelected, setOptionFourSelected] = useState(false);
   const [optionFiveSelected, setOptionFiveSelected] = useState(false);
 
+  const handleSendReport = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="report-report">
       <div className="report-content">
         <div className="report-b">
           <div className="report-frame">
-            <div className="report-group">
-              <div className="report-overlap-group">
-                <div className="report-rectangle" />
-                <div className="report-rectangle-552" />
-              </div>
-            </div>
+            <div className="report-text-wrapper">&lt;-</div>
           </div>
           <h1 className="report-text-wrapper">Report?</h1>
         </div>
@@ -84,7 +83,12 @@ export function Report() {
           >
             {optionFiveSelected && ">"} Other...
           </button>
-          <button className="report-text-wrapper-2">-&gt;</button>
+          <button
+            onClick={(e) => handleSendReport(e)}
+            className="report-text-wrapper-2"
+          >
+            -&gt;
+          </button>
         </div>
       </div>
     </div>
