@@ -17,7 +17,7 @@ export function UploadAttachment(props) {
 
     const handleClick = (e) => {
         if (uploadImage == null) return;
-        const postImageTime = new Date(localStorage.getItem('promptDate')).toLocaleDateString();
+        const postImageTime = new Date(localStorage.getItem('promptDate')).toLocaleDateString().replace(/\//g, "-");
         
         const imageRef = ref(storage, `images/${localStorage.getItem('userid')}/${postImageTime}/${uploadImage.name + v4()}`);
         uploadBytes(imageRef, uploadImage).then((snapshot) => {
@@ -52,7 +52,7 @@ export function UploadAttachment(props) {
 
     return (
         <div>
-            <Input type="file" onChange={(e) => handleChange(e)} accept="/image/*" />
+            <Input type="file" errorBorderColor="red" onChange={(e) => handleChange(e)} accept="/image/*" />
             <Button colorScheme='teal' variant='outline' onClick={(e) => handleClick(e)}>
                 <PlusSquareIcon />
             </Button>

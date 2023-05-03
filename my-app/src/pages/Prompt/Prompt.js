@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import apiClient from "../../instance/config";
 import { Navbar } from "../../components/index";
 import Calendar from "../../components/calendar/calendar";
 import { CreatePostButton } from "../../components";
 import "./Prompt.css";
 import { UserPost } from "../../components/UserPost/UserPost";
-import axios from "axios";
 import { User } from "../User/User";
 
 export function Prompt() {
@@ -90,8 +90,6 @@ export function Prompt() {
             setHavePrompt(false);
             // setShowPencil(false);
           }
-
-          console.log("show pencil inside useEffect: ", showPencil);
         })
         .catch((err) => {
           console.err(err.message);

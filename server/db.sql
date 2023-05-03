@@ -4,6 +4,8 @@ CREATE TABLE tblUser (
     userPassword VARCHAR(25) NOT NULL,
     loginTime TIMESTAMP NOT NULL
 );
+ALTER TABLE tbluser
+ADD COLUMN isAdmin BOOLEAN DEFAULT FALSE NOT NULL;
 
 CREATE TABLE tblPrompt(
     promptid UUID DEFAULT uuid_generate_v4() UNIQUE PRIMARY KEY,
@@ -25,6 +27,9 @@ ALTER TABLE tblPost
 DROP COLUMN postComments;
 ALTER TABLE tblPost
 ADD COLUMN postLike INT DEFAULT 0 NOT NULL;
+ALTER TABLE tblpost
+ALTER COLUMN attachment type VARCHAR;
+
 
 CREATE TABLE tblComment(
     commentid UUID DEFAULT uuid_generate_v4() UNIQUE PRIMARY KEY,
@@ -34,6 +39,12 @@ CREATE TABLE tblComment(
 );
 ALTER TABLE tblcomment
 ADD COLUMN postid uuid REFERENCES tblPost(postid) NOT NULL;
+ALTER TABLE tblcomment
+DROP COLUMN postid;
+ALTER TABLE tblComment
+ADD COLUMN postid uuid REFERENCES tblPost(postid) ON DELETE CASCADE;
+ALTER TABLE tblpost
+ALTER COLUMN postid SET NOT NULL;
 
 --report post table
 CREATE TABLE tblReport_Post (
@@ -42,5 +53,5 @@ CREATE TABLE tblReport_Post (
     reason TEXT[] NOT NULL,
     postid UUID REFERENCES tblPost(postid) NOT NULL
 );
-
-
+ALTER TABLE tblreport_post
+ADD COLUMN columnid uuid REFERENCES tblComment(commentid);

@@ -111,6 +111,34 @@ router.put("/logintime", async (req, res) => {
   }
 });
 
+//get user info by userid
+router.get("/:userid", async (req, res) => {
+  try {
+    const { userid } = req.params;
+
+    //check whether user exist
+    const user = await pool.query(
+      "SELECT * FROM tbluser WHERE userid = $1",
+      [userid]
+    );
+
+    if (user.rows.length === 0) {
+      return res.status(401).json("User does not exist...");
+    }
+
+    //get the user info
+    const getUserInfo = await pool.query(
+      "SELECT * FROM tbluser WHERE userid = $1",
+      [userid]
+    );
+
+    res.json(getUserInfo.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 //get user info by useremail
 router.get("/:useremail", async (req, res) => {
   try {

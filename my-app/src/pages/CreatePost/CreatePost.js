@@ -3,6 +3,8 @@ import apiClient from "../../instance/config";
 import * as ROUTES from "../../constants/routes";
 import { Navbar } from "../../components/index";
 import { UploadAttachment } from "../../firebase/upload";
+import { deleteObject, ref } from "firebase/storage";
+import { storage } from "../../firebase/firebaseConfig/firebaseConfig";
 import "./CreatePost.css";
 import { Button, Stack, Textarea, Flex, AspectRatio, Image, CloseButton } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
@@ -58,6 +60,14 @@ export function CreatePost({
       }
   };
 
+  useEffect(() => {
+    if(attachment != "") {
+      setIsVaild(true);
+      setHelperText(defaultHelperText);
+      setMoreThan500(false);
+    }
+  },[attachment])
+
   const keyDownHandler = async (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -103,7 +113,7 @@ export function CreatePost({
         setShowPencil(true);
         setPostSubmitted(!postSubmitted);
       } else {
-          if(postDescription.length < 1 && !attachment) {
+          if(postDescription.length < 1 && attachment === "") {
             setHelperText("No Empty Post...T_T")
             toast({
               title: "Oops",
@@ -119,10 +129,23 @@ export function CreatePost({
     }
   };
 
+  const handleCloseButton = (e) => {
+    const deleteAttachment = ref(storage, attachment);
+
+    deleteObject(deleteAttachment)
+      .then(() => {
+        setAttachment("");
+        console.log("successfully delete");
+      })
+      .catch((error) => {
+        console.err(error);
+      })
+  }
+
   return (
     <div>
       <div className="container flex">
-        <FormControl isInvalid={!isValid} isRequire={true} onKeyPress={keyDownHandler}>
+        <FormControl isInvalid={isValid} onKeyPress={keyDownHandler}>
           <FormLabel htmlFor="your-thought">
             <Textarea
               placeholder="Leave your thoughts here.."
@@ -135,17 +158,18 @@ export function CreatePost({
               {`characters: ${wordCount.length}/${maxLength}`}
             </span>
 
-            {isValid && <FormHelperText>{helperText}</FormHelperText>}
+            {isValid ? <FormHelperText>{helperText}</FormHelperText> : <FormErrorMessage>{helperText}</FormErrorMessage>}
 
-            <FormErrorMessage>{helperText}</FormErrorMessage>
             {!attachment ? 
             (<UploadAttachment attachment={attachment} setAttachment={setAttachment} />) 
             : 
             (
+              <Stack>
+              <CloseButton size="sm" onClick={(e) => {handleCloseButton(e)}} />
               <AspectRatio maxW='400px' ratio={4 / 3}>
-                {/* <CloseButton size="sm" onClick={(e) => {handleCloseButton(e)}}/> */}
                 <Image src={attachment} alt='user post image' objectFit='cover' />
               </AspectRatio>
+              </Stack>
             )}
             
             <Button
@@ -153,7 +177,7 @@ export function CreatePost({
               onClick={(e) => {
                 handleSubmit(e);
               }}
-              disabled={ !attachment && postDescription.length < 1 }
+              disabled={ attachment === "" && postDescription.length < 1 }
             >
               <ArrowForwardIcon />
             </Button>
