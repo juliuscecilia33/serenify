@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../instance/config";
 import { Button, Stack, Textarea, Flex } from "@chakra-ui/react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
   FormControl,
   FormLabel,
@@ -11,8 +12,12 @@ import {
 export default function InternalPromptEditor(props) {
   const { promptContent, setPromptContent, havePrompt, promptid } = props;
 
-  const handleChange = (testValue) => {
-    setPromptContent();
+  const handleChange = (textValue) => {
+    setPromptContent(textValue.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    await apiClient.put("/prompt");
   };
 
   return (
