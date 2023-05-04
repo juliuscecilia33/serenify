@@ -119,10 +119,8 @@ export function Prompt() {
 
           if (response.data.promptdescription) {
             setHavePrompt(true);
-            // setShowPencil(true);
           } else {
             setHavePrompt(false);
-            // setShowPencil(false);
           }
         })
         .catch((err) => {
@@ -134,7 +132,7 @@ export function Prompt() {
   }, [selectedPromptDate, havePrompt]);
 
   const createPostInfo = {
-    promptid, //localStorage.getItem(userid);
+    promptid,
     showPencil,
     setShowPencil,
     postSubmitted,
@@ -206,19 +204,18 @@ export function Prompt() {
           <img className="divider-small" src={DividerBig} alt="Divider Big" />
           <div className="prompt-page-div">
             <h1 className="prompt-page-sleep-how-much-did-you-get-last-night-what-is-one-way-that-helps-you-get-to-sleep">
-              <span className="prompt-page-text-wrapper">
-                Prompt
-                {/* (๑ᵕ⌓ᵕ̤ )<br /> */}
-              </span>
-              <br />
-              {/* <span className="prompt-page-span">
+              <span className="prompt-page-text-wrapper">Prompt:</span>
+              <span className="prompt-page-span">
                 <br />
-              </span> */}
+              </span>
               <span className="prompt-page-text-wrapper-2">
                 {havePrompt ? (
                   promptDescription
                 ) : (
-                  <div>"We do not have a prompt for this day...</div>
+                  <>
+                    {/* <br /> */}
+                    We do not have a prompt for this day...
+                  </>
                 )}
               </span>
             </h1>
@@ -229,37 +226,45 @@ export function Prompt() {
             alt="DividerSmall"
           />
           <div className="prompt-page-b-2">
-            <p className="prompt-page-p">
-              You can put down <br />
-              your ideas <br />
-              with the pencil.
-            </p>
-            <span className="prompt-page-span">
-              <br />
-            </span>
-            <div>
-              <b>{havePrompt && <CreatePostButton {...createPostInfo} />}</b>
-            </div>
-          </div>
-          <img className="divider-small" src={DividerBig} alt="Divider Big" />
-          <div className="prompt-page-div">
-            <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
-              <span className="prompt-page-text-wrapper-3">
-                Here’s what <br />
-              </span>
-              <span className="prompt-page-text-wrapper-4">
-                People <br />
-                Think.
-                <br />
-              </span>
-              <br />
-              <span className="prompt-page-text-wrapper-3">
-                Tap on them to
-                <br />
-                See the details
-              </span>
-              <br />
-            </p>
+            {havePrompt && (
+              <>
+                <p className="prompt-page-p">
+                  You can put down <br />
+                  your ideas <br />
+                  with the pencil.
+                </p>
+                <span className="prompt-page-span">
+                  <br />
+                </span>
+                <div>
+                  <b>{<CreatePostButton {...createPostInfo} />}</b>
+                </div>
+                <img
+                  className="divider-small negative-margin"
+                  src={DividerBig}
+                  alt="Divider Big"
+                />
+                <div className="prompt-page-div">
+                  <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
+                    <span className="prompt-page-text-wrapper-3">
+                      Here’s what <br />
+                    </span>
+                    <span className="prompt-page-text-wrapper-4">
+                      People <br />
+                      Think.
+                      <br />
+                    </span>
+                    <br />
+                    <span className="prompt-page-text-wrapper-3">
+                      Tap on them to
+                      <br />
+                      see the details
+                    </span>
+                    <br />
+                  </p>
+                </div>
+              </>
+            )}
           </div>
 
           {postsForPrompt &&
@@ -278,54 +283,6 @@ export function Prompt() {
                 />
               </>
             ))}
-
-          {/* <div className="prompt-page-b-2">
-            <p className="prompt-page-don-t-eat-before-bed-just-finished-a-sandwich">
-              Don’t eat before&nbsp;&nbsp;&nbsp;&nbsp;
-              <br />
-              bed. Just finished a&nbsp;&nbsp; <br />
-              sandwich.
-            </p>
-            <img className="prompt-page-face" alt={"Face"} src={"face-1.svg"} />
-          </div>
-          <img
-            className="divider-small"
-            src={DividerSmall}
-            alt="DividerSmall"
-          />
-
-          <div className="prompt-page-b-2">
-            <p className="prompt-page-i-usually-listen-to-podcasts-recommend-this-it-is-one-of-the-best-recording-ever-it-tells-you-how-your-muscle-operate-under-extreme-temperature-where-the-tissues-make-a-wormhole-to-the-other-side-of-the-universe-and-listen-to-spotify-while-it-s-ready-for-a-role-play-game">
-              I usually listen to podcasts.&nbsp;&nbsp;
-              <br />
-              Recommend this.. It is one of the best recording ever. It tells
-              you how your muscle operate under extreme temperature where the
-              tissues make a wormhole to the other side of the universe and
-              listen to Spotify while it’s ready for a role play game.
-            </p>
-            {/* <Music
-              property1="Default"
-              style={{
-                backgroundImage: "unset",
-                backgroundSize: "unset",
-                height: "50.55px",
-                minWidth: "263.54px",
-                position: "relative",
-                width: "unset",
-              }}
-            /> */}
-          {/* </div> */}
-
-          {/* <div className="prompt-page-div">
-            <p className="prompt-page-p">
-              Take a look at&nbsp;&nbsp; <br />
-              this video!
-            </p>
-            <div className="prompt-page-group">
-              <img className="prompt-page-img" alt={"Img"} src={".svg"} />
-            </div>
-          </div> */}
-          {/* <img className="divider-small" src={DividerBig} alt="Divider Big" /> */}
 
           <div className="prompt-page-b-cat">
             <p className="prompt-page-p">

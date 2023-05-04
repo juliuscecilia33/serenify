@@ -6,7 +6,15 @@ import { UploadAttachment } from "../../firebase/upload";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../firebase/firebaseConfig/firebaseConfig";
 import "./CreatePost.css";
-import { Button, Stack, Textarea, Flex, AspectRatio, Image, CloseButton } from "@chakra-ui/react";
+import {
+  Button,
+  Stack,
+  Textarea,
+  Flex,
+  AspectRatio,
+  Image,
+  CloseButton,
+} from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
   FormControl,
@@ -37,36 +45,36 @@ export function CreatePost({
 
   const handleChange = (textValue) => {
     setPostDescription(textValue.target.value);
-      if (textValue.target.value.length <= maxLength) {
-        setIsVaild(true);
-        if (textValue.target.value.length === maxLength) {
-          setHelperText("No more Characters~~~");
-        } else {
-          setHelperText(defaultHelperText);
-        }
-        setWordCount(textValue.target.value);
-        setMoreThan500(false);
+    if (textValue.target.value.length <= maxLength) {
+      setIsVaild(true);
+      if (textValue.target.value.length === maxLength) {
+        setHelperText("No more Characters~~~");
       } else {
-        setIsVaild(false);
-        setHelperText("Exceeded Character Limitation T_T");
-        setMoreThan500(true);
-        toast({
-          title: "oops *_*",
-          description: "Exceeded Character Limitation T_T",
-          status: "warning",
-          duration: 2000,
-          isClosable: true,
-        });
+        setHelperText(defaultHelperText);
       }
+      setWordCount(textValue.target.value);
+      setMoreThan500(false);
+    } else {
+      setIsVaild(false);
+      setHelperText("Exceeded Character Limitation T_T");
+      setMoreThan500(true);
+      toast({
+        title: "oops *_*",
+        description: "Exceeded Character Limitation T_T",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
   };
 
   useEffect(() => {
-    if(attachment != "") {
+    if (attachment != "") {
       setIsVaild(true);
       setHelperText(defaultHelperText);
       setMoreThan500(false);
     }
-  },[attachment])
+  }, [attachment]);
 
   const keyDownHandler = async (e) => {
     if (e.key === "Enter") {
@@ -74,27 +82,17 @@ export function CreatePost({
       handleSubmit();
     }
   };
-  // useEffect(() => {
-  //   document.addEventListener("keydown", keyDownHandler());
-  //   return () => {
-  //     document.removeEventListener("keydown", keyDownHandler());
-  //   };
-  // }, []);
 
   const handleSubmit = async (e) => {
     try {
       if (isValid) {
         await apiClient
-          .post(
-            "/posts/create",
-            {
-              postDescription: postDescription,
-              attachment: attachment,
-              userid: localStorage.getItem("userid"),
-              promptid: promptid,
-            }
-            //console.log(localStorage.getItem("userid"))
-          )
+          .post("/posts/create", {
+            postDescription: postDescription,
+            attachment: attachment,
+            userid: localStorage.getItem("userid"),
+            promptid: promptid,
+          })
           .then((response) => {
             console.log("response successful: ", response);
           })
@@ -113,15 +111,15 @@ export function CreatePost({
         setShowPencil(true);
         setPostSubmitted(!postSubmitted);
       } else {
-          if(postDescription.length < 1 && attachment === "") {
-            setHelperText("No Empty Post...T_T")
-            toast({
-              title: "Oops",
-              description: "No Empty Post...T_T",
-              status: "error",
-              duration: 2500,
-              isClosable: true,
-            });
+        if (postDescription.length < 1 && attachment === "") {
+          setHelperText("No Empty Post...T_T");
+          toast({
+            title: "Oops",
+            description: "No Empty Post...T_T",
+            status: "error",
+            duration: 2500,
+            isClosable: true,
+          });
         }
       }
     } catch (err) {
@@ -139,8 +137,8 @@ export function CreatePost({
       })
       .catch((error) => {
         console.err(error);
-      })
-  }
+      });
+  };
 
   return (
     <div>
@@ -158,26 +156,41 @@ export function CreatePost({
               {`characters: ${wordCount.length}/${maxLength}`}
             </span>
 
-            {isValid ? <FormHelperText>{helperText}</FormHelperText> : <FormErrorMessage>{helperText}</FormErrorMessage>}
+            {isValid ? (
+              <FormHelperText>{helperText}</FormHelperText>
+            ) : (
+              <FormErrorMessage>{helperText}</FormErrorMessage>
+            )}
 
-            {!attachment ? 
-            (<UploadAttachment attachment={attachment} setAttachment={setAttachment} />) 
-            : 
-            (
+            {!attachment ? (
+              <UploadAttachment
+                attachment={attachment}
+                setAttachment={setAttachment}
+              />
+            ) : (
               <Stack>
-              <CloseButton size="sm" onClick={(e) => {handleCloseButton(e)}} />
-              <AspectRatio maxW='400px' ratio={4 / 3}>
-                <Image src={attachment} alt='user post image' objectFit='cover' />
-              </AspectRatio>
+                <CloseButton
+                  size="sm"
+                  onClick={(e) => {
+                    handleCloseButton(e);
+                  }}
+                />
+                <AspectRatio maxW="400px" ratio={4 / 3}>
+                  <Image
+                    src={attachment}
+                    alt="user post image"
+                    objectFit="cover"
+                  />
+                </AspectRatio>
               </Stack>
             )}
-            
+
             <Button
               colorScheme="teal"
               onClick={(e) => {
                 handleSubmit(e);
               }}
-              disabled={ attachment === "" && postDescription.length < 1 }
+              disabled={attachment === "" && postDescription.length < 1}
             >
               <ArrowForwardIcon />
             </Button>

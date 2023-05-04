@@ -10,6 +10,7 @@ import {
   HomeVTwo,
   Post,
   Report,
+  PostDetail,
 } from "./pages";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Authentication } from "./context/Authentication";
@@ -45,6 +46,7 @@ function App() {
             <Route path={ROUTES.PROMPT} element={<Prompt />} />
             <Route path={ROUTES.HOMEVTWO} element={<HomeVTwo />} />
             <Route path={ROUTES.REPORT} element={<Report />} />
+            <Route path={ROUTES.POSTDETAIL} element={<PostDetail />} />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>
