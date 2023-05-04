@@ -15,6 +15,7 @@ import { Authentication } from "../../context/Authentication";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import Logo from "../../images/logo2.png";
+import moment from "moment";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
@@ -36,6 +37,18 @@ export function Prompt() {
   console.log("prompt id: ", promptid);
 
   console.log("show pencil outside: ", showPencil);
+
+  console.log("default prompt date: ", defaultPromptDate.split("-"));
+
+  let splitPromptDate = defaultPromptDate.split("-");
+  let formatDate = new Date(
+    splitPromptDate[2],
+    splitPromptDate[0] - 1,
+    splitPromptDate[1]
+  );
+  console.log("moment date: ", moment(formatDate).format("MMMM D, Y ~ dddd"));
+  let displayDate = moment(formatDate).format("MMMM D, Y");
+  let displayDay = moment(formatDate).format("dddd");
 
   const [postsForPrompt, setPostsForPrompt] = useState();
 
@@ -130,7 +143,7 @@ export function Prompt() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <Navbar />
         <h1>Posts</h1>
 
@@ -165,7 +178,7 @@ export function Prompt() {
               key={id}
             />
           ))}
-      </div>
+      </div> */}
       <div className="prompt-page-prompt-page">
         <div className="prompt-page-content">
           <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
@@ -179,10 +192,10 @@ export function Prompt() {
             </Link>
           )}
           <div className="prompt-page-b">
-            <p className="prompt-page-apr">
-              &lt;&nbsp;&nbsp;&nbsp;&nbsp;Apr 30,
-              2023&nbsp;&nbsp;&nbsp;&nbsp;&gt;
-            </p>
+            <p className="prompt-page-apr">{displayDate}</p>
+            <p className="prompt-page-apr-two">{displayDay}</p>
+            <br />
+
             <div className="calendar">
               <Calendar
                 dateCallBack={selectedPromptDate}
@@ -194,9 +207,10 @@ export function Prompt() {
           <div className="prompt-page-div">
             <h1 className="prompt-page-sleep-how-much-did-you-get-last-night-what-is-one-way-that-helps-you-get-to-sleep">
               <span className="prompt-page-text-wrapper">
-                Prompt <br />
+                Prompt
                 {/* (๑ᵕ⌓ᵕ̤ )<br /> */}
               </span>
+              <br />
               {/* <span className="prompt-page-span">
                 <br />
               </span> */}
@@ -242,7 +256,7 @@ export function Prompt() {
               <span className="prompt-page-text-wrapper-3">
                 Tap on them to
                 <br />
-                See the details~
+                See the details
               </span>
               <br />
             </p>
