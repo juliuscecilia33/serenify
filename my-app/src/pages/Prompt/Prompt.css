@@ -135,12 +135,12 @@ p {
 .prompt-page-span {
   font-size: 99px;
   font-weight: 500;
-  line-height: 99px;
+  line-height: 50px;
 }
 
 .prompt-page-text-wrapper-2 {
   font-size: 45px;
-  line-height: 58.5px;
+  line-height: 38.5px;
 }
 
 .prompt-page-b-2 {
@@ -240,4 +240,20 @@ p {
   flex-direction: column;
   padding: 40px 0px 170px;
   position: relative;
+}
+
+.cat-image {
+  background-image: "unset";
+  background-size: "unset";
+  cursor: "pointer";
+  height: "200.5px";
+  min-width: "197.98px";
+  position: "relative";
+  transition: "all 0.2s ease";
+  width: "unset";
+  margin-top: 4rem;
+}
+
+.divider-small {
+  min-width: 390px;
 }

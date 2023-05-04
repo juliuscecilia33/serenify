@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import apiClient from "../../instance/config";
 import { Navbar } from "../../components/index";
@@ -6,11 +6,15 @@ import Calendar from "../../components/calendar/calendar";
 import { CreatePostButton } from "../../components";
 import "./Prompt.css";
 import { UserPost } from "../../components/UserPost/UserPost";
-import { User } from "../User/User";
 import DividerBig from "../../images/DividerBig.png";
 import Cat from "../../images/Cat.png";
 import DividerSmall from "../../images/DividerSmall.png";
 import PencilShort from "../../images/PencilShort.png";
+import * as ROUTES from "../../constants/routes";
+import { Authentication } from "../../context/Authentication";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import Logo from "../../images/logo2.png";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
@@ -25,11 +29,24 @@ export function Prompt() {
   const [postSubmitted, setPostSubmitted] = useState(false);
   const [refreshPosts, setPostsRefresh] = useState(false);
 
+  const navigate = useNavigate();
+
+  const { isAuthenticated, setAuth } = useContext(Authentication);
+
   console.log("prompt id: ", promptid);
 
   console.log("show pencil outside: ", showPencil);
 
   const [postsForPrompt, setPostsForPrompt] = useState();
+
+  const logout = (e) => {
+    e.preventDefault();
+
+    localStorage.removeItem("userid");
+    console.log("User logged out");
+
+    navigate(ROUTES.LOGIN);
+  };
 
   const gettPostsForCertainPrompt = async () => {
     if (promptid) {
@@ -151,79 +168,66 @@ export function Prompt() {
       </div>
       <div className="prompt-page-prompt-page">
         <div className="prompt-page-content">
-          <img className="prompt-page-logo" alt={"Logo"} src={"logo-2.png"} />
-          <div className="prompt-page-you">You</div>
+          <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
+          {isAuthenticated ? (
+            <button onClick={(e) => logout(e)}>
+              <div className="log-in">Sign Out</div>
+            </button>
+          ) : (
+            <Link to={ROUTES.LOGIN}>
+              <div className="log-in">Log in</div>
+            </Link>
+          )}
           <div className="prompt-page-b">
             <p className="prompt-page-apr">
               &lt;&nbsp;&nbsp;&nbsp;&nbsp;Apr 30,
               2023&nbsp;&nbsp;&nbsp;&nbsp;&gt;
             </p>
+            <div className="calendar">
+              <Calendar
+                dateCallBack={selectedPromptDate}
+                setShowPencil={setShowPencil}
+              />
+            </div>
           </div>
-          {/* <DividerBig
-            style={{
-              marginLeft: "-24.00px",
-              marginRight: "-24.00px",
-              minWidth: "390px",
-              width: "unset",
-            }}
-          /> */}
-          <img src={DividerBig} alt="Divider Big" />
+          <img className="divider-small" src={DividerBig} alt="Divider Big" />
           <div className="prompt-page-div">
             <h1 className="prompt-page-sleep-how-much-did-you-get-last-night-what-is-one-way-that-helps-you-get-to-sleep">
               <span className="prompt-page-text-wrapper">
-                Sleep <br />
-                (๑ᵕ⌓ᵕ̤ )<br />
+                Prompt <br />
+                {/* (๑ᵕ⌓ᵕ̤ )<br /> */}
               </span>
-              <span className="prompt-page-span">
+              {/* <span className="prompt-page-span">
                 <br />
-              </span>
+              </span> */}
               <span className="prompt-page-text-wrapper-2">
-                How much did you&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />
-                get last night? <br />
-                What is one way&nbsp;&nbsp;
-                <br />
-                that helps you get&nbsp;&nbsp;&nbsp;&nbsp;
-                <br />
-                to sleep?
+                {havePrompt ? (
+                  promptDescription
+                ) : (
+                  <div>"We do not have a prompt for this day...</div>
+                )}
               </span>
             </h1>
           </div>
-          {/* <DividerSmall
-            style={{
-              marginLeft: "-24.00px",
-              marginRight: "-24.00px",
-              minWidth: "390px",
-              width: "unset",
-            }}
-          /> */}
-          <img src={DividerSmall} alt="DividerSmall" />
+          <img
+            className="divider-small"
+            src={DividerSmall}
+            alt="DividerSmall"
+          />
           <div className="prompt-page-b-2">
             <p className="prompt-page-p">
               You can put down <br />
               your ideas <br />
               with the pencil.
             </p>
-            {/* <PencilShort
-              property1="pencil short"
-              style={{
-                backgroundImage: "unset",
-                backgroundSize: "unset",
-                height: "68.5px",
-                minWidth: "145.19px",
-                position: "relative",
-                width: "unset",
-              }}
-            /> */}
+            <span className="prompt-page-span">
+              <br />
+            </span>
+            <div>
+              <b>{havePrompt && <CreatePostButton {...createPostInfo} />}</b>
+            </div>
           </div>
-          {/* <DividerBig
-            style={{
-              marginLeft: "-24.00px",
-              marginRight: "-24.00px",
-              minWidth: "390px",
-              width: "unset",
-            }}
-          /> */}
-          <img src={DividerBig} alt="Divider Big" />
+          <img className="divider-small" src={DividerBig} alt="Divider Big" />
           <div className="prompt-page-div">
             <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
               <span className="prompt-page-text-wrapper-3">
@@ -234,24 +238,34 @@ export function Prompt() {
                 Think.
                 <br />
               </span>
+              <br />
               <span className="prompt-page-text-wrapper-3">
                 Tap on them to
                 <br />
                 See the details~
               </span>
+              <br />
             </p>
           </div>
-          {/* <DividerSmall
-            style={{
-              marginLeft: "-24.00px",
-              marginRight: "-24.00px",
-              minWidth: "390px",
-              width: "unset",
-            }}
-          /> */}
-          <img src={DividerSmall} alt="DividerSmall" />
 
-          <div className="prompt-page-b-2">
+          {postsForPrompt &&
+            postsForPrompt.map((post, id) => (
+              <>
+                <UserPost
+                  refreshPosts={refreshPosts}
+                  setPostsRefresh={setPostsRefresh}
+                  postData={post}
+                  key={id}
+                />
+                <img
+                  className="divider-small"
+                  src={DividerSmall}
+                  alt="DividerSmall"
+                />
+              </>
+            ))}
+
+          {/* <div className="prompt-page-b-2">
             <p className="prompt-page-don-t-eat-before-bed-just-finished-a-sandwich">
               Don’t eat before&nbsp;&nbsp;&nbsp;&nbsp;
               <br />
@@ -260,15 +274,11 @@ export function Prompt() {
             </p>
             <img className="prompt-page-face" alt={"Face"} src={"face-1.svg"} />
           </div>
-          {/* <DividerSmall
-            style={{
-              marginLeft: "-24.00px",
-              marginRight: "-24.00px",
-              minWidth: "390px",
-              width: "unset",
-            }}
-          /> */}
-          <img src={DividerSmall} alt="DividerSmall" />
+          <img
+            className="divider-small"
+            src={DividerSmall}
+            alt="DividerSmall"
+          />
 
           <div className="prompt-page-b-2">
             <p className="prompt-page-i-usually-listen-to-podcasts-recommend-this-it-is-one-of-the-best-recording-ever-it-tells-you-how-your-muscle-operate-under-extreme-temperature-where-the-tissues-make-a-wormhole-to-the-other-side-of-the-universe-and-listen-to-spotify-while-it-s-ready-for-a-role-play-game">
@@ -290,18 +300,9 @@ export function Prompt() {
                 width: "unset",
               }}
             /> */}
-          </div>
-          {/* <DividerSmall
-            style={{
-              marginLeft: "-24.00px",
-              marginRight: "-24.00px",
-              minWidth: "390px",
-              width: "unset",
-            }}
-          /> */}
-          <img src={DividerSmall} alt="DividerSmall" />
+          {/* </div> */}
 
-          <div className="prompt-page-div">
+          {/* <div className="prompt-page-div">
             <p className="prompt-page-p">
               Take a look at&nbsp;&nbsp; <br />
               this video!
@@ -309,16 +310,9 @@ export function Prompt() {
             <div className="prompt-page-group">
               <img className="prompt-page-img" alt={"Img"} src={".svg"} />
             </div>
-          </div>
-          <img src={DividerBig} alt="Divider Big" />
-          {/* <DividerBig
-            style={{
-              marginLeft: "-24.00px",
-              marginRight: "-24.00px",
-              minWidth: "390px",
-              width: "unset",
-            }}
-          /> */}
+          </div> */}
+          {/* <img className="divider-small" src={DividerBig} alt="Divider Big" /> */}
+
           <div className="prompt-page-b-cat">
             <p className="prompt-page-p">
               Pet this cat <br />
@@ -326,20 +320,13 @@ export function Prompt() {
               <br />
               Back to top.
             </p>
-            {/* <Cat
-              property1="Default"
-              style={{
-                backgroundImage: "unset",
-                backgroundSize: "unset",
-                cursor: "pointer",
-                height: "200.5px",
-                minWidth: "197.98px",
-                position: "relative",
-                transition: "all 0.2s ease",
-                width: "unset",
+            <button
+              onClick={() => {
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
               }}
-            /> */}
-            <img src={Cat} alt="Cat" />
+            >
+              <img className="cat-image" src={Cat} alt="Cat" />
+            </button>
           </div>
         </div>
       </div>
