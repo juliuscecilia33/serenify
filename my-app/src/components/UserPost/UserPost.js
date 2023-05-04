@@ -140,68 +140,71 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
   }
 
   return (
-    <div class="post-container">
-      <div className="top-section">
-        <div className="profile-pic">
-          <img src={getRandomAnimal()} alt="Animal" />
+    <>
+      <div class="post-container">
+        <div className="top-section">
+          <div className="profile-pic">
+            <img src={getRandomAnimal()} alt="Animal" />
+          </div>
+          <p className="date_posted">
+            {timeSince(new Date(postData.postData.posttime))} ago
+          </p>
         </div>
-        <p className="date_posted">
-          {timeSince(new Date(postData.postData.posttime))} ago
-        </p>
-      </div>
-      <div className="middle-section">
-        <p className="post_text">{postData.postData.postdescription}</p>
-        {postData.postData.attachment ? (
-          <img src={postData.postData.attachment} alt="post_image" />
-        ) : null}
+        <div className="middle-section">
+          <p className="post_text">{postData.postData.postdescription}</p>
+          {postData.postData.attachment ? (
+            <img src={postData.postData.attachment} alt="post_image" />
+          ) : null}
 
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="post-expand"
-        >
-          {isExpanded ? <BsChevronUp /> : <BsChevronDown />}
-        </button>
-      </div>
-      {isExpanded && (
-        <div className="expanded-section">
-          <div className="report_button">
-            <button>
-              <BsExclamationOctagon />
-            </button>
-            <p>Report</p>
-          </div>
-          <div className="buttons">
-            <div className="button-container">
-              {postData.postData.likedusers &&
-              postData.postData.likedusers.includes(
-                localStorage.getItem("userid")
-              ) ? (
-                <button onClick={(e) => handleDecrementLike(e)}>
-                  <BsHeartFill />
-                </button>
-              ) : (
-                <button onClick={(e) => handleIncrementLike(e)}>
-                  <BsHeart />
-                </button>
-              )}
-              <p>{likeCount}</p>
-            </div>
-            <div className="button-container">
-              <button>
-                <BsChatRight />
-              </button>
-              <p>234</p>
-            </div>
-            <div className="button-container">
-              {postData.postData.userid === localStorage.getItem("userid") && (
-                <button onClick={(e) => handleDeletePost(e)}>
-                  <BsFillTrash3Fill />
-                </button>
-              )}
-            </div>
-          </div>
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="post-expand"
+          >
+            {isExpanded ? <BsChevronUp /> : <BsChevronDown />}
+          </button>
         </div>
-      )}
-    </div>
+        {isExpanded && (
+          <div className="expanded-section">
+            <div className="report_button">
+              <button>
+                <BsExclamationOctagon />
+              </button>
+              <p>Report</p>
+            </div>
+            <div className="buttons">
+              <div className="button-container">
+                {postData.postData.likedusers &&
+                postData.postData.likedusers.includes(
+                  localStorage.getItem("userid")
+                ) ? (
+                  <button onClick={(e) => handleDecrementLike(e)}>
+                    <BsHeartFill />
+                  </button>
+                ) : (
+                  <button onClick={(e) => handleIncrementLike(e)}>
+                    <BsHeart />
+                  </button>
+                )}
+                <p>{likeCount}</p>
+              </div>
+              <div className="button-container">
+                <button>
+                  <BsChatRight />
+                </button>
+                <p>234</p>
+              </div>
+              <div className="button-container">
+                {postData.postData.userid ===
+                  localStorage.getItem("userid") && (
+                  <button onClick={(e) => handleDeletePost(e)}>
+                    <BsFillTrash3Fill />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
