@@ -26,13 +26,20 @@ const ProtectedRoute = (props) => {
         userType();
     }, [admin]);
 
-
-
-    
     return (
-        {
-            
-        }
+        <div>
+            <div className="calendar-container">
+                <DatePicker
+                className="calendar-input"
+                selected={selectedDate}
+                onChange={(date) => setDate(date)}
+                maxDate={new Date()}
+                />
+                <button className="calendar-button" onClick={handleClick}>
+                Select
+                </button>
+            </div>
+        </div>
     )
 }
 export default ProtectedRoute;
