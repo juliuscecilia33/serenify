@@ -211,6 +211,20 @@
   background: none;
   border: none;
   width: 80%;
+  margin-bottom: 2.5rem;
+}
+
+.commenting-input {
+  /* border: 2px solid black; */
+  outline: none;
+  color: #686868;
+  font-family: "Oswald", Helvetica;
+  font-size: 25px;
+  font-weight: 400;
+  background: none;
+  border: none;
+  width: 100%;
+  margin-top: 3rem;
 }
 
 .save-button {
@@ -219,4 +233,5 @@
   font-weight: 400;
   font-size: 25px;
   color: #282828;
+  margin: 0.5rem 0;
 }

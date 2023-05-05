@@ -25,14 +25,17 @@ export function PostDetail() {
   const navigate = useNavigate();
 
   const [editingPost, setEditingPost] = useState(false);
+  const [commentingOnPost, setCommentingOnPost] = useState(false);
 
   const location = useLocation();
 
   const postData = location.state?.postData;
-  console.log("post data: ", postData);
   const [editedPostValue, setEditedPostValue] = useState(
     postData.postdescription ? postData.postdescription : ""
   );
+
+  const [commentingOnPostValue, setCommentingOnPostValue] = useState("");
+
   console.log("edited post value: ", editedPostValue);
 
   const logout = (e) => {
@@ -97,8 +100,10 @@ export function PostDetail() {
                 value={editedPostValue}
                 onChange={(e) => setEditedPostValue(e.target.value)}
                 className="editing-input"
+                placeholder="Edit your post here..."
               />
-              <button className="save-button">Save Changes</button>
+              <button className="save-button">Save</button>
+              <button className="save-button">Cancel</button>
             </>
           ) : (
             <h1 className="post-page-don-t-eat-before-bed-just-finished-a-sandwich">
@@ -143,13 +148,26 @@ export function PostDetail() {
           </p>
           <div className="post-page-component">
             <img className="" alt={"Icon heart"} src={Heart} />
-            <img className="" alt={"Icon pencil"} src={Comment} />
+            <button onClick={() => setCommentingOnPost(!commentingOnPost)}>
+              <img className="" alt={"Icon pencil"} src={Comment} />
+            </button>
             <img
               className=""
               alt={"Material symbols report outline"}
               src={Report}
             />
           </div>
+          {commentingOnPost && (
+            <>
+              <textarea
+                value={commentingOnPostValue}
+                onChange={(e) => setCommentingOnPostValue(e.target.value)}
+                className="commenting-input"
+                placeholder="Type your comment here..."
+              />
+              <button className="save-button">Comment -&gt;</button>
+            </>
+          )}
         </div>
         <img className="divider-small" src={DividerSmall} alt="DividerSmall" />
         <div className="post-page-p-wrapper">
