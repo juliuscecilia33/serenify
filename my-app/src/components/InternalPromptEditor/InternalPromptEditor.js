@@ -2,22 +2,36 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../../instance/config";
 import { Button, Stack, Textarea, Flex } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from "@chakra-ui/react";
+import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 
 export default function InternalPromptEditor(props) {
   const { promptContent, setPromptContent, havePrompt, promptid } = props;
+  const toast = useToast();
 
   const handleChange = (textValue) => {
     setPromptContent(textValue.target.value);
   };
 
   const handleSubmit = async (e) => {
-    await apiClient.put("/prompt");
+    await apiClient
+      .put(`/prompt/${promptid}`, {
+        promptDescription: { promptContent },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error("error from handle submit: ", error.message);
+      });
+
+    toast({
+      title: "new Prompt",
+      description: "You have successfully post a new prompt",
+      status: "success",
+      duration: 2500,
+      isClosable: true,
+    });
   };
 
   return (
