@@ -196,3 +196,19 @@
 
 .trash-icon {
 }
+
+.post-image {
+  margin-top: 2rem;
+}
+
+.editing-input {
+  /* border: 2px solid black; */
+  outline: none;
+  color: #686868;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  background: none;
+  border: none;
+  width: 80%;
+}

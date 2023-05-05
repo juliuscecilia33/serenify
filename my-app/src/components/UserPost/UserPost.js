@@ -99,13 +99,6 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
           {postData.postData.attachment ? (
             <img src={postData.postData.attachment} alt="post_image" />
           ) : null}
-
-          {/* <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="post-expand"
-          >
-            {isExpanded ? <BsChevronUp /> : <BsChevronDown />}
-          </button> */}
         </div>
         <p className="date_posted">
           {timeSince(new Date(postData.postData.posttime))} ago

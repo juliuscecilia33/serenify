@@ -151,6 +151,7 @@ export function CreatePost({
               value={postDescription}
               resize={"none"}
               errorBorderColor="red"
+              colorScheme={"green"}
             />
             <span style={{ color: moreThan500 ? "red" : "" }}>
               {`characters: ${wordCount.length}/${maxLength}`}

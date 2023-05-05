@@ -15,6 +15,7 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Logo from "../../images/logo2.png";
+import axios from "axios";
 
 export function PostDetail() {
   let { postid } = useParams();
@@ -22,10 +23,17 @@ export function PostDetail() {
   console.log("post id from post detail: ", postid);
 
   const navigate = useNavigate();
+
+  const [editingPost, setEditingPost] = useState(false);
+
   const location = useLocation();
 
   const postData = location.state?.postData;
   console.log("post data: ", postData);
+  const [editedPostValue, setEditedPostValue] = useState(
+    postData.postdescription ? postData.postdescription : ""
+  );
+  console.log("edited post value: ", editedPostValue);
 
   const logout = (e) => {
     e.preventDefault();
@@ -34,6 +42,25 @@ export function PostDetail() {
     console.log("User logged out");
 
     navigate(ROUTES.LOGIN);
+  };
+
+  const handleDeletePost = (e) => {
+    e.preventDefault();
+
+    console.log("make sure postid exists: ", postData.postid);
+
+    axios
+      .delete(`http://localhost:3005/posts/${postData.postid}`)
+      .then((response) => {
+        console.log("delete response: ", response);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+
+    // setPostsRefresh(!refreshPosts);
+
+    console.log("Deleted Post");
   };
 
   const { isAuthenticated, setAuth } = useContext(Authentication);
@@ -64,9 +91,28 @@ export function PostDetail() {
           </button>
         </div>
         <div className="post-page-b">
-          <h1 className="post-page-don-t-eat-before-bed-just-finished-a-sandwich">
-            {postData.postdescription && postData.postdescription}
-          </h1>
+          {editingPost ? (
+            <>
+              <textarea
+                value={editedPostValue}
+                onChange={(e) => setEditedPostValue(e.target.value)}
+                className="editing-input"
+              />
+              <button>Save Changes</button>
+            </>
+          ) : (
+            <h1 className="post-page-don-t-eat-before-bed-just-finished-a-sandwich">
+              {postData.postdescription && postData.postdescription}
+            </h1>
+          )}
+
+          {postData.attachment && (
+            <img
+              className="post-image"
+              src={postData.attachment}
+              alt="post_image"
+            />
+          )}
           {postData.userid &&
             postData.userid === localStorage.getItem("userid") && (
               <div className="post-page-component-two">
@@ -75,12 +121,13 @@ export function PostDetail() {
                   alt={"Material symbols report outline"}
                   src={Trash}
                 />
-
-                <img
-                  className="trash-icon"
-                  alt={"Material symbols report outline"}
-                  src={Pencil}
-                />
+                <button onClick={() => setEditingPost(!editingPost)}>
+                  <img
+                    className="trash-icon"
+                    alt={"Material symbols report outline"}
+                    src={Pencil}
+                  />
+                </button>
               </div>
             )}
         </div>

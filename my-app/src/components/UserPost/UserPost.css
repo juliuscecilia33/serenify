@@ -97,3 +97,13 @@
   justify-content: space-around;
   color: green;
 }
+
+.middle-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.middle-section img {
+  margin-top: 2rem;
+}
