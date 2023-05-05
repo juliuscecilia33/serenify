@@ -1,0 +1,181 @@
+.post-page-post-page {
+  align-items: center;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  min-width: 390px;
+  position: relative;
+}
+
+.post-page-content {
+  align-items: center;
+  align-self: stretch;
+  background-color: #ece8d1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  position: relative;
+}
+
+.post-page-logo {
+  cursor: pointer;
+  height: 24px;
+  left: 32px;
+  position: absolute;
+  top: 69px;
+  width: 31px;
+}
+
+.post-page-text-wrapper {
+  color: #282828;
+  cursor: pointer;
+  font-family: "Oswald", Helvetica;
+  font-size: 23px;
+  font-weight: 400;
+  left: 325px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-decoration: underline;
+  top: 69px;
+  white-space: nowrap;
+}
+
+.post-page-tag {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 140px 0px 0px;
+  position: relative;
+}
+
+.post-page-div {
+  align-self: stretch;
+  color: #282828;
+  cursor: pointer;
+  font-family: "Oswald", Helvetica;
+  font-size: 90px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 90px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.post-page-b {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px 30px;
+  position: relative;
+}
+
+.post-page-don-t-eat-before-bed-just-finished-a-sandwich {
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  margin-right: -7px;
+  margin-top: -1px;
+  position: relative;
+  width: 349px;
+}
+
+.post-page-b-2 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px 30px;
+  position: relative;
+  width: fit-content;
+}
+
+.post-page-p {
+  align-self: stretch;
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.post-page-component {
+  height: 78px;
+  margin-top: -8px;
+  min-width: 341px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 2rem;
+  margin-top: 2rem;
+}
+
+.post-page-icon-heart {
+  height: 70px;
+  left: 9px;
+  position: absolute;
+  top: 3px;
+  width: 70px;
+}
+
+.post-page-icon-pencil {
+  height: 70px;
+  left: 250px;
+  position: absolute;
+  top: 4px;
+  width: 70px;
+}
+
+.post-page-material-symbols-report-outline {
+  cursor: pointer;
+  height: 70px;
+  left: 130px;
+  position: absolute;
+  top: 3px;
+  width: 70px;
+}
+
+.post-page-p-wrapper {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px 30px;
+  position: relative;
+}
+
+.post-page-text-wrapper-2 {
+  align-self: stretch;
+  color: #686868;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.post-page-b-cat {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px 170px;
+  position: relative;
+}
+
+.divider-small {
+  min-width: 390px;
+}
+
+.trash-icon {
+}

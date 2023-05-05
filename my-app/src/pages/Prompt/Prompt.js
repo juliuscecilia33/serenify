@@ -235,7 +235,7 @@ export function Prompt() {
             postsForPrompt.map((post, id) => (
               <>
                 {post.postid && (
-                  <Link to={`/post/${post.postid}`}>
+                  <Link to={`/post/${post.postid}`} state={{ postData: post }}>
                     <UserPost
                       refreshPosts={refreshPosts}
                       setPostsRefresh={setPostsRefresh}
