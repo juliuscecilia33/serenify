@@ -60,8 +60,10 @@
   letter-spacing: 0;
   line-height: 90px;
   margin-top: -1px;
-  position: relative;
+  /* position: absolute; */
+  /* left: 0; */
   white-space: nowrap;
+  transform: translateX(-8.4rem);
 }
 
 .post-page-b {
@@ -116,6 +118,21 @@
   justify-content: space-between;
   padding-right: 2rem;
   margin-top: 2rem;
+}
+
+.post-page-component-two {
+  height: 78px;
+  margin-top: -8px;
+  min-width: 341px;
+  display: flex;
+  align-items: center;
+  /* justify-content:; */
+  padding-right: 2rem;
+  margin-top: 2rem;
+}
+
+.trash-icon {
+  margin-right: 5rem;
 }
 
 .post-page-icon-heart {

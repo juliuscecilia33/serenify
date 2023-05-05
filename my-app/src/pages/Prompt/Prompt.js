@@ -52,6 +52,12 @@ export function Prompt() {
 
   const [postsForPrompt, setPostsForPrompt] = useState();
 
+  const sortByDate = (postData) => {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(postData.posttime) - new Date(postData.posttime);
+  };
+
   const logout = (e) => {
     e.preventDefault();
 
@@ -72,7 +78,11 @@ export function Prompt() {
             response.data.filter((post) => post.promptid === promptid)
           );
           setPostsForPrompt(
-            response.data.filter((post) => post.promptid === promptid)
+            response.data
+              .sort(function (a, b) {
+                return new Date(b.posttime) - new Date(a.posttime);
+              })
+              .filter((post) => post.promptid === promptid)
           );
         })
         .catch((error) => {

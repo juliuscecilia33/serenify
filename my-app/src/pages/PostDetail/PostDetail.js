@@ -6,6 +6,7 @@ import DividerSmall from "../../images/DividerSmall.png";
 import { useParams } from "react-router-dom";
 import "./PostDetail.css";
 import Pencil from "../../images/PencilTwo.png";
+import Comment from "../../images/Comment.png";
 import Report from "../../images/Report.png";
 import Trash from "../../images/Trash.png";
 import Heart from "../../images/Heart.png";
@@ -13,6 +14,7 @@ import { Authentication } from "../../context/Authentication";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Logo from "../../images/logo2.png";
 
 export function PostDetail() {
   let { postid } = useParams();
@@ -39,7 +41,9 @@ export function PostDetail() {
   return (
     <div className="post-page-post-page">
       <div className="post-page-content">
-        <img className="post-page-logo" alt={"Logo"} src={"logo-2.png"} />
+        <Link to={ROUTES.HOMEVTWO}>
+          <img className="post-page-logo" alt={"Logo"} src={Logo} />
+        </Link>
         {isAuthenticated ? (
           <button onClick={(e) => logout(e)}>
             <div className="log-in">Sign Out</div>
@@ -50,20 +54,35 @@ export function PostDetail() {
           </Link>
         )}
         <div className="post-page-tag">
-          <div className="post-page-div">&lt;-</div>
+          <button
+            onClick={() => {
+              navigate(ROUTES.PROMPT);
+            }}
+            className="post-page-div"
+          >
+            &lt;-
+          </button>
         </div>
         <div className="post-page-b">
           <h1 className="post-page-don-t-eat-before-bed-just-finished-a-sandwich">
-            Don’t eat before&nbsp;&nbsp;&nbsp;&nbsp;
-            <br />
-            bed. Just finished a&nbsp;&nbsp; <br />
-            sandwich.
+            {postData.postdescription && postData.postdescription}
           </h1>
-          <img
-            className="trash-icon"
-            alt={"Material symbols report outline"}
-            src={Trash}
-          />
+          {postData.userid &&
+            postData.userid === localStorage.getItem("userid") && (
+              <div className="post-page-component-two">
+                <img
+                  className="trash-icon"
+                  alt={"Material symbols report outline"}
+                  src={Trash}
+                />
+
+                <img
+                  className="trash-icon"
+                  alt={"Material symbols report outline"}
+                  src={Pencil}
+                />
+              </div>
+            )}
         </div>
         <img
           className="divider-small negative-margin"
@@ -77,7 +96,7 @@ export function PostDetail() {
           </p>
           <div className="post-page-component">
             <img className="" alt={"Icon heart"} src={Heart} />
-            <img className="" alt={"Icon pencil"} src={Pencil} />
+            <img className="" alt={"Icon pencil"} src={Comment} />
             <img
               className=""
               alt={"Material symbols report outline"}
