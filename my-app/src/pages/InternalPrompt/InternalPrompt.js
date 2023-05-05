@@ -4,9 +4,9 @@ import { Navbar } from "../../components/index";
 import apiClient from "../../instance/config";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { InternalPromptEditor } from "../../component/InternalPromptEditor/InternalPromptEditor";
+import { InternalPromptEditor } from "../../components/InternalPromptEditor/InternalPromptEditor";
 
-const InternalPrompt = (props) => {
+export function InternalPrompt() {
   const [admin, setAdmin] = useState(false);
   const [date, setDate] = useState(new Date());
   const [promptContent, setPromptContent] = useState("");
@@ -82,6 +82,6 @@ const InternalPrompt = (props) => {
       />
     </div>
   );
-};
+}
 
-export default InternalPrompt;
+// export default InternalPrompt;

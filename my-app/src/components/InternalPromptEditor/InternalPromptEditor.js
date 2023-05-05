@@ -5,7 +5,7 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 
-export default function InternalPromptEditor(props) {
+export function InternalPromptEditor(props) {
   const { promptContent, setPromptContent, havePrompt, promptid } = props;
   const toast = useToast();
 
