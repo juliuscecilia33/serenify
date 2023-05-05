@@ -98,7 +98,7 @@ export function PostDetail() {
                 onChange={(e) => setEditedPostValue(e.target.value)}
                 className="editing-input"
               />
-              <button>Save Changes</button>
+              <button className="save-button">Save Changes</button>
             </>
           ) : (
             <h1 className="post-page-don-t-eat-before-bed-just-finished-a-sandwich">

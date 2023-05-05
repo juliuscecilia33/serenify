@@ -212,3 +212,11 @@
   border: none;
   width: 80%;
 }
+
+.save-button {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  color: #282828;
+}
