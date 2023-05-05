@@ -141,42 +141,6 @@ export function Prompt() {
 
   return (
     <>
-      {/* <div>
-        <Navbar />
-        <h1>Posts</h1>
-
-        <h2>
-          {havePrompt ? (
-            promptDescription
-          ) : (
-            <div>
-              <p>"We do not have prompt for this day...</p>
-              <p>sorry T_T"</p>
-            </div>
-          )}
-        </h2>
-
-        <div className="calendar">
-          <Calendar
-            dateCallBack={selectedPromptDate}
-            setShowPencil={setShowPencil}
-          />
-        </div>
-
-        <div>
-          <b>{havePrompt && <CreatePostButton {...createPostInfo} />}</b>
-        </div>
-
-        {postsForPrompt &&
-          postsForPrompt.map((post, id) => (
-            <UserPost
-              refreshPosts={refreshPosts}
-              setPostsRefresh={setPostsRefresh}
-              postData={post}
-              key={id}
-            />
-          ))}
-      </div> */}
       <div className="prompt-page-prompt-page">
         <div className="prompt-page-content">
           <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
@@ -270,12 +234,17 @@ export function Prompt() {
           {postsForPrompt &&
             postsForPrompt.map((post, id) => (
               <>
-                <UserPost
-                  refreshPosts={refreshPosts}
-                  setPostsRefresh={setPostsRefresh}
-                  postData={post}
-                  key={id}
-                />
+                {post.postid && (
+                  <Link to={`/post/${post.postid}`}>
+                    <UserPost
+                      refreshPosts={refreshPosts}
+                      setPostsRefresh={setPostsRefresh}
+                      postData={post}
+                      key={id}
+                    />
+                  </Link>
+                )}
+
                 <img
                   className="divider-small"
                   src={DividerSmall}
