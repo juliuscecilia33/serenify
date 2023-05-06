@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./HomeVTwo.css";
 import Logo from "../../images/logo2.png";
 import Cat from "../../images/Cat.png";
@@ -6,6 +6,20 @@ import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
 import { Authentication } from "../../context/Authentication";
 import { useNavigate } from "react-router";
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  HStack,
+  Button,
+  Box,
+} from "@chakra-ui/react";
+import AdminIconTwo from "../../images/AdminIconTwo.png";
 
 export function HomeVTwo() {
   const { isAuthenticated, setAuth } = useContext(Authentication);
@@ -14,16 +28,54 @@ export function HomeVTwo() {
   const logout = (e) => {
     e.preventDefault();
 
-    localStorage.removeItem("userid");
+    localStorage.clear();
     console.log("User logged out");
 
     navigate(ROUTES.LOGIN);
   };
 
+  /*
+    Admin Dropdown Button
+  */
+  // const [isAdmin, setIsAdmin] = useState(false);
+  const [adminButtonOpen, setAdminButtonOpen] = useState(false);
+  // const checkAdmin = () => {
+  //   localStorage.getItem("isAdmin") === true
+  //     ? setIsAdmin(true)
+  //     : setIsAdmin(false);
+  // };
+
+  // useEffect(() => {
+  //   checkAdmin();
+  // }, []);
+
   return (
     <div className="content">
-      <img className="logo" alt={"Logo"} src={Logo} />
-      {isAuthenticated ? (
+      <HStack spacing="24px">
+        <Box>
+          <img className="logo" alt={"Logo"} src={Logo} />
+        </Box>
+      </HStack>
+      {isAuthenticated && localStorage.getItem("isAdmin") === true ? (
+        <>
+          {/* <Menu>
+            <MenuButton
+              as={Button}
+              _hover={{ bg: "gray.400" }}
+              _expanded={{ bg: "gray.400" }}
+              _focus={{ boxShadow: "outline" }}
+            >
+              <Box>
+                <img className="admin-logo" alt={"Logo"} src={AdminIconTwo} />
+              </Box>
+            </MenuButton>
+          </Menu> */}
+          <h1>ADMININININ</h1>
+          <button onClick={(e) => logout(e)}>
+            <div className="log-in">Sign Out</div>
+          </button>
+        </>
+      ) : isAuthenticated ? (
         <button onClick={(e) => logout(e)}>
           <div className="log-in">Sign Out</div>
         </button>

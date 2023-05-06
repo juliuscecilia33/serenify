@@ -146,8 +146,8 @@ router.put("/:postid/editdescription", async (req, res) => {
     const { postdescription } = req.body;
 
     const updatePostDescription = await pool.query(
-      "UPDATE tblpost SET postdescription WHERE postid = $2",
-      [userid, postid]
+      "UPDATE tblpost SET postdescription = $1 WHERE postid = $2",
+      [postdescription, postid]
     );
 
     res.json("Edited Post Description");

@@ -17,6 +17,14 @@
   width: 31px;
 }
 
+.admin-logo {
+  height: 24px;
+  left: 80px;
+  top: 69px;
+  width: auto;
+  position: absolute;
+}
+
 .log-in {
   color: #000000;
   font-family: "Oswald", Helvetica;

@@ -5,6 +5,7 @@ import { Navbar } from "../../components/index";
 import Calendar from "../../components/calendar/calendar";
 import { CreatePostButton } from "../../components";
 import "./Prompt.css";
+import "../HomeVTwo/HomeVTwo.css";
 import { UserPost } from "../../components/UserPost/UserPost";
 import DividerBig from "../../images/DividerBig.png";
 import Cat from "../../images/Cat.png";
@@ -59,7 +60,7 @@ export function Prompt() {
   const logout = (e) => {
     e.preventDefault();
 
-    localStorage.removeItem("userid");
+    localStorage.clear();
     console.log("User logged out");
 
     navigate(ROUTES.LOGIN);
@@ -144,17 +145,22 @@ export function Prompt() {
     <>
       <div className="prompt-page-prompt-page">
         <div className="prompt-page-content">
-          {/* <Link to={ROUTES.HOMEVTWO}> */}
-          <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
-          {/* </Link> */}
+          <Link to={ROUTES.HOMEVTWO}>
+            <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
+          </Link>
           {isAuthenticated ? (
-            <button onClick={(e) => logout(e)}>
-              <div className="log-in">Sign Out</div>
+            <button className="log-in-button" onClick={(e) => logout(e)}>
+              Sign Out
             </button>
           ) : (
-            <Link to={ROUTES.LOGIN}>
-              <div className="log-in">Log in</div>
-            </Link>
+            // <Link to={ROUTES.LOGIN}>
+            <button
+              onClick={() => console.log("Login button")}
+              className="log-in-button"
+            >
+              Log in
+            </button>
+            // </Link>
           )}
           <div className="prompt-page-b">
             <p className="prompt-page-apr">{displayDate}</p>

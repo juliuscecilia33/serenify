@@ -1,6 +1,8 @@
 import * as ROUTES from "./constants/routes";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router";
+
 import {
   Login,
   Home,
@@ -21,18 +23,35 @@ import apiClient from "./instance/config";
 import axios from "axios";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [admin, setAdmin] = useState(false);
+
   const checkAuthenticated = () => {
     localStorage.getItem("userid")
       ? setIsAuthenticated(true)
       : setIsAuthenticated(false);
   };
 
+  const userType = async () => {
+    await apiClient
+      .get(`/users/${localStorage.getItem("userid")}`)
+      .then((response) => {
+        console.log("response", response);
+        localStorage.setItem("isAdmin", response.data.isadmin);
+        setAdmin(response.data.isadmin);
+      })
+      .catch((err) => {
+        console.err(err.message);
+      });
+  };
+
   useEffect(() => {
     checkAuthenticated();
+    userType();
   }, []);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   console.log("user is authenticated: ", isAuthenticated);
+  console.log(admin);
 
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);

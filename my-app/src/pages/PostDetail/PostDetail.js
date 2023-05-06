@@ -39,10 +39,32 @@ export function PostDetail() {
 
   console.log("edited post value: ", editedPostValue);
 
+  const handleEditPostDescription = (e) => {
+    e.preventDefault();
+
+    const postBody = {
+      postescription: editedPostValue,
+    };
+
+    axios
+      .put(
+        `http://localhost:3005/posts/${postData.postid}/editdescription`,
+        postBody
+      )
+      .then((response) => {
+        console.log("edit response: ", response);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+
+    navigate(0);
+  };
+
   const logout = (e) => {
     e.preventDefault();
 
-    localStorage.removeItem("userid");
+    localStorage.clear();
     console.log("User logged out");
 
     navigate(ROUTES.LOGIN);
@@ -104,7 +126,12 @@ export function PostDetail() {
                 className="editing-input"
                 placeholder="Edit your post here..."
               />
-              <button className="save-button">Save</button>
+              <button
+                onClick={(e) => handleEditPostDescription(e)}
+                className="save-button"
+              >
+                Save
+              </button>
               <button
                 onClick={() => setEditingPost(false)}
                 className="save-button"
