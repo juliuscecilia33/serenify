@@ -19,7 +19,7 @@ export function InternalPrompt() {
       .get(`/users/${localStorage.getItem("userid")}`)
       .then((response) => {
         console.log("response", response);
-
+        localStorage.setItem("isAdmin", response.data.isadmin);
         if (!response.data.isadmin) {
           navigate("/prompt");
         }
@@ -92,4 +92,3 @@ export function InternalPrompt() {
   );
 }
 
-// export default InternalPrompt;

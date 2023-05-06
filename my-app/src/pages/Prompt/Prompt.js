@@ -13,9 +13,10 @@ import PencilShort from "../../images/PencilShort.png";
 import * as ROUTES from "../../constants/routes";
 import { Authentication } from "../../context/Authentication";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Logo from "../../images/logo2.png";
 import moment from "moment";
+import { Button } from "@chakra-ui/react";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
@@ -31,6 +32,10 @@ export function Prompt() {
   const [refreshPosts, setPostsRefresh] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleLogo = () => {
+    <Navigate to="/" />;
+  };
 
   const { isAuthenticated, setAuth } = useContext(Authentication);
 
@@ -92,13 +97,6 @@ export function Prompt() {
   //Transfer the date from LocalStorage to date datatype
   useEffect(() => {
     if (localStorage.getItem("promptDate")) {
-      // console.log(
-      //   "prompt date from local storage: ",
-      //   localStorage.getItem("promptDate")
-      // );
-      //setLocalStorageDate(new Date(localStorage.getItem("promptDate")));
-      // console.log("type for new Date(): ", typeof new Date());
-      // console.log("type for local storage date: ", typeof localStorageDate);
       setDefaultPromptDate(
         new Date(localStorage.getItem("promptDate"))
           .toLocaleDateString()
@@ -146,9 +144,9 @@ export function Prompt() {
     <>
       <div className="prompt-page-prompt-page">
         <div className="prompt-page-content">
-          <Link to={ROUTES.HOMEVTWO}>
-            <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
-          </Link>
+          {/* <Link to={ROUTES.HOMEVTWO}> */}
+          <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
+          {/* </Link> */}
           {isAuthenticated ? (
             <button onClick={(e) => logout(e)}>
               <div className="log-in">Sign Out</div>

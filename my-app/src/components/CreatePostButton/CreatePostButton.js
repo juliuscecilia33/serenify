@@ -1,5 +1,5 @@
 import "./CreatePostButton.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 //import { useNavigate } from "react-router-dom";
 import pencil from "../../images/pencil.png";
 import { CreatePost } from "../../pages/CreatePost/CreatePost";
@@ -11,13 +11,6 @@ export function CreatePostButton({
   postSubmitted,
   setPostSubmitted,
 }) {
-  //navigate to the create post page
-  // const navigate = useNavigate();
-  // const goToCreatePost = (props) => {
-  //   navigate("/createPost");
-  //   console.log("props:", props);
-  // };
-
   const createPostInfo = {
     promptid,
     showPencil,

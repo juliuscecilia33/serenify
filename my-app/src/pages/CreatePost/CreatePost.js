@@ -10,12 +10,12 @@ import {
   Button,
   Stack,
   Textarea,
-  Flex,
   AspectRatio,
   Image,
   CloseButton,
+  ButtonGroup,
 } from "@chakra-ui/react";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import {
   FormControl,
   FormLabel,
@@ -140,6 +140,10 @@ export function CreatePost({
       });
   };
 
+  const handleBackButton = (e) => {
+    setShowPencil(true);
+  };
+
   return (
     <div>
       <div className="container flex">
@@ -187,16 +191,25 @@ export function CreatePost({
               </AspectRatio>
             </Stack>
           )}
-
-          <Button
-            colorScheme="teal"
-            onClick={(e) => {
-              handleSubmit(e);
-            }}
-            disabled={attachment === "" && postDescription.length < 1}
-          >
-            <ArrowForwardIcon />
-          </Button>
+          <ButtonGroup gap="2">
+            <Button
+              colorScheme="teal"
+              onClick={(e) => {
+                handleBackButton(e);
+              }}
+            >
+              <ArrowBackIcon />
+            </Button>
+            <Button
+              colorScheme="teal"
+              onClick={(e) => {
+                handleSubmit(e);
+              }}
+              disabled={attachment === "" && postDescription.length < 1}
+            >
+              <ArrowForwardIcon />
+            </Button>
+          </ButtonGroup>
         </FormControl>
       </div>
     </div>
