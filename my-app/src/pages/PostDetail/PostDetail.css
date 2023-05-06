@@ -120,6 +120,14 @@
   margin-top: 2rem;
 }
 
+.comment-box-component {
+  /* height: `8px; */
+  min-width: 341px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .post-page-component-two {
   height: 78px;
   margin-top: -8px;
@@ -230,8 +238,8 @@
 .save-button {
   font-family: "Oswald";
   font-style: normal;
-  font-weight: 400;
-  font-size: 25px;
+  font-weight: 500;
+  font-size: 30px;
   color: #282828;
   margin: 0.5rem 0;
 }

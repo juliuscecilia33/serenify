@@ -138,6 +138,25 @@ router.put("/:postid/likedecremented", async (req, res) => {
   }
 });
 
+// 3. update like count for post (url)
+// router.put("/:postid")
+router.put("/:postid/editdescription", async (req, res) => {
+  try {
+    const { postid } = req.params;
+    const { userid } = req.body;
+
+    const updateLikedUsers = await pool.query(
+      "UPDATE tblpost SET postdescription WHERE postid = $2",
+      [userid, postid]
+    );
+
+    res.json("Edited Post Description");
+  } catch (error) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 //Delete a post
 router.delete("/:postid", async (req, res) => {
   try {

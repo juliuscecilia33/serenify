@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import "./PostDetail.css";
 import Pencil from "../../images/PencilTwo.png";
 import Comment from "../../images/Comment.png";
+import CommentFilled from "../../images/CommentFilled.png";
 import Report from "../../images/Report.png";
 import Trash from "../../images/Trash.png";
 import Heart from "../../images/Heart.png";
@@ -62,6 +63,7 @@ export function PostDetail() {
       });
 
     // setPostsRefresh(!refreshPosts);
+    navigate(ROUTES.PROMPT);
 
     console.log("Deleted Post");
   };
@@ -103,7 +105,12 @@ export function PostDetail() {
                 placeholder="Edit your post here..."
               />
               <button className="save-button">Save</button>
-              <button className="save-button">Cancel</button>
+              <button
+                onClick={() => setEditingPost(false)}
+                className="save-button"
+              >
+                Cancel
+              </button>
             </>
           ) : (
             <h1 className="post-page-don-t-eat-before-bed-just-finished-a-sandwich">
@@ -121,11 +128,13 @@ export function PostDetail() {
           {postData.userid &&
             postData.userid === localStorage.getItem("userid") && (
               <div className="post-page-component-two">
-                <img
-                  className="trash-icon"
-                  alt={"Material symbols report outline"}
-                  src={Trash}
-                />
+                <button onClick={(e) => handleDeletePost(e)}>
+                  <img
+                    className="trash-icon"
+                    alt={"Material symbols report outline"}
+                    src={Trash}
+                  />
+                </button>
                 <button onClick={() => setEditingPost(!editingPost)}>
                   <img
                     className="trash-icon"
@@ -148,8 +157,13 @@ export function PostDetail() {
           </p>
           <div className="post-page-component">
             <img className="" alt={"Icon heart"} src={Heart} />
+
             <button onClick={() => setCommentingOnPost(!commentingOnPost)}>
-              <img className="" alt={"Icon pencil"} src={Comment} />
+              <img
+                className=""
+                alt={"Icon pencil"}
+                src={commentingOnPost ? CommentFilled : Comment}
+              />
             </button>
             <img
               className=""
@@ -165,7 +179,9 @@ export function PostDetail() {
                 className="commenting-input"
                 placeholder="Type your comment here..."
               />
-              <button className="save-button">Comment -&gt;</button>
+              <div className="comment-box-component">
+                <button className="save-button">Comment -&gt;</button>
+              </div>
             </>
           )}
         </div>

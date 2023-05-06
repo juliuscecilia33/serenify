@@ -107,3 +107,10 @@
 .middle-section img {
   margin-top: 2rem;
 }
+
+.pencil-icon {
+  width: 40px;
+  height: auto;
+  margin-top: 2rem;
+  margin-left: 1rem;
+}

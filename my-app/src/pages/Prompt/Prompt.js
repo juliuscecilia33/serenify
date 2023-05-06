@@ -153,7 +153,9 @@ export function Prompt() {
     <>
       <div className="prompt-page-prompt-page">
         <div className="prompt-page-content">
-          <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
+          <Link to={ROUTES.HOMEVTWO}>
+            <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
+          </Link>
           {isAuthenticated ? (
             <button onClick={(e) => logout(e)}>
               <div className="log-in">Sign Out</div>

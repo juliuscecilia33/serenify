@@ -36,25 +36,22 @@ export function InternalPromptEditor(props) {
 
   return (
     <FormControl>
-      <FormLabel htmlFor="edit-prompt">
-        <Textarea
-          defaultValue={havePrompt ? promptContent : "add a prompt for today"}
-          onChange={(textValue) => handleChange(textValue)}
-          value={promptContent}
-          resize={"none"}
-          errorBorderColor="red"
-        />
-        <FormHelperText>Edit or Set a Prompt for This Day</FormHelperText>
+      <Textarea
+        defaultValue={havePrompt ? promptContent : "add a prompt for today"}
+        onChange={(textValue) => handleChange(textValue)}
+        resize={"none"}
+        errorBorderColor="red"
+      />
+      <FormHelperText>Edit or Set a Prompt for This Day</FormHelperText>
 
-        <Button
-          colorScheme="teal"
-          onClick={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          <ArrowForwardIcon />
-        </Button>
-      </FormLabel>
+      <Button
+        colorScheme="teal"
+        onClick={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <ArrowForwardIcon />
+      </Button>
     </FormControl>
   );
 }

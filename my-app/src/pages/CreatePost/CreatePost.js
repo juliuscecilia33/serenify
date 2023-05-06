@@ -144,58 +144,59 @@ export function CreatePost({
     <div>
       <div className="container flex">
         <FormControl isInvalid={isValid} onKeyPress={keyDownHandler}>
-          <FormLabel htmlFor="your-thought">
-            <Textarea
-              placeholder="Leave your thoughts here.."
-              onChange={(textValue) => handleChange(textValue)}
-              value={postDescription}
-              resize={"none"}
-              errorBorderColor="red"
-              colorScheme={"green"}
-            />
-            <span style={{ color: moreThan500 ? "red" : "" }}>
-              {`characters: ${wordCount.length}/${maxLength}`}
-            </span>
-
-            {isValid ? (
-              <FormHelperText>{helperText}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{helperText}</FormErrorMessage>
-            )}
-
-            {!attachment ? (
-              <UploadAttachment
-                attachment={attachment}
-                setAttachment={setAttachment}
-              />
-            ) : (
-              <Stack>
-                <CloseButton
-                  size="sm"
-                  onClick={(e) => {
-                    handleCloseButton(e);
-                  }}
-                />
-                <AspectRatio maxW="400px" ratio={4 / 3}>
-                  <Image
-                    src={attachment}
-                    alt="user post image"
-                    objectFit="cover"
-                  />
-                </AspectRatio>
-              </Stack>
-            )}
-
-            <Button
-              colorScheme="teal"
-              onClick={(e) => {
-                handleSubmit(e);
-              }}
-              disabled={attachment === "" && postDescription.length < 1}
-            >
-              <ArrowForwardIcon />
-            </Button>
+          <FormLabel htmlFor="edit-prompt">
+            Leave Your Thoughts here...
           </FormLabel>
+          <Textarea
+            placeholder="Leave your thoughts here.."
+            onChange={(textValue) => handleChange(textValue)}
+            value={postDescription}
+            resize={"none"}
+            errorBorderColor="red"
+            colorScheme={"green"}
+          />
+          <span style={{ color: moreThan500 ? "red" : "" }}>
+            {`characters: ${wordCount.length}/${maxLength}`}
+          </span>
+
+          {isValid ? (
+            <FormHelperText>{helperText}</FormHelperText>
+          ) : (
+            <FormErrorMessage>{helperText}</FormErrorMessage>
+          )}
+
+          {!attachment ? (
+            <UploadAttachment
+              attachment={attachment}
+              setAttachment={setAttachment}
+            />
+          ) : (
+            <Stack>
+              <CloseButton
+                size="sm"
+                onClick={(e) => {
+                  handleCloseButton(e);
+                }}
+              />
+              <AspectRatio maxW="400px" ratio={4 / 3}>
+                <Image
+                  src={attachment}
+                  alt="user post image"
+                  objectFit="cover"
+                />
+              </AspectRatio>
+            </Stack>
+          )}
+
+          <Button
+            colorScheme="teal"
+            onClick={(e) => {
+              handleSubmit(e);
+            }}
+            disabled={attachment === "" && postDescription.length < 1}
+          >
+            <ArrowForwardIcon />
+          </Button>
         </FormControl>
       </div>
     </div>

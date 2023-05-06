@@ -13,6 +13,8 @@ import {
   BsFillTrash3Fill,
 } from "react-icons/bs";
 
+import Pencil from "../../images/PencilTwo.png";
+
 function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
 
@@ -105,52 +107,14 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
         </p>
         <div className="button-container">
           {postData.postData.userid === localStorage.getItem("userid") && (
-            <button className="trash-icon" onClick={(e) => handleDeletePost(e)}>
-              <BsFillTrash3Fill />
-            </button>
+            <>
+              <button className="trash-icon">
+                <BsFillTrash3Fill />
+              </button>
+              <img alt="Edit-icon" className="pencil-icon" src={Pencil} />
+            </>
           )}
         </div>
-        {/* {isExpanded && (
-          <div className="expanded-section">
-            <div className="report_button">
-              <button>
-                <BsExclamationOctagon />
-              </button>
-              <p>Report</p>
-            </div>
-            <div className="buttons">
-              <div className="button-container">
-                {postData.postData.likedusers &&
-                postData.postData.likedusers.includes(
-                  localStorage.getItem("userid")
-                ) ? (
-                  <button onClick={(e) => handleDecrementLike(e)}>
-                    <BsHeartFill />
-                  </button>
-                ) : (
-                  <button onClick={(e) => handleIncrementLike(e)}>
-                    <BsHeart />
-                  </button>
-                )}
-                <p>{likeCount}</p>
-              </div>
-              <div className="button-container">
-                <button>
-                  <BsChatRight />
-                </button>
-                <p>234</p>
-              </div>
-              <div className="button-container">
-                {postData.postData.userid ===
-                  localStorage.getItem("userid") && (
-                  <button onClick={(e) => handleDeletePost(e)}>
-                    <BsFillTrash3Fill />
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        )} */}
       </div>
     </>
   );

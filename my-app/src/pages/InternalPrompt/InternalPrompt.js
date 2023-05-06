@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/index";
 import apiClient from "../../instance/config";
 import DatePicker from "react-datepicker";
@@ -8,10 +8,13 @@ import { InternalPromptEditor } from "../../components/InternalPromptEditor/Inte
 
 export function InternalPrompt() {
   const [admin, setAdmin] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(
+    new Date().toLocaleDateString().replace(/\//g, "-")
+  );
   const [promptContent, setPromptContent] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
   const [promptid, setPromptid] = useState("");
+  const navigate = useNavigate();
 
   const userType = async () => {
     await apiClient
@@ -19,6 +22,7 @@ export function InternalPrompt() {
       .then((response) => {
         console.log("response", response);
         const adminOrNot = response.data.isAdmin;
+        console.log(adminOrNot);
         setAdmin(adminOrNot);
       })
       .catch((err) => {
@@ -28,9 +32,8 @@ export function InternalPrompt() {
 
   useEffect(() => {
     userType();
-
-    if (!admin) {
-      return <Navigate to="/prompt" replace />;
+    if (admin === false) {
+      navigate("/prompt");
     }
   }, [admin]);
 
@@ -60,6 +63,17 @@ export function InternalPrompt() {
   const handleClick = (date) => {
     localStorage.setItem("internalDate", date);
   };
+
+  useEffect(() => {
+    setDate(
+      new Date(
+        localStorage
+          .getItem("internalDate")
+          .toLocaleDateString()
+          .replace(/\//g, "-")
+      )
+    );
+  }, [localStorage.getItem("internalDate")]);
 
   return (
     <div>
