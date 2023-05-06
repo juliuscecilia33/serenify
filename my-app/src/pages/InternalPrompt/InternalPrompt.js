@@ -8,9 +8,7 @@ import { InternalPromptEditor } from "../../components/InternalPromptEditor/Inte
 
 export function InternalPrompt() {
   const [admin, setAdmin] = useState(false);
-  const [date, setDate] = useState(
-    new Date().toLocaleDateString().replace(/\//g, "-")
-  );
+  const [pickDate, setPickDate] = useState(new Date());
   const [promptContent, setPromptContent] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
   const [promptid, setPromptid] = useState("");
@@ -21,28 +19,29 @@ export function InternalPrompt() {
       .get(`/users/${localStorage.getItem("userid")}`)
       .then((response) => {
         console.log("response", response);
-        const adminOrNot = response.data.isAdmin;
-        console.log(adminOrNot);
-        setAdmin(adminOrNot);
+
+        if (!response.data.isadmin) {
+          navigate("/prompt");
+        }
       })
       .catch((err) => {
+        navigate("/prompt");
         console.err(err.message);
       });
   };
 
   useEffect(() => {
     userType();
-    if (admin === false) {
-      navigate("/prompt");
-    }
-  }, [admin]);
+  }, []);
 
   useEffect(() => {
+    const dateTime = new Date(pickDate)
+      .toLocaleDateString()
+      .replace(/\//g, "-");
     const getPromptContent = async () => {
       const res = await apiClient
-        .get(`/prompt/:${date}`)
+        .get(`/prompt/:${dateTime}`)
         .then((response) => {
-          console.log("response: ", response.data.promptdescription);
           setPromptContent(response.data.promptdescription);
           setPromptid(response.data.promptid);
 
@@ -58,21 +57,16 @@ export function InternalPrompt() {
     };
     //use promptDate to find the content
     getPromptContent();
-  }, [date, havePrompt]);
+  }, [pickDate, havePrompt]);
 
-  const handleClick = (date) => {
-    localStorage.setItem("internalDate", date);
+  const handleClick = () => {
+    localStorage.setItem("internalDate", pickDate);
   };
 
   useEffect(() => {
-    setDate(
-      new Date(
-        localStorage
-          .getItem("internalDate")
-          .toLocaleDateString()
-          .replace(/\//g, "-")
-      )
-    );
+    if (localStorage.getItem("internalDate")) {
+      setPickDate(new Date(localStorage.getItem("internalDate")));
+    }
   }, [localStorage.getItem("internalDate")]);
 
   return (
@@ -80,8 +74,8 @@ export function InternalPrompt() {
       <div className="calendar-container">
         <DatePicker
           className="calendar-input"
-          selected={date}
-          onChange={(date) => setDate(date)}
+          selected={pickDate}
+          onChange={(date) => setPickDate(date)}
           maxDate={new Date()}
         />
         <button className="calendar-button" onClick={handleClick}>

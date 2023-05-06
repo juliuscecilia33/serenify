@@ -34,19 +34,12 @@ export function Prompt() {
 
   const { isAuthenticated, setAuth } = useContext(Authentication);
 
-  console.log("prompt id: ", promptid);
-
-  console.log("show pencil outside: ", showPencil);
-
-  console.log("default prompt date: ", defaultPromptDate.split("-"));
-
   let splitPromptDate = defaultPromptDate.split("-");
   let formatDate = new Date(
     splitPromptDate[2],
     splitPromptDate[0] - 1,
     splitPromptDate[1]
   );
-  console.log("moment date: ", moment(formatDate).format("MMMM D, Y ~ dddd"));
   let displayDate = moment(formatDate).format("MMMM D, Y");
   let displayDay = moment(formatDate).format("dddd");
 

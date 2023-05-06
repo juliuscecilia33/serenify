@@ -8,6 +8,7 @@ import { useToast } from "@chakra-ui/react";
 export function InternalPromptEditor(props) {
   const { promptContent, setPromptContent, havePrompt, promptid } = props;
   const toast = useToast();
+  console.log("this is the promptcontent", promptContent);
 
   const handleChange = (textValue) => {
     setPromptContent(textValue.target.value);
@@ -16,7 +17,7 @@ export function InternalPromptEditor(props) {
   const handleSubmit = async (e) => {
     await apiClient
       .put(`/prompt/${promptid}`, {
-        promptDescription: { promptContent },
+        promptDescription: promptContent,
       })
       .then((response) => {
         console.log(response);
@@ -27,7 +28,7 @@ export function InternalPromptEditor(props) {
 
     toast({
       title: "new Prompt",
-      description: "You have successfully post a new prompt",
+      description: "You have successfully post/change a new prompt",
       status: "success",
       duration: 2500,
       isClosable: true,
@@ -37,8 +38,8 @@ export function InternalPromptEditor(props) {
   return (
     <FormControl>
       <Textarea
-        defaultValue={havePrompt ? promptContent : "add a prompt for today"}
         onChange={(textValue) => handleChange(textValue)}
+        value={promptContent}
         resize={"none"}
         errorBorderColor="red"
       />

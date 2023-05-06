@@ -143,9 +143,9 @@ router.put("/:postid/likedecremented", async (req, res) => {
 router.put("/:postid/editdescription", async (req, res) => {
   try {
     const { postid } = req.params;
-    const { userid } = req.body;
+    const { postdescription } = req.body;
 
-    const updateLikedUsers = await pool.query(
+    const updatePostDescription = await pool.query(
       "UPDATE tblpost SET postdescription WHERE postid = $2",
       [userid, postid]
     );

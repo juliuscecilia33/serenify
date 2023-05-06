@@ -16,6 +16,9 @@ import {
 import { ChakraProvider } from "@chakra-ui/react";
 import { Authentication } from "./context/Authentication";
 import { ProtectedRoute } from "./helpers/protectedroute";
+import { ProtectedRouteAdmin } from "./helpers/ProtectedRouteAdmin";
+import apiClient from "./instance/config";
+import axios from "axios";
 
 function App() {
   const checkAuthenticated = () => {

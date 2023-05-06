@@ -47,18 +47,6 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
   const [likeCount, setLikeCount] = useState(postData.postData.postlike);
   const [usersLiked, setUsersLiked] = useState(postData.postData.likedusers);
 
-  console.log("post time: ", typeof postData.postData.posttime);
-  console.log("post data - user liked: ", postData.postData.likedusers);
-
-  console.log("users liked: ", usersLiked);
-  console.log("local storage user id: ", localStorage.getItem("userid"));
-  if (usersLiked) {
-    console.log(
-      "includes console: ",
-      usersLiked.includes(localStorage.getItem("userid"))
-    );
-  }
-
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleDeletePost = (e) => {
