@@ -20,7 +20,7 @@ import { Authentication } from "./context/Authentication";
 import { ProtectedRoute } from "./helpers/protectedroute";
 import { ProtectedRouteAdmin } from "./helpers/ProtectedRouteAdmin";
 import apiClient from "./instance/config";
-import axios from "axios";
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -32,33 +32,25 @@ function App() {
       : setIsAuthenticated(false);
   };
 
-  const userType = async () => {
-    await apiClient
-      .get(`/users/${localStorage.getItem("userid")}`)
-      .then((response) => {
-        console.log("response", response);
-        localStorage.setItem("isAdmin", response.data.isadmin);
-        setAdmin(response.data.isadmin);
-      })
-      .catch((err) => {
-        console.err(err.message);
-      });
-  };
+  const checkAdmin = () => {
+    localStorage.getItem('isAdmin')
+    ? setAdmin(true) : setAdmin(false)
+  }
 
   useEffect(() => {
     checkAuthenticated();
-    userType();
+    checkAdmin();
   }, []);
 
   console.log("user is authenticated: ", isAuthenticated);
-  console.log(admin);
+  console.log("this is admin in App", admin);
 
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
 
   return (
-    <Authentication.Provider value={{ isAuthenticated, setAuth }}>
+    <Authentication.Provider value={{ isAuthenticated, setAuth, admin, setAdmin }}>
       <ChakraProvider>
         <BrowserRouter>
           <Routes>
@@ -70,7 +62,7 @@ function App() {
             <Route path={ROUTES.HOMEVTWO} element={<HomeVTwo />} />
             <Route path={ROUTES.REPORT} element={<Report />} />
             <Route path={ROUTES.POSTDETAIL} element={<PostDetail />} />
-            <Route path={ROUTES.INTERNALPROMPT} element={<InternalPrompt />} />
+            <Route path={ROUTES.INTERNALPROMPT} element={ admin ? <InternalPrompt /> : <HomeVTwo />} />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>
@@ -79,3 +71,17 @@ function App() {
 }
 
 export default App;
+
+
+  // const userType = async () => {
+  //   await apiClient
+  //     .get(`/users/${localStorage.getItem("userid")}`)
+  //     .then((response) => {
+  //       console.log("response", response);
+  //       localStorage.setItem("isAdmin", response.data.isadmin);
+  //       setAdmin(response.data.isadmin);
+  //     })
+  //     .catch((err) => {
+  //       console.err(err.message);
+  //     });
+  // };

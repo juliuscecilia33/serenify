@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Route, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
 import { Navbar } from "../../components/index";
 import apiClient from "../../instance/config";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { InternalPromptEditor } from "../../components/InternalPromptEditor/InternalPromptEditor";
+import { Authentication } from "../../context/Authentication";
 
 export function InternalPrompt() {
   const [pickDate, setPickDate] = useState(new Date());
   const [promptContent, setPromptContent] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
   const [promptid, setPromptid] = useState("");
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    return () => {
-      if (localStorage.getItem("isAdmin") === false) {
-        navigate("/prompt");
-      }
-    };
-  }, []);
 
   useEffect(() => {
     const dateTime = new Date(pickDate)

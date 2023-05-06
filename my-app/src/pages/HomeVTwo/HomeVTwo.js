@@ -22,7 +22,7 @@ import {
 import AdminIconTwo from "../../images/AdminIconTwo.png";
 
 export function HomeVTwo() {
-  const { isAuthenticated, setAuth } = useContext(Authentication);
+  const { isAuthenticated, setAuth, admin } = useContext(Authentication);
   const navigate = useNavigate();
 
   const logout = (e) => {
@@ -37,17 +37,6 @@ export function HomeVTwo() {
   /*
     Admin Dropdown Button
   */
-  // const [isAdmin, setIsAdmin] = useState(false);
-  const [adminButtonOpen, setAdminButtonOpen] = useState(false);
-  // const checkAdmin = () => {
-  //   localStorage.getItem("isAdmin") === true
-  //     ? setIsAdmin(true)
-  //     : setIsAdmin(false);
-  // };
-
-  // useEffect(() => {
-  //   checkAdmin();
-  // }, []);
 
   return (
     <div className="content">
@@ -55,27 +44,33 @@ export function HomeVTwo() {
         <Box>
           <img className="logo" alt={"Logo"} src={Logo} />
         </Box>
-      </HStack>
-      {isAuthenticated && localStorage.getItem("isAdmin") === true ? (
-        <>
-          {/* <Menu>
+        {admin && (
+          <Menu>
             <MenuButton
               as={Button}
               _hover={{ bg: "gray.400" }}
               _expanded={{ bg: "gray.400" }}
               _focus={{ boxShadow: "outline" }}
+              clickOnBlur
             >
-              <Box>
-                <img className="admin-logo" alt={"Logo"} src={AdminIconTwo} />
-              </Box>
+              <img className="admin-logo" alt={"Logo"} src={AdminIconTwo} />
             </MenuButton>
-          </Menu> */}
-          <h1>ADMININININ</h1>
-          <button onClick={(e) => logout(e)}>
-            <div className="log-in">Sign Out</div>
-          </button>
-        </>
-      ) : isAuthenticated ? (
+            <MenuList>
+              <MenuItem
+                onClick={() => {
+                  navigate("/admin/prompt");
+                }}
+              >
+                <h3>Prompt</h3>
+              </MenuItem>
+              <MenuItem>
+                <h3>Report</h3>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        )}
+      </HStack>
+      {isAuthenticated ? (
         <button onClick={(e) => logout(e)}>
           <div className="log-in">Sign Out</div>
         </button>

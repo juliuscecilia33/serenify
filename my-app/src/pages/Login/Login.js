@@ -16,7 +16,8 @@ export function Login() {
   const [userPassword, setUserPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated, setAuth } = useContext(Authentication);
+  const { isAuthenticated, setAuth, setAdmin, admin } =
+    useContext(Authentication);
   const [loginError, setLoginError] = useState(false);
   const toast = useToast();
 
@@ -35,13 +36,18 @@ export function Login() {
     axios
       .post("http://localhost:3005/users/login", appBody)
       .then((response) => {
-        console.log("axios request called");
-
+        //console.log("axios request called");
         console.log("login user response", response.data);
         if (response.data.userid) {
           localStorage.setItem("userid", response.data.userid);
           setAuth(true);
           setLoading(false);
+          if (response.data.isadmin === true) {
+            localStorage.setItem("isAdmin", response.data.isadmin);
+            setAdmin(true);
+          } else {
+            setAdmin(false);
+          }
         } else {
           setAuth(false);
           setLoading(false);
