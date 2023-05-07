@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./UserPost.css";
+import { handleTimeSince } from "../../helpers/handleTimeSince";
 
 import axios from "axios";
 
@@ -14,33 +15,6 @@ import {
 } from "react-icons/bs";
 
 import Pencil from "../../images/PencilTwo.png";
-
-function timeSince(date) {
-  var seconds = Math.floor((new Date() - date) / 1000);
-
-  var interval = seconds / 31536000;
-
-  if (interval > 1) {
-    return Math.floor(interval) + " years";
-  }
-  interval = seconds / 2592000;
-  if (interval > 1) {
-    return Math.floor(interval) + " months";
-  }
-  interval = seconds / 86400;
-  if (interval > 1) {
-    return Math.floor(interval) + " days";
-  }
-  interval = seconds / 3600;
-  if (interval > 1) {
-    return Math.floor(interval) + " hours";
-  }
-  interval = seconds / 60;
-  if (interval > 1) {
-    return Math.floor(interval) + " minutes";
-  }
-  return Math.floor(seconds) + " seconds";
-}
 
 export function UserPost(postData, refreshPosts, setPostsRefresh) {
   const [postLiked, setPostLiked] = useState(false);
@@ -91,7 +65,7 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
           ) : null}
         </div>
         <p className="date_posted">
-          {timeSince(new Date(postData.postData.posttime))} ago
+          {handleTimeSince(new Date(postData.postData.posttime))} ago
         </p>
         <div className="button-container">
           {postData.postData.userid === localStorage.getItem("userid") && (

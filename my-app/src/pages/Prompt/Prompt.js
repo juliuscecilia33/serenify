@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import apiClient from "../../instance/config";
-import { Navbar } from "../../components/index";
+import { Navbar, NavbarVTwo } from "../../components/index";
 import Calendar from "../../components/calendar/calendar";
 import { CreatePostButton } from "../../components";
 import "./Prompt.css";
@@ -144,24 +144,8 @@ export function Prompt() {
   return (
     <>
       <div className="prompt-page-prompt-page">
+        <NavbarVTwo />
         <div className="prompt-page-content">
-          <Link to={ROUTES.HOMEVTWO}>
-            <img className="prompt-page-logo" alt={"Logo"} src={Logo} />
-          </Link>
-          {isAuthenticated ? (
-            <button className="log-in-button" onClick={(e) => logout(e)}>
-              Sign Out
-            </button>
-          ) : (
-            // <Link to={ROUTES.LOGIN}>
-            <button
-              onClick={() => console.log("Login button")}
-              className="log-in-button"
-            >
-              Log in
-            </button>
-            // </Link>
-          )}
           <div className="prompt-page-b">
             <p className="prompt-page-apr">{displayDate}</p>
             <p className="prompt-page-apr-two">{displayDay}</p>

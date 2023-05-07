@@ -9,22 +9,6 @@
   width: 390px;
 }
 
-.logo {
-  height: 24px;
-  left: 32px;
-  position: absolute;
-  top: 69px;
-  width: 31px;
-}
-
-.admin-logo {
-  height: 24px;
-  left: 80px;
-  top: 69px;
-  width: auto;
-  position: absolute;
-}
-
 .log-in {
   color: #000000;
   font-family: "Oswald", Helvetica;
@@ -58,7 +42,7 @@
 }
 
 .s1 {
-  padding: 140px 0px 0px;
+  padding: 80px 0px 0px;
 }
 
 .s2 {

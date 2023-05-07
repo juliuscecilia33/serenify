@@ -1,0 +1,29 @@
+.navbar-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background: none;
+  background-color: #ece8d1;
+  padding: 0px 30px;
+  padding-top: 40px;
+  margin: 0;
+  justify-content: space-between;
+}
+
+.auth-button {
+  color: #000000;
+  font-family: "Oswald", Helvetica;
+  font-size: 23px;
+  font-weight: 400;
+  left: 290px;
+  letter-spacing: 0;
+  line-height: normal;
+  text-decoration: underline;
+  top: 66px;
+  white-space: nowrap;
+}
+
+.navbar-logo {
+  height: 24px;
+  width: 31px;
+}
