@@ -14,13 +14,13 @@ import {
   Report,
   PostDetail,
   InternalPrompt,
+  InternalReport,
 } from "./pages";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Authentication } from "./context/Authentication";
 import { ProtectedRoute } from "./helpers/protectedroute";
 import { ProtectedRouteAdmin } from "./helpers/ProtectedRouteAdmin";
 import apiClient from "./instance/config";
-
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -33,9 +33,8 @@ function App() {
   };
 
   const checkAdmin = () => {
-    localStorage.getItem('isAdmin')
-    ? setAdmin(true) : setAdmin(false)
-  }
+    localStorage.getItem("isAdmin") ? setAdmin(true) : setAdmin(false);
+  };
 
   useEffect(() => {
     checkAuthenticated();
@@ -50,7 +49,9 @@ function App() {
   };
 
   return (
-    <Authentication.Provider value={{ isAuthenticated, setAuth, admin, setAdmin }}>
+    <Authentication.Provider
+      value={{ isAuthenticated, setAuth, admin, setAdmin }}
+    >
       <ChakraProvider>
         <BrowserRouter>
           <Routes>
@@ -62,7 +63,14 @@ function App() {
             <Route path={ROUTES.HOMEVTWO} element={<HomeVTwo />} />
             <Route path={ROUTES.REPORT} element={<Report />} />
             <Route path={ROUTES.POSTDETAIL} element={<PostDetail />} />
-            <Route path={ROUTES.INTERNALPROMPT} element={ admin ? <InternalPrompt /> : <HomeVTwo />} />
+            <Route
+              path={ROUTES.INTERNALPROMPT}
+              element={admin ? <InternalPrompt /> : <HomeVTwo />}
+            />
+            <Route
+              path={ROUTES.INTERNALREPORT}
+              element={admin ? <InternalReport /> : <HomeVTwo />}
+            />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>
@@ -72,16 +80,15 @@ function App() {
 
 export default App;
 
-
-  // const userType = async () => {
-  //   await apiClient
-  //     .get(`/users/${localStorage.getItem("userid")}`)
-  //     .then((response) => {
-  //       console.log("response", response);
-  //       localStorage.setItem("isAdmin", response.data.isadmin);
-  //       setAdmin(response.data.isadmin);
-  //     })
-  //     .catch((err) => {
-  //       console.err(err.message);
-  //     });
-  // };
+// const userType = async () => {
+//   await apiClient
+//     .get(`/users/${localStorage.getItem("userid")}`)
+//     .then((response) => {
+//       console.log("response", response);
+//       localStorage.setItem("isAdmin", response.data.isadmin);
+//       setAdmin(response.data.isadmin);
+//     })
+//     .catch((err) => {
+//       console.err(err.message);
+//     });
+// };

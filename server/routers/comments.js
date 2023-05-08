@@ -3,10 +3,11 @@ const router = express.Router();
 const pool = require("../db");
 
 //1. create comment
-router.post("/create", async (req, res) => {
+router.post("/:postid/create", async (req, res) => {
   try {
-    const { commentText, userid, postid } = req.body;
-    const commentTime = new Date().toLocaleDateString();
+    const { commentText, userid } = req.body;
+    const { postid } = req.params;
+    const commentTime = new Date().toLocaleString();
 
     //check if the post exists
     const checkPost = await pool.query(
@@ -31,24 +32,24 @@ router.post("/create", async (req, res) => {
 });
 
 //2. get comments by postid
-router.get("/:postid", async(req, res) => {
+router.get("/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
-    
+
     const commentList = await pool.query(
       "SELECT * FROM tblComment WHERE postid = $1",
       [postid]
     );
 
-    res.json("These are the comments under" + postid + ":" + commentList);
+    res.json(commentList.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
-  } 
+  }
 });
 
 //get a comment
-router.get("/:commentid", async(req, res) => {
+router.get("/:commentid", async (req, res) => {
   try {
     const { commentid } = req.params;
 
@@ -65,7 +66,7 @@ router.get("/:commentid", async(req, res) => {
 });
 
 //3. delete comment
-router.delete("/:commentid", async(req, res) => {
+router.delete("/:commentid", async (req, res) => {
   try {
     const { commentid } = req.params;
 
@@ -73,7 +74,7 @@ router.delete("/:commentid", async(req, res) => {
       "DELETE FROM tblComment WHERE commentid = $1",
       [commentid]
     );
-    
+
     res.json("Successfully delete comment");
   } catch (err) {
     console.error(err.message);

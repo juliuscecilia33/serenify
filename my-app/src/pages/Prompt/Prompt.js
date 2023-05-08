@@ -25,7 +25,7 @@ export function Prompt() {
   const [defaultPromptDate, setDefaultPromptDate] = useState(
     new Date().toLocaleDateString().replace(/\//g, "-")
   );
-  const [localStorageDate, setLocalStorageDate] = useState("");
+  //const [localStorageDate, setLocalStorageDate] = useState("");
   const [promptid, setPromptid] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
   const [showPencil, setShowPencil] = useState(true);

@@ -8,3 +8,4 @@ export const HOMEVTWO = "/";
 export const REPORT = "/post/:postid/report";
 export const POSTDETAIL = "/post/:postid";
 export const INTERNALPROMPT = "/admin/prompt";
+export const INTERNALREPORT = "/admin/report";

@@ -65,7 +65,11 @@ export function NavbarVTwo() {
                   >
                     <h3>Prompt</h3>
                   </MenuItem>
-                  <MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/admin/report");
+                    }}
+                  >
                     <h3>Report</h3>
                   </MenuItem>
                 </MenuGroup>

@@ -109,6 +109,19 @@
   position: relative;
 }
 
+.post-page-no-comments {
+  align-self: stretch;
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  /* margin-top: -1px; */
+  padding: 7rem 0;
+  position: relative;
+}
+
 .post-page-component {
   height: 78px;
   margin-top: -8px;
@@ -169,7 +182,6 @@
 }
 
 .post-page-p-wrapper {
-  align-items: center;
   align-self: stretch;
   display: flex;
   flex-direction: column;
@@ -200,9 +212,6 @@
 
 .divider-small {
   min-width: 390px;
-}
-
-.trash-icon {
 }
 
 .post-image {
@@ -252,5 +261,5 @@
   line-height: 19px;
   letter-spacing: 0.2px;
   color: #4f4f4f;
-  margin-top: 0.5rem;
+  margin-top: 0.7rem;
 }

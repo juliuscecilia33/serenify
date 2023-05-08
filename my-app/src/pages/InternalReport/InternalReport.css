@@ -1,0 +1,10 @@
+.admin-report-title {
+  align-self: stretch;
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 90px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 90px;
+  position: relative;
+}

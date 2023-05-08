@@ -91,6 +91,15 @@ router.get("/:postid", async (req, res) => {
   }
 });
 
+//get all post id that have more than 5 times report
+router.get("/", async (req, res) => {
+  try {
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 //get a report form commentid
 // router.get("/:commentid", async (req, res) => {
 //   try {

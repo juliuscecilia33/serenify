@@ -30,6 +30,7 @@ export function PostDetail() {
   const [editingPost, setEditingPost] = useState(false);
   const [commentingOnPost, setCommentingOnPost] = useState(false);
   const [postAltered, setPostAltered] = useState(false);
+  const [postComments, setPostComments] = useState(null);
 
   console.log("post id from post detail: ", postid);
 
@@ -41,6 +42,16 @@ export function PostDetail() {
           console.log("specific post data all: ", response);
           setPostData(response.data);
           setEditedPostValue(response.data.postdescription);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+
+      axios
+        .get(`http://localhost:3005/comments/${postid}`)
+        .then((comments_response) => {
+          console.log("comments for post: ", comments_response);
+          setPostComments(comments_response.data);
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -236,29 +247,35 @@ export function PostDetail() {
                 src={DividerSmall}
                 alt="DividerSmall"
               />
-              <div className="post-page-p-wrapper">
-                <p className="post-page-text-wrapper-2">
-                  I agree with what
-                  <br />
-                  you’ve posted. It’s so great!
-                </p>
-              </div>
-              <img
-                className="divider-small"
-                src={DividerSmall}
-                alt="DividerSmall"
-              />
-              <div className="post-page-p-wrapper">
-                <p className="post-page-text-wrapper-2">
-                  I like the emoji. It makes me see your face getting sick from
-                  the full stomach hahaha...
-                </p>
-              </div>
-              <img
-                className="divider-small negative-margin"
-                src={DividerBig}
-                alt="Divider Big"
-              />
+              {postComments && postComments.length > 0 ? (
+                postComments.map((comment, id) => (
+                  <>
+                    <div className="post-page-p-wrapper">
+                      <p className="post-page-text-wrapper-2">
+                        {comment.commenttext}
+                      </p>
+                      <p className="post-date-posted">
+                        {handleTimeSince(new Date(comment.commenttime))} ago
+                      </p>
+                    </div>
+                    <img
+                      className="divider-small"
+                      src={DividerSmall}
+                      alt="DividerSmall"
+                    />
+                  </>
+                ))
+              ) : (
+                <>
+                  <p className="post-page-no-comments">No Comments :(</p>
+                  <img
+                    className="divider-small negative-margin"
+                    src={DividerBig}
+                    alt="Divider Big"
+                  />
+                </>
+              )}
+
               <div className="post-page-b-cat">
                 <p className="post-page-p">
                   Pet this cat <br />
