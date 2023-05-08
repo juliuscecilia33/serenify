@@ -29,6 +29,10 @@ ALTER TABLE tblPost
 ADD COLUMN postLike INT DEFAULT 0 NOT NULL;
 ALTER TABLE tblpost
 ALTER COLUMN attachment type VARCHAR;
+ALTER TABLE tblPost
+ADD COLUMN reportCount INT DEFAULT 0 NOT NULL;
+ALTER TABLE tblpost
+ADD COLUMN isVisiable BOOLEAN DEFAULT true NOT NULL;
 
 
 CREATE TABLE tblComment(
@@ -54,4 +58,6 @@ CREATE TABLE tblReport_Post (
     postid UUID REFERENCES tblPost(postid) NOT NULL
 );
 ALTER TABLE tblreport_post
-ADD COLUMN columnid uuid REFERENCES tblComment(commentid);
+ADD COLUMN userid UUID REFERENCES tblUser(userid) NOT NULL;
+ALTER TABLE tblreport_post
+ADD COLUMN postid UUID REFERENCES tblPost(postid) ON DELETE CASCADE;

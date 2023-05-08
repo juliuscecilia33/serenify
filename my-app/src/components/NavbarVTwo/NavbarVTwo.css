@@ -27,3 +27,12 @@
   height: 24px;
   width: 31px;
 }
+
+.chakra-button,
+.chakra-menu__menu-button,
+.css-1flsqw1n,
+.css-1flsqw1:active,
+.css-1flsqw1[data-active],
+.admin-button {
+  background: none;
+}

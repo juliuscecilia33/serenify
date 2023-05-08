@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Navbar } from "../../components/index";
+import { Navbar, NavbarVTwo } from "../../components/index";
 import apiClient from "../../instance/config";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -49,6 +49,7 @@ export function InternalPrompt() {
 
   return (
     <div>
+      <NavbarVTwo />
       <div className="calendar-container">
         <DatePicker
           className="calendar-input"

@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import Logo from "../../images/logo2.png";
 import AdminIconTwo from "../../images/AdminIconTwo.png";
 import { Authentication } from "../../context/Authentication";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+
 import { useNavigate } from "react-router";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
@@ -27,7 +29,7 @@ export function NavbarVTwo() {
   const logout = (e) => {
     e.preventDefault();
 
-    localStorage.removeItem("userid");
+    localStorage.clear();
     console.log("User logged out");
 
     navigate(ROUTES.LOGIN);
@@ -36,30 +38,38 @@ export function NavbarVTwo() {
   return (
     <>
       <div className="navbar-container">
-        <img className="navbar-logo" alt={"Logo"} src={Logo} />
+        <Link to={ROUTES.HOMEVTWO}>
+          <img className="navbar-logo" alt={"Logo"} src={Logo} />
+        </Link>
         <HStack spacing="24px">
           {admin && (
             <Menu>
               <MenuButton
                 as={Button}
-                _hover={{ bg: "gray.400" }}
-                _expanded={{ bg: "gray.400" }}
-                _focus={{ boxShadow: "outline" }}
                 clickOnBlur
+                rightIcon={<ChevronDownIcon />}
+                transition="all 0.2s"
+                px={5}
+                py={3}
+                mx={12}
+                colorScheme="purple"
               >
-                <img className="admin-logo" alt={"Logo"} src={AdminIconTwo} />
+                Admin
               </MenuButton>
               <MenuList>
-                <MenuItem
-                  onClick={() => {
-                    navigate("/admin/prompt");
-                  }}
-                >
-                  <h3>Prompt</h3>
-                </MenuItem>
-                <MenuItem>
-                  <h3>Report</h3>
-                </MenuItem>
+                <MenuGroup title="Posts">
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/admin/prompt");
+                    }}
+                  >
+                    <h3>Prompt</h3>
+                  </MenuItem>
+                  <MenuItem>
+                    <h3>Report</h3>
+                  </MenuItem>
+                </MenuGroup>
+                <MenuGroup title="Users"></MenuGroup>
               </MenuList>
             </Menu>
           )}

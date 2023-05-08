@@ -146,13 +146,13 @@ router.put("/:postid/editdescription", async (req, res) => {
     const { postdescription } = req.body;
 
     const updatePostDescription = await pool.query(
-      "UPDATE tblpost SET postdescription = $1 WHERE postid = $2",
+      "UPDATE tblpost SET postdescription = $1 WHERE postid = $2 RETURNING *",
       [postdescription, postid]
     );
 
-    res.json("Edited Post Description");
+    res.json(updatePostDescription.rows[0]);
   } catch (error) {
-    console.error(err.message);
+    console.error(error.message);
     res.status(500).send("Server Error");
   }
 });
@@ -161,12 +161,6 @@ router.put("/:postid/editdescription", async (req, res) => {
 router.delete("/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
-
-    // const deletePostInfo = await pool.query(
-    //   "SELECT postDescription WHERE postid = $1",
-    //   [postid]
-    // );
-    // const deletePostDes = JSON.stringify(deletePostInfo.rows[0]);
 
     const deletePost = await pool.query(
       "DELETE FROM tblPost WHERE postid = $1",

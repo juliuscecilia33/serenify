@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import * as ROUTES from "../../constants/routes";
 import "../Register/Register.css";
 import toplayer from "../../images/toplayer.png";
-import { Icon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Authentication } from "../../context/Authentication";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

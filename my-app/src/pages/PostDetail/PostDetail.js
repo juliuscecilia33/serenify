@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import * as ROUTES from "../../constants/routes";
 import DividerBig from "../../images/DividerBig.png";
 import Cat from "../../images/Cat.png";
@@ -16,22 +16,45 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { NavbarVTwo } from "../../components";
 import { handleTimeSince } from "../../helpers/handleTimeSince";
+import {
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+  Stack,
+  Box,
+} from "@chakra-ui/react";
 
 export function PostDetail() {
   let { postid } = useParams();
+  const [postData, setPostData] = useState(null);
+  const [editingPost, setEditingPost] = useState(false);
+  const [commentingOnPost, setCommentingOnPost] = useState(false);
+  const [postAltered, setPostAltered] = useState(false);
 
   console.log("post id from post detail: ", postid);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    setTimeout(() => {
+      axios
+        .get(`http://localhost:3005/posts/${postid}`)
+        .then((response) => {
+          console.log("specific post data all: ", response);
+          setPostData(response.data);
+          setEditedPostValue(response.data.postdescription);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    }, "1000");
+  }, [postid, postAltered]);
 
-  const [editingPost, setEditingPost] = useState(false);
-  const [commentingOnPost, setCommentingOnPost] = useState(false);
+  const navigate = useNavigate();
 
   const location = useLocation();
 
-  const postData = location.state?.postData;
+  // let postData = location.state?.postData;
   const [editedPostValue, setEditedPostValue] = useState(
-    postData.postdescription ? postData.postdescription : ""
+    postData ? postData.postdescription : ""
   );
 
   const [commentingOnPostValue, setCommentingOnPostValue] = useState("");
@@ -42,7 +65,7 @@ export function PostDetail() {
     e.preventDefault();
 
     const postBody = {
-      postescription: editedPostValue,
+      postdescription: editedPostValue,
     };
 
     axios
@@ -52,12 +75,16 @@ export function PostDetail() {
       )
       .then((response) => {
         console.log("edit response: ", response);
+
+        setEditingPost(false);
+        setEditedPostValue(
+          postData.postdescription ? postData.postdescription : ""
+        );
+        setPostAltered(!postAltered);
       })
       .catch((error) => {
         console.error("There was an error!", error);
       });
-
-    navigate(0);
   };
 
   const handleDeletePost = (e) => {
@@ -82,162 +109,204 @@ export function PostDetail() {
 
   return (
     <>
-      <NavbarVTwo />
-      <div className="post-page-post-page">
-        <div className="post-page-content">
-          <div className="post-page-tag">
-            <button
-              onClick={() => {
-                navigate(ROUTES.PROMPT);
-              }}
-              className="post-page-div"
-            >
-              &lt;-
-            </button>
-          </div>
-          <div className="post-page-b">
-            {editingPost ? (
-              <>
-                <textarea
-                  value={editedPostValue}
-                  onChange={(e) => setEditedPostValue(e.target.value)}
-                  className="editing-input"
-                  placeholder="Edit your post here..."
-                />
+      {postData ? (
+        <>
+          <NavbarVTwo />
+          <div className="post-page-post-page">
+            <div className="post-page-content">
+              <div className="post-page-tag">
                 <button
-                  onClick={(e) => handleEditPostDescription(e)}
-                  className="save-button"
+                  onClick={() => {
+                    navigate(ROUTES.PROMPT);
+                  }}
+                  className="post-page-div"
                 >
-                  Save
+                  &lt;-
                 </button>
-                <button
-                  onClick={() => setEditingPost(false)}
-                  className="save-button"
-                >
-                  Cancel
-                </button>
-              </>
-            ) : (
-              <h1 className="post-page-don-t-eat-before-bed-just-finished-a-sandwich">
-                {postData.postdescription && postData.postdescription}
-              </h1>
-            )}
+              </div>
+              <div className="post-page-b">
+                {editingPost ? (
+                  <>
+                    <textarea
+                      value={editedPostValue}
+                      onChange={(e) => setEditedPostValue(e.target.value)}
+                      className="editing-input"
+                      placeholder="Edit your post here..."
+                    />
+                    <button
+                      onClick={(e) => handleEditPostDescription(e)}
+                      className="save-button"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => {
+                        setEditingPost(false);
+                        setEditedPostValue(
+                          postData.postdescription
+                            ? postData.postdescription
+                            : ""
+                        );
+                      }}
+                      className="save-button"
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <h1 className="post-page-don-t-eat-before-bed-just-finished-a-sandwich">
+                    {postData.postdescription && postData.postdescription}
+                  </h1>
+                )}
 
-            {postData.attachment && (
+                {postData.attachment && (
+                  <img
+                    className="post-image"
+                    src={postData.attachment}
+                    alt="post_image"
+                  />
+                )}
+                <p className="post-date-posted">
+                  {handleTimeSince(new Date(postData.posttime))} ago
+                </p>
+                {postData.userid &&
+                  postData.userid === localStorage.getItem("userid") && (
+                    <div className="post-page-component-two">
+                      <button onClick={(e) => handleDeletePost(e)}>
+                        <img
+                          className="trash-icon"
+                          alt={"Material symbols report outline"}
+                          src={Trash}
+                        />
+                      </button>
+                      <button onClick={() => setEditingPost(!editingPost)}>
+                        <img
+                          className="trash-icon"
+                          alt={"Material symbols report outline"}
+                          src={Pencil}
+                        />
+                      </button>
+                    </div>
+                  )}
+              </div>
               <img
-                className="post-image"
-                src={postData.attachment}
-                alt="post_image"
+                className="divider-small negative-margin"
+                src={DividerBig}
+                alt="Divider Big"
               />
-            )}
-            <p className="post-date-posted">
-              {handleTimeSince(new Date(postData.posttime))} ago
-            </p>
-            {postData.userid &&
-              postData.userid === localStorage.getItem("userid") && (
-                <div className="post-page-component-two">
-                  <button onClick={(e) => handleDeletePost(e)}>
+              <div className="post-page-b-2">
+                <p className="post-page-p">
+                  Any thoughts you <br />
+                  Want to leave?
+                </p>
+                <div className="post-page-component">
+                  <img className="" alt={"Icon heart"} src={Heart} />
+
+                  <button
+                    onClick={() => setCommentingOnPost(!commentingOnPost)}
+                  >
                     <img
-                      className="trash-icon"
-                      alt={"Material symbols report outline"}
-                      src={Trash}
+                      className=""
+                      alt={"Icon pencil"}
+                      src={commentingOnPost ? CommentFilled : Comment}
                     />
                   </button>
-                  <button onClick={() => setEditingPost(!editingPost)}>
-                    <img
-                      className="trash-icon"
-                      alt={"Material symbols report outline"}
-                      src={Pencil}
-                    />
-                  </button>
+                  <img
+                    className=""
+                    alt={"Material symbols report outline"}
+                    src={Report}
+                  />
                 </div>
-              )}
-          </div>
-          <img
-            className="divider-small negative-margin"
-            src={DividerBig}
-            alt="Divider Big"
-          />
-          <div className="post-page-b-2">
-            <p className="post-page-p">
-              Any thoughts you <br />
-              Want to leave?
-            </p>
-            <div className="post-page-component">
-              <img className="" alt={"Icon heart"} src={Heart} />
-
-              <button onClick={() => setCommentingOnPost(!commentingOnPost)}>
-                <img
-                  className=""
-                  alt={"Icon pencil"}
-                  src={commentingOnPost ? CommentFilled : Comment}
-                />
-              </button>
+                {commentingOnPost && (
+                  <>
+                    <textarea
+                      value={commentingOnPostValue}
+                      onChange={(e) => setCommentingOnPostValue(e.target.value)}
+                      className="commenting-input"
+                      placeholder="Type your comment here..."
+                    />
+                    <div className="comment-box-component">
+                      <button className="save-button">Comment -&gt;</button>
+                    </div>
+                  </>
+                )}
+              </div>
               <img
-                className=""
-                alt={"Material symbols report outline"}
-                src={Report}
+                className="divider-small"
+                src={DividerSmall}
+                alt="DividerSmall"
               />
+              <div className="post-page-p-wrapper">
+                <p className="post-page-text-wrapper-2">
+                  I agree with what
+                  <br />
+                  you’ve posted. It’s so great!
+                </p>
+              </div>
+              <img
+                className="divider-small"
+                src={DividerSmall}
+                alt="DividerSmall"
+              />
+              <div className="post-page-p-wrapper">
+                <p className="post-page-text-wrapper-2">
+                  I like the emoji. It makes me see your face getting sick from
+                  the full stomach hahaha...
+                </p>
+              </div>
+              <img
+                className="divider-small negative-margin"
+                src={DividerBig}
+                alt="Divider Big"
+              />
+              <div className="post-page-b-cat">
+                <p className="post-page-p">
+                  Pet this cat <br />
+                  And you will go
+                  <br />
+                  Back to top.
+                </p>
+                <button
+                  onClick={() => {
+                    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                  }}
+                >
+                  <img className="cat-image" src={Cat} alt="Cat" />
+                </button>
+              </div>
             </div>
-            {commentingOnPost && (
-              <>
-                <textarea
-                  value={commentingOnPostValue}
-                  onChange={(e) => setCommentingOnPostValue(e.target.value)}
-                  className="commenting-input"
-                  placeholder="Type your comment here..."
-                />
-                <div className="comment-box-component">
-                  <button className="save-button">Comment -&gt;</button>
-                </div>
-              </>
-            )}
           </div>
-          <img
-            className="divider-small"
-            src={DividerSmall}
-            alt="DividerSmall"
-          />
-          <div className="post-page-p-wrapper">
-            <p className="post-page-text-wrapper-2">
-              I agree with what
-              <br />
-              you’ve posted. It’s so great!
-            </p>
-          </div>
-          <img
-            className="divider-small"
-            src={DividerSmall}
-            alt="DividerSmall"
-          />
-          <div className="post-page-p-wrapper">
-            <p className="post-page-text-wrapper-2">
-              I like the emoji. It makes me see your face getting sick from the
-              full stomach hahaha...
-            </p>
-          </div>
-          <img
-            className="divider-small negative-margin"
-            src={DividerBig}
-            alt="Divider Big"
-          />
-          <div className="post-page-b-cat">
-            <p className="post-page-p">
-              Pet this cat <br />
-              And you will go
-              <br />
-              Back to top.
-            </p>
-            <button
-              onClick={() => {
-                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-              }}
-            >
-              <img className="cat-image" src={Cat} alt="Cat" />
-            </button>
-          </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        <>
+          <Box padding="6">
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+          </Box>
+          <Box padding="6">
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+          </Box>
+          <Box padding="6">
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+          </Box>
+          <Box padding="6">
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+          </Box>
+          <Box padding="6">
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+          </Box>
+        </>
+      )}
     </>
   );
 }
