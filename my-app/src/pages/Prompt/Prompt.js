@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import apiClient from "../../instance/config";
-import { Navbar, NavbarVTwo } from "../../components/index";
+import { NavbarVTwo } from "../../components/index";
 import Calendar from "../../components/calendar/calendar";
 import { CreatePostButton } from "../../components";
 import "./Prompt.css";
@@ -10,12 +10,10 @@ import { UserPost } from "../../components/UserPost/UserPost";
 import DividerBig from "../../images/DividerBig.png";
 import Cat from "../../images/Cat.png";
 import DividerSmall from "../../images/DividerSmall.png";
-import PencilShort from "../../images/PencilShort.png";
 import * as ROUTES from "../../constants/routes";
 import { Authentication } from "../../context/Authentication";
 import { useNavigate } from "react-router";
 import { Link, Navigate } from "react-router-dom";
-import Logo from "../../images/logo2.png";
 import moment from "moment";
 import { Button } from "@chakra-ui/react";
 

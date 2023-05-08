@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
-import apiClient from "../../instance/config";
 
-export function ReportList() {
-  const [reportPostList, setReportPostList] = useState([]);
-
-  const getReport = async () => {
-    await apiClient
-      .get(`/posts/invisible`)
-      .then((response) => {
-        console.log(response);
-        setReportPostList(response.data);
-      })
-      .catch((err) => {
-        console.err(err.message);
-      });
-  };
+export function ReportList(props) {
+  const { reportPost } = props;
 
   return (
-    <div>
-      <h1>fuck</h1>
+    <div class="post-container">
+      <div className="top-section"></div>
+      <div className="middle-section">
+        <div className="report-count">
+          <span>Report Count: {reportPost.reportPost.reportCount}</span>
+        </div>
+        <div className="admin-action">
+          <span className="admin-action-text">Admin Actions: </span>
+          <div className="button-container"></div>
+        </div>
+        <p className="post_text">{reportPost.reportPost.postdescription}</p>
+        {reportPost.reportPost.attachment ? (
+          <img src={reportPost.reportPost.attachment} alt="post_image" />
+        ) : null}
+      </div>
     </div>
   );
 }
