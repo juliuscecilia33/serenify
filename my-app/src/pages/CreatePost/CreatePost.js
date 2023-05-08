@@ -1,7 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import apiClient from "../../instance/config";
-import * as ROUTES from "../../constants/routes";
-import { Navbar } from "../../components/index";
 import { UploadAttachment } from "../../firebase/upload";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../firebase/firebaseConfig/firebaseConfig";

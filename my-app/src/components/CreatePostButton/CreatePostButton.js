@@ -1,6 +1,5 @@
 import "./CreatePostButton.css";
-import React, { useState, useEffect, useRef } from "react";
-//import { useNavigate } from "react-router-dom";
+import React from "react";
 import pencil from "../../images/pencil.png";
 import { CreatePost } from "../../pages/CreatePost/CreatePost";
 

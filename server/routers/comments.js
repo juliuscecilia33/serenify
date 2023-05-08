@@ -66,16 +66,16 @@ router.get("/:commentid", async (req, res) => {
 });
 
 //3. delete comment
-router.delete("/:commentid", async (req, res) => {
+router.delete("/:commentid/:userid", async (req, res) => {
   try {
-    const { commentid } = req.params;
+    const { commentid, userid } = req.params;
 
     const deleteComment = await pool.query(
-      "DELETE FROM tblComment WHERE commentid = $1",
-      [commentid]
+      "DELETE FROM tblComment WHERE commentid = $1 AND userid = $2",
+      [commentid, userid]
     );
 
-    res.json("Successfully delete comment");
+    res.json(deleteComment.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

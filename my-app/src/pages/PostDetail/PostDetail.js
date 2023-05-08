@@ -12,17 +12,10 @@ import Report from "../../images/Report.png";
 import Trash from "../../images/Trash.png";
 import Heart from "../../images/Heart.png";
 import { useNavigate } from "react-router";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { NavbarVTwo } from "../../components";
 import { handleTimeSince } from "../../helpers/handleTimeSince";
-import {
-  Skeleton,
-  SkeletonCircle,
-  SkeletonText,
-  Stack,
-  Box,
-} from "@chakra-ui/react";
+import { SkeletonLayout } from "../../components";
 
 export function PostDetail() {
   let { postid } = useParams();
@@ -31,6 +24,7 @@ export function PostDetail() {
   const [commentingOnPost, setCommentingOnPost] = useState(false);
   const [postAltered, setPostAltered] = useState(false);
   const [postComments, setPostComments] = useState(null);
+  const [commentingOnPostValue, setCommentingOnPostValue] = useState("");
 
   console.log("post id from post detail: ", postid);
 
@@ -51,7 +45,11 @@ export function PostDetail() {
         .get(`http://localhost:3005/comments/${postid}`)
         .then((comments_response) => {
           console.log("comments for post: ", comments_response);
-          setPostComments(comments_response.data);
+          setPostComments(
+            comments_response.data.sort(function (a, b) {
+              return new Date(b.commenttime) - new Date(a.commenttime);
+            })
+          );
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -61,16 +59,35 @@ export function PostDetail() {
 
   const navigate = useNavigate();
 
-  const location = useLocation();
-
   // let postData = location.state?.postData;
   const [editedPostValue, setEditedPostValue] = useState(
     postData ? postData.postdescription : ""
   );
 
-  const [commentingOnPostValue, setCommentingOnPostValue] = useState("");
+  const handleCommentSubmission = (e) => {
+    e.preventDefault();
 
-  console.log("edited post value: ", editedPostValue);
+    const commentBody = {
+      commentText: commentingOnPostValue,
+      userid: localStorage.getItem("userid"),
+    };
+
+    axios
+      .post(
+        `http://localhost:3005/comments/${postData.postid}/create`,
+        commentBody
+      )
+      .then((response) => {
+        console.log("edit response: ", response);
+
+        setCommentingOnPost(false);
+        setCommentingOnPostValue("");
+        setPostAltered(!postAltered);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  };
 
   const handleEditPostDescription = (e) => {
     e.preventDefault();
@@ -143,6 +160,7 @@ export function PostDetail() {
                       onChange={(e) => setEditedPostValue(e.target.value)}
                       className="editing-input"
                       placeholder="Edit your post here..."
+                      maxlength="500"
                     />
                     <button
                       onClick={(e) => handleEditPostDescription(e)}
@@ -172,7 +190,7 @@ export function PostDetail() {
 
                 {postData.attachment && (
                   <img
-                    className="post-image"
+                    className="post-image-attachment"
                     src={postData.attachment}
                     alt="post_image"
                   />
@@ -235,9 +253,15 @@ export function PostDetail() {
                       onChange={(e) => setCommentingOnPostValue(e.target.value)}
                       className="commenting-input"
                       placeholder="Type your comment here..."
+                      maxlength="500"
                     />
                     <div className="comment-box-component">
-                      <button className="save-button">Comment -&gt;</button>
+                      <button
+                        onClick={(e) => handleCommentSubmission(e)}
+                        className="save-button"
+                      >
+                        Comment -&gt;
+                      </button>
                     </div>
                   </>
                 )}
@@ -247,27 +271,28 @@ export function PostDetail() {
                 src={DividerSmall}
                 alt="DividerSmall"
               />
-              <div className="prompt-page-div">
-                <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
-                  <span className="prompt-page-text-wrapper-3">
-                    Here’s what <br />
-                  </span>
-                  <span className="prompt-page-text-wrapper-4">
-                    People <br />
-                    <u>Commented.</u>
-                    <br />
-                  </span>
-                  <br />
-                  <img
-                    className="divider-small negative-margin"
-                    src={DividerBig}
-                    alt="Divider Big"
-                  />
-                </p>
-              </div>
+
               {postComments && postComments.length > 0 ? (
                 postComments.map((comment, id) => (
                   <>
+                    <div className="prompt-page-div">
+                      <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
+                        <span className="prompt-page-text-wrapper-3">
+                          Here’s what <br />
+                        </span>
+                        <span className="prompt-page-text-wrapper-4">
+                          People <br />
+                          <u>Commented.</u>
+                          <br />
+                        </span>
+                        <br />
+                        <img
+                          className="divider-small negative-margin"
+                          src={DividerBig}
+                          alt="Divider Big"
+                        />
+                      </p>
+                    </div>
                     <div className="post-page-p-wrapper" key={id}>
                       <p className="post-page-text-wrapper-2">
                         {comment.commenttext}
@@ -276,6 +301,18 @@ export function PostDetail() {
                         {handleTimeSince(new Date(comment.commenttime))} ago
                       </p>
                     </div>
+                    {comment.userid &&
+                      comment.userid === localStorage.getItem("userid") && (
+                        <div className="post-page-component-three">
+                          <button>
+                            <img
+                              className="comment-trash-icon"
+                              alt={"Material symbols report outline"}
+                              src={Trash}
+                            />
+                          </button>
+                        </div>
+                      )}
                     <img
                       className="divider-small"
                       src={DividerSmall}
@@ -285,7 +322,9 @@ export function PostDetail() {
                 ))
               ) : (
                 <>
-                  <p className="post-page-no-comments">No Comments :(</p>
+                  <p className="post-page-no-comments">
+                    Be the first to comment! &lt;･◡･&gt;
+                  </p>
                   <img
                     className="divider-small negative-margin"
                     src={DividerBig}
@@ -313,34 +352,7 @@ export function PostDetail() {
           </div>
         </>
       ) : (
-        <>
-          <Box padding="6">
-            <SkeletonCircle size="10" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-          </Box>
-          <Box padding="6">
-            <SkeletonCircle size="10" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-          </Box>
-          <Box padding="6">
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-          </Box>
-          <Box padding="6">
-            <SkeletonCircle size="10" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-          </Box>
-          <Box padding="6">
-            <SkeletonCircle size="10" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-          </Box>
-        </>
+        <SkeletonLayout />
       )}
     </>
   );

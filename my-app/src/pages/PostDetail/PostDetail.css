@@ -152,8 +152,28 @@
   margin-top: 2rem;
 }
 
+.post-page-component-three {
+  height: 78px;
+  min-width: 341px;
+  display: flex;
+  align-items: center;
+  /* justify-content:; */
+  padding-right: 2rem;
+  /* margin-top: 2rem; */
+}
+
 .trash-icon {
   margin-right: 5rem;
+}
+
+.comment-trash-icon {
+  width: 35px;
+  height: auto;
+}
+
+.post-image-attachment {
+  border-radius: 15px;
+  margin: 2rem 0;
 }
 
 .post-page-icon-heart {

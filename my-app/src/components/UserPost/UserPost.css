@@ -114,3 +114,8 @@
   margin-top: 2rem;
   margin-left: 1rem;
 }
+
+.post-image-attachment {
+  border-radius: 15px;
+  margin: 1rem 0;
+}

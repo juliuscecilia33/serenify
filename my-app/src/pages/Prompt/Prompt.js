@@ -15,7 +15,6 @@ import { Authentication } from "../../context/Authentication";
 import { useNavigate } from "react-router";
 import { Link, Navigate } from "react-router-dom";
 import moment from "moment";
-import { Button } from "@chakra-ui/react";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
