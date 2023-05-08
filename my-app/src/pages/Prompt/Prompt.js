@@ -208,7 +208,7 @@ export function Prompt() {
                     </span>
                     <span className="prompt-page-text-wrapper-4">
                       People <br />
-                      Think.
+                      <u>Think.</u>
                       <br />
                     </span>
                     <br />
@@ -220,6 +220,11 @@ export function Prompt() {
                     <br />
                   </p>
                 </div>
+                <img
+                  className="divider-small negative-margin"
+                  src={DividerBig}
+                  alt="Divider Big"
+                />
               </>
             )}
           </div>

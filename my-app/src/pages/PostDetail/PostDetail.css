@@ -244,6 +244,12 @@
   margin-top: 3rem;
 }
 
+.prompt-page-text-wrapper-4 {
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 80px;
+}
+
 .save-button {
   font-family: "Oswald";
   font-style: normal;

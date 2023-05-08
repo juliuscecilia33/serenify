@@ -247,10 +247,28 @@ export function PostDetail() {
                 src={DividerSmall}
                 alt="DividerSmall"
               />
+              <div className="prompt-page-div">
+                <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
+                  <span className="prompt-page-text-wrapper-3">
+                    Here’s what <br />
+                  </span>
+                  <span className="prompt-page-text-wrapper-4">
+                    People <br />
+                    <u>Commented.</u>
+                    <br />
+                  </span>
+                  <br />
+                  <img
+                    className="divider-small negative-margin"
+                    src={DividerBig}
+                    alt="Divider Big"
+                  />
+                </p>
+              </div>
               {postComments && postComments.length > 0 ? (
                 postComments.map((comment, id) => (
                   <>
-                    <div className="post-page-p-wrapper">
+                    <div className="post-page-p-wrapper" key={id}>
                       <p className="post-page-text-wrapper-2">
                         {comment.commenttext}
                       </p>

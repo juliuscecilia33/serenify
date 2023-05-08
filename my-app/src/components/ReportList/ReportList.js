@@ -5,7 +5,15 @@ export function ReportList() {
   const [reportPostList, setReportPostList] = useState([]);
 
   const getReport = async () => {
-    await apiClient.get(``);
+    await apiClient
+      .get(`/posts/invisible`)
+      .then((response) => {
+        console.log(response);
+        setReportPostList(response.data);
+      })
+      .catch((err) => {
+        console.err(err.message);
+      });
   };
 
   return (

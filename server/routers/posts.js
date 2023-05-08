@@ -63,6 +63,20 @@ router.get("/:postid", async (req, res) => {
   }
 });
 
+//get all the post that is unvaild rn
+router.get("/invisible", async (req, res) => {
+  try {
+    const getAllPostInvisible = await pool.query(
+      "SELECT * FROM tblPost WHERE isVisible = false"
+    );
+
+    res.json(getAllPostInvisible.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 router.get("/:postid/checkifliked", async (req, res) => {
   try {
     const { postid } = req.params;
