@@ -16,6 +16,7 @@ import axios from "axios";
 import { NavbarVTwo } from "../../components";
 import { handleTimeSince } from "../../helpers/handleTimeSince";
 import { SkeletonLayout } from "../../components";
+import { Link } from "react-router-dom";
 
 export function PostDetail() {
   let { postid } = useParams();
@@ -31,7 +32,7 @@ export function PostDetail() {
   useEffect(() => {
     setTimeout(() => {
       axios
-        .get(`http://localhost:3005/posts/${postid}`)
+        .get(`${process.env.REACT_APP_BACKENDURL}posts/${postid}`)
         .then((response) => {
           console.log("specific post data all: ", response);
           setPostData(response.data);
@@ -42,7 +43,7 @@ export function PostDetail() {
         });
 
       axios
-        .get(`http://localhost:3005/comments/${postid}`)
+        .get(`${process.env.REACT_APP_BACKENDURL}comments/${postid}`)
         .then((comments_response) => {
           console.log("comments for post: ", comments_response);
           setPostComments(
@@ -74,7 +75,7 @@ export function PostDetail() {
 
     axios
       .post(
-        `http://localhost:3005/comments/${postData.postid}/create`,
+        `${process.env.REACT_APP_BACKENDURL}comments/${postData.postid}/create`,
         commentBody
       )
       .then((response) => {
@@ -98,7 +99,7 @@ export function PostDetail() {
 
     axios
       .put(
-        `http://localhost:3005/posts/${postData.postid}/editdescription`,
+        `${process.env.REACT_APP_BACKENDURL}posts/${postData.postid}/editdescription`,
         postBody
       )
       .then((response) => {
@@ -121,7 +122,7 @@ export function PostDetail() {
     console.log("make sure postid exists: ", postData.postid);
 
     axios
-      .delete(`http://localhost:3005/posts/${postData.postid}`)
+      .delete(`${process.env.REACT_APP_BACKENDURL}posts/${postData.postid}`)
       .then((response) => {
         console.log("delete response: ", response);
       })
@@ -160,7 +161,7 @@ export function PostDetail() {
                       onChange={(e) => setEditedPostValue(e.target.value)}
                       className="editing-input"
                       placeholder="Edit your post here..."
-                      maxlength="500"
+                      maxLength="500"
                     />
                     <button
                       onClick={(e) => handleEditPostDescription(e)}
@@ -189,10 +190,11 @@ export function PostDetail() {
                 )}
 
                 {postData.attachment && (
-                  <img
+                  <iframe
                     className="post-image-attachment"
                     src={postData.attachment}
                     alt="post_image"
+                    title="attachment"
                   />
                 )}
                 <p className="post-date-posted">
@@ -240,11 +242,13 @@ export function PostDetail() {
                       src={commentingOnPost ? CommentFilled : Comment}
                     />
                   </button>
-                  <img
-                    className=""
-                    alt={"Material symbols report outline"}
-                    src={Report}
-                  />
+                  <Link to={`/post/${postData.postid}/report`}>
+                    <img
+                      className=""
+                      alt={"Material symbols report outline"}
+                      src={Report}
+                    />
+                  </Link>
                 </div>
                 {commentingOnPost && (
                   <>
@@ -253,7 +257,7 @@ export function PostDetail() {
                       onChange={(e) => setCommentingOnPostValue(e.target.value)}
                       className="commenting-input"
                       placeholder="Type your comment here..."
-                      maxlength="500"
+                      maxLength="500"
                     />
                     <div className="comment-box-component">
                       <button
@@ -271,28 +275,27 @@ export function PostDetail() {
                 src={DividerSmall}
                 alt="DividerSmall"
               />
-
+              <div className="prompt-page-div">
+                <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
+                  <span className="prompt-page-text-wrapper-3">
+                    Here’s what <br />
+                  </span>
+                  <span className="prompt-page-text-wrapper-4">
+                    People <br />
+                    <u>Commented.</u>
+                    <br />
+                  </span>
+                  <br />
+                  <img
+                    className="divider-small negative-margin"
+                    src={DividerBig}
+                    alt="Divider Big"
+                  />
+                </p>
+              </div>
               {postComments && postComments.length > 0 ? (
                 postComments.map((comment, id) => (
                   <>
-                    <div className="prompt-page-div">
-                      <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
-                        <span className="prompt-page-text-wrapper-3">
-                          Here’s what <br />
-                        </span>
-                        <span className="prompt-page-text-wrapper-4">
-                          People <br />
-                          <u>Commented.</u>
-                          <br />
-                        </span>
-                        <br />
-                        <img
-                          className="divider-small negative-margin"
-                          src={DividerBig}
-                          alt="Divider Big"
-                        />
-                      </p>
-                    </div>
                     <div className="post-page-p-wrapper" key={id}>
                       <p className="post-page-text-wrapper-2">
                         {comment.commenttext}

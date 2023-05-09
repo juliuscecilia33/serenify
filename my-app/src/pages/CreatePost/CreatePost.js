@@ -180,11 +180,12 @@ export function CreatePost({
                   handleCloseButton(e);
                 }}
               />
-              <AspectRatio maxW="400px" ratio={4 / 3}>
-                <Image
+              <AspectRatio maxW="400px" ratio={1}>
+                <iframe
                   src={attachment}
                   alt="user post image"
                   objectFit="cover"
+                  title="post-attachment"
                 />
               </AspectRatio>
             </Stack>

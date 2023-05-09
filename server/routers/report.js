@@ -118,6 +118,23 @@ router.get("/:postid", async (req, res) => {
 //   }
 // });
 
+//get all report reason for single post
+router.get("/reason/:postid", async (req, res) => {
+  try {
+    const { postid } = req.params;
+
+    const getAllReportReason = await pool.query(
+      "SELECT reason FROM tblReport_Post WHERE postid = $1",
+      [postid]
+    );
+
+    res.json(getAllReportReason.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 //delete a report by reportid
 router.delete("/:postid", async (req, res) => {
   try {

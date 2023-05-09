@@ -5,6 +5,7 @@
   flex-direction: column;
   min-width: 390px;
   position: relative;
+  background-color: #ece8d1;
 }
 
 .report-content {
@@ -35,6 +36,20 @@
   height: 120px;
   justify-content: flex-end;
   position: relative;
+  margin-bottom: 2rem;
+}
+
+.other-input {
+  /* border: 2px solid black; */
+  outline: none;
+  color: #686868;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  background: none;
+  border: none;
+  width: 80%;
+  margin-bottom: 2.5rem;
 }
 
 .report-group {

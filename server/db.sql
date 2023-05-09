@@ -54,7 +54,7 @@ ALTER COLUMN postid SET NOT NULL;
 CREATE TABLE tblReport_Post (
     report_postId UUID DEFAULT uuid_generate_v4() UNIQUE PRIMARY KEY,
     reportTime TIMESTAMP NOT NULL,
-    reason TEXT[] NOT NULL,
+    reason VARCHAR(500) NOT NULL,
     postid UUID REFERENCES tblPost(postid) NOT NULL
 );
 ALTER TABLE tblreport_post

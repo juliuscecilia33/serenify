@@ -15,6 +15,7 @@ import {
   PostDetail,
   InternalPrompt,
   InternalReport,
+  InternalReportPostDetail,
 } from "./pages";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Authentication } from "./context/Authentication";
@@ -70,6 +71,10 @@ function App() {
             <Route
               path={ROUTES.INTERNALREPORT}
               element={admin ? <InternalReport /> : <HomeVTwo />}
+            />
+            <Route
+              path={ROUTES.INTERNALREPORTPOSTDETAIL}
+              element={admin ? <InternalReportPostDetail /> : <HomeVTwo />}
             />
           </Routes>
         </BrowserRouter>

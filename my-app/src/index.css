@@ -3,6 +3,10 @@
   /* background-color: #ece8d1; */
 }
 
+.chakra-ui-light {
+  background-color: #ece8d1;
+}
+
 body,
 #root {
   margin: 0 auto;

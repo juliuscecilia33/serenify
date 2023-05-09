@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import "./UserPost.css";
 import { handleTimeSince } from "../../helpers/handleTimeSince";
-
 import axios from "axios";
-
 import { BsFillTrash3Fill } from "react-icons/bs";
-
 import Pencil from "../../images/PencilTwo.png";
 
 export function UserPost(postData, refreshPosts, setPostsRefresh) {
@@ -55,10 +52,11 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
         <div className="middle-section">
           <p className="post_text">{postData.postData.postdescription}</p>
           {postData.postData.attachment ? (
-            <img
+            <iframe
               className="post-image-attachment"
               src={postData.postData.attachment}
               alt="post_image"
+              title="attachment"
             />
           ) : null}
         </div>

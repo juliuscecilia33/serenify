@@ -9,3 +9,4 @@ export { Report } from "./Report/Report";
 export { PostDetail } from "./PostDetail/PostDetail";
 export { InternalPrompt } from "./InternalPrompt/InternalPrompt";
 export { InternalReport } from "./InternalReport/InternalReport";
+export { InternalReportPostDetail } from "./InternalReportPostDetail/InternalReportPostDetail";

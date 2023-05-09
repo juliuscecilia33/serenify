@@ -13,17 +13,14 @@ export function ReportList(props) {
             Report Count: {reportPostData && reportPostData.reportcount}
           </span>
         </div>
-        {/* <div className="admin-action">
-          <span className="admin-action-text">Admin Actions: </span>
-          <div className="button-container"></div>
-        </div> */}
         <p className="post_text">
           {reportPostData && reportPostData.postdescription}
         </p>
         {reportPostData && reportPostData.attachment ? (
-          <img
+          <iframe
             src={reportPostData && reportPostData.attachment}
             alt="post_image"
+            title="attachment"
           />
         ) : null}
       </div>
