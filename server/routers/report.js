@@ -64,6 +64,8 @@ router.post("/:postid/add", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+
 //get a report from postid
 router.get("/:postid", async (req, res) => {
   try {
@@ -91,32 +93,7 @@ router.get("/:postid", async (req, res) => {
   }
 });
 
-//get a report form commentid
-// router.get("/:commentid", async (req, res) => {
-//   try {
-//     const { commentid } = req.params;
 
-//     //check if the post still exist
-//     const checkComment = await pool.query(
-//       "SELECT * FROM tblComment WHERE commentid = $1",
-//       [commentid]
-//     );
-
-//     if (checkComment.rows[0].length == 0) {
-//       return res.status(401).json("The post does not exist...");
-//     }
-
-//     const getReportByCommentid = await pool.query(
-//       "SELECT * FROM tblReport WHERE commentid = $1",
-//       [commentid]
-//     );
-
-//     res.json(getReportByCommentid.rows[0]);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send("Server Error");
-//   }
-// });
 
 //get all report reason for single post
 router.get("/reason/:postid", async (req, res) => {
@@ -134,6 +111,8 @@ router.get("/reason/:postid", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+
 
 //delete a report by reportid
 router.delete("/:postid", async (req, res) => {
@@ -162,4 +141,44 @@ router.delete("/:postid", async (req, res) => {
   }
 });
 
+//approve a report
+router.delete{ "/approve/:postid", async(req, res) => {
+  try{
+    const {postid} = req.params;
+    
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+}
+}
+
 module.exports = router;
+
+
+//get a report form commentid
+// router.get("/:commentid", async (req, res) => {
+//   try {
+//     const { commentid } = req.params;
+
+//     //check if the post still exist
+//     const checkComment = await pool.query(
+//       "SELECT * FROM tblComment WHERE commentid = $1",
+//       [commentid]
+//     );
+
+//     if (checkComment.rows[0].length == 0) {
+//       return res.status(401).json("The post does not exist...");
+//     }
+
+//     const getReportByCommentid = await pool.query(
+//       "SELECT * FROM tblReport WHERE commentid = $1",
+//       [commentid]
+//     );
+
+//     res.json(getReportByCommentid.rows[0]);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });

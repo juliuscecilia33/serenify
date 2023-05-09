@@ -5,7 +5,16 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { NavbarVTwo } from "../../components";
 import apiClient from "../../instance/config";
-import { Button, AspectRatio, List, ListItem } from "@chakra-ui/react";
+import {
+  Radio,
+  RadioGroup,
+  AspectRatio,
+  List,
+  ListItem,
+  Spinner,
+  useToast,
+} from "@chakra-ui/react";
+import { InternalReportAdminAction } from "../../components/InternalReportAdminAction/InternalReportAdminAction";
 
 export function InternalReportPostDetail() {
   let { postid } = useParams();
@@ -98,7 +107,9 @@ export function InternalReportPostDetail() {
         src={DividerBig}
         alt="Divider Big"
       />
-      <div className="admin-action"></div>
+      <div className="admin-action">
+        <InternalReportAdminAction postid={postid} />
+      </div>
     </div>
   );
 }
