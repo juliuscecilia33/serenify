@@ -9,43 +9,58 @@ export function InternalPromptEditor(props) {
   const { promptContent, setPromptContent, havePrompt, promptid } = props;
   const toast = useToast();
   console.log("this is the promptcontent", promptContent);
+  console.log(
+    "internal Date",
+    new Date(localStorage.getItem("InternalDate"))
+      .toLocaleDateString()
+      .replace(/\//g, "-")
+  );
 
   const handleChange = (textValue) => {
     setPromptContent(textValue.target.value);
   };
 
   const handleSubmit = async (e) => {
-    if (promptContent) {
+    if (havePrompt) {
       await apiClient
         .put(`/prompt/${promptid}`, {
           promptDescription: promptContent,
         })
         .then((response) => {
           console.log(response);
+          toast({
+            title: "new Prompt",
+            description: "You have successfully post/change a new prompt",
+            status: "success",
+            duration: 2500,
+            isClosable: true,
+          });
         })
         .catch((error) => {
           console.error("error from handle submit: ", error.message);
         });
     } else {
+      const dateTime = new Date(localStorage.getItem("InternalDate"))
+        .toLocaleDateString()
+        .replace(/\//g, "-");
       await apiClient
-        .put(`/prompt/${localStorage.getItem("InternalDate")}`, {
+        .post(`/prompt/create/${dateTime}`, {
           promptDescription: promptContent,
         })
         .then((response) => {
           console.log(response);
+          toast({
+            title: "new Prompt",
+            description: "You have successfully post/change a new prompt",
+            status: "success",
+            duration: 2500,
+            isClosable: true,
+          });
         })
         .catch((error) => {
           console.error("error from handle submit: ", error.message);
         });
     }
-
-    toast({
-      title: "new Prompt",
-      description: "You have successfully post/change a new prompt",
-      status: "success",
-      duration: 2500,
-      isClosable: true,
-    });
   };
 
   return (

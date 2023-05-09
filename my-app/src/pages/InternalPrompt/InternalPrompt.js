@@ -11,7 +11,8 @@ export function InternalPrompt() {
   const [promptContent, setPromptContent] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
   const [promptid, setPromptid] = useState("");
-
+  localStorage.setItem("internalDate", pickDate);
+  
   useEffect(() => {
     const dateTime = new Date(pickDate)
       .toLocaleDateString()

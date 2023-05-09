@@ -3,11 +3,12 @@ const router = express.Router();
 const pool = require("../db");
 
 //create a prompt
-router.post("/create", async (req, res) => {
+router.post("/create/:promptDate", async (req, res) => {
   try {
     const { promptDescription } = req.body;
 
-    const promptDate = new Date().toLocaleDateString(); //.split('T')[0];
+    const { promptDate } = req.params;
+    //new Date().toLocaleDateString(); //.split('T')[0];
 
     const checkDate = await pool.query(
       "SELECT * FROM tblPrompt WHERE promptDate  = $1",
