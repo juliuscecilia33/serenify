@@ -44,9 +44,9 @@ export function InternalReportPostDetail() {
       .then((response) => {
         console.log("report reasons:", response.data);
         setReportReason(response.data);
-        if (reportReason) {
-          //   console.log("report reasons after set:", reportReason);
-        }
+        // if (reportReason) {
+        //    console.log("report reasons after set:", reportReason);
+        // }
       })
       .catch((err) => {
         console.err(err.message);

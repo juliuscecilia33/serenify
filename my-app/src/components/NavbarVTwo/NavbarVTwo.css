@@ -24,8 +24,8 @@
 }
 
 .navbar-logo {
-  height: 24px;
-  width: 31px;
+  height: 28px;
+  width: auto;
 }
 
 .chakra-button,
@@ -39,5 +39,5 @@
 
 .cat-image-logo {
   width: auto;
-  height: 30px;
+  height: 32px;
 }

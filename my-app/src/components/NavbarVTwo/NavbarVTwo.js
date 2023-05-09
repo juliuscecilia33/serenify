@@ -4,6 +4,7 @@ import AdminIconTwo from "../../images/AdminIconTwo.png";
 import { Authentication } from "../../context/Authentication";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import Cat from "../../images/Cat.png";
+import CatBolded from "../../images/catbolded.png";
 import { useNavigate } from "react-router";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
@@ -13,13 +14,9 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
   MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   HStack,
   Button,
-  Box,
 } from "@chakra-ui/react";
 
 export function NavbarVTwo() {
@@ -79,13 +76,27 @@ export function NavbarVTwo() {
           )}
         </HStack>
         {isAuthenticated ? (
-          <button onClick={(e) => logout(e)}>
-            {/* <div className="auth-button">Sign Out</div> */}
-            <img className="cat-image-logo" alt={"Cat"} src={Cat} />
-          </button>
+          // <button onClick={(e) => logout(e)}>
+          <>
+            <Menu>
+              <MenuButton as={Button} colorScheme="null">
+                <img className="cat-image-logo" alt={"Cat"} src={CatBolded} />
+              </MenuButton>
+              <MenuList>
+                <MenuItem
+                  onClick={() =>
+                    navigate(`/${localStorage.getItem("userid")}/profile`)
+                  }
+                >
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={(e) => logout(e)}>Sign Out</MenuItem>
+              </MenuList>
+            </Menu>
+          </>
         ) : (
-          <Link to={ROUTES.LOGIN}>
-            <div className="auth-button">Log in</div>
+          <Link to={ROUTES.REGISTER}>
+            <div className="auth-button">Register</div>
           </Link>
         )}
       </div>

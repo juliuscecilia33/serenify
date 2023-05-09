@@ -10,12 +10,47 @@ export function InternalReportAdminAction(props) {
   const { postid } = props;
   const [approveSelect, setApproveSelect] = useState(false);
   const [denySelect, setDenySelect] = useState(false);
+  const toast = useToast();
 
-  // const handleClikc = async (e) => {
-  //   if (approveSelect) {
-  //       await apiClient.
-  //   }
-  // };
+  const handleClick = async (e) => {
+    if (approveSelect) {
+      await apiClient
+        .delete(`/report/approve/${postid}`)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.err(err.message);
+        });
+
+      toast({
+        title: "Successful Action",
+        description: `You have approved the report for ${postid}`,
+        status: "success",
+        duration: 2500,
+        isClosable: true,
+      });
+    }
+
+    if (denySelect) {
+      await apiClient
+        .delete(`/report/deny/:postid`)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.err(err.message);
+        });
+
+      toast({
+        title: "Successful Action",
+        description: `You have deny the report for ${postid}`,
+        status: "success",
+        duration: 2500,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <div>

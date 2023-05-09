@@ -65,7 +65,6 @@ router.post("/:postid/add", async (req, res) => {
   }
 });
 
-
 //get a report from postid
 router.get("/:postid", async (req, res) => {
   try {
@@ -93,8 +92,6 @@ router.get("/:postid", async (req, res) => {
   }
 });
 
-
-
 //get all report reason for single post
 router.get("/reason/:postid", async (req, res) => {
   try {
@@ -111,8 +108,6 @@ router.get("/reason/:postid", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
-
 
 //delete a report by reportid
 router.delete("/:postid", async (req, res) => {
@@ -179,6 +174,31 @@ router.delete("/approve/:postid", async (req, res) => {
 //deny a report
 router.delete("/deny/:postid", async (req, res) => {
   try {
+    const { postid } = req.params;
+
+    //check the post still exist or not
+    const checkPost = await pool.query(
+      "SELECT * FROM tblPost WHERE postid = $1",
+      [postid]
+    );
+
+    if (checkPost.rows.length == 0) {
+      return res.status(401).json("The post does not exist...");
+    }
+
+    //if post exists, update isvisible and clear the report count for that post to 0
+    const updatePost = await pool.query(
+      "UPDATE tblPost SET isvisible = true, reportCount = 0 WHERE postid = $1",
+      [postid]
+    );
+
+    //delete all the records in the tblReport_Post
+    const deleteReportRecord = await pool.query(
+      "DELETE FROM tblReport_Post WHERE postid = $1",
+      [postid]
+    );
+
+    res.json("Successfully deny the report");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -186,7 +206,6 @@ router.delete("/deny/:postid", async (req, res) => {
 });
 
 module.exports = router;
-
 
 //get a report form commentid
 // router.get("/:commentid", async (req, res) => {

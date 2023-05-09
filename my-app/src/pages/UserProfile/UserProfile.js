@@ -2,14 +2,14 @@ import React, { useState, useContext } from "react";
 import * as ROUTES from "../../constants/routes";
 import "./UserProfile.css";
 import DividerSmall from "../../images/DividerSmall.png";
+import { NavbarVTwo } from "../../components";
 
 export function UserProfile() {
   return (
     <>
+      <NavbarVTwo />
       <div className="profile-page-profile-page">
         <div className="profile-page-content">
-          <img className="profile-page-logo" alt={"Logo"} src={"logo-2.png"} />
-          <div className="profile-page-logout">Log out</div>
           <div className="profile-page-b">
             <p className="profile-page-greetings-what-would-you-want-me-to-tell-you-about">
               <span className="profile-page-text-wrapper">
