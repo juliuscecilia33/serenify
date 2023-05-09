@@ -142,16 +142,48 @@ router.delete("/:postid", async (req, res) => {
 });
 
 //approve a report
-router.delete{ "/approve/:postid", async(req, res) => {
-  try{
-    const {postid} = req.params;
-    
+router.delete("/approve/:postid", async (req, res) => {
+  try {
+    const { postid } = req.params;
+
+    //check the post still exist or not
+    const checkPost = await pool.query(
+      "SELECT * FROM tblPost WHERE postid = $1",
+      [postid]
+    );
+
+    if (checkPost.rows.length == 0) {
+      return res.status(401).json("The post does not exist...");
+    }
+
+    //first update all the routes in the post
+    //delete the post in tblpost
+    const deletePost = await pool.query(
+      "DELETE FROM tblPost WHERE postid = $1",
+      [postid]
+    );
+
+    //then delete all records in tblReport_Post
+    const deleteReportRecord = await pool.query(
+      "DELETE FROM tblReport_Post WHERE postid = $1",
+      [postid]
+    );
+
+    res.json("Successfully Approve the report for postid: ", postid);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
-}
-}
+});
+
+//deny a report
+router.delete("/deny/:postid", async (req, res) => {
+  try {
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
 

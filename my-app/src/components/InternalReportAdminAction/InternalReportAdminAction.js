@@ -11,11 +11,11 @@ export function InternalReportAdminAction(props) {
   const [approveSelect, setApproveSelect] = useState(false);
   const [denySelect, setDenySelect] = useState(false);
 
-  const handleClikc = async (e) => {
-    if (approveSelect) {
-        await apiClient.
-    }
-  };
+  // const handleClikc = async (e) => {
+  //   if (approveSelect) {
+  //       await apiClient.
+  //   }
+  // };
 
   return (
     <div>
