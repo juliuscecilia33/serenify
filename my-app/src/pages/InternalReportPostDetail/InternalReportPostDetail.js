@@ -13,7 +13,7 @@ export function InternalReportPostDetail() {
   const [postDescription, setPostDescription] = useState("");
   const [postReportCount, setPostReportCount] = useState(null);
   const [postAttachment, setPostAttachment] = useState(null);
-  const [reportReason, setReportReason] = useState(null);
+  const [reportReason, setReportReason] = useState([]);
 
   const getPostDetail = async () => {
     await apiClient
@@ -34,7 +34,10 @@ export function InternalReportPostDetail() {
       .get(`/report/reason/${postid}`)
       .then((response) => {
         console.log("report reasons:", response.data);
-        setReportReason(response.data.reason);
+        setReportReason(response.data);
+        if (reportReason) {
+          //   console.log("report reasons after set:", reportReason);
+        }
       })
       .catch((err) => {
         console.err(err.message);
@@ -45,6 +48,8 @@ export function InternalReportPostDetail() {
     getPostDetail();
     getReportReason();
   }, []);
+
+  console.log("report reasons after set:", reportReason);
 
   return (
     <div>
@@ -81,11 +86,19 @@ export function InternalReportPostDetail() {
 
       <div className="report-reason-container">
         <List>
-          {reportReason.map((reason, id) => (
-            <ListItem key={id}>{reason}</ListItem>
-          ))}
+          {reportReason &&
+            reportReason.map(({ reason, id }) => {
+              return <ListItem key={id}>{reason}</ListItem>;
+            })}
         </List>
       </div>
+
+      <img
+        className="divider-small negative-margin"
+        src={DividerBig}
+        alt="Divider Big"
+      />
+      <div className="admin-action"></div>
     </div>
   );
 }

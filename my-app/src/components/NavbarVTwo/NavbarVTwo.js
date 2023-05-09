@@ -3,7 +3,7 @@ import Logo from "../../images/logo2.png";
 import AdminIconTwo from "../../images/AdminIconTwo.png";
 import { Authentication } from "../../context/Authentication";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-
+import Cat from "../../images/Cat.png";
 import { useNavigate } from "react-router";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
@@ -80,7 +80,8 @@ export function NavbarVTwo() {
         </HStack>
         {isAuthenticated ? (
           <button onClick={(e) => logout(e)}>
-            <div className="auth-button">Sign Out</div>
+            {/* <div className="auth-button">Sign Out</div> */}
+            <img className="cat-image-logo" alt={"Cat"} src={Cat} />
           </button>
         ) : (
           <Link to={ROUTES.LOGIN}>
