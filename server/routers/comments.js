@@ -31,7 +31,9 @@ router.post("/:postid/create", async (req, res) => {
   }
 });
 
-//2. get comments by postid
+//get all the comment by userid
+
+//get comments by postid
 router.get("/:postid", async (req, res) => {
   try {
     const { postid } = req.params;

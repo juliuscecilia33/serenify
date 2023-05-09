@@ -33,19 +33,6 @@ router.post("/create", async (req, res) => {
   }
 });
 
-//get all the post
-//get all first, then id
-router.get("/all", async (req, res) => {
-  try {
-    const allPosts = await pool.query("SELECT * FROM tblPost");
-
-    res.json(allPosts.rows);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
 //get all the post that is unvaild rn
 router.get("/invisible", async (req, res) => {
   try {
@@ -54,6 +41,19 @@ router.get("/invisible", async (req, res) => {
     );
 
     res.json(getAllPostInvisible.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+//get all the post
+//get all first, then id
+router.get("/all", async (req, res) => {
+  try {
+    const allPosts = await pool.query("SELECT * FROM tblPost");
+
+    res.json(allPosts.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

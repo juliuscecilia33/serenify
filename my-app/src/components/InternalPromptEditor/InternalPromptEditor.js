@@ -15,16 +15,29 @@ export function InternalPromptEditor(props) {
   };
 
   const handleSubmit = async (e) => {
-    await apiClient
-      .put(`/prompt/${promptid}`, {
-        promptDescription: promptContent,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error("error from handle submit: ", error.message);
-      });
+    if (promptContent) {
+      await apiClient
+        .put(`/prompt/${promptid}`, {
+          promptDescription: promptContent,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error("error from handle submit: ", error.message);
+        });
+    } else {
+      await apiClient
+        .put(`/prompt/${localStorage.getItem("InternalDate")}`, {
+          promptDescription: promptContent,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error("error from handle submit: ", error.message);
+        });
+    }
 
     toast({
       title: "new Prompt",

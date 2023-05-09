@@ -30,24 +30,6 @@ router.post("/create", async (req, res) => {
   }
 });
 
-//Get a promptid and promptDescription by promptDate
-// router.get("/:promptid", async (req, res) => {
-//   try {
-//     const { promptid } = req.params;
-//     //const { promptDate } = req.body;
-
-//     const getPromptInfo = await pool.query(
-//       "SELECT promptDate, promptDescription FROM tblPrompt WHERE promptid = $1",
-//       [promptid]
-//     );
-
-//     res.json(getPromptInfo.rows[0]);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send("Server Error");
-//   }
-// });
-
 router.get("/allprompts", async (req, res) => {
   try {
     // const { promptid } = req.params;
@@ -79,6 +61,24 @@ router.get("/:promptDate", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+//Get a promptid and promptDescription by promptDate
+// router.get("/:promptid", async (req, res) => {
+//   try {
+//     const { promptid } = req.params;
+//     //const { promptDate } = req.body;
+
+//     const getPromptInfo = await pool.query(
+//       "SELECT promptDate, promptDescription FROM tblPrompt WHERE promptid = $1",
+//       [promptid]
+//     );
+
+//     res.json(getPromptInfo.rows[0]);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
 
 //Delete a prompt            -->I am not sure we should delete this by promptid or promptdate, since the id is really long and complex
 //                           -->So every time we want to get something relates to the prompt, we need to get the id first

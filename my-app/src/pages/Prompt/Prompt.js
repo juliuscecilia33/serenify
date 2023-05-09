@@ -65,7 +65,7 @@ export function Prompt() {
     setTimeout(() => {
       if (promptid) {
         axios
-          .get(`${process.env.REACT_APP_BACKENDURL}posts/all`)
+          .get(`http://localhost:3005/posts/all`)
           .then((response) => {
             console.log("posts all: ", response);
             console.log(

@@ -238,11 +238,14 @@ export function CreatePost({
               {currentAsciiMood}
             </MenuButton>
             <MenuList>
-              <MenuItem>Download</MenuItem>
+              {asciiEmojis.map((emoji, id) => (
+                <MenuItem key={id}>{emoji}</MenuItem>
+              ))}
+              {/* <MenuItem>Download</MenuItem>
               <MenuItem>Create a Copy</MenuItem>
               <MenuItem>Mark as Draft</MenuItem>
               <MenuItem>Delete</MenuItem>
-              <MenuItem>Attend a Workshop</MenuItem>
+              <MenuItem>Attend a Workshop</MenuItem> */}
             </MenuList>
           </Menu>
           <ButtonGroup gap="2">
@@ -252,7 +255,7 @@ export function CreatePost({
                 handleBackButton(e);
               }}
             >
-              <ArrowBackIcon />
+              &gt;-
             </Button>
             <Button
               colorScheme="teal"
@@ -261,7 +264,7 @@ export function CreatePost({
               }}
               disabled={attachment === "" && postDescription.length < 1}
             >
-              <ArrowForwardIcon />
+              -&gt;
             </Button>
           </ButtonGroup>
         </FormControl>
