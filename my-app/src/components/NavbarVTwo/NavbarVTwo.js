@@ -52,7 +52,7 @@ export function NavbarVTwo() {
                 px={5}
                 py={3}
                 mx={12}
-                colorScheme="purple"
+                colorScheme="blue"
               >
                 Admin
               </MenuButton>

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  /* background-color: #ece8d1; */
 }
 
 body,
@@ -18,7 +19,7 @@ h3,
 h4,
 p,
 li {
-  color: #1f2937;
+  color: #282828;
   line-height: 1.3;
 }
 

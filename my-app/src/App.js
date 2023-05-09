@@ -7,7 +7,7 @@ import {
   Login,
   Home,
   Register,
-  User,
+  UserProfile,
   Prompt,
   HomeVTwo,
   Post,
@@ -58,7 +58,7 @@ function App() {
             <Route path={ROUTES.LOGIN} element={<Login />} />
             <Route path={ROUTES.HOME} element={<Home />} />
             <Route path={ROUTES.REGISTER} element={<Register />} />
-            <Route path={ROUTES.USER} element={<User />} />
+            <Route path={ROUTES.USER} element={<UserProfile />} />
             <Route path={ROUTES.PROMPT} element={<Prompt />} />
             <Route path={ROUTES.HOMEVTWO} element={<HomeVTwo />} />
             <Route path={ROUTES.REPORT} element={<Report />} />

@@ -21,7 +21,9 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
     console.log("make sure postid exists: ", postData.postData.postid);
 
     axios
-      .delete(`http://localhost:3005/posts/${postData.postData.postid}`)
+      .delete(
+        `${process.env.REACT_APP_BACKENDURL}posts/${postData.postData.postid}`
+      )
       .then((response) => {
         console.log("delete response: ", response);
       })
@@ -48,7 +50,7 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
 
   return (
     <>
-      <div class="post-container">
+      <div className="post-container">
         <div className="top-section"></div>
         <div className="middle-section">
           <p className="post_text">{postData.postData.postdescription}</p>

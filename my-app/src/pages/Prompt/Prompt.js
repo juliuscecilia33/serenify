@@ -35,8 +35,6 @@ export function Prompt() {
     <Navigate to="/" />;
   };
 
-  const { isAuthenticated, setAuth } = useContext(Authentication);
-
   let splitPromptDate = defaultPromptDate.split("-");
   let formatDate = new Date(
     splitPromptDate[2],
@@ -66,7 +64,7 @@ export function Prompt() {
   const gettPostsForCertainPrompt = async () => {
     if (promptid) {
       axios
-        .get("http://localhost:3005/posts/all")
+        .get(`${process.env.REACT_APP_BACKENDURL}posts/all`)
         .then((response) => {
           console.log("posts all: ", response);
           console.log(

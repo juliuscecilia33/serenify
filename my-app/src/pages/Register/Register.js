@@ -35,7 +35,7 @@ export function Register() {
     };
 
     axios
-      .post("http://localhost:3005/users/register", appBody)
+      .post(`${process.env.REACT_APP_BACKENDURL}users/register`, appBody)
       .then((response) => {
         console.log("axios request called");
 

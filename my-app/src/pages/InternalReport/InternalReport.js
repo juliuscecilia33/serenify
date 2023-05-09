@@ -39,7 +39,7 @@ export function InternalReport() {
             <div>
               {reportPost.postid && (
                 <Link
-                  to={`/post/${reportPost.postid}`}
+                  to={`admin/report/${reportPost.postid}`}
                   state={{ reportPostData: reportPost }}
                 >
                   <ReportList key={id} reportPostData={reportPost} />

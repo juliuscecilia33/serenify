@@ -16,18 +16,18 @@ router.post("/:postid/add", async (req, res) => {
       [postid]
     );
 
-    if (checkPost.rows[0].length == 0) {
+    if (checkPost.rows.length == 0) {
       return res.status(401).json("The post does not exist...");
     }
 
     // SELECT * FROM tblreport_post where userid = userid and postid = postid; if row > 1, then you return error
     //check whether the user has already reported it before
     const checkUserReported = await pool.query(
-      "SELECT * FROM tblReport WHERE userid = $1 AND postid = $2",
+      "SELECT * FROM tblreport_post WHERE userid = $1 AND postid = $2",
       [userid, postid]
     );
 
-    if (checkUserReported.rows[0].length > 0) {
+    if (checkUserReported.rows.length > 0) {
       return res
         .status(401)
         .json("You have already report this post before...");
@@ -49,10 +49,11 @@ router.post("/:postid/add", async (req, res) => {
       "SELECT reportCount FROM tblPost WHERE postid = $1",
       [postid]
     );
+    console.log("check report count:", checkReportCount);
 
-    if (checkReportCount >= 5) {
-      const updateIsVisiable = await pool.query(
-        "UPDATE tblPost SET isVisiable = false WHERE postid = $1",
+    if (checkReportCount.rows[0].reportcount >= 5) {
+      const updateIsVisible = await pool.query(
+        "UPDATE tblPost SET isvisible = false WHERE postid = $1",
         [postid]
       );
     }
@@ -63,7 +64,6 @@ router.post("/:postid/add", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
 //get a report from postid
 router.get("/:postid", async (req, res) => {
   try {
