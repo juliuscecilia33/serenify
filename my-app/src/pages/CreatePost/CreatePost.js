@@ -13,7 +13,11 @@ import {
   CloseButton,
   ButtonGroup,
 } from "@chakra-ui/react";
-import { ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
+import {
+  ArrowForwardIcon,
+  ArrowBackIcon,
+  ChevronDownIcon,
+} from "@chakra-ui/icons";
 import {
   FormControl,
   FormLabel,
@@ -21,6 +25,16 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+} from "@chakra-ui/react";
 
 export function CreatePost({
   promptid,
@@ -37,8 +51,37 @@ export function CreatePost({
   const [isValid, setIsVaild] = useState(false);
   const [moreThan500, setMoreThan500] = useState(false);
   const toast = useToast();
+  const [currentAsciiMood, setCurrentAsciiMood] = useState("(￣▽￣)ノ");
   //const [toastText, setToastText] = useState("Successfully Post~^_^~");
   const maxLength = 500;
+
+  const asciiEmojis = [
+    "(ㆆ _ ㆆ) - Afraid",
+    "•`_´• - Angry",
+    "•͡˘㇁•͡˘ - Awkward",
+    "(˵ ͡° ͜ʖ ͡°˵) - Blush",
+    "(-_-) - Bored",
+    "※(^o^)/※ - Cheer",
+    "(｡◕‿‿◕｡) - Cute",
+    "ᕕ(⌐■_■)ᕗ ♪♬ - Dance",
+    "<(^_^)> - Dope",
+    "¯(°_o)/¯ - Dunno",
+    "(҂◡_◡) ᕤ - Endure",
+    "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧ - Excited",
+    "(－‸ლ) - Face Palm",
+    "(^-^)/ - Grateful",
+    "( ´◔ ω◔`) ノシ - Greetings",
+    "٩(^‿^)۶ - Happy",
+    "(°Ω°)/ - Help",
+    "(づ｡◕‿‿◕｡)づ - Hug",
+    "(˶‾᷄ ⁻̫ ‾᷅˵) - Pleased",
+    "♥‿♥ - Love",
+    "t(ಠ益ಠt) - Mad",
+    "ε(´סּ︵סּ`)з - Sad",
+    "(๑•́ ヮ •̀๑) - Surprised",
+    "(๑•̀ㅂ•́)ง✧ - Victory",
+  ];
+
   //   const [userid, setUserid] = useState();
 
   const handleChange = (textValue) => {
@@ -190,9 +233,21 @@ export function CreatePost({
               </AspectRatio>
             </Stack>
           )}
+          <Menu>
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+              {currentAsciiMood}
+            </MenuButton>
+            <MenuList>
+              <MenuItem>Download</MenuItem>
+              <MenuItem>Create a Copy</MenuItem>
+              <MenuItem>Mark as Draft</MenuItem>
+              <MenuItem>Delete</MenuItem>
+              <MenuItem>Attend a Workshop</MenuItem>
+            </MenuList>
+          </Menu>
           <ButtonGroup gap="2">
             <Button
-              colorScheme="teal"
+              colorScheme="red"
               onClick={(e) => {
                 handleBackButton(e);
               }}

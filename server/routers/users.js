@@ -12,6 +12,24 @@ router.get("/test", async (req, res) => {
   }
 });
 
+//get all the user like post
+router.get("/:userid/likepost", async (req, res) => {
+  try {
+    const { userid } = req.params;
+
+    const getAllUserLikePost = await pool.query(
+      "SELECT postsliked FROM tblUser WHERE userid = $1",
+      [userid]
+    );
+    //const res = getAllUserLikePost.rows[0].postsliked;
+
+    res.json(JSON.parse(getAllUserLikePost.rows[0].postsliked));
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // Register New User
 router.post("/register", async (req, res) => {
   try {
@@ -117,10 +135,9 @@ router.get("/:userid", async (req, res) => {
     const { userid } = req.params;
 
     //check whether user exist
-    const user = await pool.query(
-      "SELECT * FROM tbluser WHERE userid = $1",
-      [userid]
-    );
+    const user = await pool.query("SELECT * FROM tbluser WHERE userid = $1", [
+      userid,
+    ]);
 
     if (user.rows.length === 0) {
       return res.status(401).json("User does not exist...");

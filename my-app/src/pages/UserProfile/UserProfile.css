@@ -50,7 +50,7 @@
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  padding: 140px 0px 30px;
+  padding: 70px 0px 30px;
   position: relative;
 }
 
@@ -101,6 +101,10 @@
   width: 390px;
 }
 
+button {
+  text-align: left;
+}
+
 .profile-page-b-2 {
   align-items: flex-start;
   display: flex;
@@ -128,6 +132,18 @@
 
 .profile-page-text-wrapper-4 {
   color: #686868;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  position: relative;
+  white-space: nowrap;
+  width: 350px;
+}
+
+.profile-page-text-wrapper-4-bold {
+  color: #282828;
   font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;

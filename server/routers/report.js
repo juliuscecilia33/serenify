@@ -109,35 +109,8 @@ router.get("/reason/:postid", async (req, res) => {
   }
 });
 
-//delete a report by reportid
-router.delete("/:postid", async (req, res) => {
-  try {
-    const { postid } = req.params;
-
-    //check if the post still exist
-    const checkPost = await pool.query(
-      "SELECT * FROM tblPost WHERE postid = $1",
-      [postid]
-    );
-
-    if (checkPost.rows[0].length == 0) {
-      return res.status(401).json("The post does not exist...");
-    }
-
-    const deleteReportByPostid = await pool.query(
-      "DELETE FROM tblReport_Post WHERE postid = $1",
-      [postid]
-    );
-
-    res.json("Successfully solve the report for postid: ", postid);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
 //approve a report
-router.delete("/approve/:postid", async (req, res) => {
+router.delete("/:postid/approve", async (req, res) => {
   try {
     const { postid } = req.params;
 
@@ -164,7 +137,7 @@ router.delete("/approve/:postid", async (req, res) => {
       [postid]
     );
 
-    res.json("Successfully Approve the report for postid: ", postid);
+    res.json("Successfully Approve the report");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -172,7 +145,7 @@ router.delete("/approve/:postid", async (req, res) => {
 });
 
 //deny a report
-router.delete("/deny/:postid", async (req, res) => {
+router.delete("/:postid/deny", async (req, res) => {
   try {
     const { postid } = req.params;
 
@@ -199,6 +172,32 @@ router.delete("/deny/:postid", async (req, res) => {
     );
 
     res.json("Successfully deny the report");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+//delete a report by reportid
+router.delete("/:postid", async (req, res) => {
+  try {
+    const { postid } = req.params;
+
+    //check if the post still exist
+    const checkPost = await pool.query(
+      "SELECT * FROM tblPost WHERE postid = $1",
+      [postid]
+    );
+
+    if (checkPost.rows[0].length == 0) {
+      return res.status(401).json("The post does not exist...");
+    }
+
+    const deleteReportByPostid = await pool.query(
+      "DELETE FROM tblReport_Post WHERE postid = $1",
+      [postid]
+    );
+
+    res.json("Successfully solve the report for postid: ", postid);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

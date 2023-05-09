@@ -77,6 +77,23 @@ router.get("/:postid", async (req, res) => {
   }
 });
 
+//get all the post based on userid
+router.get("/:userid/post", async (req, res) => {
+  try {
+    const { userid } = req.params;
+
+    const getAllUserPost = await pool.query(
+      "SELECT * FROM tblPost WHERE userid = $1",
+      [userid]
+    );
+
+    res.json(getAllUserPost.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 router.get("/:postid/checkifliked", async (req, res) => {
   try {
     const { postid } = req.params;
@@ -119,11 +136,16 @@ router.put("/:postid/likeincremented", async (req, res) => {
       [userid, postid]
     );
 
-    const updateUserPostsLiked = await pool.query(
-      "UPDATE tblUser SET postsLiked = ARRAY_APPEND(postsliked, $1) WHERE userid = $2",
-      [postid, userid]
+    // get post data
+    const postDataResult = await pool.query(
+      "SELECT * FROM tblPost WHERE postid = $1",
+      [postid]
     );
 
+    const updateUserPostsLiked = await pool.query(
+      "UPDATE tblUser SET postsLiked = ARRAY_APPEND(postsliked, $1) WHERE userid = $2",
+      [postDataResult.rows[0], userid]
+    );
     res.json("Like Count incremented");
   } catch (error) {
     console.error(err.message);

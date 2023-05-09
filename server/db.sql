@@ -2,7 +2,8 @@ CREATE TABLE tblUser (
     userId UUID DEFAULT uuid_generate_v4() UNIQUE PRIMARY KEY,
     userEmail VARCHAR(25) UNIQUE,
     userPassword VARCHAR(25) NOT NULL,
-    loginTime TIMESTAMP NOT NULL
+    loginTime TIMESTAMP NOT NULL,
+    postsliked TEXT[] DEFAULT NULL
 );
 ALTER TABLE tbluser
 ADD COLUMN isAdmin BOOLEAN DEFAULT FALSE NOT NULL;

@@ -5,6 +5,11 @@ import DividerSmall from "../../images/DividerSmall.png";
 import { NavbarVTwo } from "../../components";
 
 export function UserProfile() {
+  const [optionOneSelected, setOptionOneSelected] = useState(false);
+  const [optionTwoSelected, setOptionTwoSelected] = useState(false);
+  const [optionThreeSelected, setOptionThreeSelected] = useState(false);
+  const [optionSelected, setOptionSelected] = useState("");
+
   return (
     <>
       <NavbarVTwo />
@@ -33,12 +38,52 @@ export function UserProfile() {
           </div>
           <div className="profile-page-div">----------------</div>
           <div className="profile-page-b-2">
-            <div className="profile-page-your-posts">&gt; Your Posts</div>
-            <div className="profile-page-text-wrapper-4">Your Likes</div>
-            <div className="profile-page-text-wrapper-4">Your Comments</div>
-            <div className="profile-page-text-wrapper-4">Your Reports</div>
-            <div className="profile-page-text-wrapper-5">Go Back</div>
-            <div className="profile-page-text-wrapper-6">-&gt;</div>
+            <button
+              onClick={() => {
+                setOptionOneSelected(true);
+                setOptionTwoSelected(false);
+                setOptionThreeSelected(false);
+                setOptionSelected("Posts");
+              }}
+              className={
+                optionOneSelected
+                  ? "profile-page-text-wrapper-4-bold"
+                  : "profile-page-text-wrapper-4"
+              }
+            >
+              {optionOneSelected && ">"} Your Posts
+            </button>
+            <button
+              onClick={() => {
+                setOptionOneSelected(false);
+                setOptionTwoSelected(true);
+                setOptionThreeSelected(false);
+                setOptionSelected("Likes");
+              }}
+              className={
+                optionTwoSelected
+                  ? "profile-page-text-wrapper-4-bold"
+                  : "profile-page-text-wrapper-4"
+              }
+            >
+              {optionTwoSelected && ">"} Your Likes
+            </button>
+            <button
+              onClick={() => {
+                setOptionOneSelected(false);
+                setOptionTwoSelected(false);
+                setOptionThreeSelected(true);
+                setOptionSelected("Comments");
+              }}
+              className={
+                optionThreeSelected
+                  ? "profile-page-text-wrapper-4-bold"
+                  : "profile-page-text-wrapper-4"
+              }
+            >
+              {optionThreeSelected && ">"} Your Comments
+            </button>
+            <button className="profile-page-text-wrapper-6">-&gt;</button>
           </div>
           <img
             className="divider-small"
