@@ -13,10 +13,10 @@ export function ReportList(props) {
             Report Count: {reportPostData && reportPostData.reportcount}
           </span>
         </div>
-        <div className="admin-action">
+        {/* <div className="admin-action">
           <span className="admin-action-text">Admin Actions: </span>
           <div className="button-container"></div>
-        </div>
+        </div> */}
         <p className="post_text">
           {reportPostData && reportPostData.postdescription}
         </p>

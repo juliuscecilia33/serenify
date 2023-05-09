@@ -4,6 +4,7 @@ import { NavbarVTwo } from "../../components/NavbarVTwo/NavbarVTwo";
 import apiClient from "../../instance/config";
 import { ReportList } from "../../components/ReportList/ReportList";
 import DividerSmall from "../../images/DividerSmall.png";
+import * as ROUTES from "../../constants/routes";
 
 export function InternalReport() {
   const [reportPostList, setReportPostList] = useState([]);
