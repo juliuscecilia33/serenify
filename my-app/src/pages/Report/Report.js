@@ -51,6 +51,13 @@ export function Report() {
       })
       .catch((error) => {
         console.error("There was an error!", error);
+        toast({
+          title: "Post already reported!",
+          description: "You have already reported this post before",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
       });
   };
 

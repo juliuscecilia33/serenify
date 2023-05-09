@@ -37,7 +37,7 @@ export function InternalReport() {
       <div>
         {reportPostList &&
           reportPostList.map((reportPost, id) => (
-            <div>
+            <div key={id}>
               {reportPost.postid && (
                 <Link to={`${reportPost.postid}`}>
                   <ReportList key={id} reportPostData={reportPost} />

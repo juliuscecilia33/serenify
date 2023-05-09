@@ -242,13 +242,16 @@ export function PostDetail() {
                       src={commentingOnPost ? CommentFilled : Comment}
                     />
                   </button>
-                  <Link to={`/post/${postData.postid}/report`}>
-                    <img
-                      className=""
-                      alt={"Material symbols report outline"}
-                      src={Report}
-                    />
-                  </Link>
+                  {postData.userid &&
+                    postData.userid !== localStorage.getItem("userid") && (
+                      <Link to={`/post/${postData.postid}/report`}>
+                        <img
+                          className=""
+                          alt={"Material symbols report outline"}
+                          src={Report}
+                        />
+                      </Link>
+                    )}
                 </div>
                 {commentingOnPost && (
                   <>

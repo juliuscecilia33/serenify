@@ -21,7 +21,7 @@ export function InternalReportPostDetail() {
       .then((response) => {
         console.log("post detail in report: ", response);
         setPostReportCount(response.data.reportcount);
-        setPostDescription(response.data.postDescription);
+        setPostDescription(response.data.postdescription);
         setPostAttachment(response.data.attachment);
       })
       .catch((err) => {
@@ -66,7 +66,7 @@ export function InternalReportPostDetail() {
           <div className="report-count">
             <span>Report Count: {postReportCount}</span>
           </div>
-          <p className="post_text">{postDescription}</p>
+          <p className="post_text">{postDescription && postDescription}</p>
           {postAttachment ? (
             <AspectRatio>
               <iframes
@@ -80,7 +80,11 @@ export function InternalReportPostDetail() {
       </div>
 
       <div className="report-reason-container">
-        <List>reportReason.map((reason, id) => {})</List>
+        <List>
+          {reportReason.map((reason, id) => (
+            <ListItem key={id}>{reason}</ListItem>
+          ))}
+        </List>
       </div>
     </div>
   );
