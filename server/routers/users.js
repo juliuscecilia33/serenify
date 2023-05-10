@@ -12,24 +12,6 @@ router.get("/test", async (req, res) => {
   }
 });
 
-//get all the user like post
-router.get("/:userid/likepost", async (req, res) => {
-  try {
-    const { userid } = req.params;
-
-    const getAllUserLikePost = await pool.query(
-      "SELECT postsliked FROM tblUser WHERE userid = $1",
-      [userid]
-    );
-    //const res = getAllUserLikePost.rows[0].postsliked;
-
-    res.json(JSON.parse(getAllUserLikePost.rows[0].postsliked));
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
 // Register New User
 router.post("/register", async (req, res) => {
   try {
@@ -59,8 +41,25 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//change user password
+router.put("/:userid/changePassword", async(req, res) => {
+  try{
+    const {userid} = req.params;
+    const {userpassword} = req.body;
+
+    //check if the password vaild
+
+    const updatePassword = await pool.query("UPDATE tblUser SET userpassword = $1 WHERE userid = $2", [userpassword, userid]);
+
+    res.json("Successfully Change the Password!");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 // Login User
-router.post("/login", async (req, res) => {
+router.put("/login", async (req, res) => {
   const { useremail, userpassword } = req.body;
   const dateObject = new Date().toLocaleString();
 
@@ -129,6 +128,23 @@ router.put("/logintime", async (req, res) => {
 
     res.json("Successfully updated time to " + dateObject);
     // res.json("Sucessfully update the logintime");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+//get all the user like post
+router.get("/:userid/likepost", async (req, res) => {
+  try {
+    const { userid } = req.params;
+
+    const getAllUserLikePost = await pool.query(
+      "SELECT postsliked FROM tblUser WHERE userid = $1",
+      [userid]
+    );
+    //const res = getAllUserLikePost.rows[0].postsliked;
+
+    res.json(JSON.parse(getAllUserLikePost.rows[0].postsliked));
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

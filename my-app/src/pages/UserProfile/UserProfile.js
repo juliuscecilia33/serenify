@@ -1,14 +1,39 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import * as ROUTES from "../../constants/routes";
+import apiClient from "../../instance/config";
 import "./UserProfile.css";
 import DividerSmall from "../../images/DividerSmall.png";
 import { NavbarVTwo } from "../../components";
+import { AccountInfo } from "../../components/AccountInfo/AccountInfo";
 
 export function UserProfile() {
   const [optionOneSelected, setOptionOneSelected] = useState(false);
   const [optionTwoSelected, setOptionTwoSelected] = useState(false);
   const [optionThreeSelected, setOptionThreeSelected] = useState(false);
   const [optionSelected, setOptionSelected] = useState("");
+
+  const [userInfo, setUserInfo] = useState();
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+
+  const getUserInfo = async () => {
+    await apiClient
+      .get(`/users/${localStorage.getItem("userid")}`)
+      .then((response) => {
+        console.log("user info in userProfile:", response);
+        setUserInfo(response.data);
+        //console.log(userInfo.useremail);
+        setUserEmail(response.data.useremail);
+        setUserPassword(response.data.userpassword);
+      })
+      .catch((err) => {
+        console.err(err.message);
+      });
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   return (
     <>
@@ -90,40 +115,11 @@ export function UserProfile() {
             src={DividerSmall}
             alt="DividerSmall"
           />
-          <div className="profile-page-b-3">
-            <h1 className="profile-page-account-info-email-helloworld-uw-edu-password">
-              <span className="profile-page-text-wrapper-7">
-                Account
-                <br />
-                Info:
-                <br />
-              </span>
-              <span className="profile-page-text-wrapper-8">
-                <br />
-                Email: <br />
-              </span>
-              <span className="profile-page-text-wrapper-9">
-                helloworld@uw.edu
-                <br />
-                <br />
-              </span>
-              <span className="profile-page-text-wrapper-8">
-                Password:
-                <br />
-              </span>
-              <span className="profile-page-text-wrapper-9">
-                **************
-                <br />
-              </span>
-            </h1>
-            <p className="profile-page-wake-me-up-if-you-want-to-change-it-zzzz">
-              <span className="profile-page-text-wrapper-10">
-                Wake me up if you want to change it.
-                <br />
-              </span>
-              <span className="profile-page-text-wrapper-3">(￣ρ￣)..zzZZ</span>
-            </p>
-          </div>
+          <AccountInfo
+            userInformation={userInfo}
+            userEmail={userEmail}
+            userPassword={userPassword}
+          />
         </div>
       </div>
     </>
