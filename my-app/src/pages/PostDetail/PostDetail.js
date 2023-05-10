@@ -11,6 +11,7 @@ import CommentFilled from "../../images/CommentFilled.png";
 import Report from "../../images/Report.png";
 import Trash from "../../images/Trash.png";
 import Heart from "../../images/Heart.png";
+import HeartFilled from "../../images/heartfilled.png";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { NavbarVTwo } from "../../components";
@@ -26,6 +27,7 @@ export function PostDetail() {
   const [postAltered, setPostAltered] = useState(false);
   const [postComments, setPostComments] = useState(null);
   const [commentingOnPostValue, setCommentingOnPostValue] = useState("");
+  const [postLiked, setPostLiked] = useState(false);
 
   console.log("post id from post detail: ", postid);
 
@@ -51,6 +53,19 @@ export function PostDetail() {
               return new Date(b.commenttime) - new Date(a.commenttime);
             })
           );
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+
+      axios
+        .get(
+          `${process.env.REACT_APP_BACKENDURL}users/${localStorage.getItem(
+            "userid"
+          )}/likepost`
+        )
+        .then((likedposts_response) => {
+          console.log("liked posts: ", likedposts_response);
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -88,6 +103,44 @@ export function PostDetail() {
       .catch((error) => {
         console.error("There was an error!", error);
       });
+  };
+
+  const handleLikeOrDislikePost = (e) => {
+    e.preventDefault();
+
+    const likeBody = {
+      userid: localStorage.getItem("userid"),
+    };
+
+    if (postLiked) {
+      axios
+        .put(
+          `${process.env.REACT_APP_BACKENDURL}posts/${postData.postid}/likedecremented`,
+          likeBody
+        )
+        .then((response) => {
+          console.log("like incremented: ", response);
+
+          setPostLiked(true);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    } else {
+      axios
+        .put(
+          `${process.env.REACT_APP_BACKENDURL}posts/likedecremented/${postData.postid}`,
+          likeBody
+        )
+        .then((response) => {
+          console.log("like decremented: ", response);
+
+          setPostLiked(false);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    }
   };
 
   const handleEditPostDescription = (e) => {
@@ -231,7 +284,13 @@ export function PostDetail() {
                   Want to leave?
                 </p>
                 <div className="post-page-component">
-                  <img className="" alt={"Icon heart"} src={Heart} />
+                  <button onClick={(e) => handleLikeOrDislikePost(e)}>
+                    {postLiked ? (
+                      <img className="" alt={"Icon heart"} src={HeartFilled} />
+                    ) : (
+                      <img className="" alt={"Icon heart"} src={Heart} />
+                    )}
+                  </button>
 
                   <button
                     onClick={() => setCommentingOnPost(!commentingOnPost)}

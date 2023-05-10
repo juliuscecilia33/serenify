@@ -15,6 +15,7 @@ export function UserProfile() {
   const [userInfo, setUserInfo] = useState();
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const getUserInfo = async () => {
     await apiClient
@@ -33,7 +34,7 @@ export function UserProfile() {
 
   useEffect(() => {
     getUserInfo();
-  }, []);
+  }, [isSubmitted]);
 
   return (
     <>
@@ -119,6 +120,8 @@ export function UserProfile() {
             userInformation={userInfo}
             userEmail={userEmail}
             userPassword={userPassword}
+            isSubmitted={isSubmitted}
+            setIsSubmitted={setIsSubmitted}
           />
         </div>
       </div>

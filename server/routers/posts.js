@@ -94,30 +94,28 @@ router.get("/:userid/post", async (req, res) => {
   }
 });
 
-router.get("/:postid/checkifliked", async (req, res) => {
-  try {
-    const { postid } = req.params;
-    const { userid } = req.body;
+// router.get("/:postid/checkifliked", async (req, res) => {
+//   try {
+//     const { postid } = req.params;
+//     const { userid } = req.body;
 
-    // const checkIfUserHasLiked = await pool.query(
-    //   "SELECT * FROM tbluser WHERE '769156ac-405a-4d93-bea3-781bc3f7dec1' = ANY(postsliked) AND userid = '76f8fe50-06bb-4553-9b28-a453fac37712'"
-    // );
+//     // const checkIfUserHasLiked = await pool.query(
+//     //   "SELECT * FROM tbluser WHERE '769156ac-405a-4d93-bea3-781bc3f7dec1' = ANY(postsliked) AND userid = '76f8fe50-06bb-4553-9b28-a453fac37712'"
+//     // );
 
-    const checkIfUserHasLiked = await pool.query(
-      "SELECT * FROM tbluser WHERE $1 = ANY(postsliked) AND userid = $2",
-      [postid, userid]
-    );
+//     const getAllUserLikePost = await pool.query(
+//       "SELECT postsliked FROM tblUser WHERE userid = $1",
+//       [userid]
+//     );
 
-    if (checkIfUserHasLiked.rows.length > 0) {
-      return res.json(true);
-    }
+//     res.json(JSON.parse(getAllUserLikePost.rows[0].postsliked));
 
-    res.json(false);
-  } catch (error) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
+//     // res.json(false);
+//   } catch (error) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
 
 // 3. update like count for post (url)
 // router.put("/:postid")
@@ -153,9 +151,10 @@ router.put("/:postid/likeincremented", async (req, res) => {
   }
 });
 
-router.put("/:postid/likedecremented", async (req, res) => {
+router.put("/likedecremented/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
+    const { userid } = req.body;
 
     const updateLike = await pool.query(
       "UPDATE tblpost SET postlike = postlike - 1 WHERE postid = $1",
