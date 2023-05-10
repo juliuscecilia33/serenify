@@ -93,10 +93,6 @@ router.get("/:userid/likepost", async (req, res) => {
       [userid]
     );
 
-    // console.log("all user liked posts: ", getAllUserLikePost);
-    //const res = getAllUserLikePost.rows[0].postsliked;
-    // res.json(getAllUserLikePost.rows[0].postsliked);
-
     const result = getAllUserLikePost.rows[0].postsliked.map((item) =>
       JSON.parse(item)
     );

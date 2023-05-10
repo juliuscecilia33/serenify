@@ -117,6 +117,22 @@ router.get("/:userid/post", async (req, res) => {
 //   }
 // });
 
+router.get("/:postid/checklike", async (req, res) => {
+  const { postid } = req.params;
+
+  try {
+    const checkLike = await pool.query(
+      "SELECT postlike from tblpost WHERE postid = $1 ",
+      [postid]
+    );
+
+    res.json(checkLike.rows[0].postlike);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // 3. update like count for post (url)
 // router.put("/:postid")
 router.put("/:postid/likeincremented", async (req, res) => {
@@ -146,7 +162,7 @@ router.put("/:postid/likeincremented", async (req, res) => {
     );
     res.json("Like Count incremented");
   } catch (error) {
-    console.error(err.message);
+    console.error(error.message);
     res.status(500).send("Server Error");
   }
 });
@@ -156,14 +172,28 @@ router.put("/likedecremented/:postid", async (req, res) => {
     const { postid } = req.params;
     const { userid } = req.body;
 
+    const checkLike = await pool.query(
+      "SELECT postlike from tblpost WHERE postid = $1 ",
+      [postid]
+    );
+
+    if (checkLike.rows[0].postlike === 0) {
+      res.status(500).send("Like count can't be below 0!");
+    }
+
     const updateLike = await pool.query(
       "UPDATE tblpost SET postlike = postlike - 1 WHERE postid = $1",
       [postid]
     );
 
+    const postDataResult = await pool.query(
+      "SELECT * FROM tblPost WHERE postid = $1",
+      [postid]
+    );
+
     const updateUserPostsLiked = await pool.query(
       "UPDATE tblUser SET postsLiked = ARRAY_REMOVE(postsliked, $1) WHERE userid = $2",
-      [postid, userid]
+      [postDataResult.rows[0], userid]
     );
 
     res.json("Like Count decremented");

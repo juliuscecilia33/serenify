@@ -28,8 +28,10 @@ export function PostDetail() {
   const [postComments, setPostComments] = useState(null);
   const [commentingOnPostValue, setCommentingOnPostValue] = useState("");
   const [postLiked, setPostLiked] = useState(false);
+  const [userPostsLiked, setUserPostsLiked] = useState(null);
 
   console.log("post id from post detail: ", postid);
+  console.log("post liked: ", postLiked);
 
   useEffect(() => {
     setTimeout(() => {
@@ -66,6 +68,20 @@ export function PostDetail() {
         )
         .then((likedposts_response) => {
           console.log("liked posts: ", likedposts_response);
+          setUserPostsLiked(likedposts_response.data);
+          if (
+            likedposts_response.data.filter(
+              (likedpost) => likedpost.postid === postid
+            ).length > 0
+          ) {
+            setPostLiked(true);
+          }
+          console.log(
+            "filtered liked posts: ",
+            likedposts_response.data.filter(
+              (likedpost) => likedpost.postid === postid
+            )
+          );
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -112,16 +128,17 @@ export function PostDetail() {
       userid: localStorage.getItem("userid"),
     };
 
-    if (postLiked) {
+    if (!postLiked) {
       axios
         .put(
-          `${process.env.REACT_APP_BACKENDURL}posts/${postData.postid}/likedecremented`,
+          `${process.env.REACT_APP_BACKENDURL}posts/${postData.postid}/likeincremented`,
           likeBody
         )
         .then((response) => {
           console.log("like incremented: ", response);
 
           setPostLiked(true);
+          setPostAltered(!postAltered);
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -136,6 +153,7 @@ export function PostDetail() {
           console.log("like decremented: ", response);
 
           setPostLiked(false);
+          setPostAltered(!postAltered);
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -286,7 +304,21 @@ export function PostDetail() {
                 <div className="post-page-component">
                   <button onClick={(e) => handleLikeOrDislikePost(e)}>
                     {postLiked ? (
-                      <img className="" alt={"Icon heart"} src={HeartFilled} />
+                      userPostsLiked ? (
+                        userPostsLiked.filter(
+                          (likedpost) => likedpost.postid === postid
+                        ).length > 0 ? (
+                          <img
+                            className=""
+                            alt={"Icon heart"}
+                            src={HeartFilled}
+                          />
+                        ) : (
+                          <img className="" alt={"Icon heart"} src={Heart} />
+                        )
+                      ) : (
+                        <img className="" alt={"Icon heart"} src={Heart} />
+                      )
                     ) : (
                       <img className="" alt={"Icon heart"} src={Heart} />
                     )}
