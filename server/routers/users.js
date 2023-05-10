@@ -93,11 +93,15 @@ router.get("/:userid/likepost", async (req, res) => {
       [userid]
     );
 
-    console.log("all user liked posts: ", getAllUserLikePost);
+    // console.log("all user liked posts: ", getAllUserLikePost);
     //const res = getAllUserLikePost.rows[0].postsliked;
-    res.json(getAllUserLikePost.rows[0].postsliked);
+    // res.json(getAllUserLikePost.rows[0].postsliked);
 
-    // res.json(JSON.parse(getAllUserLikePost.rows[0].postsliked));
+    const result = getAllUserLikePost.rows[0].postsliked.map((item) =>
+      JSON.parse(item)
+    );
+
+    res.json(result);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
