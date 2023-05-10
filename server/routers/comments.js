@@ -32,6 +32,21 @@ router.post("/:postid/create", async (req, res) => {
 });
 
 //get all the comment by userid
+router.get("/:userid", async (req, res) => {
+  try {
+    const { userid } = req.params;
+
+    const getAllComment = await pool.query(
+      "SELECT * FROM tblComment WHERE userid = $1",
+      [userid]
+    );
+
+    res.json(getAllComment.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 //get comments by postid
 router.get("/:postid", async (req, res) => {

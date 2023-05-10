@@ -31,20 +31,6 @@ router.post("/create/:promptDate", async (req, res) => {
   }
 });
 
-router.get("/allprompts", async (req, res) => {
-  try {
-    // const { promptid } = req.params;
-    //const { promptDate } = req.body;
-
-    const getAllPrompts = await pool.query("SELECT * FROM tblPrompt");
-
-    res.json(getAllPrompts.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error asdfkajsdlfkaj");
-  }
-});
-
 //get promptDes by the promptDate DEFAULT
 router.get("/:promptDate", async (req, res) => {
   try {
@@ -60,6 +46,21 @@ router.get("/:promptDate", async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
+  }
+});
+
+//get all prompts
+router.get("/allprompts", async (req, res) => {
+  try {
+    // const { promptid } = req.params;
+    //const { promptDate } = req.body;
+
+    const getAllPrompts = await pool.query("SELECT * FROM tblPrompt");
+
+    res.json(getAllPrompts.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error asdfkajsdlfkaj");
   }
 });
 

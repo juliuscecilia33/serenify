@@ -11,13 +11,15 @@ export function InternalPrompt() {
   const [promptContent, setPromptContent] = useState("");
   const [havePrompt, setHavePrompt] = useState(false);
   const [promptid, setPromptid] = useState("");
-  localStorage.setItem("internalDate", pickDate);
-  
+  const [promptSubmitted, setPromptSubmitted] = useState(false);
+
+  //localStorage.setItem('InternalDate', pickDate);
   useEffect(() => {
-    const dateTime = new Date(pickDate)
-      .toLocaleDateString()
-      .replace(/\//g, "-");
     const getPromptContent = async () => {
+      const dateTime = new Date(pickDate)
+        .toLocaleDateString()
+        .replace(/\//g, "-");
+
       const res = await apiClient
         .get(`/prompt/:${dateTime}`)
         .then((response) => {
@@ -38,9 +40,10 @@ export function InternalPrompt() {
     getPromptContent();
   }, [pickDate, havePrompt]);
 
-  const handleClick = () => {
-    localStorage.setItem("internalDate", pickDate);
-  };
+  // const handleClick = () => {
+  //   setPickDate();
+  //   localStorage.setItem("internalDate", pickDate);
+  // };
 
   useEffect(() => {
     if (localStorage.getItem("internalDate")) {
@@ -55,18 +58,23 @@ export function InternalPrompt() {
         <DatePicker
           className="calendar-input"
           selected={pickDate}
-          onChange={(date) => setPickDate(date)}
+          onChange={(date) => {
+            setPickDate(date);
+            localStorage.setItem("internalDate", date);
+          }}
           maxDate={new Date()}
         />
-        <button className="calendar-button" onClick={handleClick}>
+        {/* <button className="calendar-button" onClick={handleClick}>
           Select
-        </button>
+        </button> */}
       </div>
       <InternalPromptEditor
         havePrompt={havePrompt}
         promptContent={promptContent}
         setPromptContent={setPromptContent}
         promptid={promptid}
+        setPromptSubmitted={setPromptSubmitted}
+        promptSubmitted={promptSubmitted}
       />
     </div>
   );

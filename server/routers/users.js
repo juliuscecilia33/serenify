@@ -62,6 +62,7 @@ router.post("/register", async (req, res) => {
 // Login User
 router.post("/login", async (req, res) => {
   const { useremail, userpassword } = req.body;
+  const dateObject = new Date().toLocaleString();
 
   console.log("user email from login: ", useremail);
   console.log("user password from login: ", userpassword);
@@ -86,6 +87,11 @@ router.post("/login", async (req, res) => {
       console.log("wrong password");
       return res.status(401).json("Invalid Credential");
     }
+
+    const time = await pool.query(
+      "UPDATE tbluser SET logintime = $1 WHERE userEmail = $2",
+      [dateObject, useremail]
+    );
 
     // const jwtToken = jwtGenerator(user.rows[0].user_id);
     return res.json(user.rows[0]);

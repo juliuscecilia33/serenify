@@ -43,7 +43,7 @@ export function UserProfile() {
                 setOptionOneSelected(true);
                 setOptionTwoSelected(false);
                 setOptionThreeSelected(false);
-                setOptionSelected("Posts");
+                setOptionSelected("posts");
               }}
               className={
                 optionOneSelected
@@ -58,7 +58,7 @@ export function UserProfile() {
                 setOptionOneSelected(false);
                 setOptionTwoSelected(true);
                 setOptionThreeSelected(false);
-                setOptionSelected("Likes");
+                setOptionSelected("likes");
               }}
               className={
                 optionTwoSelected
@@ -73,7 +73,7 @@ export function UserProfile() {
                 setOptionOneSelected(false);
                 setOptionTwoSelected(false);
                 setOptionThreeSelected(true);
-                setOptionSelected("Comments");
+                setOptionSelected("comments");
               }}
               className={
                 optionThreeSelected

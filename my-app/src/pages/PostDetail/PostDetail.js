@@ -328,9 +328,15 @@ export function PostDetail() {
                 ))
               ) : (
                 <>
-                  <p className="post-page-no-comments">
-                    Be the first to comment! &lt;･◡･&gt;
-                  </p>
+                  <button
+                    onClick={() => {
+                      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                    }}
+                  >
+                    <p className="post-page-no-comments">
+                      Be the first to comment! &lt;･◡･&gt;
+                    </p>
+                  </button>
                   <img
                     className="divider-small negative-margin"
                     src={DividerBig}

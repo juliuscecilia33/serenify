@@ -43,6 +43,33 @@ export function CreatePost({
   postSubmitted,
   setPostSubmitted,
 }) {
+  const asciiEmojis = [
+    "(ㆆ _ ㆆ)  -  Afraid",
+    "•`_´•  -  Angry",
+    "•͡˘㇁•͡˘  -  Awkward",
+    "(˵ ͡° ͜ʖ ͡°˵)  -  Blush",
+    "(-_-)  -  Bored",
+    "※(^o^)/※  -  Cheer",
+    "(｡◕‿‿◕｡)  -  Cute",
+    "ᕕ(⌐■_■)ᕗ ♪♬  -  Dance",
+    "<(^_^)>  -  Dope",
+    "¯(°_o)/¯  -  Dunno",
+    "(҂◡_◡) ᕤ  -  Endure",
+    "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧  -  Excited",
+    "(－‸ლ)  -  Face Palm",
+    "(^-^)/  -  Grateful",
+    "( ´◔ ω◔`) ノシ  -  Greetings",
+    "٩(^‿^)۶  -  Happy",
+    "(°Ω°)/  -  Help",
+    "(づ｡◕‿‿◕｡)づ  -  Hug",
+    "(˶‾᷄ ⁻̫ ‾᷅˵)  -  Pleased",
+    "♥‿♥  -  Love",
+    "t(ಠ益ಠt)  -  Mad",
+    "ε(´סּ︵סּ`)з  -  Sad",
+    "(๑•́ ヮ •̀๑)  -  Surprised",
+    "(๑•̀ㅂ•́)ง✧  -  Victory",
+  ];
+
   const [postDescription, setPostDescription] = useState("");
   const [attachment, setAttachment] = useState("");
   const defaultHelperText = "Share your thoughts~~~";
@@ -51,36 +78,9 @@ export function CreatePost({
   const [isValid, setIsVaild] = useState(false);
   const [moreThan500, setMoreThan500] = useState(false);
   const toast = useToast();
-  const [currentAsciiMood, setCurrentAsciiMood] = useState("(￣▽￣)ノ");
-  //const [toastText, setToastText] = useState("Successfully Post~^_^~");
-  const maxLength = 500;
+  const [currentAsciiMood, setCurrentAsciiMood] = useState(asciiEmojis[0]);
 
-  const asciiEmojis = [
-    "(ㆆ _ ㆆ) - Afraid",
-    "•`_´• - Angry",
-    "•͡˘㇁•͡˘ - Awkward",
-    "(˵ ͡° ͜ʖ ͡°˵) - Blush",
-    "(-_-) - Bored",
-    "※(^o^)/※ - Cheer",
-    "(｡◕‿‿◕｡) - Cute",
-    "ᕕ(⌐■_■)ᕗ ♪♬ - Dance",
-    "<(^_^)> - Dope",
-    "¯(°_o)/¯ - Dunno",
-    "(҂◡_◡) ᕤ - Endure",
-    "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧ - Excited",
-    "(－‸ლ) - Face Palm",
-    "(^-^)/ - Grateful",
-    "( ´◔ ω◔`) ノシ - Greetings",
-    "٩(^‿^)۶ - Happy",
-    "(°Ω°)/ - Help",
-    "(づ｡◕‿‿◕｡)づ - Hug",
-    "(˶‾᷄ ⁻̫ ‾᷅˵) - Pleased",
-    "♥‿♥ - Love",
-    "t(ಠ益ಠt) - Mad",
-    "ε(´סּ︵סּ`)з - Sad",
-    "(๑•́ ヮ •̀๑) - Surprised",
-    "(๑•̀ㅂ•́)ง✧ - Victory",
-  ];
+  const maxLength = 500;
 
   //   const [userid, setUserid] = useState();
 
@@ -238,14 +238,18 @@ export function CreatePost({
               {currentAsciiMood}
             </MenuButton>
             <MenuList>
-              {asciiEmojis.map((emoji, id) => (
-                <MenuItem key={id}>{emoji}</MenuItem>
-              ))}
-              {/* <MenuItem>Download</MenuItem>
-              <MenuItem>Create a Copy</MenuItem>
-              <MenuItem>Mark as Draft</MenuItem>
-              <MenuItem>Delete</MenuItem>
-              <MenuItem>Attend a Workshop</MenuItem> */}
+              <MenuGroup title="Mood: ">
+                {asciiEmojis.map((emoji, id) => (
+                  <>
+                    <MenuItem
+                      onClick={() => setCurrentAsciiMood(emoji)}
+                      key={id}
+                    >
+                      {emoji}
+                    </MenuItem>
+                  </>
+                ))}
+              </MenuGroup>
             </MenuList>
           </Menu>
           <ButtonGroup gap="2">

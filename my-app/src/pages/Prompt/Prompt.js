@@ -28,6 +28,7 @@ export function Prompt() {
   const [showPencil, setShowPencil] = useState(true);
   const [postSubmitted, setPostSubmitted] = useState(false);
   const [refreshPosts, setPostsRefresh] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,30 +63,28 @@ export function Prompt() {
   };
 
   const gettPostsForCertainPrompt = async () => {
-    setTimeout(() => {
-      if (promptid) {
-        axios
-          .get(`http://localhost:3005/posts/all`)
-          .then((response) => {
-            console.log("posts all: ", response);
-            console.log(
-              "posts response for that prompt: ",
-              response.data.filter((post) => post.promptid === promptid)
-            );
-            setPostsForPrompt(
-              response.data
-                .sort(function (a, b) {
-                  return new Date(b.posttime) - new Date(a.posttime);
-                })
-                .filter((post) => post.promptid === promptid)
-            );
-          })
-          .catch((error) => {
-            console.error("There was an error!", error);
-          });
-      }
-      setPostsForPrompt(null);
-    }, "1000");
+    if (promptid) {
+      axios
+        .get(`http://localhost:3005/posts/all`)
+        .then((response) => {
+          console.log("posts all: ", response);
+          console.log(
+            "posts response for that prompt: ",
+            response.data.filter((post) => post.promptid === promptid)
+          );
+          setPostsForPrompt(
+            response.data
+              .sort(function (a, b) {
+                return new Date(b.posttime) - new Date(a.posttime);
+              })
+              .filter((post) => post.promptid === promptid)
+          );
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    }
+    setPostsForPrompt(null);
   };
 
   useEffect(() => {
@@ -108,26 +107,32 @@ export function Prompt() {
   };
 
   useEffect(() => {
-    const getDefaultPromptContent = async () => {
-      const res = await apiClient
-        .get(`/prompt/:${defaultPromptDate}`)
-        .then((response) => {
-          console.log("response: ", response.data.promptdescription);
-          setPromptDescription(response.data.promptdescription);
-          setPromptid(response.data.promptid);
+    setTimeout(() => {
+      const getDefaultPromptContent = async () => {
+        await apiClient
+          .get(`/prompt/${defaultPromptDate}`)
+          .then((response) => {
+            console.log(
+              "response prompt description: ",
+              response.data.promptdescription
+            );
+            setPromptDescription(response.data.promptdescription);
+            setPromptid(response.data.promptid);
 
-          if (response.data.promptdescription) {
-            setHavePrompt(true);
-          } else {
-            setHavePrompt(false);
-          }
-        })
-        .catch((err) => {
-          console.err(err.message);
-        });
-    };
+            if (response.data.promptdescription) {
+              setHavePrompt(true);
+            } else {
+              setHavePrompt(false);
+              console.log("went into else condition");
+            }
+          })
+          .catch((err) => {
+            console.err(err.message);
+          });
+      };
+      getDefaultPromptContent();
+    }, 1000);
     //use promptDate to find the content
-    getDefaultPromptContent();
   }, [selectedPromptDate, havePrompt]);
 
   const createPostInfo = {
@@ -140,138 +145,135 @@ export function Prompt() {
 
   return (
     <>
-      {postsForPrompt ? (
-        <div className="prompt-page-prompt-page">
-          <NavbarVTwo />
-          <div className="prompt-page-content">
-            <div className="prompt-page-b">
-              <p className="prompt-page-apr">{displayDate}</p>
-              <p className="prompt-page-apr-two">{displayDay}</p>
-              <br />
+      {/* {!pageLoading ? ( */}
+      <div className="prompt-page-prompt-page">
+        <NavbarVTwo />
+        <div className="prompt-page-content">
+          <div className="prompt-page-b">
+            <p className="prompt-page-apr">{displayDate}</p>
+            <p className="prompt-page-apr-two">{displayDay}</p>
+            <br />
 
-              <div className="calendar">
-                <Calendar
-                  dateCallBack={selectedPromptDate}
-                  setShowPencil={setShowPencil}
-                />
-              </div>
+            <div className="calendar">
+              <Calendar
+                dateCallBack={selectedPromptDate}
+                setShowPencil={setShowPencil}
+              />
             </div>
-            <img className="divider-small" src={DividerBig} alt="Divider Big" />
-            <div className="prompt-page-div">
-              <h1 className="prompt-page-sleep-how-much-did-you-get-last-night-what-is-one-way-that-helps-you-get-to-sleep">
-                <span className="prompt-page-text-wrapper">Prompt:</span>
+          </div>
+          <img className="divider-small" src={DividerBig} alt="Divider Big" />
+          <div className="prompt-page-div">
+            <h1 className="prompt-page-sleep-how-much-did-you-get-last-night-what-is-one-way-that-helps-you-get-to-sleep">
+              <span className="prompt-page-text-wrapper">Prompt:</span>
+              <span className="prompt-page-span">
+                <br />
+              </span>
+              <span className="prompt-page-text-wrapper-2">
+                {havePrompt ? (
+                  promptDescription
+                ) : (
+                  <>
+                    {/* <br /> */}
+                    We do not have a prompt for this day...
+                  </>
+                )}
+              </span>
+            </h1>
+          </div>
+          <img
+            className="divider-small"
+            src={DividerSmall}
+            alt="DividerSmall"
+          />
+          <div className="prompt-page-b-2">
+            {havePrompt && (
+              <>
+                <p className="prompt-page-p">
+                  You can put down <br />
+                  your ideas <br />
+                  with the pencil.
+                </p>
                 <span className="prompt-page-span">
                   <br />
                 </span>
-                <span className="prompt-page-text-wrapper-2">
-                  {havePrompt ? (
-                    promptDescription
-                  ) : (
-                    <>
-                      {/* <br /> */}
-                      We do not have a prompt for this day...
-                    </>
-                  )}
-                </span>
-              </h1>
-            </div>
-            <img
-              className="divider-small"
-              src={DividerSmall}
-              alt="DividerSmall"
-            />
-            <div className="prompt-page-b-2">
-              {havePrompt && (
-                <>
-                  <p className="prompt-page-p">
-                    You can put down <br />
-                    your ideas <br />
-                    with the pencil.
-                  </p>
-                  <span className="prompt-page-span">
+                <div>
+                  <b>{<CreatePostButton {...createPostInfo} />}</b>
+                </div>
+                <img
+                  className="divider-small negative-margin"
+                  src={DividerBig}
+                  alt="Divider Big"
+                />
+                <div className="prompt-page-div">
+                  <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
+                    <span className="prompt-page-text-wrapper-3">
+                      Here’s what <br />
+                    </span>
+                    <span className="prompt-page-text-wrapper-4">
+                      People <br />
+                      <u>Think.</u>
+                      <br />
+                    </span>
                     <br />
-                  </span>
-                  <div>
-                    <b>{<CreatePostButton {...createPostInfo} />}</b>
-                  </div>
-                  <img
-                    className="divider-small negative-margin"
-                    src={DividerBig}
-                    alt="Divider Big"
-                  />
-                  <div className="prompt-page-div">
-                    <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
-                      <span className="prompt-page-text-wrapper-3">
-                        Here’s what <br />
-                      </span>
-                      <span className="prompt-page-text-wrapper-4">
-                        People <br />
-                        <u>Think.</u>
-                        <br />
-                      </span>
+                    <span className="prompt-page-text-wrapper-3">
+                      Tap on them to
                       <br />
-                      <span className="prompt-page-text-wrapper-3">
-                        Tap on them to
-                        <br />
-                        see the details
-                      </span>
-                      <br />
-                    </p>
-                  </div>
-                  <img
-                    className="divider-small negative-margin"
-                    src={DividerBig}
-                    alt="Divider Big"
-                  />
-                </>
-              )}
-            </div>
+                      see the details
+                    </span>
+                    <br />
+                  </p>
+                </div>
+                <img
+                  className="divider-small negative-margin"
+                  src={DividerBig}
+                  alt="Divider Big"
+                />
+              </>
+            )}
+          </div>
 
-            {postsForPrompt &&
-              postsForPrompt.map((post, id) => (
-                <>
-                  {post.postid && (
-                    <Link
-                      to={`/post/${post.postid}`}
-                      state={{ postData: post }}
-                    >
-                      <UserPost
-                        refreshPosts={refreshPosts}
-                        setPostsRefresh={setPostsRefresh}
-                        postData={post}
-                        key={id}
-                      />
-                    </Link>
-                  )}
+          {postsForPrompt &&
+            postsForPrompt.map((post, id) => (
+              <>
+                {post.postid && (
+                  <Link to={`/post/${post.postid}`} state={{ postData: post }}>
+                    <UserPost
+                      refreshPosts={refreshPosts}
+                      setPostsRefresh={setPostsRefresh}
+                      postData={post}
+                      key={id}
+                    />
+                  </Link>
+                )}
 
-                  <img
-                    className="divider-small"
-                    src={DividerSmall}
-                    alt="DividerSmall"
-                  />
-                </>
-              ))}
+                <img
+                  className="divider-small"
+                  src={DividerSmall}
+                  alt="DividerSmall"
+                />
+              </>
+            ))}
 
-            <div className="prompt-page-b-cat">
-              <p className="prompt-page-p">
-                Pet this cat <br />
-                And you will go
-                <br />
-                Back to top.
-              </p>
-              <button
-                onClick={() => {
-                  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-                }}
-              >
-                <img className="cat-image" src={Cat} alt="Cat" />
-              </button>
-            </div>
+          <div className="prompt-page-b-cat">
+            <p className="prompt-page-p">
+              Pet this cat <br />
+              And you will go
+              <br />
+              Back to top.
+            </p>
+            <button
+              onClick={() => {
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              }}
+            >
+              <img className="cat-image" src={Cat} alt="Cat" />
+            </button>
           </div>
         </div>
-      ) : (
+      </div>
+      {/* ) : (
         <SkeletonLayout />
-      )}
+      )} */}
     </>
   );
 }

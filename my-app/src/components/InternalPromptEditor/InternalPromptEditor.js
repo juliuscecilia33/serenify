@@ -6,19 +6,34 @@ import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 
 export function InternalPromptEditor(props) {
-  const { promptContent, setPromptContent, havePrompt, promptid } = props;
+  const {
+    promptContent,
+    setPromptContent,
+    havePrompt,
+    promptid,
+    setPromptSubmitted,
+    promptSubmitted,
+  } = props;
   const toast = useToast();
   console.log("this is the promptcontent", promptContent);
   console.log(
-    "internal Date",
-    new Date(localStorage.getItem("InternalDate"))
-      .toLocaleDateString()
-      .replace(/\//g, "-")
+    "this is the localStorage Time",
+    localStorage.getItem("internalDate")
   );
+  const dateTimee = new Date(localStorage.getItem("internalDate"))
+    .toLocaleDateString()
+    .replace(/\//g, "-");
+  console.log("this is the internal date:", dateTimee);
 
   const handleChange = (textValue) => {
     setPromptContent(textValue.target.value);
   };
+
+  useEffect(() => {
+    if (!havePrompt) {
+      setPromptContent("");
+    }
+  }, [havePrompt, promptSubmitted]);
 
   const handleSubmit = async (e) => {
     if (havePrompt) {
@@ -28,39 +43,31 @@ export function InternalPromptEditor(props) {
         })
         .then((response) => {
           console.log(response);
-          toast({
-            title: "new Prompt",
-            description: "You have successfully post/change a new prompt",
-            status: "success",
-            duration: 2500,
-            isClosable: true,
-          });
         })
         .catch((error) => {
           console.error("error from handle submit: ", error.message);
         });
     } else {
-      const dateTime = new Date(localStorage.getItem("InternalDate"))
-        .toLocaleDateString()
-        .replace(/\//g, "-");
       await apiClient
-        .post(`/prompt/create/${dateTime}`, {
+        .post(`/prompt/create/${dateTimee}`, {
           promptDescription: promptContent,
         })
         .then((response) => {
           console.log(response);
-          toast({
-            title: "new Prompt",
-            description: "You have successfully post/change a new prompt",
-            status: "success",
-            duration: 2500,
-            isClosable: true,
-          });
         })
         .catch((error) => {
           console.error("error from handle submit: ", error.message);
         });
     }
+
+    setPromptSubmitted(!promptSubmitted);
+    toast({
+      title: "new Prompt",
+      description: "You have successfully post/change a new prompt",
+      status: "success",
+      duration: 2500,
+      isClosable: true,
+    });
   };
 
   return (
@@ -79,7 +86,7 @@ export function InternalPromptEditor(props) {
           handleSubmit(e);
         }}
       >
-        <ArrowForwardIcon />
+        -&gt;
       </Button>
     </FormControl>
   );

@@ -83,6 +83,9 @@ export function NavbarVTwo() {
                 <img className="cat-image-logo" alt={"Cat"} src={CatBolded} />
               </MenuButton>
               <MenuList>
+                <MenuItem onClick={() => navigate(ROUTES.PROMPT)}>
+                  Today's Prompt
+                </MenuItem>
                 <MenuItem
                   onClick={() =>
                     navigate(`/${localStorage.getItem("userid")}/profile`)
