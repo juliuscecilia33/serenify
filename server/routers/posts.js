@@ -6,7 +6,8 @@ const pool = require("../db");
 // like count to 0
 router.post("/create", async (req, res) => {
   try {
-    const { postDescription, attachment, userid, promptid } = req.body;
+    const { postDescription, attachment, userid, promptid, ascii_mood } =
+      req.body;
     //Generate TIMESTAMP
     const postTime = new Date().toLocaleString();
 
@@ -22,8 +23,8 @@ router.post("/create", async (req, res) => {
 
     //create the post
     const createPost = await pool.query(
-      "INSERT INTO tblPost (postDescription, attachment, postTime, userid, promptid) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [postDescription, attachment, postTime, userid, promptid]
+      "INSERT INTO tblPost (postDescription, attachment, postTime, userid, promptid, ascii_mood) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [postDescription, attachment, postTime, userid, promptid, ascii_mood]
     );
 
     res.json("Successfully post~~~");

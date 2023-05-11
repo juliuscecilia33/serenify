@@ -60,6 +60,9 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
             />
           ) : null}
         </div>
+        {postData.postData.ascii_mood && (
+          <h3>{postData.postData.ascii_mood}</h3>
+        )}
         <p className="date_posted">
           {handleTimeSince(new Date(postData.postData.posttime))} ago
         </p>

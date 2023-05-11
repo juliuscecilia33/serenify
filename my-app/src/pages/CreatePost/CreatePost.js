@@ -123,6 +123,7 @@ export function CreatePost({
             attachment: attachment,
             userid: localStorage.getItem("userid"),
             promptid: promptid,
+            ascii_mood: currentAsciiMood,
           })
           .then((response) => {
             console.log("response successful: ", response);
@@ -188,8 +189,6 @@ export function CreatePost({
             value={postDescription}
             resize={"none"}
             className="post-input"
-            // errorBorderColor="red"
-            // colorScheme={"green"}
           />
           <span
             className="character-limit"
