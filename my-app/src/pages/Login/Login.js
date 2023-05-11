@@ -64,6 +64,13 @@ export function Login() {
         navigate(ROUTES.HOMEVTWO);
       })
       .catch((error) => {
+        toast({
+          title: "Oops (°Ω°)/",
+          description: `${error.response.data}`,
+          status: "warning",
+          duration: 4000,
+          isClosable: true,
+        });
         console.error("There was an error!", error);
         setLoginError(true);
       });

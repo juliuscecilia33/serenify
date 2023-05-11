@@ -1,7 +1,6 @@
 import * as ROUTES from "./constants/routes";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useNavigate } from "react-router";
 
 import {
   Login,
@@ -10,18 +9,17 @@ import {
   UserProfile,
   Prompt,
   HomeVTwo,
-  Post,
   Report,
   PostDetail,
   InternalPrompt,
   InternalReport,
   InternalReportPostDetail,
+  UserComments,
+  UserPosts,
+  UserLikes,
 } from "./pages";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Authentication } from "./context/Authentication";
-import { ProtectedRoute } from "./helpers/protectedroute";
-import { ProtectedRouteAdmin } from "./helpers/ProtectedRouteAdmin";
-import apiClient from "./instance/config";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -64,6 +62,9 @@ function App() {
             <Route path={ROUTES.HOMEVTWO} element={<HomeVTwo />} />
             <Route path={ROUTES.REPORT} element={<Report />} />
             <Route path={ROUTES.POSTDETAIL} element={<PostDetail />} />
+            <Route path={ROUTES.USERPOSTS} element={<UserPosts />} />
+            <Route path={ROUTES.USERCOMMENTS} element={<UserComments />} />
+            <Route path={ROUTES.USERLIKES} element={<UserLikes />} />
             <Route
               path={ROUTES.INTERNALPROMPT}
               element={admin ? <InternalPrompt /> : <HomeVTwo />}
@@ -84,16 +85,3 @@ function App() {
 }
 
 export default App;
-
-// const userType = async () => {
-//   await apiClient
-//     .get(`/users/${localStorage.getItem("userid")}`)
-//     .then((response) => {
-//       console.log("response", response);
-//       localStorage.setItem("isAdmin", response.data.isadmin);
-//       setAdmin(response.data.isadmin);
-//     })
-//     .catch((err) => {
-//       console.err(err.message);
-//     });
-// };

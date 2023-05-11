@@ -5,17 +5,21 @@ import "./UserProfile.css";
 import DividerSmall from "../../images/DividerSmall.png";
 import { NavbarVTwo } from "../../components";
 import { AccountInfo } from "../../components/AccountInfo/AccountInfo";
+import { useNavigate } from "react-router-dom";
 
 export function UserProfile() {
-  const [optionOneSelected, setOptionOneSelected] = useState(false);
+  const [optionOneSelected, setOptionOneSelected] = useState(true);
   const [optionTwoSelected, setOptionTwoSelected] = useState(false);
   const [optionThreeSelected, setOptionThreeSelected] = useState(false);
-  const [optionSelected, setOptionSelected] = useState("");
+  const [optionSelected, setOptionSelected] = useState("posts");
+  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState();
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  console.log("Option Selected: ", optionSelected);
 
   const getUserInfo = async () => {
     await apiClient
@@ -23,7 +27,6 @@ export function UserProfile() {
       .then((response) => {
         console.log("user info in userProfile:", response);
         setUserInfo(response.data);
-        //console.log(userInfo.useremail);
         setUserEmail(response.data.useremail);
         setUserPassword(response.data.userpassword);
       })
@@ -109,7 +112,16 @@ export function UserProfile() {
             >
               {optionThreeSelected && ">"} Your Comments
             </button>
-            <button className="profile-page-text-wrapper-6">-&gt;</button>
+            <button
+              onClick={() =>
+                navigate(
+                  `/${localStorage.getItem("userid")}/profile/${optionSelected}`
+                )
+              }
+              className="profile-page-text-wrapper-6"
+            >
+              -&gt;
+            </button>
           </div>
           <img
             className="divider-small"

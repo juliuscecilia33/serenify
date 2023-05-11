@@ -57,7 +57,7 @@ router.post("/login", async (req, res) => {
 
     if (user.rows.length === 0) {
       console.log("wrong email");
-      return res.status(401).json("Invalid Credential");
+      return res.status(401).json("Invalid Credentials");
     }
 
     // const validPassword = await bcrypt.compare(

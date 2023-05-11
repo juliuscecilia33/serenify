@@ -22,6 +22,7 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
+import "./AccountInfo.css";
 
 export function AccountInfo(props) {
   const {
@@ -68,7 +69,7 @@ export function AccountInfo(props) {
         password1 != null &&
         password2 != null &&
         password1 === password2 &&
-        password1 != userpassword
+        password1 !== userpassword
       ) {
         console.log("password1", password1);
         console.log("password2", password2);
@@ -181,8 +182,10 @@ export function AccountInfo(props) {
           Wake me up if you want to change it.
           <br />
         </span>
-        <Button onClick={onOpen}>
-          <span className="profile-page-text-wrapper-3">(￣ρ￣)..zzZZ</span>
+        <Button colorScheme={"null"} onClick={onOpen}>
+          <span className="profile-page-text-wrapper-3">
+            {!isOpen ? "(￣ρ￣)..zzZZ" : "※(^o^)/※"}
+          </span>
         </Button>
       </p>
 

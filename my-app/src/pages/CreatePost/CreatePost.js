@@ -133,7 +133,7 @@ export function CreatePost({
           });
 
         toast({
-          title: "Yeah, a new post~",
+          title: "Yeah, a new post ※(^o^)/※",
           description: "Your post was successfully posted!",
           status: "success",
           duration: 2500,

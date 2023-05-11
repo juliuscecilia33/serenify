@@ -10,3 +10,6 @@ export const POSTDETAIL = "/post/:postid";
 export const INTERNALPROMPT = "/admin/prompt";
 export const INTERNALREPORT = "/admin/report";
 export const INTERNALREPORTPOSTDETAIL = "/admin/report/:postid";
+export const USERPOSTS = "/:userid/profile/posts";
+export const USERLIKES = "/:userid/profile/likes";
+export const USERCOMMENTS = "/:userid/profile/comments";

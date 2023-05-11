@@ -10,3 +10,6 @@ export { PostDetail } from "./PostDetail/PostDetail";
 export { InternalPrompt } from "./InternalPrompt/InternalPrompt";
 export { InternalReport } from "./InternalReport/InternalReport";
 export { InternalReportPostDetail } from "./InternalReportPostDetail/InternalReportPostDetail";
+export { UserComments } from "./UserComments/UserComments";
+export { UserLikes } from "./UserLikes/UserLikes";
+export { UserPosts } from "./UserPosts/UserPosts";
