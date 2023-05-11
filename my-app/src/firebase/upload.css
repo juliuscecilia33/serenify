@@ -1,6 +1,6 @@
 .upload-attachment {
   /* border: 2px solid red; */
-  margin: 5rem 0;
+  margin: 3rem 0;
 }
 
 .upload-attachment input {
@@ -15,4 +15,5 @@
   line-height: 19px;
   letter-spacing: 0.2px;
   color: #282828;
+  text-decoration: underline;
 }

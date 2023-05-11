@@ -247,14 +247,14 @@ export function CreatePost({
             </MenuList>
           </Menu>
           <br />
-          <ButtonGroup gap="2">
+          <ButtonGroup marginTop={10} gap="2">
             <Button
               colorScheme="red"
               onClick={(e) => {
                 handleBackButton(e);
               }}
             >
-              X
+              Discard
             </Button>
             <Button
               colorScheme="teal"
@@ -263,7 +263,7 @@ export function CreatePost({
               }}
               disabled={attachment === "" && postDescription.length < 1}
             >
-              -&gt;
+              Post!
             </Button>
           </ButtonGroup>
         </FormControl>
