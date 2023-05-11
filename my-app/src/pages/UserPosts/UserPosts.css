@@ -33,6 +33,15 @@ your-post-your-post {
   line-height: normal;
 }
 
+.mood-backing {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
 .your-post-logo {
   cursor: pointer;
   height: 24px;

@@ -10,6 +10,10 @@ router.post("/create/:promptDate", async (req, res) => {
     const { promptDate } = req.params;
     //new Date().toLocaleDateString(); //.split('T')[0];
 
+    if (promptDescription === null) {
+      res.status(400).send("the prompt content cannot be null...");
+    }
+
     const checkDate = await pool.query(
       "SELECT * FROM tblPrompt WHERE promptDate  = $1",
       [promptDate]
