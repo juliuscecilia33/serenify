@@ -49,19 +49,28 @@
 
 .middle-section {
   width: 100%;
-  margin: 25px 0;
+  /* margin: 25px 0; */
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.post_text {
+.mood-backing {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 300;
-  font-size: 32px;
-  line-height: 130%;
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+.post_text {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  /* line-height: %; */
   color: #282828;
+  margin-bottom: 0.5rem;
 }
 
 .trash-icon {

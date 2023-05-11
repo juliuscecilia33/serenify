@@ -5,46 +5,7 @@ import axios from "axios";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import Pencil from "../../images/PencilTwo.png";
 
-export function UserPost(postData, refreshPosts, setPostsRefresh) {
-  const [postLiked, setPostLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(postData.postData.postlike);
-  const [usersLiked, setUsersLiked] = useState(postData.postData.likedusers);
-
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const handleDeletePost = (e) => {
-    e.preventDefault();
-
-    console.log("make sure postid exists: ", postData.postData.postid);
-
-    axios
-      .delete(
-        `${process.env.REACT_APP_BACKENDURL}posts/${postData.postData.postid}`
-      )
-      .then((response) => {
-        console.log("delete response: ", response);
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-      });
-
-    setPostsRefresh(!refreshPosts);
-
-    console.log("Deleted Post");
-  };
-
-  const handleIncrementLike = (e) => {
-    e.preventDefault();
-
-    console.log("increment like");
-  };
-
-  const handleDecrementLike = (e) => {
-    e.preventDefault();
-
-    console.log("decrement like");
-  };
-
+export function UserPost(postData) {
   return (
     <>
       <div className="post-container">
@@ -61,8 +22,11 @@ export function UserPost(postData, refreshPosts, setPostsRefresh) {
           ) : null}
         </div>
         {postData.postData.ascii_mood && (
-          <h3>{postData.postData.ascii_mood}</h3>
+          // <div className="mood-backing">
+          <h3 className="mood-backing">{postData.postData.ascii_mood}</h3>
+          // </div>
         )}
+        <br />
         <p className="date_posted">
           {handleTimeSince(new Date(postData.postData.posttime))} ago
         </p>
