@@ -83,12 +83,17 @@ router.get("/:userid/posts", async (req, res) => {
   try {
     const { userid } = req.params;
 
-    const getAllUserPost = await pool.query(
-      "SELECT * FROM tblPost WHERE userid = $1",
+    const getPromptAndUserPosts = await pool.query(
+      "SELECT pm.promptid, pm.promptdescription, pm.promptdate, \
+      po.postid, po.postdescription, po.attachment, po.posttime, po.userid, po.postlike, po.likedusers, \
+      po.reportcount, po.isvisible, po.ascii_mood\
+        FROM tblPost po \
+        JOIN tblPrompt pm ON pm.promptid = po.promptid \
+        WHERE po.userid = $1",
       [userid]
     );
 
-    res.json(getAllUserPost.rows);
+    res.json(getPromptAndUserPosts.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

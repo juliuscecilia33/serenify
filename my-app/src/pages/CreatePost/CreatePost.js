@@ -4,26 +4,30 @@ import { UploadAttachment } from "../../firebase/upload";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../firebase/firebaseConfig/firebaseConfig";
 import "./CreatePost.css";
-import {
-  Button,
-  Stack,
-  AspectRatio,
-  CloseButton,
-  ButtonGroup,
-} from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   FormControl,
   FormErrorMessage,
   FormHelperText,
-} from "@chakra-ui/react";
-import { useToast } from "@chakra-ui/react";
-import {
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
   MenuGroup,
+  Button,
+  Stack,
+  AspectRatio,
+  CloseButton,
+  ButtonGroup,
+  useToast,
+  useDisclosure,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
 } from "@chakra-ui/react";
 
 export function CreatePost({
@@ -69,6 +73,7 @@ export function CreatePost({
   const [moreThan500, setMoreThan500] = useState(false);
   const toast = useToast();
   const [currentAsciiMood, setCurrentAsciiMood] = useState(asciiEmojis[0]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const maxLength = 500;
 
@@ -247,12 +252,7 @@ export function CreatePost({
           </Menu>
           <br />
           <ButtonGroup marginTop={10} gap="2">
-            <Button
-              colorScheme="red"
-              onClick={(e) => {
-                handleBackButton(e);
-              }}
-            >
+            <Button colorScheme="red" onClick={onOpen}>
               Discard
             </Button>
             <Button
@@ -265,6 +265,36 @@ export function CreatePost({
               Post!
             </Button>
           </ButtonGroup>
+
+          <>
+            <AlertDialog isOpen={isOpen} onClose={onClose}>
+              <AlertDialogOverlay>
+                <AlertDialogContent>
+                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    Discard Your Post
+                  </AlertDialogHeader>
+
+                  <AlertDialogBody>
+                    Are you sure you want to discard?
+                  </AlertDialogBody>
+
+                  <AlertDialogFooter>
+                    <Button onClick={onClose}>Cancel</Button>
+                    <Button
+                      colorScheme="red"
+                      onClick={(e) => {
+                        handleBackButton(e);
+                        onClose();
+                      }}
+                      ml={3}
+                    >
+                      Delete
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialogOverlay>
+            </AlertDialog>
+          </>
         </FormControl>
       </div>
     </div>

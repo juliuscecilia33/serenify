@@ -13,6 +13,7 @@ export function InternalPromptEditor(props) {
     promptid,
     setPromptSubmitted,
     promptSubmitted,
+    setHavePrompt,
   } = props;
   const toast = useToast();
   console.log("this is the promptcontent", promptContent);
@@ -30,12 +31,13 @@ export function InternalPromptEditor(props) {
   };
 
   useEffect(() => {
-    if (!havePrompt) {
+    if (havePrompt === null) {
       setPromptContent("");
     }
   }, [havePrompt, promptSubmitted]);
 
   const handleSubmit = async (e) => {
+    console.log("haveprompt inside handle submit", havePrompt);
     if (havePrompt) {
       await apiClient
         .put(`/prompt/${promptid}`, {
@@ -54,6 +56,7 @@ export function InternalPromptEditor(props) {
         })
         .then((response) => {
           console.log(response);
+          setHavePrompt(true);
         })
         .catch((error) => {
           console.error("error from handle submit: ", error.message);

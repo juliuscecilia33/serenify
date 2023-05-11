@@ -75,6 +75,7 @@ export function InternalPrompt() {
         promptid={promptid}
         setPromptSubmitted={setPromptSubmitted}
         promptSubmitted={promptSubmitted}
+        setHavePrompt={setHavePrompt}
       />
     </div>
   );

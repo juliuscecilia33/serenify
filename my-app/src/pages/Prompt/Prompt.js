@@ -42,25 +42,11 @@ export function Prompt() {
     splitPromptDate[0] - 1,
     splitPromptDate[1]
   );
+
   let displayDate = moment(formatDate).format("MMMM D, Y");
   let displayDay = moment(formatDate).format("dddd");
 
   const [postsForPrompt, setPostsForPrompt] = useState();
-
-  const sortByDate = (postData) => {
-    // Turn your strings into dates, and then subtract them
-    // to get a value that is either negative, positive, or zero.
-    return new Date(postData.posttime) - new Date(postData.posttime);
-  };
-
-  const logout = (e) => {
-    e.preventDefault();
-
-    localStorage.clear();
-    console.log("User logged out");
-
-    navigate(ROUTES.LOGIN);
-  };
 
   const gettPostsForCertainPrompt = async () => {
     if (promptid) {

@@ -9,6 +9,7 @@ import Pencil from "../../images/PencilTwo.png";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { handleTimeSince } from "../../helpers/handleTimeSince";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 export function UserPosts() {
   const [userPosts, setUserPosts] = useState(null);
@@ -32,6 +33,13 @@ export function UserPosts() {
         console.error("There was an error!", error);
       });
   }, []);
+
+  const formatDate = (defaultPromptDate) => {
+    console.log(new Date(defaultPromptDate));
+    let displayDate = moment(new Date(defaultPromptDate)).format("MMMM D, Y");
+
+    return displayDate;
+  };
 
   console.log(userPosts);
 
@@ -61,7 +69,12 @@ export function UserPosts() {
               <>
                 <Link to={`/post/${post.postid}`} state={{ postData: post }}>
                   <div className="post-container">
-                    <div className="top-section"></div>
+                    <div className="top-top-section">
+                      <p>
+                        <b>{post.promptdescription}</b> •{" "}
+                        {formatDate(post.promptdate)}
+                      </p>
+                    </div>
                     <div className="middle-section">
                       <p className="post_text">{post.postdescription}</p>
                       {post.attachment && (
