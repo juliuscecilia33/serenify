@@ -73,13 +73,17 @@ export function AccountInfo(props) {
       ) {
         console.log("password1", password1);
         console.log("password2", password2);
-        setUserpassword(password1);
+        //setUserpassword(password1);
         await apiClient
           .put(`/users/changePassword/${localStorage.getItem("userid")}`, {
-            userpassword: userpassword,
+            userpassword: password1,
           })
           .then((res) => {
-            console.log(res);
+            console.log("res from the change password", res);
+            setUserpassword(res.data.userpassword);
+            setIsSubmitted(!isSubmitted);
+            onClose();
+            // navigate(0);
             toast({
               title: "Successfully Change the Password",
               description: "You have successfully change your password",
@@ -91,8 +95,6 @@ export function AccountInfo(props) {
           .catch((err) => {
             console.err(err.message);
           });
-
-        setIsSubmitted(!isSubmitted);
       } else if (password1 == null || password2 == null) {
         console.log("password1", password1);
         console.log("password2", password2);
@@ -135,7 +137,7 @@ export function AccountInfo(props) {
 
   useEffect(() => {
     console.log("userpassword:", userpassword);
-    setUserpassword(userpassword);
+    //setUserpassword(userpassword);
   }, [userpassword, isSubmitted]);
 
   return (

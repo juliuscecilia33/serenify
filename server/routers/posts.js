@@ -79,7 +79,7 @@ router.get("/:postid", async (req, res) => {
 });
 
 //get all the post based on userid
-router.get("/:userid/post", async (req, res) => {
+router.get("/:userid/posts", async (req, res) => {
   try {
     const { userid } = req.params;
 
@@ -94,29 +94,6 @@ router.get("/:userid/post", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
-// router.get("/:postid/checkifliked", async (req, res) => {
-//   try {
-//     const { postid } = req.params;
-//     const { userid } = req.body;
-
-//     // const checkIfUserHasLiked = await pool.query(
-//     //   "SELECT * FROM tbluser WHERE '769156ac-405a-4d93-bea3-781bc3f7dec1' = ANY(postsliked) AND userid = '76f8fe50-06bb-4553-9b28-a453fac37712'"
-//     // );
-
-//     const getAllUserLikePost = await pool.query(
-//       "SELECT postsliked FROM tblUser WHERE userid = $1",
-//       [userid]
-//     );
-
-//     res.json(JSON.parse(getAllUserLikePost.rows[0].postsliked));
-
-//     // res.json(false);
-//   } catch (error) {
-//     console.error(err.message);
-//     res.status(500).send("Server Error");
-//   }
-// });
 
 router.get("/:postid/checklike", async (req, res) => {
   const { postid } = req.params;

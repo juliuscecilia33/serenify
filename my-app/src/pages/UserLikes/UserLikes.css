@@ -1,0 +1,153 @@
+your-post-your-post {
+  align-items: center;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  min-width: 390px;
+  position: relative;
+}
+
+.your-post-content {
+  align-items: center;
+  align-self: stretch;
+  background-color: #ece8d1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  position: relative;
+}
+
+.your-post-logo {
+  cursor: pointer;
+  height: 24px;
+  left: 24px;
+  position: absolute;
+  top: 70px;
+  width: 31px;
+}
+
+.divider-small {
+  min-width: 390px;
+}
+
+.cat-image {
+  background-image: "unset";
+  background-size: "unset";
+  cursor: "pointer";
+  height: "200.5px";
+  min-width: "197.98px";
+  position: "relative";
+  transition: "all 0.2s ease";
+  width: 200px;
+  margin-top: 4rem;
+}
+
+.your-post-logout {
+  color: #282828;
+  cursor: pointer;
+  font-family: "Oswald", Helvetica;
+  font-size: 23px;
+  font-weight: 400;
+  left: 304px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-decoration: underline;
+  top: 69px;
+  white-space: nowrap;
+}
+
+.your-post-b {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0px 30px;
+  position: relative;
+}
+
+.your-post-your-posts-are-listed-below {
+  align-self: stretch;
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 80px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 90px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.your-post-text-wrapper {
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.your-post-span {
+  font-size: 45px;
+  line-height: 58.5px;
+}
+
+.your-post-div {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px 30px;
+  position: relative;
+}
+
+.your-post-don-t-eat-before-bed-just-finished-a-sandwich {
+  align-self: stretch;
+  color: #282828;
+  cursor: pointer;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.your-post-face {
+  height: 50.55px;
+  min-width: 189.68px;
+  position: relative;
+}
+
+.your-post-p {
+  align-self: stretch;
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.your-post-img-wrapper {
+  height: 52px;
+  min-width: 215px;
+  position: relative;
+}
+
+.your-post-img {
+  cursor: pointer;
+  height: 51px;
+  left: 1px;
+  position: absolute;
+  top: 1px;
+  width: 214px;
+}
+
+.your-post-b-cat {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px 170px;
+  position: relative;
+}

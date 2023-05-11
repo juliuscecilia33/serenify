@@ -26,6 +26,15 @@
   width: 31px;
 }
 
+.mood-backing {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
 .post-page-text-wrapper {
   color: #282828;
   cursor: pointer;

@@ -113,16 +113,16 @@ router.put("/changePassword/:userid", async (req, res) => {
     //check if the password vaild
 
     const updatePassword = await pool.query(
-      "UPDATE tbluser SET userpassword = $1 WHERE userid = $2",
+      "UPDATE tbluser SET userpassword = $1 WHERE userid = $2 RETURNING *",
       [userpassword, userid]
     );
 
-    const getNewUserInfo = await pool.query(
-      "SELECT * FROM tblUser WHERE userid = $1",
-      [userid]
-    );
+    // const getNewUserInfo = await pool.query(
+    //   "SELECT * FROM tblUser WHERE userid = $1",
+    //   [userid]
+    // );
 
-    res.json(getNewUserInfo.rows[0]);
+    res.json(updatePassword.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

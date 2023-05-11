@@ -271,6 +271,11 @@ export function PostDetail() {
                     title="attachment"
                   />
                 )}
+                {postData.ascii_mood && (
+                  // <div className="mood-backing">
+                  <h3 className="mood-backing">{postData.ascii_mood}</h3>
+                  // </div>
+                )}
                 <p className="post-date-posted">
                   {handleTimeSince(new Date(postData.posttime))} ago
                 </p>

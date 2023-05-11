@@ -65,7 +65,7 @@ export function Prompt() {
   const gettPostsForCertainPrompt = async () => {
     if (promptid) {
       axios
-        .get(`http://localhost:3005/posts/all`)
+        .get(`${process.env.REACT_APP_BACKENDURL}posts/all`)
         .then((response) => {
           console.log("posts all: ", response);
           console.log(
