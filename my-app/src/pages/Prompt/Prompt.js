@@ -193,6 +193,7 @@ export function Prompt() {
                   your ideas <br />
                   with the pencil.
                 </p>
+
                 <span className="prompt-page-span">
                   <br />
                 </span>

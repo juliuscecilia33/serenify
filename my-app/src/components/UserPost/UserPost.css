@@ -58,9 +58,10 @@
 .mood-backing {
   font-family: "Oswald";
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 20px;
   margin-bottom: 1rem;
+  margin-top: 0.5rem;
 }
 
 .post_text {

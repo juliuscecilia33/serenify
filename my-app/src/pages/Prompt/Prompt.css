@@ -102,6 +102,13 @@
 
 .prompt-page-text-wrapper {
   font-weight: 500;
+  text-decoration: underline;
+}
+
+.small-text {
+  margin-top: 0.5rem;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .prompt-page-span {
