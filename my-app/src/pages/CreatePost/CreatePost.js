@@ -7,20 +7,13 @@ import "./CreatePost.css";
 import {
   Button,
   Stack,
-  Textarea,
   AspectRatio,
-  Image,
   CloseButton,
   ButtonGroup,
 } from "@chakra-ui/react";
-import {
-  ArrowForwardIcon,
-  ArrowBackIcon,
-  ChevronDownIcon,
-} from "@chakra-ui/icons";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   FormControl,
-  FormLabel,
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
@@ -30,10 +23,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
   MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
 } from "@chakra-ui/react";
 
 export function CreatePost({
@@ -72,7 +62,7 @@ export function CreatePost({
 
   const [postDescription, setPostDescription] = useState("");
   const [attachment, setAttachment] = useState("");
-  const defaultHelperText = "Share your thoughts~~~";
+  const defaultHelperText = "Upload an Image or Video!";
   const [helperText, setHelperText] = useState("");
   const [wordCount, setWordCount] = useState("");
   const [isValid, setIsVaild] = useState(false);
@@ -110,7 +100,7 @@ export function CreatePost({
   };
 
   useEffect(() => {
-    if (attachment != "") {
+    if (attachment !== "") {
       setIsVaild(true);
       setHelperText(defaultHelperText);
       setMoreThan500(false);
@@ -189,19 +179,23 @@ export function CreatePost({
     <div>
       <div className="container flex">
         <FormControl isInvalid={isValid} onKeyPress={keyDownHandler}>
-          <FormLabel htmlFor="edit-prompt">
+          {/* <FormLabel htmlFor="edit-prompt">
             Leave Your Thoughts here...
-          </FormLabel>
-          <Textarea
+          </FormLabel> */}
+          <textarea
             placeholder="Leave your thoughts here.."
             onChange={(textValue) => handleChange(textValue)}
             value={postDescription}
             resize={"none"}
-            errorBorderColor="red"
-            colorScheme={"green"}
+            className="post-input"
+            // errorBorderColor="red"
+            // colorScheme={"green"}
           />
-          <span style={{ color: moreThan500 ? "red" : "" }}>
-            {`characters: ${wordCount.length}/${maxLength}`}
+          <span
+            className="character-limit"
+            style={{ color: moreThan500 ? "red" : "" }}
+          >
+            {`Characters: ${wordCount.length}/${maxLength}`}
           </span>
 
           {isValid ? (
@@ -209,7 +203,6 @@ export function CreatePost({
           ) : (
             <FormErrorMessage>{helperText}</FormErrorMessage>
           )}
-
           {!attachment ? (
             <UploadAttachment
               attachment={attachment}
@@ -233,6 +226,7 @@ export function CreatePost({
               </AspectRatio>
             </Stack>
           )}
+          <h1 className="upload-text">Select a Mood</h1>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               {currentAsciiMood}
@@ -252,6 +246,7 @@ export function CreatePost({
               </MenuGroup>
             </MenuList>
           </Menu>
+          <br />
           <ButtonGroup gap="2">
             <Button
               colorScheme="red"
@@ -259,7 +254,7 @@ export function CreatePost({
                 handleBackButton(e);
               }}
             >
-              &gt;-
+              X
             </Button>
             <Button
               colorScheme="teal"

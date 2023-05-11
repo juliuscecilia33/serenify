@@ -177,7 +177,7 @@ router.put("/likedecremented/:postid", async (req, res) => {
       [postid]
     );
 
-    if (checkLike.rows[0].postlike === 0) {
+    if (checkLike.rows[0].postlike <= 0) {
       res.status(500).send("Like count can't be below 0!");
     }
 
@@ -189,6 +189,11 @@ router.put("/likedecremented/:postid", async (req, res) => {
     const postDataResult = await pool.query(
       "SELECT * FROM tblPost WHERE postid = $1",
       [postid]
+    );
+
+    const getAllUserLikePost = await pool.query(
+      "SELECT postsliked FROM tblUser WHERE userid = $1",
+      [userid]
     );
 
     const updateUserPostsLiked = await pool.query(

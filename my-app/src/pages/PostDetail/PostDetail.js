@@ -75,6 +75,8 @@ export function PostDetail() {
             ).length > 0
           ) {
             setPostLiked(true);
+          } else {
+            setPostLiked(false);
           }
           console.log(
             "filtered liked posts: ",
@@ -144,20 +146,21 @@ export function PostDetail() {
           console.error("There was an error!", error);
         });
     } else {
-      axios
-        .put(
-          `${process.env.REACT_APP_BACKENDURL}posts/likedecremented/${postData.postid}`,
-          likeBody
-        )
-        .then((response) => {
-          console.log("like decremented: ", response);
+      // axios
+      //   .put(
+      //     `${process.env.REACT_APP_BACKENDURL}posts/likedecremented/${postData.postid}`,
+      //     likeBody
+      //   )
+      //   .then((response) => {
+      //     console.log("like decremented: ", response);
 
-          setPostLiked(false);
-          setPostAltered(!postAltered);
-        })
-        .catch((error) => {
-          console.error("There was an error!", error);
-        });
+      //     setPostLiked(false);
+      //     setPostAltered(!postAltered);
+      //   })
+      //   .catch((error) => {
+      //     console.error("There was an error!", error);
+      //   });
+      return;
     }
   };
 
