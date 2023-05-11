@@ -246,32 +246,3 @@ router.delete("/:useremail", async (req, res) => {
 });
 
 module.exports = router;
-
-//TimeStamp function
-// function pgFormatDate(date) {
-//   /* Via http://stackoverflow.com/questions/3605214/javascript-add-leading-zeroes-to-date */
-//   function zeroPad(d) {
-//     return ("0" + d).slice(-2);
-//   }
-
-//   var parsed = new Date(date);
-
-//   return (
-//     parsed.getUTCFullYear().toString() +
-//     "-" +
-//     zeroPad(parsed.getMonth() + 1).toString() +
-//     "-" +
-//     zeroPad(parsed.getDate()).toString() +
-//     " " +
-//     zeroPad(parsed.getHours()).toString() +
-//     ":" +
-//     zeroPad(parsed.getMinutes()).toString() +
-//     ":" +
-//     zeroPad(parsed.getSeconds()).toString() +
-//     "-" +
-//     zeroPad(parsed.getMilliseconds()).toString()
-//   );
-
-//   // 2023-04-16 17:37-59 <- ours
-//   // 2016-06-22 19:10:25-07 <- correct format
-// }

@@ -4,8 +4,35 @@ import "./UserLikes.css";
 import { NavbarVTwo } from "../../components";
 import DividerSmall from "../../images/DividerSmall.png";
 import Cat from "../../images/Cat.png";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Pencil from "../../images/PencilTwo.png";
+import { BsFillTrash3Fill } from "react-icons/bs";
+import { handleTimeSince } from "../../helpers/handleTimeSince";
 
 export function UserLikes() {
+  const [userLikes, setUserLikes] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKENDURL}users/${localStorage.getItem(
+          "userid"
+        )}/likepost`
+      )
+      .then((response) => {
+        console.log("liked posts all: ", response);
+        setUserLikes(
+          response.data.sort(function (a, b) {
+            return new Date(b.posttime) - new Date(a.posttime);
+          })
+        );
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, []);
+
   return (
     <>
       <NavbarVTwo />
@@ -27,29 +54,63 @@ export function UserLikes() {
             src={DividerSmall}
             alt="DividerSmall"
           />
-          <div className="your-post-div">
-            <p className="your-post-don-t-eat-before-bed-just-finished-a-sandwich">
-              Don’t eat before&nbsp;&nbsp;&nbsp;&nbsp;
-              <br />
-              bed. Just finished a&nbsp;&nbsp; <br />
-              sandwich.
-            </p>
-          </div>
-          <img
-            className="divider-small"
-            src={DividerSmall}
-            alt="DividerSmall"
-          />
-          <div className="your-post-div">
-            <p className="your-post-p">
-              The light bulb in my living room just exploded. It cut my hand...
-            </p>
-          </div>
-          <img
-            className="divider-small"
-            src={DividerSmall}
-            alt="DividerSmall"
-          />
+          {userLikes ? (
+            userLikes.map((post, id) => (
+              <>
+                <Link to={`/post/${post.postid}`} state={{ postData: post }}>
+                  <div className="post-container">
+                    {/* <div className="top-top-section">
+                      <p>
+                        <b>{post.promptdescription}</b> •{" "}
+                        {formatDate(post.promptdate)}
+                      </p>
+                    </div> */}
+                    <div className="middle-section">
+                      <p className="post_text">{post.postdescription}</p>
+                      {post.attachment && (
+                        <iframe
+                          className="post-image-attachment"
+                          src={post.attachment}
+                          alt="post_image"
+                          title="attachment"
+                        />
+                      )}
+                    </div>
+                    {post.ascii_mood && (
+                      // <div className="mood-backing">
+                      <h3 className="mood-backing">{post.ascii_mood}</h3>
+                      // </div>
+                    )}
+                    <br />
+                    <p className="date_posted">
+                      {handleTimeSince(new Date(post.posttime))} ago
+                    </p>
+                    <div className="button-container">
+                      {post.userid === localStorage.getItem("userid") && (
+                        <>
+                          <button className="trash-icon">
+                            <BsFillTrash3Fill />
+                          </button>
+                          <img
+                            alt="Edit-icon"
+                            className="pencil-icon"
+                            src={Pencil}
+                          />
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <img
+                    className="divider-small"
+                    src={DividerSmall}
+                    alt="DividerSmall"
+                  />
+                </Link>
+              </>
+            ))
+          ) : (
+            <h1>No Liked Posts</h1>
+          )}
           <div className="your-post-b-cat">
             <p className="your-post-p">
               Pet this cat <br />

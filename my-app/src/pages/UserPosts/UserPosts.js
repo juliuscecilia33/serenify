@@ -10,9 +10,11 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { handleTimeSince } from "../../helpers/handleTimeSince";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { useNavigate } from "react-router";
 
 export function UserPosts() {
   const [userPosts, setUserPosts] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -48,6 +50,16 @@ export function UserPosts() {
       <NavbarVTwo />
       <div className="your-post-your-post">
         <div className="your-post-content">
+          <div className="post-page-tag">
+            <button
+              onClick={() => {
+                navigate(`/${localStorage.getItem("userid")}/profile`);
+              }}
+              className="post-page-div"
+            >
+              &lt;-
+            </button>
+          </div>
           <div className="your-post-b">
             <h1 className="your-post-your-posts-are-listed-below">
               <span className="your-post-text-wrapper">
