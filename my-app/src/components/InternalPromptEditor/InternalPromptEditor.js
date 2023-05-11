@@ -38,39 +38,50 @@ export function InternalPromptEditor(props) {
 
   const handleSubmit = async (e) => {
     console.log("haveprompt inside handle submit", havePrompt);
-    if (havePrompt) {
-      await apiClient
-        .put(`/prompt/${promptid}`, {
-          promptDescription: promptContent,
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.error("error from handle submit: ", error.message);
-        });
+    console.log("prompt content inside handle submit", promptContent);
+    if (promptContent === null || promptContent === "") {
+      toast({
+        title: "ohh nooooo",
+        description: "You cannot post empty prompt...",
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+      });
     } else {
-      await apiClient
-        .post(`/prompt/create/${dateTimee}`, {
-          promptDescription: promptContent,
-        })
-        .then((response) => {
-          console.log(response);
-          setHavePrompt(!havePrompt);
-        })
-        .catch((error) => {
-          console.error("error from handle submit: ", error.message);
-        });
-    }
+      if (havePrompt) {
+        await apiClient
+          .put(`/prompt/${promptid}`, {
+            promptDescription: promptContent,
+          })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error("error from handle submit: ", error.message);
+          });
+      } else {
+        await apiClient
+          .post(`/prompt/create/${dateTimee}`, {
+            promptDescription: promptContent,
+          })
+          .then((response) => {
+            console.log(response);
+            setHavePrompt(!havePrompt);
+          })
+          .catch((error) => {
+            console.error("error from handle submit: ", error.message);
+          });
+      }
 
-    setPromptSubmitted(!promptSubmitted);
-    toast({
-      title: "new Prompt",
-      description: "You have successfully post/change a new prompt",
-      status: "success",
-      duration: 2500,
-      isClosable: true,
-    });
+      setPromptSubmitted(!promptSubmitted);
+      toast({
+        title: "new Prompt",
+        description: "You have successfully post/change a new prompt",
+        status: "success",
+        duration: 2500,
+        isClosable: true,
+      });
+    }
   };
 
   return (
