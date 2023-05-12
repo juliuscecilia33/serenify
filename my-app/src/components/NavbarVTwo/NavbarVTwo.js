@@ -26,10 +26,11 @@ export function NavbarVTwo() {
   const logout = (e) => {
     e.preventDefault();
 
+    setAuth(false);
     localStorage.clear();
     console.log("User logged out");
 
-    navigate(ROUTES.LOGIN);
+    navigate(ROUTES.HOMEVTWO);
   };
 
   return (
@@ -39,7 +40,7 @@ export function NavbarVTwo() {
           <img className="navbar-logo" alt={"Logo"} src={Logo} />
         </Link>
         <HStack spacing="24px">
-          {admin && (
+          {isAuthenticated && admin && (
             <Menu>
               <MenuButton
                 as={Button}

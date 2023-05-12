@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Navbar, NavbarVTwo } from "../../components/index";
+import { useNavigate } from "react-router";
 import apiClient from "../../instance/config";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { InternalPromptEditor } from "../../components/InternalPromptEditor/InternalPromptEditor";
 import { Authentication } from "../../context/Authentication";
+import "./InternalPrompt.css";
 
 export function InternalPrompt() {
   const [pickDate, setPickDate] = useState(new Date());
@@ -12,6 +14,18 @@ export function InternalPrompt() {
   const [havePrompt, setHavePrompt] = useState(false);
   const [promptid, setPromptid] = useState("");
   const [promptSubmitted, setPromptSubmitted] = useState(false);
+  const navigate = useNavigate();
+  const { isAuthenticated, setAuth, admin } = useContext(Authentication);
+
+  const checkUserLogin = () => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  };
+
+  useEffect(() => {
+    checkUserLogin();
+  }, []);
 
   //localStorage.setItem('InternalDate', pickDate);
   useEffect(() => {
@@ -52,7 +66,7 @@ export function InternalPrompt() {
   }, [localStorage.getItem("internalDate")]);
 
   return (
-    <div>
+    <div className="admin-prompt">
       <NavbarVTwo />
       <div className="calendar-container">
         <DatePicker

@@ -5,6 +5,7 @@
   flex-direction: column;
   min-width: 390px;
   position: relative;
+  margin-top: 5rem;
 }
 
 .login-content {

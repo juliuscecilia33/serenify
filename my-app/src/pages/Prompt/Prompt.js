@@ -18,6 +18,7 @@ import moment from "moment";
 
 export function Prompt() {
   //const baseURL = "http://localhost:3005/prompt";
+  const { isAuthenticated, setAuth, admin } = useContext(Authentication);
   const [promptDescription, setPromptDescription] = useState("");
   const [defaultPromptDate, setDefaultPromptDate] = useState(
     new Date().toLocaleDateString().replace(/\//g, "-")
@@ -172,7 +173,7 @@ export function Prompt() {
             alt="DividerSmall"
           />
           <div className="prompt-page-b-2">
-            {havePrompt && (
+            {havePrompt && isAuthenticated && (
               <>
                 <p className="prompt-page-p">
                   You can put down <br />

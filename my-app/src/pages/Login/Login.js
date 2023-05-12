@@ -10,6 +10,7 @@ import { Authentication } from "../../context/Authentication";
 import Logo from "../../images/logo2.png";
 import { useToast } from "@chakra-ui/react";
 import { Link, Navigate } from "react-router-dom";
+import { NavbarVTwo } from "../../components";
 
 export function Login() {
   const [userEmail, setUserEmail] = useState("");
@@ -80,36 +81,34 @@ export function Login() {
   console.log("Password: ", userPassword);
 
   return (
-    <div className="login-login">
-      <div className="login-content">
-        <img className="login-logo" alt={"Logo"} src={Logo} />
-        <Link to={ROUTES.REGISTER}>
-          <div className="login-text-wrapper">Sign up</div>
-        </Link>
-        <div className="login-tag" />
-        <div className="login-b">
-          <h1 className="login-h-1">Login:</h1>
-        </div>
-        <div className="login-b-2">
-          <input
-            onChange={(e) => setUserEmail(e.target.value)}
-            className="login-div"
-            placeholder="Email"
-          />
-          <input
-            onChange={(e) => setUserPassword(e.target.value)}
-            className="login-text-wrapper-2"
-            placeholder="Password"
-            type="Password"
-          />
-          <button
-            onClick={(e) => handleLogin(e)}
-            className="login-text-wrapper-3"
-          >
-            -&gt;
-          </button>
+    <>
+      <NavbarVTwo />
+      <div className="login-login">
+        <div className="login-content">
+          <div className="login-b">
+            <h1 className="login-h-1">Login:</h1>
+          </div>
+          <div className="login-b-2">
+            <input
+              onChange={(e) => setUserEmail(e.target.value)}
+              className="login-div"
+              placeholder="Email"
+            />
+            <input
+              onChange={(e) => setUserPassword(e.target.value)}
+              className="login-text-wrapper-2"
+              placeholder="Password"
+              type="Password"
+            />
+            <button
+              onClick={(e) => handleLogin(e)}
+              className="login-text-wrapper-3"
+            >
+              -&gt;
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

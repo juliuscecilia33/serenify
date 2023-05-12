@@ -6,13 +6,25 @@ import DividerSmall from "../../images/DividerSmall.png";
 import { NavbarVTwo } from "../../components";
 import { AccountInfo } from "../../components/AccountInfo/AccountInfo";
 import { useNavigate } from "react-router-dom";
+import { Authentication } from "../../context/Authentication";
 
 export function UserProfile() {
+  const { isAuthenticated, setAuth, admin } = useContext(Authentication);
   const [optionOneSelected, setOptionOneSelected] = useState(true);
   const [optionTwoSelected, setOptionTwoSelected] = useState(false);
   const [optionThreeSelected, setOptionThreeSelected] = useState(false);
   const [optionSelected, setOptionSelected] = useState("posts");
   const navigate = useNavigate();
+
+  const checkUserLogin = () => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  };
+
+  useEffect(() => {
+    checkUserLogin();
+  }, []);
 
   const [userInfo, setUserInfo] = useState();
   const [userEmail, setUserEmail] = useState("");
@@ -20,7 +32,6 @@ export function UserProfile() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   console.log("Option Selected: ", optionSelected);
-
   const getUserInfo = async () => {
     await apiClient
       .get(`/users/${localStorage.getItem("userid")}`)

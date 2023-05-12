@@ -88,8 +88,15 @@ router.get("/:userid/likepost", async (req, res) => {
   try {
     const { userid } = req.params;
 
+    // const getAllUserLikePost = await pool.query(
+    //   "SELECT postsliked FROM tblUser WHERE userid = $1",
+    //   [userid]
+    // );
+
     const getAllUserLikePost = await pool.query(
-      "SELECT postsliked FROM tblUser WHERE userid = $1",
+      "SELECT u.postsliked \
+      FROM tblUser u \
+      WHERE userid = $1",
       [userid]
     );
 

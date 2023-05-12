@@ -3,10 +3,11 @@ import * as ROUTES from "../../constants/routes";
 import "../Register/Register.css";
 import toplayer from "../../images/toplayer.png";
 import { Authentication } from "../../context/Authentication";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../../images/logo2.png";
-import { useToast } from "@chakra-ui/react";
+import { useToast, Checkbox, CheckboxGroup } from "@chakra-ui/react";
+import { NavbarVTwo } from "../../components";
 
 export function Register() {
   const [userEmail, setUserEmail] = useState("");
@@ -73,17 +74,15 @@ export function Register() {
 
   return (
     <>
+      <NavbarVTwo />
       <div className="signup-signup">
         <div className="signup-content">
-          <img className="signup-logo" alt={"Logo"} src={Logo} />
-          <div className="signup-log-in">Log In</div>
-          <div className="signup-tag" />
           <div className="signup-b">
-            <h1 className="signup-text-wrapper">Sign up:</h1>
+            <h1 className="signup-text-wrapper">Register:</h1>
           </div>
           <div className="signup-b-2">
             <input
-              className="signup-div"
+              className="signup-text-wrapper-2"
               placeholder="Email"
               onChange={(e) => setUserEmail(e.target.value)}
             />
@@ -99,6 +98,19 @@ export function Register() {
               placeholder="Confirm Password"
               type="Password"
             />
+
+            <div>
+              <h3>
+                Please read and agree the <u>Privacy Policy</u>
+              </h3>
+              <h3></h3>
+            </div>
+
+            <Link to={ROUTES.LOGIN}>
+              <h3 className="signup-text-wrapper-4">
+                Already have an account? <u>Log in here!</u>
+              </h3>
+            </Link>
             <button
               onClick={(e) => handleRegister(e)}
               className="signup-text-wrapper-3"
