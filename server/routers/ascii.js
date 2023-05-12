@@ -43,11 +43,32 @@ router.put("/add/reaction/:userid", async (req, res) => {
 
     //check the whether the userid exist in the text[]
     const checkUserid = await pool.query(
-      "SELECT * FROM tblAscii_Reaction WHERE ascii_string = $1 AND postid = $2 AND $3 = ANY(userid)",
+      "SELECT * FROM tblAscii_Reaction WHERE ascii_string = $1 AND postid = $2 AND $3 = ANY(userid) RETURNING *",
       [ascii_string, postid, userid]
     );
 
-    if(checkUserid.rows.length )
+    if (checkUserid.rows.length > 0) {
+      //remove the userid from text[];
+      //if the userid is the only user who like, remvoe the entire ascii reaction
+      if (checkUserid.rouws[0].total > 1) {
+        await pool.query(
+          "UPDATE tblAscii_Reaction SET total = total - 1, ARRAY_REMOVE(userid, $1) WHERE ascii_string = $1 AND postid = $2",
+          [ascii_string, postid]
+        );
+      } else {
+        await pool.query(
+          "DELETE FROM tblAscii_Reaction WHERE ascii_string = $1 AND postid = $2",
+          [ascii_string, postid]
+        );
+      }
+    } else {
+      //the user does not in the userid[]
+      //put userid in the userid[]
+      await pool.query(
+        "UPDATE tblAscii_Reaction SET total = total + 1, ARRAY_APPEND(userid, $1) WHERE ascii_string = $2 AND postid = $3",
+        [userid, ascii_string, postid]
+      );
+    }
 
     //check whether the user
   } catch (err) {

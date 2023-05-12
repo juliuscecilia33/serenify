@@ -20,56 +20,40 @@ import { SkeletonLayout } from "../../components";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
   MenuGroup,
   Button,
-  Stack,
-  AspectRatio,
-  CloseButton,
-  ButtonGroup,
-  useToast,
-  useDisclosure,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
-  AlertDialogCloseButton,
 } from "@chakra-ui/react";
 
 export function PostDetail() {
   const asciiEmojis = [
-    "(ㆆ _ ㆆ)  -  Feeling Afraid",
-    "•`_´•  -  Feeling Angry",
-    "•͡˘㇁•͡˘  - Feeling Awkward",
-    "(˵ ͡° ͜ʖ ͡°˵)  - Feeling Blush",
-    "(-_-)  -  Feeling Bored",
-    "※(^o^)/※  -  Feeling Cheerful",
-    "(｡◕‿‿◕｡)  -  Feeling Cute",
+    "(ㆆ _ ㆆ)  -  Reacted Afraid",
+    "•`_´•  -  Reacted Angry",
+    "•͡˘㇁•͡˘  - Reacted Awkward",
+    "(˵ ͡° ͜ʖ ͡°˵)  - Reacted Blush",
+    "(-_-)  -  Reacted Bored",
+    "※(^o^)/※  -  Reacted Cheerful",
+    "(｡◕‿‿◕｡)  -  Reacted Cute",
     "ᕕ(⌐■_■)ᕗ ♪♬  -  Dance!",
-    "<(^_^)>  -  Feeling Dope",
-    "¯(°_o)/¯  - Feeling Dunno",
+    "<(^_^)>  -  Reacted Dope",
+    "¯(°_o)/¯  - Reacted Dunno",
     "(҂◡_◡) ᕤ  -  Endure",
-    "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧  -  Feeling Excited",
+    "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧  -  Reacted Excited",
     "(－‸ლ)  -  Face Palm",
-    "(^-^)/  -  Feeling Grateful",
+    "(^-^)/  -  Reacted Grateful",
     "( ´◔ ω◔`) ノシ  -  Greetings",
-    "٩(^‿^)۶  -  Feeling Happy",
+    "٩(^‿^)۶  -  Reacted Happy",
     "(°Ω°)/  -  Help",
     "(づ｡◕‿‿◕｡)づ  -  Hug",
-    "(˶‾᷄ ⁻̫ ‾᷅˵)  -  Feeling Pleased",
+    "(˶‾᷄ ⁻̫ ‾᷅˵)  -  Reacted Pleased",
     "♥‿♥  -  Love",
-    "t(ಠ益ಠt)  -  Feeling Mad",
-    "ε(´סּ︵סּ`)з  -  Feeling Sad",
-    "(๑•́ ヮ •̀๑)  -  Feeling Surprised",
-    "(๑•̀ㅂ•́)ง✧  -  Feeling Victory",
+    "t(ಠ益ಠt)  -  Reacted Mad",
+    "ε(´סּ︵סּ`)з  -  Reacted Sad",
+    "(๑•́ ヮ •̀๑)  -  Reacted Surprised",
+    "(๑•̀ㅂ•́)ง✧  -  Reacted Victory",
   ];
 
   let { postid } = useParams();
@@ -428,7 +412,12 @@ export function PostDetail() {
                 )}
                 <p className="post-page-p-2">React to the post!</p>
                 <Menu>
-                  <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                  <MenuButton
+                    mr="auto"
+                    mt={4}
+                    as={Button}
+                    rightIcon={<ChevronDownIcon />}
+                  >
                     {currentAsciiMood}
                   </MenuButton>
                   <MenuList>
@@ -455,7 +444,7 @@ export function PostDetail() {
               <div className="prompt-page-div">
                 <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
                   <span className="prompt-page-text-wrapper-3">
-                    Here’s how <br />
+                    See how <br />
                   </span>
                   <span className="prompt-page-text-wrapper-4">
                     People <br />
@@ -463,6 +452,15 @@ export function PostDetail() {
                     <br />
                   </span>
                   <br />
+                  <p style={{ marginBottom: "2rem" }}>
+                    (˵ ͡° ͜ʖ ͡°˵) - Reacted Blush - <u>5 People</u>
+                  </p>
+                  <p style={{ marginBottom: "2rem" }}>
+                    (｡◕‿‿◕｡) - Reacted Cute - <u>3 People</u>
+                  </p>
+                  <p style={{ marginBottom: "2rem" }}>
+                    (๑•́ ヮ •̀๑) - Reacted Surprised - <u>7 People</u>
+                  </p>
                   <img
                     className="divider-small negative-margin"
                     src={DividerBig}
