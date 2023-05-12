@@ -71,11 +71,11 @@ export function UserComments() {
             <h1>No comments to show</h1>
           )}
 
-          <img
+          {/* <img
             className="divider-small"
             src={DividerSmall}
             alt="DividerSmall"
-          />
+          /> */}
           <div className="your-post-b-cat">
             <p className="your-post-p">
               Pet this cat <br />
