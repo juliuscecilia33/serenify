@@ -6,7 +6,23 @@ import { Authentication } from "../../context/Authentication";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../../images/logo2.png";
-import { useToast, Checkbox, CheckboxGroup } from "@chakra-ui/react";
+import {
+  useToast,
+  Checkbox,
+  CheckboxGroup,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Button,
+  List,
+  ListItem,
+  UnorderedList,
+} from "@chakra-ui/react";
 import { NavbarVTwo } from "../../components";
 
 export function Register() {
@@ -15,8 +31,11 @@ export function Register() {
   const [userConfirmPassword, setUserConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { isAuthenticated, setAuth } = useContext(Authentication);
+  const [showArrow, setShowArrow] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -100,10 +119,117 @@ export function Register() {
             />
 
             <div>
+              {!showArrow ? (
+                <h3>
+                  Please read and agree the{" "}
+                  <button onClick={onOpen}>
+                    <u>Privacy Policy</u>
+                  </button>
+                </h3>
+              ) : (
+                <h3>
+                  ✔Please read and agree the{" "}
+                  <button onClick={onOpen}>
+                    <u>Privacy Policy</u>
+                  </button>
+                </h3>
+              )}
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Privacy Policy</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <p>
+                      This privacy notice for Young Leaders Program, describes
+                      how and why we might collect, store, and use your
+                      information when you use our services, such as when you:
+                    </p>
+                    <UnorderedList>
+                      <ListItem>
+                        Visit our website, or any website of ours that links to
+                        this privacy notice
+                      </ListItem>
+                      <ListItem>
+                        Engage with us in other related ways, including any
+                        sales, marketing, or events Questions or concerns?
+                        Reading this privacy notice will help you
+                      </ListItem>
+                      <ListItem>
+                        What personal information do we process? When you visit,
+                        use, or navigate our Services, we may process personal
+                        information depending on how you interact with the Young
+                        Leaders Program and the Services, the choices you make,
+                        and the products and features you use.{" "}
+                      </ListItem>
+                      <ListItem>
+                        What information do we collect? We collect personal
+                        information that you provide to us. We collect email
+                        addresses and passwords.{" "}
+                      </ListItem>
+                      <ListItem>
+                        Do we process any sensitive personal information? We do
+                        not process sensitive personal information.{" "}
+                      </ListItem>
+                      <ListItem>
+                        Do we receive any information from third parties? We do
+                        not receive any information from third parties. Which
+                        parties do we share personal information with? We do not
+                        share your personal information with third parties.{" "}
+                      </ListItem>
+                      <ListItem>
+                        How do we process your information? We process your
+                        information to provide, improve, and administer our
+                        Services, communicate with you, for security and fraud
+                        prevention, and to comply with law. We may also process
+                        your information for other purposes with your consent
+                        and only when we have a valid legal reason to do so.{" "}
+                      </ListItem>
+                      <ListItem>
+                        How long do we keep your information? We keep your
+                        information for as long as necessary to fulfill the
+                        purposes outlined in this privacy notice, unless a
+                        longer retention period is required or permitted by law.
+                        No purpose in this notice will require us keeping your
+                        information for longer than the period of time in which
+                        users have an account with us.
+                      </ListItem>
+                      <ListItem>
+                        What are your rights? Depending on where you are located
+                        geographically, the applicable privacy law may mean you
+                        have certain rights regarding your personal information.{" "}
+                      </ListItem>
+                      <ListItem>
+                        How do you exercise your rights? The easiest way to
+                        exercise your rights is by contacting us at
+                        serenify.platform@outlook.com. We will consider and act
+                        upon any request in accordance with applicable data
+                        protection laws.
+                      </ListItem>
+                    </UnorderedList>
+                  </ModalBody>
+
+                  <ModalFooter>
+                    <Button
+                      colorScheme="blue"
+                      mr={3}
+                      onClick={(e) => {
+                        setShowArrow(true);
+                        onClose();
+                      }}
+                    >
+                      Agree
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+
               <h3>
-                Please read and agree the <u>Privacy Policy</u>
+                Follow Serenify's{" "}
+                <button>
+                  <u>Community Guideline</u>
+                </button>
               </h3>
-              <h3></h3>
             </div>
 
             <Link to={ROUTES.LOGIN}>
@@ -111,12 +237,14 @@ export function Register() {
                 Already have an account? <u>Log in here!</u>
               </h3>
             </Link>
-            <button
-              onClick={(e) => handleRegister(e)}
-              className="signup-text-wrapper-3"
-            >
-              -&gt;
-            </button>
+            {showArrow && (
+              <button
+                onClick={(e) => handleRegister(e)}
+                className="signup-text-wrapper-3"
+              >
+                -&gt;
+              </button>
+            )}
           </div>
         </div>
       </div>

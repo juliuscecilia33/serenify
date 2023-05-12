@@ -118,6 +118,18 @@
   position: relative;
 }
 
+.post-page-p-2 {
+  align-self: stretch;
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  margin-top: 3.5rem;
+  position: relative;
+}
+
 .post-page-no-comments {
   align-self: stretch;
   color: #282828;

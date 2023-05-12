@@ -351,7 +351,9 @@ export function PostDetail() {
                         />
                       </Link>
                     )}
+                  <br />
                 </div>
+                <p className="post-page-p-2">React to the post!</p>
                 {commentingOnPost && (
                   <>
                     <textarea
