@@ -24,6 +24,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import { NavbarVTwo } from "../../components";
+import { CommunityRule } from "../../components/CommunityRule/CommunityRule";
 
 export function Register() {
   const [userEmail, setUserEmail] = useState("");
@@ -31,6 +32,8 @@ export function Register() {
   const [userConfirmPassword, setUserConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { isAuthenticated, setAuth } = useContext(Authentication);
+  const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
+  const [agreeCommunityRule, setAgreeCommunityRule] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
@@ -119,7 +122,7 @@ export function Register() {
             />
 
             <div>
-              {!showArrow ? (
+              {!agreePrivacyPolicy ? (
                 <h3>
                   Please read and agree the{" "}
                   <button onClick={onOpen}>
@@ -214,30 +217,30 @@ export function Register() {
                       colorScheme="blue"
                       mr={3}
                       onClick={(e) => {
-                        setShowArrow(true);
+                        setAgreePrivacyPolicy(true);
                         onClose();
                       }}
                     >
                       Agree
                     </Button>
+                    <Button variant="ghost" mr={3} onClick={onClose}>
+                      Cancel
+                    </Button>
                   </ModalFooter>
                 </ModalContent>
               </Modal>
 
-              <h3>
-                Follow Serenify's{" "}
-                <button>
-                  <u>Community Guideline</u>
-                </button>
-              </h3>
+              <CommunityRule
+                agreeCommunityRule={agreeCommunityRule}
+                setAgreeCommunityRule={setAgreeCommunityRule}
+              />
             </div>
-
             <Link to={ROUTES.LOGIN}>
               <h3 className="signup-text-wrapper-4">
                 Already have an account? <u>Log in here!</u>
               </h3>
             </Link>
-            {showArrow && (
+            {agreeCommunityRule && agreePrivacyPolicy && (
               <button
                 onClick={(e) => handleRegister(e)}
                 className="signup-text-wrapper-3"

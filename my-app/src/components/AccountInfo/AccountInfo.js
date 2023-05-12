@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import "./AccountInfo.css";
+import { CommunityRule } from "../../components/CommunityRule/CommunityRule";
 
 export function AccountInfo(props) {
   const {
@@ -47,9 +48,7 @@ export function AccountInfo(props) {
   const [show2, setShow2] = useState(false);
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
-
   const toast = useToast();
-  console.log("userPassword 刚开始", userpassword);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
