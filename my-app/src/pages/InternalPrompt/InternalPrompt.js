@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Navbar, NavbarVTwo } from "../../components/index";
+import { NavbarVTwo } from "../../components/index";
 import { useNavigate } from "react-router";
 import apiClient from "../../instance/config";
 import DatePicker from "react-datepicker";

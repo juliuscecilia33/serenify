@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./HomeVTwo.css";
 import Cat from "../../images/Cat.png";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { NavbarVTwo } from "../../components";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 export function HomeVTwo() {
+  const x = useMotionValue(0);
+  // const rotate = useTransform(x, [-100, 100], [-180, 180]);
+
+  const handleDrag = (event, info) => {
+    x.set(info.point.x);
+  };
+
+  const handleDragEnd = () => {
+    x.set(0);
+  };
+  const [rotate, setRotate] = useState(false);
   return (
     <>
       <NavbarVTwo />
@@ -40,6 +52,7 @@ export function HomeVTwo() {
             ---------
           </h1>
         </div>
+
         <div className="s3">
           <p className="small">&nbsp;I like to</p>
           <h1 className="big">Scroll</h1>
@@ -51,13 +64,31 @@ export function HomeVTwo() {
             <br />
           </span>
           <h1 className="big">---------</h1>
-          <img
+          {/* <img
             className="wheel"
             alt={"Wheel"}
             src={
               "https://anima-uploads.s3.amazonaws.com/projects/64480ae0ca3bfce771e46398/releases/6448516f8ae30cff1df92e11/img/wheel.svg"
             }
-          />
+          /> */}
+          <motion.div>
+            <motion.img
+              className="wheel"
+              alt="Wheel"
+              src="https://anima-uploads.s3.amazonaws.com/projects/64480ae0ca3bfce771e46398/releases/6448516f8ae30cff1df92e11/img/wheel.svg"
+              drag="x"
+              animate={{ rotate: rotate ? 360 : 0 }}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.7}
+              onDrag={handleDrag}
+              onDragEnd={handleDragEnd}
+              whileTap={{ scale: 1.2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              onClick={() => {
+                setRotate(!rotate);
+              }}
+            />
+          </motion.div>
         </div>
         <div className="s3">
           <p className="small">

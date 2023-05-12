@@ -39,7 +39,46 @@ export function NavbarVTwo() {
         <Link to={ROUTES.HOMEVTWO}>
           <img className="navbar-logo" alt={"Logo"} src={Logo} />
         </Link>
-        <HStack spacing="24px">
+        {isAuthenticated && admin && (
+          <Link to={ROUTES.ADMINPAGE}>
+            <div className="auth-button">Admin</div>
+          </Link>
+        )}
+        {isAuthenticated ? (
+          // <button onClick={(e) => logout(e)}>
+          <>
+            <Menu>
+              <MenuButton as={Button} colorScheme="null">
+                <img className="cat-image-logo" alt={"Cat"} src={CatBolded} />
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={() => navigate(ROUTES.PROMPT)}>
+                  Today's Prompt
+                </MenuItem>
+                <MenuItem
+                  onClick={() =>
+                    navigate(`/${localStorage.getItem("userid")}/profile`)
+                  }
+                >
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={(e) => logout(e)}>Sign Out</MenuItem>
+              </MenuList>
+            </Menu>
+          </>
+        ) : (
+          <Link to={ROUTES.REGISTER}>
+            <div className="auth-button">Register</div>
+          </Link>
+        )}
+      </div>
+    </>
+  );
+}
+
+//old admin menu
+{
+  /* <HStack spacing="24px">
           {isAuthenticated && admin && (
             <Menu>
               <MenuButton
@@ -75,35 +114,5 @@ export function NavbarVTwo() {
               </MenuList>
             </Menu>
           )}
-        </HStack>
-        {isAuthenticated ? (
-          // <button onClick={(e) => logout(e)}>
-          <>
-            <Menu>
-              <MenuButton as={Button} colorScheme="null">
-                <img className="cat-image-logo" alt={"Cat"} src={CatBolded} />
-              </MenuButton>
-              <MenuList>
-                <MenuItem onClick={() => navigate(ROUTES.PROMPT)}>
-                  Today's Prompt
-                </MenuItem>
-                <MenuItem
-                  onClick={() =>
-                    navigate(`/${localStorage.getItem("userid")}/profile`)
-                  }
-                >
-                  Profile
-                </MenuItem>
-                <MenuItem onClick={(e) => logout(e)}>Sign Out</MenuItem>
-              </MenuList>
-            </Menu>
-          </>
-        ) : (
-          <Link to={ROUTES.REGISTER}>
-            <div className="auth-button">Register</div>
-          </Link>
-        )}
-      </div>
-    </>
-  );
+        </HStack> */
 }

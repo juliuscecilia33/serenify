@@ -1,0 +1,25 @@
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+module.exports = async (req, res, next) => {
+  try {
+    //1. destructure token
+    const jwtToken = req.header("token");
+
+    //2.check whether token exists
+    //if not exist --> throw error
+    if (!jwtToken) {
+      return res.status(403).json("Not Authorize!");
+    }
+
+    //3.check if jwtToken is valid
+    //用这一个function就可以检验，仅需提取的jwtToken和设立的jwtSecret
+    const payload = jwt.verify(jwtToken, process.env.jwtSecret);
+
+    //最后转换为user可用的payload？？？？这块没听懂
+    req.user = payload.user;
+  } catch (err) {
+    console.error(err.message);
+    return res.status(403).json("Not Authorize!");
+  }
+};

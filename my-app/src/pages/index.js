@@ -13,3 +13,4 @@ export { InternalReportPostDetail } from "./InternalReportPostDetail/InternalRep
 export { UserComments } from "./UserComments/UserComments";
 export { UserLikes } from "./UserLikes/UserLikes";
 export { UserPosts } from "./UserPosts/UserPosts";
+export { AdminPage } from "./AdminPage/AdminPage";

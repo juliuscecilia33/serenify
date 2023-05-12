@@ -17,6 +17,7 @@ import {
   UserComments,
   UserPosts,
   UserLikes,
+  AdminPage,
 } from "./pages";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Authentication } from "./context/Authentication";
@@ -76,6 +77,10 @@ function App() {
             <Route
               path={ROUTES.INTERNALREPORTPOSTDETAIL}
               element={admin ? <InternalReportPostDetail /> : <HomeVTwo />}
+            />
+            <Route
+              path={ROUTES.ADMINPAGE}
+              element={admin ? <AdminPage /> : <HomeVTwo />}
             />
           </Routes>
         </BrowserRouter>

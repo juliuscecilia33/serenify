@@ -22,14 +22,13 @@ export function CommunityRule(props) {
     <div>
       {!agreeCommunityRule ? (
         <h3>
-          Follow Serenify's{" "}
           <button onClick={onOpen}>
             <u>Community Guideline</u>
           </button>
         </h3>
       ) : (
         <h3>
-          ✔Follow Serenify's{" "}
+          ✔
           <button onClick={onOpen}>
             <u>Community Guideline</u>
           </button>

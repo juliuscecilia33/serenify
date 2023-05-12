@@ -122,16 +122,17 @@ export function Register() {
             />
 
             <div>
+              Please Read and Agree the Privacy Policy and Serenify's Community
+              Guideline First~
               {!agreePrivacyPolicy ? (
                 <h3>
-                  Please read and agree the{" "}
                   <button onClick={onOpen}>
                     <u>Privacy Policy</u>
                   </button>
                 </h3>
               ) : (
                 <h3>
-                  ✔Please read and agree the{" "}
+                  ✔
                   <button onClick={onOpen}>
                     <u>Privacy Policy</u>
                   </button>
@@ -229,7 +230,6 @@ export function Register() {
                   </ModalFooter>
                 </ModalContent>
               </Modal>
-
               <CommunityRule
                 agreeCommunityRule={agreeCommunityRule}
                 setAgreeCommunityRule={setAgreeCommunityRule}
