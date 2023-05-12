@@ -5,10 +5,10 @@ import CatBolded from "../../images/catbolded.png";
 import { useNavigate } from "react-router";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
-import "./NavbarVTwo.css";
+import "./AdminNavbar.css";
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 
-export function NavbarVTwo() {
+export function AdminNavbar() {
   const { isAuthenticated, setAuth, admin } = useContext(Authentication);
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ export function NavbarVTwo() {
 
   return (
     <>
-      <div className="navbar-container">
+      <div className="admin-navbar-container">
         <Link to={ROUTES.HOMEVTWO}>
           <img className="navbar-logo" alt={"Logo"} src={Logo} />
         </Link>

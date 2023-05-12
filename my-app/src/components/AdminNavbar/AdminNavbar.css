@@ -1,0 +1,43 @@
+.admin-navbar-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background: none;
+  background-color: #d1ebec;
+  padding: 0px 30px;
+  padding-top: 40px;
+  margin: 0;
+  justify-content: space-between;
+}
+
+.auth-button {
+  color: #000000;
+  font-family: "Oswald", Helvetica;
+  font-size: 23px;
+  font-weight: 400;
+  left: 290px;
+  letter-spacing: 0;
+  line-height: normal;
+  text-decoration: underline;
+  top: 66px;
+  white-space: nowrap;
+}
+
+.navbar-logo {
+  height: 28px;
+  width: auto;
+}
+
+.chakra-button,
+.chakra-menu__menu-button,
+.css-1flsqw1n,
+.css-1flsqw1:active,
+.css-1flsqw1[data-active],
+.admin-button {
+  background: none;
+}
+
+.cat-image-logo {
+  width: auto;
+  height: 32px;
+}
