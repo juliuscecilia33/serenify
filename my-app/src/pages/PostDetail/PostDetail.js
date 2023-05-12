@@ -17,9 +17,61 @@ import axios from "axios";
 import { NavbarVTwo } from "../../components";
 import { handleTimeSince } from "../../helpers/handleTimeSince";
 import { SkeletonLayout } from "../../components";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import {
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuGroup,
+  Button,
+  Stack,
+  AspectRatio,
+  CloseButton,
+  ButtonGroup,
+  useToast,
+  useDisclosure,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
+} from "@chakra-ui/react";
 
 export function PostDetail() {
+  const asciiEmojis = [
+    "(ㆆ _ ㆆ)  -  Feeling Afraid",
+    "•`_´•  -  Feeling Angry",
+    "•͡˘㇁•͡˘  - Feeling Awkward",
+    "(˵ ͡° ͜ʖ ͡°˵)  - Feeling Blush",
+    "(-_-)  -  Feeling Bored",
+    "※(^o^)/※  -  Feeling Cheerful",
+    "(｡◕‿‿◕｡)  -  Feeling Cute",
+    "ᕕ(⌐■_■)ᕗ ♪♬  -  Dance!",
+    "<(^_^)>  -  Feeling Dope",
+    "¯(°_o)/¯  - Feeling Dunno",
+    "(҂◡_◡) ᕤ  -  Endure",
+    "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧  -  Feeling Excited",
+    "(－‸ლ)  -  Face Palm",
+    "(^-^)/  -  Feeling Grateful",
+    "( ´◔ ω◔`) ノシ  -  Greetings",
+    "٩(^‿^)۶  -  Feeling Happy",
+    "(°Ω°)/  -  Help",
+    "(づ｡◕‿‿◕｡)づ  -  Hug",
+    "(˶‾᷄ ⁻̫ ‾᷅˵)  -  Feeling Pleased",
+    "♥‿♥  -  Love",
+    "t(ಠ益ಠt)  -  Feeling Mad",
+    "ε(´סּ︵סּ`)з  -  Feeling Sad",
+    "(๑•́ ヮ •̀๑)  -  Feeling Surprised",
+    "(๑•̀ㅂ•́)ง✧  -  Feeling Victory",
+  ];
+
   let { postid } = useParams();
   const [postData, setPostData] = useState(null);
   const [editingPost, setEditingPost] = useState(false);
@@ -29,6 +81,7 @@ export function PostDetail() {
   const [commentingOnPostValue, setCommentingOnPostValue] = useState("");
   const [postLiked, setPostLiked] = useState(false);
   const [userPostsLiked, setUserPostsLiked] = useState(null);
+  const [currentAsciiMood, setCurrentAsciiMood] = useState(asciiEmojis[0]);
 
   console.log("post id from post detail: ", postid);
   console.log("post liked: ", postLiked);
@@ -374,12 +427,49 @@ export function PostDetail() {
                   </>
                 )}
                 <p className="post-page-p-2">React to the post!</p>
+                <Menu>
+                  <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                    {currentAsciiMood}
+                  </MenuButton>
+                  <MenuList>
+                    <MenuGroup title="Mood: ">
+                      {asciiEmojis.map((emoji, id) => (
+                        <>
+                          <MenuItem
+                            onClick={() => setCurrentAsciiMood(emoji)}
+                            key={id}
+                          >
+                            {emoji}
+                          </MenuItem>
+                        </>
+                      ))}
+                    </MenuGroup>
+                  </MenuList>
+                </Menu>
               </div>
               <img
                 className="divider-small"
                 src={DividerSmall}
                 alt="DividerSmall"
               />
+              <div className="prompt-page-div">
+                <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
+                  <span className="prompt-page-text-wrapper-3">
+                    Here’s how <br />
+                  </span>
+                  <span className="prompt-page-text-wrapper-4">
+                    People <br />
+                    <u>Reacted.</u>
+                    <br />
+                  </span>
+                  <br />
+                  <img
+                    className="divider-small negative-margin"
+                    src={DividerBig}
+                    alt="Divider Big"
+                  />
+                </p>
+              </div>
               <div className="prompt-page-div">
                 <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
                   <span className="prompt-page-text-wrapper-3">
@@ -390,12 +480,12 @@ export function PostDetail() {
                     <u>Commented.</u>
                     <br />
                   </span>
-                  <br />
-                  <img
+                  {/* <br /> */}
+                  {/* <img
                     className="divider-small negative-margin"
                     src={DividerBig}
                     alt="Divider Big"
-                  />
+                  /> */}
                 </p>
               </div>
               {postComments && postComments.length > 0 ? (
