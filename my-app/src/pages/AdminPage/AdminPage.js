@@ -35,7 +35,7 @@ export function AdminPage() {
             <h1 className="admin-page-text-wrapper">Admin</h1>
           </div>
           <div className="admin-page-b1-5">
-            <button
+            {/* <button
               onClick={() => {
                 setCreatePromptSelect(true);
                 setPromptSelect(false);
@@ -46,7 +46,7 @@ export function AdminPage() {
               }
             >
               {createPromptSelect && ">"} Create a prompt
-            </button>
+            </button> */}
             <button
               onClick={() => {
                 setCreatePromptSelect(false);
@@ -57,7 +57,7 @@ export function AdminPage() {
                 promptSelect ? "admin-page-div-bolded" : "admin-page-div"
               }
             >
-              {promptSelect && ">"} Edit a prompt
+              {promptSelect && ">"} Handle prompts
             </button>
             <button
               onClick={() => {

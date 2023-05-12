@@ -30,6 +30,16 @@ your-post-your-post {
   min-width: 390px;
 }
 
+.comment-post-description {
+  color: #686868;
+  cursor: pointer;
+  font-family: "Oswald", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
 .cat-image {
   background-image: "unset";
   background-size: "unset";
@@ -95,18 +105,19 @@ your-post-your-post {
   flex-direction: column;
   padding: 40px 0px 30px;
   position: relative;
+  font-weight: 500;
 }
 
-.your-post-don-t-eat-before-bed-just-finished-a-sandwich {
+.comment-post {
   align-self: stretch;
   color: #282828;
   cursor: pointer;
   font-family: "Oswald", Helvetica;
-  font-size: 45px;
-  font-weight: 400;
+  font-size: 40px;
+  font-weight: 500;
   letter-spacing: 0;
   line-height: 58.5px;
-  margin-top: -1px;
+  margin-top: -2rem;
   position: relative;
 }
 

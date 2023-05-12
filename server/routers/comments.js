@@ -59,7 +59,7 @@ router.get("/:userid", async (req, res) => {
 });
 
 //get comments by postid
-router.get("/:postid", async (req, res) => {
+router.get("/post/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
 

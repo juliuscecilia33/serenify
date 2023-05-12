@@ -6,6 +6,8 @@ import DividerSmall from "../../images/DividerSmall.png";
 import Cat from "../../images/Cat.png";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import moment from "moment";
+import { handleTimeSince } from "../../helpers/handleTimeSince";
 
 export function UserComments() {
   const [userComments, setUserComments] = useState(null);
@@ -31,11 +33,28 @@ export function UserComments() {
       });
   }, []);
 
+  const formatDate = (defaultPromptDate) => {
+    console.log(new Date(defaultPromptDate));
+    let displayDate = moment(new Date(defaultPromptDate)).format("MMMM D, Y");
+
+    return displayDate;
+  };
+
   return (
     <>
       <NavbarVTwo />
       <div className="your-post-your-post">
         <div className="your-post-content">
+          <div className="post-page-tag">
+            <button
+              onClick={() => {
+                navigate(`/${localStorage.getItem("userid")}/profile`);
+              }}
+              className="post-page-div"
+            >
+              &lt;-
+            </button>
+          </div>
           <div className="your-post-b">
             <h1 className="your-post-your-posts-are-listed-below">
               <span className="your-post-text-wrapper">
@@ -55,9 +74,21 @@ export function UserComments() {
           {userComments ? (
             userComments.map((comment, id) => (
               <>
-                <div key={id} className="your-post-div">
-                  <p className="your-post-don-t-eat-before-bed-just-finished-a-sandwich">
-                    {comment.commenttext}
+                <div className="post-container">
+                  <div className="top-top-section">
+                    <button
+                      onClick={() => navigate(`/post/${comment.postid}`)}
+                      className="comment-post-description"
+                    >
+                      <b>{comment.postdescription}</b> •{" "}
+                      {formatDate(comment.posttime)}
+                    </button>
+                  </div>
+                  <div key={id} className="your-post-div">
+                    <p className="comment-post">{comment.commenttext}</p>
+                  </div>
+                  <p className="date_posted">
+                    {handleTimeSince(new Date(comment.commenttime))} ago
                   </p>
                 </div>
                 <img
@@ -70,12 +101,6 @@ export function UserComments() {
           ) : (
             <h1>No comments to show</h1>
           )}
-
-          {/* <img
-            className="divider-small"
-            src={DividerSmall}
-            alt="DividerSmall"
-          /> */}
           <div className="your-post-b-cat">
             <p className="your-post-p">
               Pet this cat <br />

@@ -47,7 +47,7 @@ export function PostDetail() {
         });
 
       axios
-        .get(`${process.env.REACT_APP_BACKENDURL}comments/${postid}`)
+        .get(`${process.env.REACT_APP_BACKENDURL}comments/post/${postid}`)
         .then((comments_response) => {
           console.log("comments for post: ", comments_response);
           setPostComments(
@@ -353,7 +353,7 @@ export function PostDetail() {
                     )}
                   <br />
                 </div>
-                <p className="post-page-p-2">React to the post!</p>
+
                 {commentingOnPost && (
                   <>
                     <textarea
@@ -373,6 +373,7 @@ export function PostDetail() {
                     </div>
                   </>
                 )}
+                <p className="post-page-p-2">React to the post!</p>
               </div>
               <img
                 className="divider-small"
