@@ -83,42 +83,5 @@ export function AdminPage() {
         </div>
       </div>
     </>
-    // <div>
-    //   <NavbarVTwo />
-    //   <h1>Admin</h1>
-    //   <div className="admin-selections">
-    //     <div className="admin-prompt-selection">
-    //       <button
-    //         onClick={() => {
-    //           setPromptSelect(!promptSelect);
-    //           setReportSelect(false);
-    //         }}
-    //       >
-    //         {promptSelect ? "> Edit/Post a Prompt" : "Edit/Post a Prompt"}
-    //       </button>
-    //     </div>
-
-    //     <div className="admin-report-selection">
-    //       <button
-    //         onClick={() => {
-    //           setPromptSelect(false);
-    //           setReportSelect(!reportSelect);
-    //         }}
-    //       >
-    //         {reportSelect ? "> Handle User Report" : "Handle User Report"}
-    //       </button>
-    //     </div>
-    //   </div>
-
-    //   <>
-    //     <button
-    // onClick={(e) => {
-    //   handleClick(e);
-    // }}
-    //     >
-    //       -&gt;
-    //     </button>
-    //   </>
-    // </div>
   );
 }

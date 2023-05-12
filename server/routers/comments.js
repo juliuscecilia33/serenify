@@ -36,12 +36,22 @@ router.get("/:userid", async (req, res) => {
   try {
     const { userid } = req.params;
 
-    const getAllComment = await pool.query(
-      "SELECT * FROM tblComment WHERE userid = $1",
+    // const getAllComment = await pool.query(
+    //   "SELECT * FROM tblComment WHERE userid = $1",
+    //   [userid]
+    // );
+
+    const getCommentAndPost = await pool.query(
+      "SELECT pc.commentid, pc.commenttext, pc.commenttime,  \
+      pc.userid, po.postid, po.postdescription, po.attachment, \
+      po.posttime, po.userid, po.postlike, po.likedusers, \
+      po.reportcount, po.isvisible, po.ascii_mood FROM tblpost po \
+      JOIN tblcomment pc ON po.postid = pc.postid \
+      WHERE pc.userid = $1",
       [userid]
     );
 
-    res.json(getAllComment.rows);
+    res.json(getCommentAndPost.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

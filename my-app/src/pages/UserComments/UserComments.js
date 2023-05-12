@@ -4,8 +4,33 @@ import "./UserComments.css";
 import { NavbarVTwo } from "../../components";
 import DividerSmall from "../../images/DividerSmall.png";
 import Cat from "../../images/Cat.png";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 export function UserComments() {
+  const [userComments, setUserComments] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKENDURL}comments/${localStorage.getItem(
+          "userid"
+        )}`
+      )
+      .then((response) => {
+        console.log("comments all: ", response);
+        setUserComments(
+          response.data.sort(function (a, b) {
+            return new Date(b.commenttime) - new Date(a.commenttime);
+          })
+        );
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, []);
+
   return (
     <>
       <NavbarVTwo />
@@ -27,24 +52,25 @@ export function UserComments() {
             src={DividerSmall}
             alt="DividerSmall"
           />
-          <div className="your-post-div">
-            <p className="your-post-don-t-eat-before-bed-just-finished-a-sandwich">
-              Don’t eat before&nbsp;&nbsp;&nbsp;&nbsp;
-              <br />
-              bed. Just finished a&nbsp;&nbsp; <br />
-              sandwich.
-            </p>
-          </div>
-          <img
-            className="divider-small"
-            src={DividerSmall}
-            alt="DividerSmall"
-          />
-          <div className="your-post-div">
-            <p className="your-post-p">
-              The light bulb in my living room just exploded. It cut my hand...
-            </p>
-          </div>
+          {userComments ? (
+            userComments.map((comment, id) => (
+              <>
+                <div key={id} className="your-post-div">
+                  <p className="your-post-don-t-eat-before-bed-just-finished-a-sandwich">
+                    {comment.commenttext}
+                  </p>
+                </div>
+                <img
+                  className="divider-small"
+                  src={DividerSmall}
+                  alt="DividerSmall"
+                />
+              </>
+            ))
+          ) : (
+            <h1>No comments to show</h1>
+          )}
+
           <img
             className="divider-small"
             src={DividerSmall}
