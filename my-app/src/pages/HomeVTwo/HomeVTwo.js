@@ -30,13 +30,12 @@ export function HomeVTwo() {
             &lt;･◡･&gt;!
             <br />
             <br />I am Serenify.
-            <br />
-            ---------
           </h1>
+          <h1 className="dash">----------</h1>
         </div>
         <div className="s2">
           <h1 className="big">Your</h1>
-          <p className="small smallcross">
+          <p className="small">
             &nbsp;Online&nbsp;
             <br />
             &nbsp;Anonymous&nbsp;
@@ -46,11 +45,8 @@ export function HomeVTwo() {
             &nbsp;Prompt Based&nbsp;
             <br />
           </p>
-          <h1 className="big">
-            Forum.
-            <br />
-            ---------
-          </h1>
+          <h1 className="big">Forum.</h1>
+          <h1 className="dash">----------</h1>
         </div>
 
         <div className="s3">
@@ -63,7 +59,7 @@ export function HomeVTwo() {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Try it~^
             <br />
           </span>
-          <h1 className="big">---------</h1>
+          <h1 className="dash">----------</h1>
           {/* <img
             className="wheel"
             alt={"Wheel"}
@@ -100,9 +96,6 @@ export function HomeVTwo() {
             <br />
             <br />
             <br />
-            <br />
-            <br />
-            <h1 className="big">---------</h1>
           </p>
           <Link to={ROUTES.PROMPT}>
             <img className="cat" alt={"Cat"} src={Cat} />

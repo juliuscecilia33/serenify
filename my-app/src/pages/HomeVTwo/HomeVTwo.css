@@ -10,7 +10,7 @@
 }
 
 .log-in {
-  color: #000000;
+  color: #282828;
   font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
@@ -27,18 +27,24 @@
   font-family: "Oswald";
   font-style: normal;
   font-weight: 500;
-  font-size: 100px;
+  font-size: 90px;
   line-height: 100%;
-  color: #000000;
+  color: #282828;
 }
 
 .small {
   font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
-  font-size: 50px;
+  font-size: 45px;
   line-height: 130%;
-  color: #000000;
+  color: #282828;
+}
+
+.dash {
+  font-size: 60px;
+  letter-spacing: 0.2em;
+  color: #282828;
 }
 
 .s1 {
@@ -57,10 +63,6 @@
   align-self: stretch;
   justify-content: center;
   position: relative;
-}
-
-.smallcross {
-  text-decoration: line-through;
 }
 
 .wheel {

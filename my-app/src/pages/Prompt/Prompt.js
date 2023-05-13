@@ -176,9 +176,10 @@ export function Prompt() {
             {havePrompt && isAuthenticated && (
               <>
                 <p className="prompt-page-p">
-                  You can put down <br />
-                  your ideas <br />
-                  with the pencil.
+                  Put down your
+                  <br />
+                  ideas with a pencil.
+                  <br />
                 </p>
 
                 <span className="prompt-page-span">
@@ -245,9 +246,7 @@ export function Prompt() {
           <div className="prompt-page-b-cat">
             <p className="prompt-page-p">
               Pet this cat <br />
-              And you will go
-              <br />
-              Back to top.
+              To go back top.
             </p>
             <button
               onClick={() => {

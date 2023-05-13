@@ -11,7 +11,7 @@ router.post("/create/:promptDate", async (req, res) => {
     //new Date().toLocaleDateString(); //.split('T')[0];
 
     if (promptDescription === null) {
-      res.status(400).send("the prompt content cannot be null...");
+      return res.status(401).send("the prompt content cannot be null...");
     }
 
     const checkDate = await pool.query(

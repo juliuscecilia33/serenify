@@ -94,15 +94,19 @@ router.get("/:userid/likepost", async (req, res) => {
     // );
 
     const getAllUserLikePost = await pool.query(
-      "SELECT u.postsliked \
-      FROM tblUser u \
-      WHERE userid = $1",
+      "SELECT postsliked FROM tblUser WHERE userid = $1",
       [userid]
     );
 
+    if (getAllUserLikePost.rows.length == 0) {
+      res.json("Empty Likes");
+    }
     const result = getAllUserLikePost.rows[0].postsliked.map((item) =>
       JSON.parse(item)
     );
+
+    // console.log(result);
+    // http://localhost:3005/users/7e52c2f3-d552-48ad-9473-ff15e63d60d7/likepost
 
     res.json(result);
   } catch (err) {

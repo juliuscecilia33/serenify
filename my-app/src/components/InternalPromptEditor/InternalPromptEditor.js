@@ -39,69 +39,89 @@ export function InternalPromptEditor(props) {
   const handleSubmit = async (e) => {
     console.log("haveprompt inside handle submit", havePrompt);
     console.log("prompt content inside handle submit", promptContent);
-    if (promptContent === null || promptContent === "") {
-      toast({
+    if (!promptContent) {
+      return toast({
         title: "ohh nooooo",
         description: "You cannot post empty prompt...",
         status: "error",
         duration: 2500,
         isClosable: true,
       });
-    } else {
-      if (havePrompt) {
-        await apiClient
-          .put(`/prompt/${promptid}`, {
-            promptDescription: promptContent,
-          })
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.error("error from handle submit: ", error.message);
-          });
-      } else {
-        await apiClient
-          .post(`/prompt/create/${dateTimee}`, {
-            promptDescription: promptContent,
-          })
-          .then((response) => {
-            console.log(response);
-            setHavePrompt(!havePrompt);
-          })
-          .catch((error) => {
-            console.error("error from handle submit: ", error.message);
-          });
-      }
+    }
 
-      setPromptSubmitted(!promptSubmitted);
-      toast({
-        title: "new Prompt",
-        description: "You have successfully post/change a new prompt",
-        status: "success",
-        duration: 2500,
-        isClosable: true,
-      });
+    if (havePrompt && promptContent != null) {
+      await apiClient
+        .put(`/prompt/${promptid}`, {
+          promptDescription: promptContent,
+        })
+        .then((response) => {
+          console.log(response);
+          setPromptSubmitted(!promptSubmitted);
+          toast({
+            title: "new Prompt",
+            description: "You have successfully post/change a new prompt",
+            status: "success",
+            duration: 2500,
+            isClosable: true,
+          });
+        })
+        .catch((error) => {
+          console.error("error from handle submit: ", error.message);
+          toast({
+            title: "ohh nooooo",
+            description: "You cannot post empty prompt...",
+            status: "error",
+            duration: 2500,
+            isClosable: true,
+          });
+        });
+    } else {
+      await apiClient
+        .post(`/prompt/create/${dateTimee}`, {
+          promptDescription: promptContent,
+        })
+        .then((response) => {
+          console.log(response);
+          setPromptSubmitted(!promptSubmitted);
+          setHavePrompt(!havePrompt);
+          toast({
+            title: "new Prompt",
+            description: "You have successfully post/change a new prompt",
+            status: "success",
+            duration: 2500,
+            isClosable: true,
+          });
+        })
+        .catch((error) => {
+          console.error("error from handle submit: ", error.message);
+          toast({
+            title: "ohh nooooo",
+            description: "You cannot post empty prompt...",
+            status: "error",
+            duration: 2500,
+            isClosable: true,
+          });
+        });
     }
   };
 
   return (
     <FormControl>
-      <Textarea
+      <textarea
         onChange={(textValue) => handleChange(textValue)}
         value={promptContent}
         resize={"none"}
         errorBorderColor="red"
+        className="post-input"
       />
-      <FormHelperText>Edit or Set a Prompt for This Day</FormHelperText>
-
-      <Button
-        colorScheme="teal"
+      <button
+        className="selection-div"
         onClick={(e) => {
           handleSubmit(e);
         }}
       >
         -&gt;
-      </Button>
+      </button>
     </FormControl>
   );
 }

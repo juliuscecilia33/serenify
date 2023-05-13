@@ -161,7 +161,7 @@ router.put("/likedecremented/:postid", async (req, res) => {
     );
 
     if (checkLike.rows[0].postlike <= 0) {
-      res.status(500).send("Like count can't be below 0!");
+      res.status(401).send("Like count can't be below 0!");
     }
 
     const getAllUserLikePost = await pool.query(
@@ -171,7 +171,7 @@ router.put("/likedecremented/:postid", async (req, res) => {
 
     const removeFromUserLikedPosts = await pool.query(
       "UPDATE tblUser SET postsliked = ARRAY_REMOVE(postsliked, $1) WHERE userid = $2 RETURNING *",
-      [getAllUserLikePost.rows[0], userid]
+      [postid, userid]
     );
 
     // check post detail
