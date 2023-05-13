@@ -13,7 +13,6 @@ router.post("/reaction/:userid", async (req, res) => {
     const { userid } = req.params;
     const { ascii_string, postid } = req.body;
 
-    // const insertUserid = ARRAY[userid];
     // check whether the ascii-string/ascii_reactionid has already reacted to that post
     const checkAsciiString = await pool.query(
       "SELECT * FROM tblAscii_Reaction WHERE postid = $1 AND ascii_string = $2",
@@ -24,11 +23,6 @@ router.post("/reaction/:userid", async (req, res) => {
       return res.status(401).send("The ascii emoji has already there");
     }
 
-    // const saltRound = 10;
-    // const salt = await bcrypt.genSalt(saltRound);
-
-    // const bcryptPassword = await bcrypt.hash(password, salt);
-
     const postNewAsciiReaction = await pool.query(
       "INSERT INTO tblascii_reaction (ascii_string, postid, userid) VALUES ($1, $2, ARRAY[$3]) RETURNING *",
       [ascii_string, postid, userid]
@@ -38,7 +32,6 @@ router.post("/reaction/:userid", async (req, res) => {
     //   "UPDATE tblAscii_Reaction SET userid = ARRAY_APPEND(userid, $1) WHERE postid = $2 AND ascii_string = $3 RETURNING *",
     //   [userid, postid, ascii_string]
     // );
-    // const token = jwtGenerator(newUser.rows[0].user_id);
 
     res.json(postNewAsciiReaction.rows[0]);
   } catch (err) {

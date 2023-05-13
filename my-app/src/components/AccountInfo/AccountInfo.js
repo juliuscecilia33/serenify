@@ -72,6 +72,17 @@ export function AccountInfo(props) {
       ) {
         console.log("password1", password1);
         console.log("password2", password2);
+
+         var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+         if (!password1.match(paswd)) {
+           return toast({
+             title: "Something Wrong...",
+             description: "Please check the password format ε(´סּ︵סּ)з",
+             status: "error",
+             duration: 3500,
+             isClosable: true,
+           });
+         }
         //setUserpassword(password1);
         await apiClient
           .put(`/users/changePassword/${localStorage.getItem("userid")}`, {
@@ -85,7 +96,7 @@ export function AccountInfo(props) {
             // navigate(0);
             toast({
               title: "Successfully Change the Password",
-              description: "You have successfully change your password",
+              description: "You have successfully change your password! (｡◕‿‿◕｡)",
               status: "success",
               duration: 2500,
               isClosable: true,
@@ -100,7 +111,7 @@ export function AccountInfo(props) {
         setIsError(true);
         toast({
           title: "Empty Password",
-          description: "You cannot change to empty password...",
+          description: "You cannot change to empty password... •`_´•",
           status: "error",
           duration: 2500,
           isClosable: true,
@@ -113,7 +124,7 @@ export function AccountInfo(props) {
       ) {
         toast({
           title: "Ooops...",
-          description: "You are setting up the same password",
+          description: "You are setting up the same password ( ╥﹏╥) ノシ",
           status: "warning",
           duration: 2500,
           isClosable: true,
@@ -121,9 +132,8 @@ export function AccountInfo(props) {
       } else {
         setIsError(true);
         toast({
-          title: "Something Wrong",
-          description:
-            "Check your password inputs...Maybe they do not match or invaild password setting...",
+          title: "Ooops...",
+          description: "The passwords do not match 0__# 0__# 0__#",
           status: "error",
           duration: 2500,
           isClosable: true,

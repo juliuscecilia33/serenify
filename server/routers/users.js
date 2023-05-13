@@ -34,11 +34,9 @@ router.post("/register", async (req, res) => {
     if (userpassword <= 6 || userpassword.length >= 18) {
       return res.status(401).json("invalid password format");
     } else {
-      let upperCount = 0;
-      let lowerCount = 0;
-      let number = 0;
-      for(let i = 0; i < userpassword.length; i++) {
-        if(userpassword.charAt(i) )
+      var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+      if (!userpassword.match(paswd)) {
+        return res.status(401).json("invalid password format");
       }
     }
 

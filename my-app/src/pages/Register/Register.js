@@ -8,8 +8,6 @@ import axios from "axios";
 import Logo from "../../images/logo2.png";
 import {
   useToast,
-  Checkbox,
-  CheckboxGroup,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -19,10 +17,21 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
-  List,
   ListItem,
   UnorderedList,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+  Input,
+  InputRightElement,
+  InputGroup,
 } from "@chakra-ui/react";
+import { QuestionIcon } from "@chakra-ui/icons";
 import { NavbarVTwo } from "../../components";
 import { CommunityRule } from "../../components/CommunityRule/CommunityRule";
 
@@ -34,20 +43,36 @@ export function Register() {
   const { isAuthenticated, setAuth } = useContext(Authentication);
   const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
   const [agreeCommunityRule, setAgreeCommunityRule] = useState(false);
-  const [showArrow, setShowArrow] = useState(false);
+  const [showPop, setShowPop] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const handlePopover = (e) => {
+    if (!userPassword) {
+      setShowPop(true);
+    }
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
-
     setLoading(true);
 
     if (userConfirmPassword !== userPassword) {
       console.error("Passwords don't match!");
       return;
+    }
+
+    var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+    if (!userPassword.match(paswd)) {
+      return toast({
+        title: "Something Wrong...",
+        description: "Please check the password format ε(´סּ︵סּ)з",
+        status: "error",
+        duration: 3500,
+        isClosable: true,
+      });
     }
 
     // verify all inputs
@@ -102,20 +127,38 @@ export function Register() {
           <div className="signup-b">
             <h1 className="signup-text-wrapper">Register:</h1>
           </div>
+
           <div className="signup-b-2">
             <input
               className="signup-text-wrapper-2"
               placeholder="Email"
-              onChange={(e) => setUserEmail(e.target.value)}
+              onChange={(e) => {
+                setUserEmail(e.target.value);
+                setShowPop(false);
+              }}
             />
             <input
-              onChange={(e) => setUserPassword(e.target.value)}
+              onChange={(e) => {
+                setUserPassword(e.target.value);
+                setShowPop(false);
+              }}
               className="signup-text-wrapper-2"
               placeholder="Password"
               type="Password"
+              onClick={(e) => handlePopover(e)}
             />
+            {!userPassword && (
+              <h3>
+                Your password should be set to 7 to 15 characters which contain
+                at least one numeric digit and a special character
+              </h3>
+            )}
+
             <input
-              onChange={(e) => setUserConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setUserConfirmPassword(e.target.value);
+                setShowPop(false);
+              }}
               className="signup-text-wrapper-2"
               placeholder="Confirm Password"
               type="Password"
