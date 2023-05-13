@@ -97,16 +97,11 @@
 }
 
 .datePicker {
-  border: 3px solid #282828;
   display: flex;
   color: #282828;
   font-family: "Oswald", Helvetica;
   font-size: 30px;
   font-weight: 500;
-}
-
-.react-datepicker-wrapper {
-  /* width: 270px; */
 }
 
 .selection-apr {

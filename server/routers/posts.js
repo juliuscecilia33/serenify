@@ -38,7 +38,12 @@ router.post("/create", async (req, res) => {
 router.get("/invisible", async (req, res) => {
   try {
     const getAllPostInvisible = await pool.query(
-      "SELECT * FROM tblPost WHERE isVisible = false"
+      "SELECT pm.promptid, pm.promptdescription, pm.promptdate, \
+      po.postid, po.postdescription, po.attachment, po.posttime, po.userid, po.postlike, po.likedusers, \
+      po.reportcount, po.isvisible, po.ascii_mood\
+        FROM tblPost po \
+        JOIN tblPrompt pm ON pm.promptid = po.promptid \
+        WHERE po.isVisible = false"
     );
 
     res.json(getAllPostInvisible.rows);

@@ -64,7 +64,7 @@ export function Prompt() {
               .sort(function (a, b) {
                 return new Date(b.posttime) - new Date(a.posttime);
               })
-              .filter((post) => post.promptid === promptid)
+              .filter((post) => post.promptid === promptid && post.isvisible)
           );
         })
         .catch((error) => {
@@ -199,15 +199,14 @@ export function Prompt() {
                       Here’s what <br />
                     </span>
                     <span className="prompt-page-text-wrapper-4">
-                      People <br />
-                      <u>Think.</u>
+                      People Think.
                       <br />
                     </span>
                     <br />
                     <span className="prompt-page-text-wrapper-3">
                       Tap on them to
                       <br />
-                      see the details
+                      see the details~
                     </span>
                     <br />
                   </p>

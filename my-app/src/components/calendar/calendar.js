@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import "./calendar.css";
 
 //import dayjs, { Dayjs } from "dayjs";
@@ -38,7 +37,7 @@ function Calendar(props) {
           wrapperClassName="datePicker"
         />
         <button className="calendar-button" onClick={handleClick}>
-          Select
+          Confirm date
         </button>
       </div>
     </div>

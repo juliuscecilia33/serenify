@@ -66,7 +66,6 @@ export function CreatePost({
 
   const [postDescription, setPostDescription] = useState("");
   const [attachment, setAttachment] = useState("");
-  const defaultHelperText = "Upload an Image or Video!";
   const [helperText, setHelperText] = useState("");
   const [wordCount, setWordCount] = useState("");
   const [isValid, setIsVaild] = useState(false);
@@ -85,8 +84,6 @@ export function CreatePost({
       setIsVaild(true);
       if (textValue.target.value.length === maxLength) {
         setHelperText("No more Characters~~~");
-      } else {
-        setHelperText(defaultHelperText);
       }
       setWordCount(textValue.target.value);
       setMoreThan500(false);
@@ -107,7 +104,7 @@ export function CreatePost({
   useEffect(() => {
     if (attachment !== "") {
       setIsVaild(true);
-      setHelperText(defaultHelperText);
+      // setHelperText(defaultHelperText);
       setMoreThan500(false);
     }
   }, [attachment]);
@@ -189,7 +186,7 @@ export function CreatePost({
             Leave Your Thoughts here...
           </FormLabel> */}
           <textarea
-            placeholder="Leave your thoughts here.."
+            placeholder="Leave your thoughts here..."
             onChange={(textValue) => handleChange(textValue)}
             value={postDescription}
             resize={"none"}

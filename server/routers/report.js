@@ -51,12 +51,10 @@ router.post("/:postid/add", async (req, res) => {
     );
     console.log("check report count:", checkReportCount);
 
-    if (checkReportCount.rows[0].reportcount >= 5) {
-      const updateIsVisible = await pool.query(
-        "UPDATE tblPost SET isvisible = false WHERE postid = $1",
-        [postid]
-      );
-    }
+    const updateIsVisible = await pool.query(
+      "UPDATE tblPost SET isvisible = false WHERE postid = $1",
+      [postid]
+    );
 
     res.json(newReport.rows[0]);
   } catch (err) {

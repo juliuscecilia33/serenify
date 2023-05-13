@@ -16,21 +16,21 @@ router.post("/reaction/:userid", async (req, res) => {
       [postid, ascii_string]
     );
 
-    if (checkAsciiString.rows.length > 0) {
+    if (checkAsciiString.rows.length != 0) {
       return res.status(401).send("The ascii emoji has already there");
     }
 
     const postNewAsciiReaction = await pool.query(
-      "INSERT INTO tblAscii_Reaction (ascii_String, postid) VALUES ($1, $2)",
-      [ascii_string, postid]
+      "INSERT INTO tblascii_reaction (ascii_string, postid, userid) VALUES ($1, $2, ARRAY[$3]) RETURNING *",
+      [ascii_string, postid, userid]
     );
 
-    const insertUserid = await pool.query(
-      "UPDATE tblAscii_Raection SET userid = ARRAY_APPEND(userid, $1) WHERE postid = $2 AND ascii_string = $3 RETURNING *",
-      [userid, postid, ascii_string]
-    );
+    // const insertUserid = await pool.query(
+    //   "UPDATE tblAscii_Reaction SET userid = ARRAY_APPEND(userid, $1) WHERE postid = $2 AND ascii_string = $3 RETURNING *",
+    //   [userid, postid, ascii_string]
+    // );
 
-    res.json(insertUserid.rows[0]);
+    res.json(postNewAsciiReaction.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -43,19 +43,36 @@ router.put("/add/reaction/:userid", async (req, res) => {
     const { userid } = req.params;
     const { ascii_string, postid } = req.body;
 
-    //check the whether the userid exist in the text[]
-    const checkUserid = await pool.query(
-      "SELECT * FROM tblAscii_Reaction WHERE ascii_string = $1 AND postid = $2 AND $3 = ANY(userid) RETURNING *",
-      [ascii_string, postid, userid]
+    const useridCol = await pool.query(
+      "SELECT * FROM tblascii_reaction WHERE ascii_string = $1 AND postid = $2",
+      [ascii_string, postid]
     );
 
-    if (checkUserid.rows.length > 0) {
+    // if (useridCol.rows.length == 0) {
+    //   return
+    // }
+
+    //check the whether the userid exist in the text[]
+    const checkUserid = await pool.query(
+      "SELECT $1 = ANY(userid) as checkresult FROM tblAscii_Reaction WHERE ascii_string = $2 AND postid = $3",
+      [userid, ascii_string, postid]
+    );
+    console.log(checkUserid.rows[0].checkresult);
+
+    if (checkUserid.rows[0].checkresult) {
       //remove the userid from text[];
       //if the userid is the only user who like, remvoe the entire ascii reaction
-      if (checkUserid.rouws[0].total > 1) {
+      const info = await pool.query(
+        "SELECT * FROM tblAscii_Reaction WHERE ascii_string = $1 AND postid = $2",
+        [ascii_string, postid]
+      );
+
+      console.log(info.rows[0]);
+
+      if (info.rows[0].total > 1) {
         await pool.query(
-          "UPDATE tblAscii_Reaction SET total = total - 1, ARRAY_REMOVE(userid, $1) WHERE ascii_string = $1 AND postid = $2",
-          [ascii_string, postid]
+          "UPDATE tblAscii_Reaction SET total = total - 1, ARRAY_REMOVE(userid, $1) WHERE ascii_string = $2 AND postid = $3",
+          [userid, ascii_string, postid]
         );
       } else {
         await pool.query(
@@ -72,12 +89,12 @@ router.put("/add/reaction/:userid", async (req, res) => {
       );
     }
 
-    const res = await poolquery(
+    const finalRes = await pool.query(
       "SELECT * FROM tblAscii_Reaction WHERE ascii_string = $1 AND postid = $2",
       [ascii_string, postid]
     );
 
-    res.json(res.rows[0]);
+    res.json(finalRes.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
