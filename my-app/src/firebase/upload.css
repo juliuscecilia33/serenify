@@ -5,16 +5,13 @@
 
 .upload-attachment input {
   margin: 1rem 0;
-  border: 2px solid red;
+  height: auto;
+  width: auto;
 }
 
 .upload-text {
   font-family: "Oswald";
-  font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  line-height: 19px;
-  letter-spacing: 0.2px;
   color: #282828;
-  text-decoration: underline;
 }

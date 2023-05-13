@@ -71,7 +71,7 @@ router.put("/add/reaction/:userid", async (req, res) => {
 
       if (info.rows[0].total > 1) {
         await pool.query(
-          "UPDATE tblAscii_Reaction SET total = total - 1, ARRAY_REMOVE(userid, $1) WHERE ascii_string = $2 AND postid = $3",
+          "UPDATE tblAscii_Reaction SET total = total - 1, userid = ARRAY_REMOVE(userid, $1) WHERE ascii_string = $2 AND postid = $3",
           [userid, ascii_string, postid]
         );
       } else {
@@ -84,7 +84,7 @@ router.put("/add/reaction/:userid", async (req, res) => {
       //the user does not in the userid[]
       //put userid in the userid[]
       await pool.query(
-        "UPDATE tblAscii_Reaction SET total = total + 1, ARRAY_APPEND(userid, $1) WHERE ascii_string = $2 AND postid = $3",
+        "UPDATE tblAscii_Reaction SET total = total + 1, userid = ARRAY_APPEND(userid, $1) WHERE ascii_string = $2 AND postid = $3",
         [userid, ascii_string, postid]
       );
     }
