@@ -47,7 +47,7 @@ router.post("/reaction/:userid", async (req, res) => {
   }
 });
 
-//put a userid into the ascii if other click it
+//put a userid into the ascii if other click it; no matter who the user is
 router.put("/add/reaction/:userid", async (req, res) => {
   try {
     const { userid } = req.params;

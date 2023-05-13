@@ -31,6 +31,17 @@ router.post("/register", async (req, res) => {
       return res.status(401).json("User has already existed...");
     }
 
+    if (userpassword <= 6 || userpassword.length >= 18) {
+      return res.status(401).json("invalid password format");
+    } else {
+      let upperCount = 0;
+      let lowerCount = 0;
+      let number = 0;
+      for(let i = 0; i < userpassword.length; i++) {
+        if(userpassword.charAt(i) )
+      }
+    }
+
     const loginTime = new Date().toLocaleString();
 
     let newUser = await pool.query(
