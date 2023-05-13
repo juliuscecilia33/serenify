@@ -75,6 +75,19 @@
   /* transform: translateX(-8.4rem); */
 }
 
+.ascii-reaction {
+  margin-bottom: 2rem;
+  font-size: 22px;
+}
+
+.border-circle {
+  margin-left: 5px;
+  font-size: 20px;
+  padding: 0 8px 0 8px;
+  border: 1px solid #686868;
+  border-radius: 10%;
+}
+
 .post-page-b {
   align-items: flex-start;
   align-self: stretch;

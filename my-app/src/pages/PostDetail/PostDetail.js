@@ -66,6 +66,7 @@ export function PostDetail() {
   const [postLiked, setPostLiked] = useState(false);
   const [userPostsLiked, setUserPostsLiked] = useState(null);
   const [currentAsciiMood, setCurrentAsciiMood] = useState(asciiEmojis[0]);
+  const [asciiReactions, setAsciiReactions] = useState(null);
 
   console.log("post id from post detail: ", postid);
   console.log("post liked: ", postLiked);
@@ -121,6 +122,19 @@ export function PostDetail() {
               (likedpost) => likedpost.postid === postid
             )
           );
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+
+      axios
+        .get(`${process.env.REACT_APP_BACKENDURL}ascii/${postid}/reactions`)
+        .then((ascii_reactions_response) => {
+          console.log(
+            "ascii reactionsfor post: ",
+            ascii_reactions_response.data
+          );
+          setAsciiReactions(ascii_reactions_response.data);
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -435,6 +449,7 @@ export function PostDetail() {
                     </MenuGroup>
                   </MenuList>
                 </Menu>
+                {/* <button>Select</button> */}
               </div>
               <img
                 className="divider-small"
@@ -448,19 +463,18 @@ export function PostDetail() {
                   </span>
                   <span className="prompt-page-text-wrapper-4">
                     People <br />
-                    <u>Reacted.</u>
+                    Reacted.
                     <br />
                   </span>
                   <br />
-                  <p style={{ marginBottom: "2rem" }}>
-                    (˵ ͡° ͜ʖ ͡°˵) - Reacted Blush - <u>5 People</u>
-                  </p>
-                  <p style={{ marginBottom: "2rem" }}>
-                    (｡◕‿‿◕｡) - Reacted Cute - <u>3 People</u>
-                  </p>
-                  <p style={{ marginBottom: "2rem" }}>
-                    (๑•́ ヮ •̀๑) - Reacted Surprised - <u>7 People</u>
-                  </p>
+                  {asciiReactions &&
+                    asciiReactions.map((reaction, key) => (
+                      <p className="ascii-reaction">
+                        {reaction.ascii_string}{" "}
+                        <span className="border-circle">+{reaction.total}</span>
+                      </p>
+                    ))}
+
                   <img
                     className="divider-small negative-margin"
                     src={DividerBig}
@@ -475,7 +489,7 @@ export function PostDetail() {
                   </span>
                   <span className="prompt-page-text-wrapper-4">
                     People <br />
-                    <u>Commented.</u>
+                    Commented.
                     <br />
                   </span>
                   {/* <br /> */}

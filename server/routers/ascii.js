@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db");
+const bcrypt = require("bcrypt");
+const jwtGenerator = require("../utils/jwtGenerator");
+const vaildinfo = require("../middleware/validinfo");
+const authorization = require("../middleware/authorization");
 
 //post an ascii reaction
 //if the ascii emoji has not been added
@@ -20,6 +24,11 @@ router.post("/reaction/:userid", async (req, res) => {
       return res.status(401).send("The ascii emoji has already there");
     }
 
+    // const saltRound = 10;
+    // const salt = await bcrypt.genSalt(saltRound);
+
+    // const bcryptPassword = await bcrypt.hash(password, salt);
+
     const postNewAsciiReaction = await pool.query(
       "INSERT INTO tblascii_reaction (ascii_string, postid, userid) VALUES ($1, $2, ARRAY[$3]) RETURNING *",
       [ascii_string, postid, userid]
@@ -29,6 +38,7 @@ router.post("/reaction/:userid", async (req, res) => {
     //   "UPDATE tblAscii_Reaction SET userid = ARRAY_APPEND(userid, $1) WHERE postid = $2 AND ascii_string = $3 RETURNING *",
     //   [userid, postid, ascii_string]
     // );
+    // const token = jwtGenerator(newUser.rows[0].user_id);
 
     res.json(postNewAsciiReaction.rows[0]);
   } catch (err) {
@@ -47,10 +57,6 @@ router.put("/add/reaction/:userid", async (req, res) => {
       "SELECT * FROM tblascii_reaction WHERE ascii_string = $1 AND postid = $2",
       [ascii_string, postid]
     );
-
-    // if (useridCol.rows.length == 0) {
-    //   return
-    // }
 
     //check the whether the userid exist in the text[]
     const checkUserid = await pool.query(
@@ -112,6 +118,23 @@ router.get("/get", async (req, res) => {
     );
 
     res.json(getAsciiInfo.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+//get a ascii_string info
+router.get("/:postid/reactions", async (req, res) => {
+  try {
+    const { postid } = req.params;
+
+    const getAsciiInfo = await pool.query(
+      "SELECT * FROM tblAscii_Reaction WHERE postid = $1",
+      [postid]
+    );
+
+    res.json(getAsciiInfo.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

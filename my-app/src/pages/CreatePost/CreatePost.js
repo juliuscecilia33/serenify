@@ -38,6 +38,7 @@ export function CreatePost({
   setPostSubmitted,
 }) {
   const asciiEmojis = [
+    "",
     "(ㆆ _ ㆆ)  -  Feeling Afraid",
     "•`_´•  -  Feeling Angry",
     "•͡˘㇁•͡˘  - Feeling Awkward",
@@ -125,7 +126,7 @@ export function CreatePost({
             attachment: attachment,
             userid: localStorage.getItem("userid"),
             promptid: promptid,
-            ascii_mood: currentAsciiMood,
+            ascii_mood: currentAsciiMood !== "" && currentAsciiMood,
           })
           .then((response) => {
             console.log("response successful: ", response);
@@ -227,29 +228,30 @@ export function CreatePost({
               </AspectRatio>
             </Stack>
           )}
-          <h1 className="upload-text">Select a Mood</h1>
-          <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              {currentAsciiMood}
-            </MenuButton>
-            <MenuList>
-              <MenuGroup title="Mood: ">
-                {asciiEmojis.map((emoji, id) => (
-                  <>
-                    <MenuItem
-                      onClick={() => setCurrentAsciiMood(emoji)}
-                      key={id}
-                    >
-                      {emoji}
-                    </MenuItem>
-                  </>
-                ))}
-              </MenuGroup>
-            </MenuList>
-          </Menu>
-          <br />
+          <div className="select-mood">
+            <h1 className="upload-text">Select a Mood</h1>
+            <Menu>
+              <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                {currentAsciiMood}
+              </MenuButton>
+              <MenuList>
+                <MenuGroup title="Mood: ">
+                  {asciiEmojis.map((emoji, id) => (
+                    <>
+                      <MenuItem
+                        onClick={() => setCurrentAsciiMood(emoji)}
+                        key={id}
+                      >
+                        {emoji}
+                      </MenuItem>
+                    </>
+                  ))}
+                </MenuGroup>
+              </MenuList>
+            </Menu>
+          </div>
           <ButtonGroup marginTop={10} gap="2">
-            <Button colorScheme="red" onClick={onOpen}>
+            <Button className="discard" onClick={onOpen}>
               Discard
             </Button>
             <Button
@@ -259,7 +261,7 @@ export function CreatePost({
               }}
               disabled={attachment === "" && postDescription.length < 1}
             >
-              Post!
+              Post
             </Button>
           </ButtonGroup>
 
