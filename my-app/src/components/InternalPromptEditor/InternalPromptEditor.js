@@ -113,6 +113,7 @@ export function InternalPromptEditor(props) {
         resize={"none"}
         errorBorderColor="red"
         className="post-input"
+        placeholder="Type prompt here..."
       />
       <button
         className="selection-div"

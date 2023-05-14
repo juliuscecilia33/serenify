@@ -61,22 +61,15 @@ export function UserProfile() {
                 Greetings~
                 <br />
               </span>
-              <span className="profile-page-span">
-                <br />
-              </span>
-              <span className="profile-page-text-wrapper-2">
-                (￣▽￣)ノ
-                <br />
-              </span>
-              <span className="profile-page-span">
-                <br />
-              </span>
+              <span className="profile-page-span"></span>
+              <span className="profile-page-text-wrapper-2">(￣▽￣)ノ</span>
+              <span className="profile-page-span"></span>
               <span className="profile-page-text-wrapper-3">
                 What would you want me to tell you about?
               </span>
             </p>
           </div>
-          <div className="profile-page-div">----------------</div>
+          <div className="profile-page-div">-----------</div>
           <div className="profile-page-b-2">
             <button
               onClick={() => {
@@ -134,6 +127,7 @@ export function UserProfile() {
               -&gt;
             </button>
           </div>
+          {/* <div className="profile-page-div">----------------</div> */}
           <img
             className="divider-small"
             src={DividerSmall}

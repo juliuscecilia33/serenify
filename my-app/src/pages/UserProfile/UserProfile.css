@@ -58,11 +58,8 @@
   align-self: stretch;
   color: #282828;
   font-family: "Oswald", Helvetica;
-  font-size: 81px;
+  font-size: 80px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 81px;
-  margin-top: -1px;
   position: relative;
 }
 
@@ -72,18 +69,15 @@
 
 .profile-page-span {
   font-size: 50px;
-  line-height: 65px;
 }
 
 .profile-page-text-wrapper-2 {
   font-size: 70px;
   font-weight: 500;
-  line-height: 75px;
 }
 
 .profile-page-text-wrapper-3 {
   font-size: 45px;
-  line-height: 58.5px;
 }
 
 .profile-page-div {
@@ -91,13 +85,10 @@
   font-family: "Oswald", Helvetica;
   font-size: 42px;
   font-weight: 400;
-  letter-spacing: 11.34px;
+  letter-spacing: 10px;
   line-height: normal;
-  margin-left: -24px;
-  margin-right: -24px;
   position: relative;
   text-align: center;
-  white-space: nowrap;
   width: 390px;
 }
 

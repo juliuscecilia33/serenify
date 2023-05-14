@@ -60,6 +60,18 @@
   line-height: 81px;
   margin-top: -1px;
   position: relative;
+  margin-bottom: 2rem;
+}
+
+.admin-page-text-small {
+  align-self: stretch;
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 31px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 81px;
+  margin-top: -1px;
 }
 
 .admin-page-b-1 {

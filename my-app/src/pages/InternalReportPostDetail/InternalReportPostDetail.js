@@ -23,6 +23,7 @@ export function InternalReportPostDetail() {
   const toast = useToast();
 
   const handleClick = async (e) => {
+    e.preventDefault();
     if (approveSelected) {
       await apiClient
         .delete(`/report/${postid}/approve`)
@@ -173,60 +174,15 @@ export function InternalReportPostDetail() {
             >
               {denySelected && ">"} Deny
             </button>
-            <div className="admin-post-page-text-wrapper-4">-&gt;</div>
+            <button
+              onClick={(e) => handleClick(e)}
+              className="admin-post-page-text-wrapper-4"
+            >
+              -&gt;
+            </button>
           </div>
         </div>
       </div>
     </>
-    // <div>
-    //   <NavbarVTwo />
-    //   <div className="post-page-tag">
-    //     <button
-    //       onClick={() => {
-    //         navigate(ROUTES.INTERNALREPORT);
-    //       }}
-    //       className="post-page-div"
-    //     >
-    //       &lt;-
-    //     </button>
-    //   </div>
-
-    //   <div className="post-container">
-    //     <div className="top-section"></div>
-    //     <div className="middle-section">
-    //       <div className="report-count">
-    //         <span>Report Count: {postReportCount}</span>
-    //       </div>
-    //       <p className="post_text">{postDescription && postDescription}</p>
-    //       {postAttachment ? (
-    //         <AspectRatio>
-    //           <iframes
-    //             src={postAttachment}
-    //             title="attachment"
-    //             alt="post attachment"
-    //           />
-    //         </AspectRatio>
-    //       ) : null}
-    //     </div>
-    //   </div>
-
-    //   <div className="report-reason-container">
-    //     <List>
-    //       {reportReason &&
-    //         reportReason.map(({ reason, id }) => {
-    //           return <ListItem key={id}>{reason}</ListItem>;
-    //         })}
-    //     </List>
-    //   </div>
-
-    //   <img
-    //     className="divider-small negative-margin"
-    //     src={DividerBig}
-    //     alt="Divider Big"
-    //   />
-    //   <div className="admin-action">
-    //     <InternalReportAdminAction postid={postid} />
-    //   </div>
-    // </div>
   );
 }

@@ -7,9 +7,11 @@ import DividerSmall from "../../images/DividerSmall.png";
 import * as ROUTES from "../../constants/routes";
 import "./InternalReport.css";
 import { AdminNavbar } from "../../components";
+import { useNavigate } from "react-router";
 
 export function InternalReport() {
   const [reportPostList, setReportPostList] = useState([]);
+  const navigate = useNavigate();
 
   const getReport = async () => {
     await apiClient
@@ -35,14 +37,25 @@ export function InternalReport() {
       <AdminNavbar />
       <div className="admin-page-admin-page">
         <div className="admin-page-content">
+          <button
+            onClick={() => navigate(ROUTES.ADMINPAGE)}
+            className="back-button"
+          >
+            &lt;-
+          </button>
           <div className="admin-page-b">
             <h1 className="admin-page-text-wrapper">
               Handle <br />
               reports
             </h1>
+            <img
+              className="divider-small"
+              src={DividerSmall}
+              alt="DividerSmall"
+            />
           </div>
           <div>
-            {reportPostList &&
+            {reportPostList && reportPostList.length > 0 ? (
               reportPostList.map((reportPost, id) => (
                 <div key={id}>
                   {reportPost.postid && (
@@ -57,7 +70,10 @@ export function InternalReport() {
                     alt="DividerSmall"
                   />
                 </div>
-              ))}
+              ))
+            ) : (
+              <h1 className="admin-page-text-small">No posts to review!</h1>
+            )}
           </div>
         </div>
       </div>

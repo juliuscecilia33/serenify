@@ -11,6 +11,7 @@ import Logo from "../../images/logo2.png";
 import { useToast } from "@chakra-ui/react";
 import { Link, Navigate } from "react-router-dom";
 import { NavbarVTwo } from "../../components";
+import { signInWithGoogle } from "../../firebase/firebaseConfig/firebaseConfig";
 
 export function Login() {
   const [userEmail, setUserEmail] = useState("");
@@ -100,6 +101,10 @@ export function Login() {
               placeholder="Password"
               type="Password"
             />
+            <div>
+              SignIn With
+              <button>Google</button>
+            </div>
             <button
               onClick={(e) => handleLogin(e)}
               className="login-text-wrapper-3"
