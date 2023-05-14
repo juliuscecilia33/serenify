@@ -149,6 +149,12 @@ export function PostDetail() {
     postData ? postData.postdescription : ""
   );
 
+  const handleAsciiReaction = (e, emoji) => {
+    e.preventDefault();
+
+    console.log("Ascii Reaction: ", emoji);
+  };
+
   const handleCommentSubmission = (e) => {
     e.preventDefault();
 
@@ -436,7 +442,7 @@ export function PostDetail() {
                       {asciiEmojis.map((emoji, id) => (
                         <>
                           <MenuItem
-                            onClick={() => setCurrentAsciiMood(emoji)}
+                            onClick={(e) => handleAsciiReaction(e, emoji)}
                             key={id}
                           >
                             {emoji}

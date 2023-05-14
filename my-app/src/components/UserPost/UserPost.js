@@ -14,7 +14,7 @@ export function UserPost(postData) {
           <p className="post_text">{postData.postData.postdescription}</p>
           {postData.postData.attachment ? (
             <iframe
-              className="post-image-attachment"
+              className="post-image-attachment-user"
               src={postData.postData.attachment}
               alt="post_image"
               title="attachment"

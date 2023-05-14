@@ -96,6 +96,15 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//firebase loging
+router.post("/firebase/login", async (req, res) => {
+  try {
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 //get all the user like post
 router.get("/:userid/likepost", async (req, res) => {
   try {

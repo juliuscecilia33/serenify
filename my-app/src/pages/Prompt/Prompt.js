@@ -147,7 +147,7 @@ export function Prompt() {
               />
             </div>
           </div>
-          <img className="divider-small" src={DividerBig} alt="Divider Big" />
+          {/* <img className="divider-small" src={DividerBig} alt="Divider Big" /> */}
           <div className="prompt-page-div">
             <h1 className="prompt-page-sleep-how-much-did-you-get-last-night-what-is-one-way-that-helps-you-get-to-sleep">
               <span className="prompt-page-text-wrapper">Prompt:</span>
@@ -166,11 +166,12 @@ export function Prompt() {
               </span>
             </h1>
           </div>
-          <img
+          <div className="profile-page-div">--------------</div>
+          {/* <img
             className="divider-small"
             src={DividerSmall}
             alt="DividerSmall"
-          />
+          /> */}
           <div className="prompt-page-b-2">
             {havePrompt && isAuthenticated && (
               <>
@@ -187,11 +188,14 @@ export function Prompt() {
                 <div>
                   <b>{<CreatePostButton {...createPostInfo} />}</b>
                 </div>
-                <img
+                <div className="profile-page-dot">
+                  ...........................
+                </div>
+                {/* <img
                   className="divider-small negative-margin"
                   src={DividerBig}
-                  alt="Divider Big"
-                />
+                  alt="Divider Big" 
+                /> */}
                 <div className="prompt-page-div">
                   <p className="prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details">
                     <span className="prompt-page-text-wrapper-3">
@@ -210,11 +214,11 @@ export function Prompt() {
                     <br />
                   </p>
                 </div>
-                <img
+                {/* <img
                   className="divider-small negative-margin"
                   src={DividerBig}
                   alt="Divider Big"
-                />
+                /> */}
               </>
             )}
           </div>
@@ -232,12 +236,12 @@ export function Prompt() {
                     />
                   </Link>
                 )}
-
-                <img
+                <div className="profile-page-div">--------------</div>
+                {/* <img
                   className="divider-small"
                   src={DividerSmall}
                   alt="DividerSmall"
-                />
+                /> */}
               </>
             ))}
 

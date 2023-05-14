@@ -85,11 +85,23 @@
   font-family: "Oswald", Helvetica;
   font-size: 42px;
   font-weight: 400;
-  letter-spacing: 10px;
+  letter-spacing: 12px;
   line-height: normal;
   position: relative;
   text-align: center;
-  width: 390px;
+  width: 360px;
+}
+
+.profile-page-dot {
+  color: #686868;
+  font-family: "Oswald", Helvetica;
+  font-size: 42px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  width: 360px;
 }
 
 button {

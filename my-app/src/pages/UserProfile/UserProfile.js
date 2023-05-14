@@ -69,7 +69,7 @@ export function UserProfile() {
               </span>
             </p>
           </div>
-          <div className="profile-page-div">-----------</div>
+          <div className="profile-page-div">--------------</div>
           <div className="profile-page-b-2">
             <button
               onClick={() => {
@@ -127,12 +127,12 @@ export function UserProfile() {
               -&gt;
             </button>
           </div>
-          {/* <div className="profile-page-div">----------------</div> */}
-          <img
+          <div className="profile-page-div">--------------</div>
+          {/* <img
             className="divider-small"
             src={DividerSmall}
             alt="DividerSmall"
-          />
+          /> */}
           <AccountInfo
             userInformation={userInfo}
             userEmail={userEmail}
