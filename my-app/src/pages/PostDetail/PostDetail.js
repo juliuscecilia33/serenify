@@ -243,21 +243,20 @@ export function PostDetail() {
           console.error("There was an error!", error);
         });
     } else {
-      // axios
-      //   .put(
-      //     `${process.env.REACT_APP_BACKENDURL}posts/likedecremented/${postData.postid}`,
-      //     likeBody
-      //   )
-      //   .then((response) => {
-      //     console.log("like decremented: ", response);
+      axios
+        .put(
+          `${process.env.REACT_APP_BACKENDURL}posts/likedecremented/${postData.postid}`,
+          likeBody
+        )
+        .then((response) => {
+          console.log("like decremented: ", response);
 
-      //     setPostLiked(false);
-      //     setPostAltered(!postAltered);
-      //   })
-      //   .catch((error) => {
-      //     console.error("There was an error!", error);
-      //   });
-      return;
+          setPostLiked(false);
+          setPostAltered(!postAltered);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
     }
   };
 

@@ -211,3 +211,12 @@
   font-weight: 400;
   transform: translate(7.4rem, 2.95rem);
 }
+
+.post-page-no-post {
+  align-self: stretch;
+  font-size: 45px;
+  font-weight: 400;
+  position: relative;
+  margin-top: 10rem;
+  margin-bottom: 9rem;
+}

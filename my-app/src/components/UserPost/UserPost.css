@@ -107,6 +107,19 @@
   align-items: flex-start;
 }
 
+.iframe-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+iframe {
+  position: absolute;
+  width: 95%;
+  height: 100%;
+  border: none;
+}
+
 .pencil-icon {
   width: 40px;
   height: auto;

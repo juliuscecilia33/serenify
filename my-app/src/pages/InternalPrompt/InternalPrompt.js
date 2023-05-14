@@ -32,6 +32,12 @@ export function InternalPrompt() {
     checkUserLogin();
   }, []);
 
+  useEffect(() => {
+    if (!localStorage.getItem("internalDate")) {
+      localStorage.setItem("internalDate", pickDate);
+    }
+  }, []);
+
   //localStorage.setItem('InternalDate', pickDate);
   useEffect(() => {
     const getPromptContent = async () => {

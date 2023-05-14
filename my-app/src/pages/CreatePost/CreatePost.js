@@ -222,7 +222,7 @@ export function CreatePost({
                 <iframe
                   src={attachment}
                   alt="user post image"
-                  // objectFit="cover"
+                  objectFit="cover"
                   title="post-attachment"
                 />
               </AspectRatio>

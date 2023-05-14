@@ -16,15 +16,15 @@ export function UserProfile() {
   const [optionSelected, setOptionSelected] = useState("posts");
   const navigate = useNavigate();
 
-  const checkUserLogin = () => {
-    if (!isAuthenticated) {
-      navigate("/");
-    }
-  };
+  // const checkUserLogin = () => {
+  //   if (!isAuthenticated) {
+  //     navigate("/");
+  //   }
+  // };
 
-  useEffect(() => {
-    checkUserLogin();
-  }, []);
+  // useEffect(() => {
+  //   checkUserLogin();
+  // }, []);
 
   const [userInfo, setUserInfo] = useState();
   const [userEmail, setUserEmail] = useState("");

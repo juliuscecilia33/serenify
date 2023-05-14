@@ -31,7 +31,7 @@ export function HomeVTwo() {
             <br />
             <br />I am Serenify.
           </h1>
-          <h1 className="dash">----------</h1>
+          <div className="profile-page-div">--------------</div>
         </div>
         <div className="s2">
           <h1 className="big">Your</h1>
@@ -46,7 +46,7 @@ export function HomeVTwo() {
             <br />
           </p>
           <h1 className="big">Forum.</h1>
-          <h1 className="dash">----------</h1>
+          <div className="profile-page-div">--------------</div>
         </div>
 
         <div className="s3">
@@ -59,7 +59,7 @@ export function HomeVTwo() {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Try it~^
             <br />
           </span>
-          <h1 className="dash">----------</h1>
+          <div className="profile-page-div">--------------</div>
           {/* <img
             className="wheel"
             alt={"Wheel"}

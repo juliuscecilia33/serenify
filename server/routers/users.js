@@ -160,9 +160,6 @@ router.get("/:userid/likepost", async (req, res) => {
       JSON.parse(item)
     );
 
-    // console.log(result);
-    // http://localhost:3005/users/7e52c2f3-d552-48ad-9473-ff15e63d60d7/likepost
-
     res.json(result);
   } catch (err) {
     console.error(err.message);

@@ -174,9 +174,20 @@ router.put("/likedecremented/:postid", async (req, res) => {
       [postid]
     );
 
+    const userLikedPost = await pool.query(
+      "SELECT postsliked FROM tblUser WHERE userid = $1",
+      [userid]
+    );
+    console.log(userLikedPost.rows[0].postsliked);
+
+    const newUserLikedPost = userLikedPost.rows[0].postsliked.filter(
+      (item) => JSON.parse(item).postid != postid
+    );
+    console.log(newUserLikedPost);
+
     const removeFromUserLikedPosts = await pool.query(
-      "UPDATE tblUser SET postsliked = ARRAY_REMOVE(postsliked, $1) WHERE userid = $2 RETURNING *",
-      [postid, userid]
+      "UPDATE tblUser SET postsliked = $1 WHERE userid = $2 RETURNING *",
+      [newUserLikedPost, userid]
     );
 
     // check post detail
