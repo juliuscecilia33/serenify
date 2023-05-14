@@ -32,7 +32,14 @@ export function AccountInfo(props) {
     userPassword,
     isSubmitted,
     setIsSubmitted,
+    google,
   } = props;
+
+  console.log("info", userInformation);
+  // const [google, setGoogle] = useState();
+  // useEffect(() => {
+  //   setGoogle(userInformation.isgoogle);
+  // }, []);
   //const [userInfo, setUserInfo] = useState();
   //   console.log("userInfo in component:", userInformation);
   //   console.log("userEmail:", userEmail);
@@ -162,38 +169,50 @@ export function AccountInfo(props) {
           {userEmail}
           <br />
         </span>
-        <span className="profile-page-text-wrapper-8">
-          Password:
-          <br />
-        </span>
-        <span className="profile-page-text-wrapper-9">
-          <InputGroup>
-            <Input
-              type={show ? "text" : "password"}
-              isReadOnly
-              value={userPassword}
-              variant="unstyled"
-            />
-            <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={() => setShow(!show)}>
-                {show ? <ViewIcon /> : <ViewOffIcon />}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-          <br />
-        </span>
+
+        {!google && (
+          <>
+            <span className="profile-page-text-wrapper-8">
+              Password:
+              <br />
+            </span>
+            <span className="profile-page-text-wrapper-9">
+              <InputGroup>
+                <Input
+                  type={show ? "text" : "password"}
+                  isReadOnly
+                  value={userPassword}
+                  variant="unstyled"
+                />
+                <InputRightElement width="4.5rem">
+                  <Button h="1.75rem" size="sm" onClick={() => setShow(!show)}>
+                    {show ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              <br />
+            </span>
+          </>
+        )}
       </h1>
-      <p className="profile-page-wake-me-up-if-you-want-to-change-it-zzzz">
-        <span className="profile-page-text-wrapper-10">
-          Wake me up if you want to change it.
-          <br />
-        </span>
-        <Button colorScheme={"null"} onClick={onOpen}>
-          <span className="profile-page-text-wrapper-3">
-            {!isOpen ? "(￣ρ￣)..zzZZ" : "※(^o^)/※"}
+      {!google ? (
+        <p className="profile-page-wake-me-up-if-you-want-to-change-it-zzzz">
+          <span className="profile-page-text-wrapper-10">
+            Wake me up if you want to change it.
+            <br />
           </span>
-        </Button>
-      </p>
+          <Button colorScheme={"null"} onClick={onOpen}>
+            <span className="profile-page-text-wrapper-3">
+              {!isOpen ? "(￣ρ￣)..zzZZ" : "※(^o^)/※"}
+            </span>
+          </Button>
+        </p>
+      ) : (
+        <span className="profile-page-text-wrapper-10">
+          I wish You could have a wonderful day
+          <br />I love you ʕっ•ᴥ•ʔっ
+        </span>
+      )}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

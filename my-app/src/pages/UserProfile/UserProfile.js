@@ -30,6 +30,7 @@ export function UserProfile() {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [google, setGoogle] = useState();
 
   console.log("Option Selected: ", optionSelected);
   const getUserInfo = async () => {
@@ -40,6 +41,7 @@ export function UserProfile() {
         setUserInfo(response.data);
         setUserEmail(response.data.useremail);
         setUserPassword(response.data.userpassword);
+        setGoogle(response.data.isgoogle);
       })
       .catch((err) => {
         console.err(err.message);
@@ -139,6 +141,7 @@ export function UserProfile() {
             userPassword={userPassword}
             isSubmitted={isSubmitted}
             setIsSubmitted={setIsSubmitted}
+            google={google}
           />
         </div>
       </div>

@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db");
-const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
 const validinfo = require("../middleware/validinfo");
 const authorization = require("../middleware/authorization");
@@ -101,22 +100,38 @@ router.post("/login", async (req, res) => {
 router.post("/firebase/login", async (req, res) => {
   try {
     const { token } = req.body;
+    const dateObject = new Date().toLocaleString();
     let uid = 0;
     let email = 0;
+    //console.log("undecrypted token in backend:", token);
+
     const decodeValue = await admin
       .auth()
       .verifyIdToken(token)
       .then((decodedToken) => {
+        //console.log("decoded token", decodedToken);
         uid = decodedToken.uid;
         email = decodedToken.email;
       });
 
-    const insertGoogle = await pool.query(
-      "INSERT INTO tblUser (googleid, isGoogle, useremail) VALUES ($1, $2, $3) RETURNING *",
-      [uid, true, email]
+    const checkEmail = await pool.query(
+      "SELECT * FROM tblUser WHERE useremail = $1",
+      [email]
     );
 
-    res.json(insertGoogle.rows[0]);
+    if (checkEmail.rows.length === 0) {
+      const insertGoogle = await pool.query(
+        "INSERT INTO tblUser (googleid, isGoogle, useremail, logintime) VALUES ($1, $2, $3, $4) RETURNING *",
+        [uid, true, email, dateObject]
+      );
+      res.json(insertGoogle.rows[0]);
+    }
+    // } else {
+    //   const getUser = await pool.query(
+    //     "SELECT * FROM tblUser WHERE uid = $1 AND useremail = $2",
+    //     [uid, email]
+    //   );
+    res.json(checkEmail.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -138,7 +153,7 @@ router.get("/:userid/likepost", async (req, res) => {
       [userid]
     );
 
-    if (getAllUserLikePost.rows.length == 0) {
+    if (getAllUserLikePost.rows[0].length == 0) {
       res.json("Empty Likes");
     }
     const result = getAllUserLikePost.rows[0].postsliked.map((item) =>

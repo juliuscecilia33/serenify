@@ -24,13 +24,62 @@ export function Login() {
   const [loginError, setLoginError] = useState(false);
   const toast = useToast();
 
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((userCred) => {
+  //     if (userCred) {
+  //       auth.userCred
+  //         .getIdToken(true)
+  //         .then(function (idToken) {
+  //           apiClient
+  //             .post("users/firebase/login", { token: idToken })
+  //             .then((response) => {
+  //               console.log("login user response", response.data);
+  //               if (response.data.userid) {
+  //                 localStorage.setItem("userid", response.data.userid);
+  //                 setAuth(true);
+  //                 setLoading(false);
+  //                 if (response.data.isadmin === true) {
+  //                   localStorage.setItem("isAdmin", response.data.isadmin);
+  //                   setAdmin(true);
+  //                 } else {
+  //                   setAdmin(false);
+  //                 }
+  //               } else {
+  //                 setAuth(false);
+  //                 setLoading(false);
+  //               }
+
+  //               toast({
+  //                 title: "You are Logged in!",
+  //                 description: "You successfully logged in! :D",
+  //                 status: "success",
+  //                 duration: 2500,
+  //                 isClosable: true,
+  //               });
+
+  //               navigate(ROUTES.HOMEVTWO);
+  //             });
+  //         })
+  //         .catch(function (error) {
+  //           // Handle error
+  //           console.err(error.message);
+  //         });
+  //     } else {
+  //       setAuth(false);
+  //     }
+  //   });
+  // }, []);
   const auth = getAuth();
-  useEffect(() => {
-    auth.onAuthStateChanged((userCred) => {
+  const googleProvider = new GoogleAuthProvider();
+  const signInWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      //.then((result) => {
+      //if (result) {
+      const userCred = res.user;
       if (userCred) {
-        setAuth(true);
-        auth.user
-          .getIdToken(/* forceRefresh */ true)
+        auth.currentUser
+          .getIdToken(true)
           .then(function (idToken) {
             apiClient
               .post("users/firebase/login", { token: idToken })
@@ -66,19 +115,12 @@ export function Login() {
             // Handle error
             console.err(error.message);
           });
+      } else {
+        setAuth(false);
       }
-    });
-  }, []);
-
-  const googleProvider = new GoogleAuthProvider();
-  const signInWithGoogle = async () => {
-    try {
-      const res = await signInWithPopup(auth, googleProvider).then((result) => {
-        if (result) {
-          setAuth(true);
-        }
-        // auth.user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-      });
+      //}
+      // auth.user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      //});
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -165,7 +207,7 @@ export function Login() {
             />
             <div>
               Sign in with&nbsp;
-              <button>Google</button>
+              <button onClick={signInWithGoogle}>Google</button>
             </div>
             <button
               onClick={(e) => handleLogin(e)}
