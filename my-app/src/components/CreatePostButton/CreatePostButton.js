@@ -30,7 +30,7 @@ export function CreatePostButton({
       {showPencil ? (
         <button onClick={(e) => handleClick(e)}>
           <img src={pencil} alt="pencil click to add post" />
-          <p style={{ marginTop: "1rem" }}>(Tap on the pencil!)</p>
+          <p style={{ marginTop: "1rem" }}>Tap on the pencil</p>
         </button>
       ) : (
         <CreatePost {...createPostInfo} />

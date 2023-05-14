@@ -61,7 +61,13 @@ export function Register() {
 
     if (userConfirmPassword !== userPassword) {
       console.error("Passwords don't match!");
-      return;
+      return toast({
+        title: "Passwords do not match...",
+        description: "Please check the password format ε(´סּ︵סּ)з",
+        status: "error",
+        duration: 3500,
+        isClosable: true,
+      });
     }
 
     var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
@@ -149,7 +155,7 @@ export function Register() {
             />
             {!userPassword && (
               <h3>
-                Your password should be set to 7 to 15 characters which contain
+                Your password should be set to 6 to 20 characters which contain
                 at least one numeric digit and a special character
               </h3>
             )}

@@ -51,10 +51,12 @@ router.post("/:postid/add", async (req, res) => {
     );
     console.log("check report count:", checkReportCount);
 
-    const updateIsVisible = await pool.query(
-      "UPDATE tblPost SET isvisible = false WHERE postid = $1",
-      [postid]
-    );
+    if (checkReportCount.rows[0].reportcount >= 3) {
+      const updateIsVisible = await pool.query(
+        "UPDATE tblPost SET isvisible = false WHERE postid = $1",
+        [postid]
+      );
+    }
 
     res.json(newReport.rows[0]);
   } catch (err) {
@@ -100,7 +102,24 @@ router.get("/reason/:postid", async (req, res) => {
       [postid]
     );
 
-    res.json(getAllReportReason.rows);
+    console.log(getAllReportReason.rows[1]);
+
+    const reasonArray = () => {
+      const array = new Array();
+
+      for (let i = 0; i < getAllReportReason.rows.length; i++) {
+        if (!array.includes(getAllReportReason.rows[i].reason)) {
+          array.push(getAllReportReason.rows[i].reason);
+        } else {
+          break;
+        }
+      }
+
+      return array;
+    };
+
+    // res.json(getAllReportReason.rows);
+    res.json(reasonArray());
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

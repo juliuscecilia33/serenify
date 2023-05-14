@@ -356,10 +356,7 @@ export function PostDetail() {
                 alt="Divider Big"
               />
               <div className="post-page-b-2">
-                <p className="post-page-p">
-                  Any thoughts you <br />
-                  Want to leave?
-                </p>
+                <p className="post-page-p">Any thoughts you Want to leave?</p>
                 <div className="post-page-component">
                   <button onClick={(e) => handleLikeOrDislikePost(e)}>
                     {postLiked ? (
@@ -462,8 +459,7 @@ export function PostDetail() {
                     See how <br />
                   </span>
                   <span className="prompt-page-text-wrapper-4">
-                    People <br />
-                    Reacted.
+                    People Reacted.
                     <br />
                   </span>
                   <br />

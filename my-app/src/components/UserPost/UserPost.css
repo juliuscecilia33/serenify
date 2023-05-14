@@ -8,10 +8,10 @@
   margin: 1rem 0;
 }
 
-.top-section {
+/* .top-section {
   display: flex;
   align-items: center;
-}
+} */
 
 .profile-pic {
   width: 35px;
@@ -47,14 +47,6 @@
   color: #4f4f4f;
 }
 
-.middle-section {
-  width: 100%;
-  /* margin: 25px 0; */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .mood-backing {
   font-family: "Oswald";
   font-style: normal;
@@ -69,7 +61,6 @@
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
-  /* line-height: %; */
   color: #282828;
   margin-bottom: 0.5rem;
 }
@@ -114,18 +105,9 @@
   align-items: flex-start;
 }
 
-.middle-section img {
-  margin-top: 2rem;
-}
-
 .pencil-icon {
   width: 40px;
   height: auto;
   margin-top: 2rem;
   margin-left: 1rem;
-}
-
-.post-image-attachment {
-  border-radius: 15px;
-  margin: 1rem 0;
 }

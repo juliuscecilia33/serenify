@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -11,14 +12,19 @@ const firebaseConfig = {
   projectId: "serenify-82872",
   storageBucket: "serenify-82872.appspot.com",
   messagingSenderId: "643283233370",
-  appId: "1:643283233370:web:7e9a738392bd9dbe298663"
+  appId: "1:643283233370:web:7e9a738392bd9dbe298663",
 };
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-
 // Initialize Cloud Storage and get a reference to the service
 const storage = getStorage(firebaseApp);
+const auth = firebaseApp.auth();
 
-export {storage, firebaseApp as default };
+const provider = new firebaseApp.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+
+const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export { storage, firebaseApp, auth, signInWithGoogle as default };

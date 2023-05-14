@@ -1,25 +1,23 @@
-.admin-page-admin-page {
+.admin-post-page-post-page {
   align-items: center;
   border: 1px none;
   display: flex;
   flex-direction: column;
-  height: 1672px;
   min-width: 390px;
   position: relative;
 }
 
-.admin-page-content {
+.admin-post-page-content {
   align-items: center;
   align-self: stretch;
   background-color: #d1eaec;
   display: flex;
   flex-direction: column;
-  height: 1672px;
   padding: 20px 24px;
   position: relative;
 }
 
-.admin-page-logo {
+.admin-post-page-logo {
   height: 24px;
   left: 32px;
   position: absolute;
@@ -27,12 +25,12 @@
   width: 31px;
 }
 
-.admin-page-logout {
+.admin-post-page-text-wrapper {
   color: #282828;
   font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
-  left: 304px;
+  left: 325px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
@@ -41,51 +39,38 @@
   white-space: nowrap;
 }
 
-.admin-page-b {
+.admin-post-page-tag {
   align-items: center;
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  padding: 140px 0px 30px;
+  padding: 40px 0px 0px;
   position: relative;
 }
 
-.admin-page-text-wrapper {
+.admin-post-page-div {
   align-self: stretch;
   color: #282828;
   font-family: "Oswald", Helvetica;
-  font-size: 81px;
+  font-size: 90px;
   font-weight: 500;
   letter-spacing: 0;
-  line-height: 81px;
-  margin-top: -1px;
-  position: relative;
-}
-
-.admin-page-b-1 {
-  align-items: flex-start;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  padding: 40px 0px 30px;
-  position: relative;
-}
-
-.admin-page-report-div {
-  align-self: stretch;
-  color: #a62f2f;
-  font-family: "Oswald", Helvetica;
-  font-size: 32px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 41.6px;
+  line-height: 90px;
   margin-top: -1px;
   position: relative;
   white-space: nowrap;
 }
 
-.admin-page-don-t-eat-before-bed-just-finished-a-sandwich {
+.admin-post-page-b {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px 30px;
+  position: relative;
+}
+
+.admin-post-page-don-t-eat-before-bed-just-finished-a-sandwich {
   color: #282828;
   font-family: "Oswald", Helvetica;
   font-size: 45px;
@@ -93,22 +78,72 @@
   letter-spacing: 0;
   line-height: 58.5px;
   margin-right: -7px;
+  margin-top: -1px;
   position: relative;
   width: 349px;
 }
 
-.admin-page-b-7 {
-  align-items: center;
-  align-self: stretch;
+.admin-post-page-b1-5 {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  padding: 40px 0px 30px;
+  gap: 36px;
+  margin-left: -4px;
+  margin-right: -4px;
+  padding: 40px 0px 18px;
   position: relative;
+  width: fit-content;
 }
 
-.admin-page-take-a-look-at-this-video {
-  align-self: stretch;
+.admin-post-page-text-wrapper-2 {
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: 350px;
+}
+
+.admin-post-page-text-wrapper-3 {
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 41.6px;
+  position: relative;
+  white-space: nowrap;
+  width: 350px;
+}
+
+.admin-post-page-b1-5-2 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-left: -4px;
+  margin-right: -4px;
+  padding: 40px 0px 0px;
+  position: relative;
+  width: fit-content;
+}
+
+.admin-post-page-approve-deny {
+  color: #686868;
+  font-family: "Oswald", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 58.5px;
+  position: relative;
+  width: 350px;
+}
+
+.admin-post-page-approve-deny-bolded {
   color: #282828;
   font-family: "Oswald", Helvetica;
   font-size: 45px;
@@ -116,20 +151,18 @@
   letter-spacing: 0;
   line-height: 58.5px;
   position: relative;
+  width: 350px;
 }
 
-.admin-page-group {
-  border: 2px solid;
-  border-color: #282828;
-  height: 198px;
-  min-width: 320px;
+.admin-post-page-text-wrapper-4 {
+  color: #282828;
+  font-family: "Oswald", Helvetica;
+  font-size: 90px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 90px;
   position: relative;
-}
-
-.admin-page-img {
-  height: 45px;
-  left: 135px;
-  position: absolute;
-  top: 74px;
-  width: 45px;
+  text-align: right;
+  white-space: nowrap;
+  width: 350px;
 }

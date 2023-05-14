@@ -139,7 +139,6 @@ export function Prompt() {
           <div className="prompt-page-b">
             <p className="prompt-page-apr">{displayDate}</p>
             <p className="prompt-page-apr-two">{displayDay}</p>
-            <br />
 
             <div className="calendar">
               <Calendar

@@ -137,9 +137,7 @@
   font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 58.5px;
-  margin-top: 3.5rem;
+  margin-top: 10px;
   position: relative;
 }
 
@@ -150,15 +148,11 @@
   font-size: 45px;
   font-weight: 400;
   letter-spacing: 0;
-  line-height: 58.5px;
-  /* margin-top: -1px; */
-  padding: 7rem 0;
   position: relative;
 }
 
 .post-page-component {
   height: 78px;
-  margin-top: -8px;
   min-width: 341px;
   display: flex;
   align-items: center;
@@ -168,7 +162,6 @@
 }
 
 .comment-box-component {
-  /* height: `8px; */
   min-width: 341px;
   display: flex;
   align-items: center;
@@ -181,7 +174,6 @@
   min-width: 341px;
   display: flex;
   align-items: center;
-  /* justify-content:; */
   padding-right: 2rem;
   margin-top: 2rem;
 }
@@ -191,9 +183,7 @@
   min-width: 341px;
   display: flex;
   align-items: center;
-  /* justify-content:; */
   padding-right: 2rem;
-  /* margin-top: 2rem; */
 }
 
 .trash-icon {
@@ -206,8 +196,8 @@
 }
 
 .post-image-attachment {
-  border-radius: 15px;
-  margin: 2rem 0;
+  margin: 1rem 0 0 0;
+  height: auto;
 }
 
 .post-page-icon-heart {
@@ -251,7 +241,6 @@
   font-weight: 400;
   letter-spacing: 0;
   line-height: 58.5px;
-  margin-top: -1px;
   position: relative;
 }
 
@@ -318,8 +307,7 @@
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  line-height: 19px;
   letter-spacing: 0.2px;
   color: #4f4f4f;
-  margin-top: 0.7rem;
+  margin-top: 10px;
 }

@@ -26,7 +26,6 @@ export function UserPost(postData) {
           <h3 className="mood-backing">{postData.postData.ascii_mood}</h3>
           // </div>
         )}
-        <br />
         <p className="date_posted">
           {handleTimeSince(new Date(postData.postData.posttime))} ago
         </p>
