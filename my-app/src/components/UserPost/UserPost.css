@@ -26,7 +26,7 @@
   height: auto;
 }
 
-.post-image-attachment-user {
+/* .post-image-attachment-user {
   margin: 1rem 0 0 0;
   height: 100%;
   overflow: hidden;
@@ -35,7 +35,7 @@
   width: 350px;
   height: auto;
   overflow: hidden;
-}
+} */
 
 .report_button {
   display: flex;
@@ -104,20 +104,18 @@
 .middle-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
 }
 
 .iframe-wrap {
   position: relative;
-  width: 100%;
   overflow: hidden;
 }
 
 iframe {
-  position: absolute;
-  width: 95%;
-  height: 100%;
-  border: none;
+  max-width: 95%;
+  height: auto;
+  aspect-ratio: auto;
 }
 
 .pencil-icon {

@@ -154,8 +154,9 @@ router.get("/:userid/likepost", async (req, res) => {
     );
 
     if (getAllUserLikePost.rows[0].length == 0) {
-      res.json("Empty Likes");
+      return res.json("Empty Likes");
     }
+
     const result = getAllUserLikePost.rows[0].postsliked.map((item) =>
       JSON.parse(item)
     );

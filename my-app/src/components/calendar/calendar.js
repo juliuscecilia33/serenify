@@ -18,6 +18,12 @@ function Calendar(props) {
     localStorage.setItem("promptDate", selectedDate);
   };
 
+  // useEffect(() => {
+  //   props.dateCallBack(selectedDate.toLocaleDateString().replace(/\//g, "-"));
+  //   props.setShowPencil(true);
+  //   localStorage.setItem("promptDate", selectedDate);
+  // }, [selectedDate, setSelectedDate]);
+
   useEffect(() => {
     if (localStorage.getItem("promptDate")) {
       setSelectedDate(new Date(localStorage.getItem("promptDate")));

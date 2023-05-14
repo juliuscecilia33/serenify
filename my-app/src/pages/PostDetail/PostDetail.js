@@ -72,6 +72,7 @@ export function PostDetail() {
   console.log("post liked: ", postLiked);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     setTimeout(() => {
       axios
         .get(`${process.env.REACT_APP_BACKENDURL}posts/${postid}`)

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-// 1. create post route
+// create post route
 // like count to 0
 router.post("/create", async (req, res) => {
   try {
@@ -34,7 +34,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-//get all the post that is unvaild rn
+//get all the post that is invisible rn
 router.get("/invisible", async (req, res) => {
   try {
     const getAllPostInvisible = await pool.query(
@@ -66,7 +66,7 @@ router.get("/all", async (req, res) => {
   }
 });
 
-// 2. get post
+//get post based on postid
 router.get("/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
@@ -105,6 +105,7 @@ router.get("/:userid/posts", async (req, res) => {
   }
 });
 
+//get postliked router
 router.get("/:postid/checklike", async (req, res) => {
   const { postid } = req.params;
 
@@ -121,8 +122,8 @@ router.get("/:postid/checklike", async (req, res) => {
   }
 });
 
-// 3. update like count for post (url)
-// router.put("/:postid")
+// update like count for post (url)
+// like route
 router.put("/:postid/likeincremented", async (req, res) => {
   try {
     const { postid } = req.params;
@@ -155,6 +156,7 @@ router.put("/:postid/likeincremented", async (req, res) => {
   }
 });
 
+//dislike route
 router.put("/likedecremented/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
@@ -174,24 +176,32 @@ router.put("/likedecremented/:postid", async (req, res) => {
       [postid]
     );
 
+    /*
+    //get the user postsliked array
+    */
     const userLikedPost = await pool.query(
       "SELECT postsliked FROM tblUser WHERE userid = $1",
       [userid]
     );
     console.log(userLikedPost.rows[0].postsliked);
 
+    //filter the postsliked array without the parameter postid
     const newUserLikedPost = userLikedPost.rows[0].postsliked.filter(
       (item) => JSON.parse(item).postid != postid
     );
     console.log(newUserLikedPost);
 
+    //then insert the new array into the tblUser
     const removeFromUserLikedPosts = await pool.query(
       "UPDATE tblUser SET postsliked = $1 WHERE userid = $2 RETURNING *",
       [newUserLikedPost, userid]
     );
 
-    // check post detail
+    /*
+    //get the user postsliked array
+    */
 
+    // set user like count minus 1
     const updateLike = await pool.query(
       "UPDATE tblpost SET postlike = postlike - 1 WHERE postid = $1",
       [postid]
@@ -202,19 +212,6 @@ router.put("/likedecremented/:postid", async (req, res) => {
       [postid]
     );
 
-    // UPDATE tblUser SET postsLiked = ARRAY_REMOVE(postliked, $1) WHERE userid = $2
-
-    // let postData = null;
-    // const result = getAllUserLikePost.rows[0].postsliked.map((item) =>
-    //   JSON.parse(item).postid === postid ?
-    //   await pool.query("UPDATE tblUser SET postsLiked = ARRAY_REMOVE(postliked, $1) WHERE userid = $2", [item, postid]) : null
-    // );
-
-    // const updateUserPostsLiked = await pool.query(
-    //   "UPDATE tblUser SET postsLiked = ARRAY_REMOVE(postsliked, $1) WHERE userid = $2",
-    //   [postDataResult.rows[0], userid]
-    // );
-
     res.json(removeFromUserLikedPosts.rows[0]);
   } catch (error) {
     console.error(error.message);
@@ -222,8 +219,7 @@ router.put("/likedecremented/:postid", async (req, res) => {
   }
 });
 
-// 3. update like count for post (url)
-// router.put("/:postid")
+// Edit the post route
 router.put("/:postid/editdescription", async (req, res) => {
   try {
     const { postid } = req.params;
@@ -258,8 +254,4 @@ router.delete("/:postid", async (req, res) => {
   }
 });
 
-// 5. edit post route(save for later)
-
 module.exports = router;
-
-// 3. comment on post route
