@@ -126,7 +126,7 @@ export function CreatePost({
             attachment: attachment,
             userid: localStorage.getItem("userid"),
             promptid: promptid,
-            ascii_mood: currentAsciiMood !== "" && currentAsciiMood,
+            ascii_mood: currentAsciiMood !== "" ? currentAsciiMood : null,
           })
           .then((response) => {
             console.log("response successful: ", response);
@@ -222,7 +222,7 @@ export function CreatePost({
                 <iframe
                   src={attachment}
                   alt="user post image"
-                  objectFit="cover"
+                  // objectFit="cover"
                   title="post-attachment"
                 />
               </AspectRatio>
@@ -251,18 +251,17 @@ export function CreatePost({
             </Menu>
           </div>
           <ButtonGroup marginTop={10} gap="2">
-            <Button className="discard" onClick={onOpen}>
+            <button className="discard" onClick={onOpen}>
               Discard
-            </Button>
-            <Button
-              colorScheme="teal"
+            </button>
+            <button
               onClick={(e) => {
                 handleSubmit(e);
               }}
               disabled={attachment === "" && postDescription.length < 1}
             >
               Post
-            </Button>
+            </button>
           </ButtonGroup>
 
           <>

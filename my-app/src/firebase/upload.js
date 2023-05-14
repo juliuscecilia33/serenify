@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { storage } from "./firebaseConfig/firebaseConfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { PlusSquareIcon } from "@chakra-ui/icons";
@@ -16,7 +16,7 @@ export function UploadAttachment(props) {
     }
   };
 
-  const handleClick = (e) => {
+  useEffect(() => {
     if (uploadImage == null) return;
     const postImageTime = new Date(localStorage.getItem("promptDate"))
       .toLocaleDateString()
@@ -35,7 +35,28 @@ export function UploadAttachment(props) {
       });
       console.log("successfully upload image:", uploadImage.name);
     });
-  };
+  }, [setUploadImage, uploadImage]);
+
+  // const handleClick = (e) => {
+  //   if (uploadImage == null) return;
+  //   const postImageTime = new Date(localStorage.getItem("promptDate"))
+  //     .toLocaleDateString()
+  //     .replace(/\//g, "-");
+
+  //   const imageRef = ref(
+  //     storage,
+  //     `images/${localStorage.getItem("userid")}/${postImageTime}/${
+  //       uploadImage.name + v4()
+  //     }`
+  //   );
+  //   uploadBytes(imageRef, uploadImage).then((snapshot) => {
+  //     getDownloadURL(snapshot.ref).then((url) => {
+  //       props.setAttachment(url);
+  //       console.log("url:", url);
+  //     });
+  //     console.log("successfully upload image:", uploadImage.name);
+  //   });
+  // };
 
   // handleClick = (e) => {
   //     const uploadTask = storage.ref(`image/${uploadImage.name}`).put(uploadImage);
@@ -64,16 +85,19 @@ export function UploadAttachment(props) {
       <Input
         type="file"
         errorBorderColor="red"
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => {
+          handleChange(e);
+        }}
         accept="/image/*"
+        variant="unstyled"
       />
-      <Button
+      {/* <Button
         colorScheme="teal"
-        variant="outline"
         onClick={(e) => handleClick(e)}
+        variant="unstyled"
       >
         <PlusSquareIcon />
-      </Button>
+      </Button> */}
     </div>
   );
 }
