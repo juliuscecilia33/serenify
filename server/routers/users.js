@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
 const validinfo = require("../middleware/validinfo");
 const authorization = require("../middleware/authorization");
+const admin = require("../config/firebase-config");
 
 //test connection
 router.get("/test", async (req, res) => {
@@ -99,6 +100,23 @@ router.post("/login", async (req, res) => {
 //firebase loging
 router.post("/firebase/login", async (req, res) => {
   try {
+    const { token } = req.body;
+    let uid = 0;
+    let email = 0;
+    const decodeValue = await admin
+      .auth()
+      .verifyIdToken(token)
+      .then((decodedToken) => {
+        uid = decodedToken.uid;
+        email = decodedToken.email;
+      });
+
+    const insertGoogle = await pool.query(
+      "INSERT INTO tblUser (googleid, isGoogle, useremail) VALUES ($1, $2, $3) RETURNING *",
+      [uid, true, email]
+    );
+
+    res.json(insertGoogle.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

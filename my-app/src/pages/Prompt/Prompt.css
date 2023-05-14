@@ -26,9 +26,6 @@
 }
 
 .prompt-page-you {
-  color: #282828;
-  cursor: pointer;
-  font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
   left: 325px;
@@ -49,8 +46,6 @@
 
 .prompt-page-apr {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 55px;
   font-weight: 500;
   text-decoration: underline;
@@ -63,8 +58,6 @@
 
 .prompt-page-apr-two {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 35px;
   font-weight: 400;
   line-height: 58.5px;
@@ -85,8 +78,6 @@
 
 .prompt-page-sleep-how-much-did-you-get-last-night-what-is-one-way-that-helps-you-get-to-sleep {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 400;
   line-height: 90px;
@@ -95,7 +86,6 @@
 
 .prompt-page-text-wrapper {
   font-weight: 500;
-  /* text-decoration: underline; */
 }
 
 .small-text {
@@ -126,8 +116,6 @@
 
 .prompt-page-p {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
   line-height: 58.5px;
@@ -136,8 +124,6 @@
 
 .prompt-page-here-s-what-people-think-tap-on-them-to-see-the-details {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
   line-height: 45px;
@@ -156,9 +142,6 @@
 
 .prompt-page-don-t-eat-before-bed-just-finished-a-sandwich {
   align-self: stretch;
-  color: #282828;
-  cursor: pointer;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
   line-height: 58.5px;
@@ -173,8 +156,6 @@
 
 .prompt-page-i-usually-listen-to-podcasts-recommend-this-it-is-one-of-the-best-recording-ever-it-tells-you-how-your-muscle-operate-under-extreme-temperature-where-the-tissues-make-a-wormhole-to-the-other-side-of-the-universe-and-listen-to-spotify-while-it-s-ready-for-a-role-play-game {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 30px;
   font-weight: 300;
   line-height: 39px;
@@ -209,7 +190,6 @@
 .cat-image {
   background-image: "unset";
   background-size: "unset";
-  cursor: "pointer";
   height: "200.5px";
   min-width: "197.98px";
   position: "relative";
@@ -227,8 +207,6 @@
 }
 
 .log-in-button {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
   transform: translate(7.4rem, 2.95rem);

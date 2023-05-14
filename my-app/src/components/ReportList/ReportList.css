@@ -1,12 +1,8 @@
 .admin-page-report-text-div {
   align-self: stretch;
   color: #a62f2f;
-  font-family: "Oswald", Helvetica;
   font-size: 32px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 41.6px;
-  margin-top: -1px;
   position: relative;
   white-space: nowrap;
   text-decoration: underline;
@@ -14,11 +10,9 @@
 }
 
 .date_posted {
-  font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  line-height: 19px;
   letter-spacing: 0.2px;
   color: #4f4f4f;
   margin-top: 1.3rem;

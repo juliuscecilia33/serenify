@@ -28,13 +28,9 @@
 }
 
 .admin-page-logout {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
   left: 304px;
-  letter-spacing: 0;
-  line-height: normal;
   position: absolute;
   text-decoration: underline;
   top: 69px;
@@ -52,26 +48,16 @@
 
 .admin-page-text-wrapper {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
-  font-size: 81px;
+  font-size: 80px;
   font-weight: 500;
-  letter-spacing: 0;
-  line-height: 81px;
-  margin-top: -1px;
   position: relative;
   margin-bottom: 2rem;
 }
 
 .admin-page-text-small {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
-  font-size: 31px;
+  font-size: 30px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 81px;
-  margin-top: -1px;
 }
 
 .admin-page-b-1 {
@@ -87,24 +73,15 @@
 .admin-page-report-text-div {
   align-self: stretch;
   color: #a62f2f;
-  font-family: "Oswald", Helvetica;
   font-size: 32px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 41.6px;
-  margin-top: -1px;
   position: relative;
   white-space: nowrap;
 }
 
 .admin-page-don-t-eat-before-bed-just-finished-a-sandwich {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 58.5px;
-  margin-right: -7px;
   position: relative;
   width: 349px;
 }
@@ -121,11 +98,8 @@
 
 .admin-page-take-a-look-at-this-video {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 58.5px;
   position: relative;
 }
@@ -147,11 +121,8 @@
 }
 
 .post_text {
-  font-family: "Oswald";
-  font-style: normal;
   font-weight: 500;
   font-size: 50px;
-  /* line-height: %; */
   color: #282828;
   margin-bottom: 0.5rem;
 }

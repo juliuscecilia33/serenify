@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  /* background-color: #ece8d1; */
 }
 
 .chakra-ui-light {
@@ -9,12 +8,11 @@
 
 body,
 #root {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   background-color: #ece8d1;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Oswald", Helvetica;
   width: 390px;
   height: 844px;
-  /* border: 1px solid red; */
 }
 
 h1,
@@ -28,21 +26,21 @@ li {
 }
 
 h1 {
-  font-size: 23px;
+  font-size: 80px;
 }
 
 h2 {
-  font-size: 20.25px;
+  font-size: 40px;
 }
 
 p,
 li {
-  font-size: 18px;
+  font-size: 23px;
 }
 
 .body-2 {
-  font-size: 16px;
-  color: #757575;
+  font-size: 18px;
+  color: #686868;
 }
 
 nav {
@@ -84,12 +82,12 @@ nav li a:hover {
   transition: 0.3s ease-in-out;
 }
 
-button:hover {
+/* button:hover {
   background: none;
   background-color: none;
   border: none;
   color: none;
-}
+} */
 
 /* .post:first-child {
   margin-top: 150px;

@@ -149,10 +149,50 @@ export function PostDetail() {
     postData ? postData.postdescription : ""
   );
 
-  const handleAsciiReaction = (e, emoji) => {
+  const handleAsciiReaction = (e, ascii_emoji) => {
     e.preventDefault();
 
-    console.log("Ascii Reaction: ", emoji);
+    // if they click
+
+    const asciiBody = {
+      ascii_string: ascii_emoji,
+      postid: postid,
+    };
+
+    axios
+      .post(
+        `${
+          process.env.REACT_APP_BACKENDURL
+        }ascii/reaction/${localStorage.getItem("userid")}`,
+        asciiBody
+      )
+      .then((response) => {
+        console.log("ascii reaction response: ", response);
+
+        setPostAltered(!postAltered);
+
+        if (response.data === false) {
+          axios
+            .put(
+              `${
+                process.env.REACT_APP_BACKENDURL
+              }ascii/add/reaction/${localStorage.getItem("userid")}`,
+              asciiBody
+            )
+            .then((second_response) => {
+              console.log("ascii reaction put response", second_response);
+              setPostAltered(!postAltered);
+            })
+            .catch((error) => {
+              console.error("There was an error!", error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+
+    console.log("Ascii Reaction: ", ascii_emoji);
   };
 
   const handleCommentSubmission = (e) => {
@@ -471,10 +511,15 @@ export function PostDetail() {
                   <br />
                   {asciiReactions &&
                     asciiReactions.map((reaction, key) => (
-                      <p className="ascii-reaction">
+                      <button
+                        onClick={(e) =>
+                          handleAsciiReaction(e, reaction.ascii_string)
+                        }
+                        className="ascii-reaction"
+                      >
                         {reaction.ascii_string}{" "}
                         <span className="border-circle">+{reaction.total}</span>
-                      </p>
+                      </button>
                     ))}
 
                   <img

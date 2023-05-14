@@ -2,7 +2,10 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { apiClient } from "../../instance/config";
+// import { apiClient } from "../../instance/config";
+// import { Authentication } from "../../context/Authentication";
+// import React, { useContext } from "react";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,20 +24,5 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 // Initialize Cloud Storage and get a reference to the service
 const storage = getStorage(firebaseApp);
-const auth = getAuth(firebaseApp);
-
-const googleProvider = new GoogleAuthProvider();
-// const signInWithGoogle = async () => {
-//   try {
-//     const res = await signInWithPopup(auth, googleProvider).then((result) => {
-//       const user = result.user;
-//       auth.user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-//         apiClient.post()
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     alert(err.message);
-//   }
-// };
 
 export { storage, firebaseApp as default };

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import * as ROUTES from "../../constants/routes";
 import "./Login.css";
 import toplayer from "../../images/toplayer.png";
@@ -11,7 +11,8 @@ import Logo from "../../images/logo2.png";
 import { useToast } from "@chakra-ui/react";
 import { Link, Navigate } from "react-router-dom";
 import { NavbarVTwo } from "../../components";
-import { signInWithGoogle } from "../../firebase/firebaseConfig/firebaseConfig";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import apiClient from "../../instance/config";
 
 export function Login() {
   const [userEmail, setUserEmail] = useState("");
@@ -22,6 +23,67 @@ export function Login() {
     useContext(Authentication);
   const [loginError, setLoginError] = useState(false);
   const toast = useToast();
+
+  const auth = getAuth();
+  useEffect(() => {
+    auth.onAuthStateChanged((userCred) => {
+      if (userCred) {
+        setAuth(true);
+        auth.user
+          .getIdToken(/* forceRefresh */ true)
+          .then(function (idToken) {
+            apiClient
+              .post("users/firebase/login", { token: idToken })
+              .then((response) => {
+                console.log("login user response", response.data);
+                if (response.data.userid) {
+                  localStorage.setItem("userid", response.data.userid);
+                  setAuth(true);
+                  setLoading(false);
+                  if (response.data.isadmin === true) {
+                    localStorage.setItem("isAdmin", response.data.isadmin);
+                    setAdmin(true);
+                  } else {
+                    setAdmin(false);
+                  }
+                } else {
+                  setAuth(false);
+                  setLoading(false);
+                }
+
+                toast({
+                  title: "You are Logged in!",
+                  description: "You successfully logged in! :D",
+                  status: "success",
+                  duration: 2500,
+                  isClosable: true,
+                });
+
+                navigate(ROUTES.HOMEVTWO);
+              });
+          })
+          .catch(function (error) {
+            // Handle error
+            console.err(error.message);
+          });
+      }
+    });
+  }, []);
+
+  const googleProvider = new GoogleAuthProvider();
+  const signInWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider).then((result) => {
+        if (result) {
+          setAuth(true);
+        }
+        // auth.user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      });
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -102,7 +164,7 @@ export function Login() {
               type="Password"
             />
             <div>
-              SignIn With
+              Sign in with&nbsp;
               <button>Google</button>
             </div>
             <button

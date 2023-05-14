@@ -34,13 +34,9 @@
 }
 
 .selection-logout {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
   left: 304px;
-  letter-spacing: 0;
-  line-height: normal;
   position: absolute;
   text-decoration: underline;
   top: 69px;
@@ -58,13 +54,8 @@
 
 .selection-text-wrapper {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
-  font-size: 81px;
+  font-size: 80px;
   font-weight: 500;
-  letter-spacing: 0;
-  line-height: 81px;
-  margin-top: -1px;
   position: relative;
 }
 
@@ -82,48 +73,30 @@
 
 .back-button {
   align-self: stretch;
-  color: #282828;
-  cursor: pointer;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 500;
-  letter-spacing: 0;
   line-height: 90px;
-  margin-top: -1px;
-  /* position: absolute; */
-  /* left: 0; */
   white-space: nowrap;
-  /* transform: translateX(-8.4rem); */
 }
 
 .datePicker {
   display: flex;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 30px;
   font-weight: 500;
 }
 
 .selection-apr {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 58.5px;
-  margin-top: -1px;
   position: relative;
   white-space: nowrap;
 }
 
 .selection-sleep-how-much-sleep-did-you-get-last-night-what-is-one-way-that-helps-you-get-to-sleep {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 75px;
   font-weight: 400;
   height: 552px;
-  letter-spacing: 0;
   line-height: 75px;
   position: relative;
   width: 350px;
@@ -139,11 +112,8 @@
 }
 
 .selection-div {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 500;
-  letter-spacing: 0;
   line-height: 90px;
   position: relative;
   text-align: right;

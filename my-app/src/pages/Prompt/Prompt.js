@@ -189,7 +189,7 @@ export function Prompt() {
                   <b>{<CreatePostButton {...createPostInfo} />}</b>
                 </div>
                 <div className="profile-page-dot">
-                  ...........................
+                  .................................
                 </div>
                 {/* <img
                   className="divider-small negative-margin"

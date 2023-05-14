@@ -26,13 +26,9 @@
 }
 
 .admin-post-page-text-wrapper {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
   left: 325px;
-  letter-spacing: 0;
-  line-height: normal;
   position: absolute;
   text-decoration: underline;
   top: 69px;
@@ -50,13 +46,9 @@
 
 .admin-post-page-div {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 500;
-  letter-spacing: 0;
   line-height: 90px;
-  margin-top: -1px;
   position: relative;
   white-space: nowrap;
 }
@@ -71,16 +63,10 @@
 }
 
 .admin-post-page-don-t-eat-before-bed-just-finished-a-sandwich {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 58.5px;
-  margin-right: -7px;
-  margin-top: -1px;
   position: relative;
-  width: 349px;
+  width: 350px;
 }
 
 .admin-post-page-b1-5 {
@@ -88,32 +74,22 @@
   display: flex;
   flex-direction: column;
   gap: 36px;
-  margin-left: -4px;
-  margin-right: -4px;
   padding: 40px 0px 18px;
   position: relative;
   width: fit-content;
 }
 
 .admin-post-page-text-wrapper-2 {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 500;
-  letter-spacing: 0;
-  line-height: 58.5px;
-  margin-top: -1px;
   position: relative;
   white-space: nowrap;
   width: 350px;
 }
 
 .admin-post-page-text-wrapper-3 {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 32px;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 41.6px;
   position: relative;
   white-space: nowrap;
@@ -134,32 +110,24 @@
 
 .admin-post-page-approve-deny {
   color: #686868;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 58.5px;
   position: relative;
   width: 350px;
 }
 
 .admin-post-page-approve-deny-bolded {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 58.5px;
   position: relative;
   width: 350px;
 }
 
 .admin-post-page-text-wrapper-4 {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 500;
-  letter-spacing: 0;
   line-height: 90px;
   position: relative;
   text-align: right;

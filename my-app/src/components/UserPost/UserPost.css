@@ -46,8 +46,6 @@
 }
 
 .date_posted {
-  font-family: "Oswald";
-  font-style: normal;
   font-weight: 400;
   font-size: 20px;
   letter-spacing: 0.2px;
@@ -55,8 +53,6 @@
 }
 
 .mood-backing {
-  font-family: "Oswald";
-  font-style: normal;
   font-weight: 400;
   font-size: 20px;
   margin-bottom: 1rem;
@@ -64,8 +60,6 @@
 }
 
 .post_text {
-  font-family: "Oswald";
-  font-style: normal;
   font-weight: 500;
   font-size: 42px;
   color: #282828;

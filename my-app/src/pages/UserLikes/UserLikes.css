@@ -18,7 +18,6 @@ your-post-your-post {
 }
 
 .your-post-logo {
-  cursor: pointer;
   height: 24px;
   left: 24px;
   position: absolute;
@@ -33,7 +32,6 @@ your-post-your-post {
 .cat-image {
   background-image: "unset";
   background-size: "unset";
-  cursor: "pointer";
   height: "200.5px";
   min-width: "197.98px";
   position: "relative";
@@ -43,13 +41,9 @@ your-post-your-post {
 }
 
 .your-post-logout {
-  color: #282828;
-  cursor: pointer;
-  font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
   left: 304px;
-  letter-spacing: 0;
   line-height: normal;
   position: absolute;
   text-decoration: underline;
@@ -68,13 +62,9 @@ your-post-your-post {
 
 .your-post-your-posts-are-listed-below {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 80px;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 90px;
-  margin-top: -1px;
   position: relative;
 }
 
@@ -99,14 +89,9 @@ your-post-your-post {
 
 .your-post-don-t-eat-before-bed-just-finished-a-sandwich {
   align-self: stretch;
-  color: #282828;
-  cursor: pointer;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 58.5px;
-  margin-top: -1px;
   position: relative;
 }
 
@@ -118,13 +103,8 @@ your-post-your-post {
 
 .your-post-p {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 58.5px;
-  margin-top: -1px;
   position: relative;
 }
 
@@ -135,7 +115,6 @@ your-post-your-post {
 }
 
 .your-post-img {
-  cursor: pointer;
   height: 51px;
   left: 1px;
   position: absolute;

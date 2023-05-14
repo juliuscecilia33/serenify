@@ -43,7 +43,6 @@
   /* border: 2px solid black; */
   outline: none;
   color: #686868;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
   background: none;
@@ -53,7 +52,6 @@
 }
 
 .report-group {
-  cursor: pointer;
   height: 66px;
   min-width: 66px;
   position: relative;
@@ -87,11 +85,8 @@
 
 .report-text-wrapper {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 500;
-  letter-spacing: 0;
   line-height: 90px;
   position: relative;
   white-space: nowrap;
@@ -110,13 +105,8 @@
 }
 
 .report-div-bold {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 58.5px;
-  margin-top: -1px;
   position: relative;
   white-space: nowrap;
   width: 350px;
@@ -124,11 +114,8 @@
 
 .report-div {
   color: #686868;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 58.5px;
   position: relative;
   white-space: nowrap;
   width: 350px;
@@ -136,25 +123,16 @@
 
 .report-text-wrapper {
   align-self: stretch;
-  color: #282828;
-  cursor: pointer;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 500;
-  letter-spacing: 0;
   line-height: 90px;
-  margin-top: -1px;
   position: relative;
   width: 342px;
 }
 
 .report-text-wrapper-2 {
-  color: #282828;
-  cursor: pointer;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 500;
-  letter-spacing: 0;
   line-height: 90px;
   position: relative;
   text-align: right;

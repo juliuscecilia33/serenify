@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db");
-const bcrypt = require("bcrypt");
-const jwtGenerator = require("../utils/jwtGenerator");
-const vaildinfo = require("../middleware/validinfo");
-const authorization = require("../middleware/authorization");
 
 //post an ascii reaction
 //if the ascii emoji has not been added
+// no reaction
 router.post("/reaction/:userid", async (req, res) => {
   try {
     const { userid } = req.params;
@@ -20,7 +17,7 @@ router.post("/reaction/:userid", async (req, res) => {
     );
 
     if (checkAsciiString.rows.length != 0) {
-      return res.status(401).send("The ascii emoji has already there");
+      return res.json(false);
     }
 
     const postNewAsciiReaction = await pool.query(

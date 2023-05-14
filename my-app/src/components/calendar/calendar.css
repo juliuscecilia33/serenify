@@ -5,11 +5,8 @@
 }
 
 .calendar-button {
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 30px;
   font-weight: 500;
   margin-top: 0.3rem;
-  cursor: pointer;
   transition: all 0.3s ease-in-out;
 }

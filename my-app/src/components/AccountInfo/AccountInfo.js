@@ -73,16 +73,16 @@ export function AccountInfo(props) {
         console.log("password1", password1);
         console.log("password2", password2);
 
-         var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
-         if (!password1.match(paswd)) {
-           return toast({
-             title: "Something Wrong...",
-             description: "Please check the password format ε(´סּ︵סּ)з",
-             status: "error",
-             duration: 3500,
-             isClosable: true,
-           });
-         }
+        var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+        if (!password1.match(paswd)) {
+          return toast({
+            title: "Something Wrong...",
+            description: "Please check the password format ε(´סּ︵סּ)з",
+            status: "error",
+            duration: 3500,
+            isClosable: true,
+          });
+        }
         //setUserpassword(password1);
         await apiClient
           .put(`/users/changePassword/${localStorage.getItem("userid")}`, {
@@ -96,7 +96,8 @@ export function AccountInfo(props) {
             // navigate(0);
             toast({
               title: "Successfully Change the Password",
-              description: "You have successfully change your password! (｡◕‿‿◕｡)",
+              description:
+                "You have successfully change your password! (｡◕‿‿◕｡)",
               status: "success",
               duration: 2500,
               isClosable: true,
@@ -152,19 +153,13 @@ export function AccountInfo(props) {
   return (
     <div className="profile-page-b-3">
       <h1 className="profile-page-account-info-email-helloworld-uw-edu-password">
-        <span className="profile-page-text-wrapper-7">
-          Account
-          <br />
-          Info:
-          <br />
-        </span>
+        <span className="profile-page-text-wrapper-7">Account Info:</span>
         <span className="profile-page-text-wrapper-8">
           <br />
           Email: <br />
         </span>
         <span className="profile-page-text-wrapper-9">
           {userEmail}
-          <br />
           <br />
         </span>
         <span className="profile-page-text-wrapper-8">

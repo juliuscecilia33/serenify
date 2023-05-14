@@ -1,7 +1,6 @@
 .post-input {
   /* border: 2px solid black; */
   color: #686868;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
   background: none;
@@ -12,7 +11,6 @@
 }
 
 .character-limit {
-  font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -21,7 +19,6 @@
 }
 
 .upload-text {
-  font-family: "Oswald";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;

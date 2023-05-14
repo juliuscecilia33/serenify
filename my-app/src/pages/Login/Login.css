@@ -29,14 +29,9 @@
 }
 
 .login-text-wrapper {
-  color: #282828;
-  cursor: pointer;
-  font-family: "Oswald", Helvetica;
   font-size: 23px;
   font-weight: 400;
   left: 304px;
-  letter-spacing: 0;
-  line-height: normal;
   position: absolute;
   text-decoration: underline;
   top: 69px;
@@ -61,13 +56,8 @@
 
 .login-h-1 {
   align-self: stretch;
-  color: #282828;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 500;
-  letter-spacing: 0;
-  line-height: 90px;
-  margin-top: -1px;
   position: relative;
   white-space: nowrap;
 }
@@ -83,12 +73,8 @@
 
 .login-div {
   color: #686868;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 58.5px;
-  margin-top: -1px;
   position: relative;
   white-space: nowrap;
   width: 342px;
@@ -98,10 +84,8 @@
 
 .login-text-wrapper-2 {
   color: #686868;
-  font-family: "Oswald", Helvetica;
   font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 58.5px;
   position: relative;
   white-space: nowrap;
@@ -113,11 +97,8 @@
 
 .login-text-wrapper-3 {
   color: #282828;
-  cursor: pointer;
-  font-family: "Oswald", Helvetica;
   font-size: 90px;
   font-weight: 500;
-  letter-spacing: 0;
   line-height: 90px;
   position: relative;
   text-align: right;
