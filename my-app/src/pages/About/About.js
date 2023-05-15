@@ -12,7 +12,7 @@ export function About() {
         <div className="about-selection-content">
           <div className="about-selection-b-3">
             <h1 className="about-selection-about-us">
-              <h1 className="h1-title">About Us:</h1>
+              <h1 className="h1-title">About Us</h1>
               <h2 className="h2-title">Project Website:</h2>
               <p>
                 <a href="https://serenify-info.webflow.io/">
