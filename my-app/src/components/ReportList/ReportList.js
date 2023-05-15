@@ -13,7 +13,7 @@ export function ReportList(props) {
 
     return displayDate;
   };
-  console.log("This is the formatted date", reportPostData);
+  //console.log("This is the formatted date", reportPostData);
 
   return (
     <div class="post-container">

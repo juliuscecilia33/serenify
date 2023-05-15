@@ -31,11 +31,11 @@ export function About() {
                 Contributors:
                 <br />
               </span>
-              <span className="contributor">
-                Haochen Dong, Julius Cecilia, Ruolin Chen, Shin Hu
-              </span>
-              <span className="about-selection-span">
+              <p className="contributor">
                 <br />
+                Haochen Dong, Julius Cecilia, Ruolin Chen, Shin Hu
+              </p>
+              <span className="about-selection-span">
                 Sponsor:
                 <br />
               </span>

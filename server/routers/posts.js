@@ -71,7 +71,12 @@ router.get("/invisible", async (req, res) => {
 router.get("/allReports", async (req, res) => {
   try {
     const getAllReport = await pool.query(
-      "SELECT * FROM tblPost WHERE reportcount >= 1"
+      "SELECT pm.promptid, pm.promptdescription, pm.promptdate, \
+      po.postid, po.postdescription, po.attachment, po.posttime, po.userid, po.postlike, po.likedusers, \
+      po.reportcount, po.isvisible, po.ascii_mood\
+        FROM tblPost po \
+        JOIN tblPrompt pm ON pm.promptid = po.promptid \
+        WHERE reportcount > 0"
     );
 
     res.json(getAllReport.rows);

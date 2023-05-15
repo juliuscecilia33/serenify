@@ -51,6 +51,9 @@ export function NavbarVTwo() {
                 >
                   Profile
                 </MenuItem>
+                <MenuItem onClick={() => navigate(ROUTES.ABOUT)}>
+                  About us
+                </MenuItem>
                 <MenuItem onClick={(e) => logout(e)}>Sign Out</MenuItem>
               </MenuList>
             </Menu>
