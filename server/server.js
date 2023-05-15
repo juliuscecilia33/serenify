@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path"); //ms azure
 
 const app = express();
 const Pool = require("pg").Pool;
@@ -14,6 +15,9 @@ const pool = new Pool({
 const cors = require("cors");
 
 app.use(cors());
+
+//ms azure
+app.use(express.static("../my-app/build/"));
 
 pool
   .connect()
@@ -31,4 +35,9 @@ app.use("/comments", require("./routers/comments"));
 app.use("/report", require("./routers/report"));
 app.use("/ascii", require("./routers/ascii"));
 
-app.listen(3005, () => console.log("Server listening on port 3005"));
+//ms azure
+app.get("/", (req, res) => {
+  res.sendFile("../my-app/build/index.html");
+});
+
+app.listen(8080, () => console.log("Server listening on port 8080"));
