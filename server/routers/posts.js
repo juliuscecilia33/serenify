@@ -67,6 +67,20 @@ router.get("/invisible", async (req, res) => {
   }
 });
 
+//get all post that has report count is greater than one
+router.get("/allReports", async (req, res) => {
+  try {
+    const getAllReport = await pool.query(
+      "SELECT * FROM tblPost WHERE reportcount >= 1"
+    );
+
+    res.json(getAllReport.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 //get all the post
 //get all first, then id
 router.get("/all", async (req, res) => {

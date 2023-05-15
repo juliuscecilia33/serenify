@@ -109,7 +109,12 @@ export function InternalReportPostDetail() {
           {/* <img className="post-page-logo" alt={"Logo"} src={"logo-2.png"} />
         <div className="post-page-text-wrapper">You</div> */}
           <div className="admin-post-page-tag">
-            <div className="admin-post-page-div">&lt;-</div>
+            <button
+              onClick={() => navigate(ROUTES.INTERNALREPORT)}
+              className="back-button"
+            >
+              &lt;-
+            </button>
           </div>
           <div className="admin-post-page-b">
             <h1 className="admin-post-page-don-t-eat-before-bed-just-finished-a-sandwich">

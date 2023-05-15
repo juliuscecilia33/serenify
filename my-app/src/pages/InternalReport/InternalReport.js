@@ -15,7 +15,7 @@ export function InternalReport() {
 
   const getReport = async () => {
     await apiClient
-      .get(`/posts/invisible`)
+      .get("/posts/allReports")
       .then((response) => {
         console.log(response);
 
