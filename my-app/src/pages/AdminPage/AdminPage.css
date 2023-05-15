@@ -13,9 +13,10 @@
   background-color: #d1eaec;
   display: flex;
   flex-direction: column;
-  height: 1400px;
+  height: flex;
   padding: 20px 24px;
   position: relative;
+  width: flex;
 }
 
 .admin-page-logo {

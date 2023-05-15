@@ -11,11 +11,8 @@ export function About() {
       <div>
         <div className="about-selection-content">
           <div className="about-selection-b-3">
-            <h1 className="about-selection-about-us-project-website-serenify-info-webflow-io-contributors-haochen-dong-julius-cecilia-ruolin-chen-shin-hu-sponsor-young-leaders-program-contact-email-serenify-platform-outlook-com-linkedin-www-linkedin-com-company-ylp-us">
-              <span className="about-selection-text-wrapper">
-                About Us:
-                <br />
-              </span>
+            <h1 className="about-selection-about-us">
+              <span className="about-selection-text-wrapper">About Us:</span>
               <span className="about-selection-span">
                 <br />
                 Project Website:
@@ -28,7 +25,6 @@ export function About() {
                 rel="noopener noreferrer"
               >
                 serenify-info.webflow.io
-                <br />
               </a>
               <span className="about-selection-span">
                 <br />
@@ -36,26 +32,15 @@ export function About() {
                 <br />
               </span>
               <span className="contributor">
-                Haochen Dong
-                <br />
+                Haochen Dong, Julius Cecilia, Ruolin Chen, Shin Hu
               </span>
-              <span className="contributor">
-                Julius Cecilia
-                <br />
-              </span>
-              <span className="contributor">
-                Ruolin Chen
-                <br />
-              </span>
-              <span className="contributor">Shin Hu</span>
               <span className="about-selection-span">
                 <br />
-                Sponsor:&nbsp;&nbsp;
+                Sponsor:
                 <br />
               </span>
               <span className="about-selection-text-wrapper-2">
                 Young Leaders Program
-                <br />
                 <br />
               </span>
               <span className="about-selection-span">
@@ -64,7 +49,6 @@ export function About() {
               </span>
               <span className="about-selection-text-wrapper-2">
                 serenify.platform@outlook.com
-                <br />
                 <br />
               </span>
               <span className="about-selection-span">

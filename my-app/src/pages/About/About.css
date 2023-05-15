@@ -37,7 +37,6 @@
   font-weight: 400;
   left: 304px;
   position: absolute;
-  text-decoration: underline;
   top: 69px;
   white-space: nowrap;
 }
@@ -58,12 +57,12 @@
   position: relative;
 }
 
-.about-selection-about-us-project-website-serenify-info-webflow-io-contributors-haochen-dong-julius-cecilia-ruolin-chen-shin-hu-sponsor-young-leaders-program-contact-email-serenify-platform-outlook-com-linkedin-www-linkedin-com-company-ylp-us {
+.about-selection-about-us {
   align-self: stretch;
   color: transparent;
   font-size: 90px;
   font-weight: 400;
-  line-height: 90px;
+  line-height: 80px;
   position: relative;
 }
 
@@ -76,14 +75,11 @@
 .about-selection-span {
   color: #282828;
   font-size: 45px;
-  line-height: 0.5px;
 }
 
 .contributor {
   color: #686868;
   font-size: 25px;
-  margin-top: -3rem;
-  margin-bottom: 0rem;
 }
 
 .about-selection-text-wrapper-2 {

@@ -206,7 +206,6 @@ export function AccountInfo(props) {
         <p className="profile-page-wake-me-up-if-you-want-to-change-it">
           <span className="profile-page-text-wrapper-10">
             Wake me up if you want to change it.
-            <br />
           </span>
           <Button colorScheme={"null"} onClick={onOpen}>
             <span className="profile-page-text-wrapper-3">
