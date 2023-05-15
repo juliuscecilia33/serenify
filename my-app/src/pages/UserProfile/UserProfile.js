@@ -66,13 +66,8 @@ export function UserProfile() {
             <div className="profile-page-content">
               <div className="profile-page-b">
                 <p className="profile-page-greetings-what-would-you-want-me-to-tell-you-about">
-                  <span className="profile-page-text-wrapper">
-                    Greetings~
-                    <br />
-                  </span>
-                  <span className="profile-page-span"></span>
+                  <span className="profile-page-text-wrapper">Greetings~</span>
                   <span className="profile-page-text-wrapper-2">(￣▽￣)ノ</span>
-                  <span className="profile-page-span"></span>
                   <span className="profile-page-text-wrapper-3">
                     What would you want me to tell you about?
                   </span>

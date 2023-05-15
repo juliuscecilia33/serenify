@@ -94,6 +94,9 @@ export function Prompt() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     setTimeout(() => {
       const getDefaultPromptContent = async () => {
         await apiClient

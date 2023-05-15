@@ -29,6 +29,10 @@ export function UploadAttachment(props) {
       }`
     );
     uploadBytes(imageRef, uploadImage).then((snapshot) => {
+      console.log("snapshot: ", snapshot);
+      if (snapshot.metadata.contentType === "video/mp4") {
+        props.setIsVideo(true);
+      }
       getDownloadURL(snapshot.ref).then((url) => {
         props.setAttachment(url);
         console.log("url:", url);

@@ -177,26 +177,33 @@ export function AccountInfo(props) {
               <br />
             </span>
             <span className="profile-page-text-wrapper-9">
-              <InputGroup>
-                <Input
-                  type={show ? "text" : "password"}
-                  isReadOnly
-                  value={userPassword}
-                  variant="unstyled"
-                />
-                <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={() => setShow(!show)}>
-                    {show ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              <br />
+              <div className="password-input">
+                <InputGroup>
+                  <Input
+                    type={show ? "text" : "password"}
+                    isReadOnly
+                    value={userPassword}
+                    variant="unstyled"
+                  />
+                  <InputRightElement width="4.5rem">
+                    <Button
+                      h="1rem"
+                      size="sm"
+                      onClick={() => setShow(!show)}
+                      variant="unstyled"
+                    >
+                      {show ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+                <br />
+              </div>
             </span>
           </>
         )}
       </h1>
-      {!google ? (
-        <p className="profile-page-wake-me-up-if-you-want-to-change-it-zzzz">
+      {!google && (
+        <p className="profile-page-wake-me-up-if-you-want-to-change-it">
           <span className="profile-page-text-wrapper-10">
             Wake me up if you want to change it.
             <br />
@@ -207,11 +214,6 @@ export function AccountInfo(props) {
             </span>
           </Button>
         </p>
-      ) : (
-        <span className="profile-page-text-wrapper-10">
-          I wish You could have a wonderful day
-          <br />I love you ʕっ•ᴥ•ʔっ
-        </span>
       )}
 
       <Modal isOpen={isOpen} onClose={onClose}>

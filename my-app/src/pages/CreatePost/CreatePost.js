@@ -74,6 +74,7 @@ export function CreatePost({
   const toast = useToast();
   const [currentAsciiMood, setCurrentAsciiMood] = useState(asciiEmojis[0]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isVideo, setIsVideo] = useState(false);
 
   const maxLength = 500;
 
@@ -127,6 +128,7 @@ export function CreatePost({
             userid: localStorage.getItem("userid"),
             promptid: promptid,
             ascii_mood: currentAsciiMood !== "" ? currentAsciiMood : null,
+            isvideo: isVideo,
           })
           .then((response) => {
             console.log("response successful: ", response);
@@ -209,6 +211,7 @@ export function CreatePost({
             <UploadAttachment
               attachment={attachment}
               setAttachment={setAttachment}
+              setIsVideo={setIsVideo}
             />
           ) : (
             <Stack>

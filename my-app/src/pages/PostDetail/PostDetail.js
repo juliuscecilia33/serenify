@@ -359,16 +359,23 @@ export function PostDetail() {
                     {postData.postdescription && postData.postdescription}
                   </h1>
                 )}
-                <div className="iframe-wrap">
-                  {postData.attachment && (
+                {postData.attachment ? (
+                  postData.isvideo ? (
                     <iframe
-                      className="post-image-attachment"
+                      className="post-image-attachment-user-hello"
                       src={postData.attachment}
                       alt="post_image"
                       title="attachment"
+                      scrolling="no"
                     />
-                  )}
-                </div>
+                  ) : (
+                    <img
+                      className="post-image-attachment-user-hello"
+                      src={postData.attachment}
+                      alt="post_image"
+                    />
+                  )
+                ) : null}
                 {postData.ascii_mood && (
                   // <div className="mood-backing">
                   <h3 className="mood-backing">{postData.ascii_mood}</h3>

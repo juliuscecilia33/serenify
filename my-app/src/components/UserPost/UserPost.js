@@ -6,6 +6,7 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import Pencil from "../../images/PencilTwo.png";
 
 export function UserPost(postData) {
+  console.log(postData.postData.attachment);
   return (
     <>
       <div className="post-container">
@@ -13,12 +14,21 @@ export function UserPost(postData) {
         <div className="middle-section">
           <p className="post_text">{postData.postData.postdescription}</p>
           {postData.postData.attachment ? (
-            <iframe
-              className="post-image-attachment-user"
-              src={postData.postData.attachment}
-              alt="post_image"
-              title="attachment"
-            />
+            postData.postData.isvideo ? (
+              <iframe
+                className="post-image-attachment-user-hello"
+                src={postData.postData.attachment}
+                alt="post_image"
+                title="attachment"
+                scrolling="no"
+              />
+            ) : (
+              <img
+                className="post-image-attachment-user-hello"
+                src={postData.postData.attachment}
+                alt="post_image"
+              />
+            )
           ) : null}
         </div>
         {postData.postData.ascii_mood && (

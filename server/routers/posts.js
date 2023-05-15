@@ -6,8 +6,14 @@ const pool = require("../db");
 // like count to 0
 router.post("/create", async (req, res) => {
   try {
-    const { postDescription, attachment, userid, promptid, ascii_mood } =
-      req.body;
+    const {
+      postDescription,
+      attachment,
+      userid,
+      promptid,
+      ascii_mood,
+      isvideo,
+    } = req.body;
     //Generate TIMESTAMP
     const postTime = new Date().toLocaleString();
 
@@ -23,8 +29,16 @@ router.post("/create", async (req, res) => {
 
     //create the post
     const createPost = await pool.query(
-      "INSERT INTO tblPost (postDescription, attachment, postTime, userid, promptid, ascii_mood) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-      [postDescription, attachment, postTime, userid, promptid, ascii_mood]
+      "INSERT INTO tblPost (postDescription, attachment, postTime, userid, promptid, ascii_mood, isvideo) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      [
+        postDescription,
+        attachment,
+        postTime,
+        userid,
+        promptid,
+        ascii_mood,
+        isvideo,
+      ]
     );
 
     res.json("Successfully post~~~");
@@ -91,7 +105,7 @@ router.get("/:userid/posts", async (req, res) => {
     const getPromptAndUserPosts = await pool.query(
       "SELECT pm.promptid, pm.promptdescription, pm.promptdate, \
       po.postid, po.postdescription, po.attachment, po.posttime, po.userid, po.postlike, po.likedusers, \
-      po.reportcount, po.isvisible, po.ascii_mood\
+      po.reportcount, po.isvisible, po.ascii_mood, po.isvideo \
         FROM tblPost po \
         JOIN tblPrompt pm ON pm.promptid = po.promptid \
         WHERE po.userid = $1",

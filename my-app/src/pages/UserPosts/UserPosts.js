@@ -96,18 +96,23 @@ export function UserPosts() {
                         </div>
                         <div className="middle-section">
                           <p className="post_text">{post.postdescription}</p>
-                          <div className="iframe-wrap">
-                            {post.attachment && (
+                          {post.attachment ? (
+                            post.isvideo ? (
                               <iframe
-                                className="post-image-attachment"
+                                className="post-image-attachment-user-hello"
                                 src={post.attachment}
                                 alt="post_image"
                                 title="attachment"
-                                allowFullScreen
                                 scrolling="no"
                               />
-                            )}
-                          </div>
+                            ) : (
+                              <img
+                                className="post-image-attachment-user-hello"
+                                src={post.attachment}
+                                alt="post_image"
+                              />
+                            )
+                          ) : null}
                         </div>
                         {post.ascii_mood && (
                           // <div className="mood-backing">

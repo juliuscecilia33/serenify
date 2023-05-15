@@ -247,58 +247,64 @@ export function Register() {
                   </button>
                 </h3>
               )}
-              <Modal isOpen={isOpen} onClose={onClose}>
+              <Modal
+                isOpen={isOpen}
+                onClose={onClose}
+                colorScheme="yellow"
+                scrollBehavior="inside"
+              >
                 <ModalOverlay />
                 <ModalContent>
                   <ModalHeader>Privacy Policy</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>
-                    <p>
-                      This privacy notice for Young Leaders Program, describes
-                      how and why we might collect, store, and use your
-                      information when you use our services, such as when you:
-                    </p>
-                    <UnorderedList>
-                      <ListItem>
+                    <div>
+                      <div>
+                        This privacy notice for Young Leaders Program, describes
+                        how and why we might collect, store, and use your
+                        information when you use our services, such as when you:
+                      </div>
+
+                      <div>
                         Visit our website, or any website of ours that links to
                         this privacy notice
-                      </ListItem>
-                      <ListItem>
+                      </div>
+                      <div>
                         Engage with us in other related ways, including any
                         sales, marketing, or events Questions or concerns?
                         Reading this privacy notice will help you
-                      </ListItem>
-                      <ListItem>
+                      </div>
+                      <div>
                         What personal information do we process? When you visit,
                         use, or navigate our Services, we may process personal
                         information depending on how you interact with the Young
                         Leaders Program and the Services, the choices you make,
                         and the products and features you use.{" "}
-                      </ListItem>
-                      <ListItem>
+                      </div>
+                      <div>
                         What information do we collect? We collect personal
                         information that you provide to us. We collect email
                         addresses and passwords.{" "}
-                      </ListItem>
-                      <ListItem>
+                      </div>
+                      <div>
                         Do we process any sensitive personal information? We do
                         not process sensitive personal information.{" "}
-                      </ListItem>
-                      <ListItem>
+                      </div>
+                      <div>
                         Do we receive any information from third parties? We do
                         not receive any information from third parties. Which
                         parties do we share personal information with? We do not
                         share your personal information with third parties.{" "}
-                      </ListItem>
-                      <ListItem>
+                      </div>
+                      <div>
                         How do we process your information? We process your
                         information to provide, improve, and administer our
                         Services, communicate with you, for security and fraud
                         prevention, and to comply with law. We may also process
                         your information for other purposes with your consent
                         and only when we have a valid legal reason to do so.{" "}
-                      </ListItem>
-                      <ListItem>
+                      </div>
+                      <div>
                         How long do we keep your information? We keep your
                         information for as long as necessary to fulfill the
                         purposes outlined in this privacy notice, unless a
@@ -306,20 +312,20 @@ export function Register() {
                         No purpose in this notice will require us keeping your
                         information for longer than the period of time in which
                         users have an account with us.
-                      </ListItem>
-                      <ListItem>
+                      </div>
+                      <div>
                         What are your rights? Depending on where you are located
                         geographically, the applicable privacy law may mean you
                         have certain rights regarding your personal information.{" "}
-                      </ListItem>
-                      <ListItem>
+                      </div>
+                      <div>
                         How do you exercise your rights? The easiest way to
                         exercise your rights is by contacting us at
                         serenify.platform@outlook.com. We will consider and act
                         upon any request in accordance with applicable data
                         protection laws.
-                      </ListItem>
-                    </UnorderedList>
+                      </div>
+                    </div>
                   </ModalBody>
 
                   <ModalFooter>

@@ -172,6 +172,12 @@
   position: relative; */
 }
 
+iframe {
+  width: 350px;
+  height: auto;
+  overflow: hidden;
+}
+
 .post-page-icon-heart {
   height: 70px;
   left: 9px;

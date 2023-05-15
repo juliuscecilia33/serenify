@@ -59,10 +59,6 @@
   font-weight: 500;
 }
 
-.profile-page-span {
-  font-size: 50px;
-}
-
 .profile-page-text-wrapper-2 {
   font-size: 70px;
   font-weight: 500;
@@ -77,7 +73,6 @@
   font-size: 42px;
   font-weight: 400;
   letter-spacing: 12px;
-  line-height: normal;
   position: relative;
   text-align: center;
   width: 360px;
@@ -88,7 +83,6 @@
   font-size: 42px;
   font-weight: 400;
   letter-spacing: 3px;
-  line-height: normal;
   position: relative;
   text-align: center;
   width: 360px;
@@ -103,8 +97,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: 36px;
-  margin-left: -4px;
-  margin-right: -4px;
   padding: 40px 0px 0px;
   position: relative;
   width: fit-content;
@@ -122,7 +114,6 @@ button {
   color: #686868;
   font-size: 45px;
   font-weight: 400;
-  line-height: 58.5px;
   position: relative;
   white-space: nowrap;
   width: 350px;
@@ -149,7 +140,6 @@ button {
   color: #282828;
   font-size: 90px;
   font-weight: 500;
-  line-height: 90px;
   position: relative;
   text-align: right;
   white-space: nowrap;
@@ -161,7 +151,7 @@ button {
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  padding: 40px 0px 170px;
+  padding: 40px 0;
   position: relative;
 }
 
@@ -170,7 +160,6 @@ button {
   color: transparent;
   font-size: 90px;
   font-weight: 400;
-  line-height: 90px;
   position: relative;
 }
 
@@ -182,16 +171,14 @@ button {
 .profile-page-text-wrapper-8 {
   color: #282828;
   font-size: 45px;
-  line-height: 58.5px;
 }
 
 .profile-page-text-wrapper-9 {
   color: #686868;
-  font-size: 45px;
-  line-height: 58.5px;
+  font-size: 30px;
 }
 
-.profile-page-wake-me-up-if-you-want-to-change-it-zzzz {
+.profile-page-wake-me-up-if-you-want-to-change-it {
   align-self: stretch;
   font-size: 23px;
   font-weight: 400;
