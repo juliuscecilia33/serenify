@@ -147,7 +147,9 @@ export function UserPosts() {
                   </>
                 ))
               ) : (
-                <h1>No posts to show</h1>
+                <p className="post-page-no-post">
+                  Post Something! <br /> ※(^o^)/※
+                </p>
               )}
 
               <div className="your-post-b-cat">

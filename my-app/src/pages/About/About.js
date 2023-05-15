@@ -12,57 +12,33 @@ export function About() {
         <div className="about-selection-content">
           <div className="about-selection-b-3">
             <h1 className="about-selection-about-us">
-              <span className="about-selection-text-wrapper">About Us:</span>
-              <span className="about-selection-span">
-                <br />
-                Project Website:
-                <br />
-              </span>
-              <a
-                href="https://serenify-info.webflow.io/"
-                className="about-selection-text-wrapper-2"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                serenify-info.webflow.io
-              </a>
-              <span className="about-selection-span">
-                <br />
-                Contributors:
-                <br />
-              </span>
-              <p className="contributor">
-                <br />
-                Haochen Dong, Julius Cecilia, Ruolin Chen, Shin Hu
+              <h1 className="h1-title">About Us:</h1>
+              <h2 className="h2-title">Project Website:</h2>
+              <p>
+                <a href="https://serenify-info.webflow.io/">
+                  serenify-info.webflow.io
+                </a>
               </p>
-              <span className="about-selection-span">
-                Sponsor:
-                <br />
-              </span>
-              <span className="about-selection-text-wrapper-2">
-                Young Leaders Program
-                <br />
-              </span>
-              <span className="about-selection-span">
-                Contact Email:
-                <br />
-              </span>
-              <span className="about-selection-text-wrapper-2">
-                serenify.platform@outlook.com
-                <br />
-              </span>
-              <span className="about-selection-span">
-                LinkedIn:
-                <br />
-              </span>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.linkedin.com/company/ylp-us/"
-                className="about-selection-text-wrapper-2"
-              >
-                www.linkedin.com/company/ylp-us
-              </a>
+
+              <h2 className="h2-title">Contributors:</h2>
+              <p>Haochen Dong, Julius Cecilia, Ruolin Chen, Shin Hu</p>
+
+              <h2 className="h2-title">Sponsor:</h2>
+              <p>Young Leaders Program</p>
+
+              <h2 className="h2-title">Contact Email:</h2>
+              <p>
+                <a href="mailto:serenify.platform@outlook.com">
+                  serenify.platform@outlook.com
+                </a>
+              </p>
+
+              <h2 className="h2-title">LinkedIn:</h2>
+              <p>
+                <a href="https://www.linkedin.com/company/ylp-us/">
+                  linkedin.com/company/ylp-us/
+                </a>
+              </p>
             </h1>
           </div>
         </div>

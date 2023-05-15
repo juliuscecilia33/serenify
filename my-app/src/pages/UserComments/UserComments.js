@@ -75,7 +75,7 @@ export function UserComments() {
                 src={DividerSmall}
                 alt="DividerSmall"
               />
-              {userComments ? (
+              {userComments && userComments.length > 0 ? (
                 userComments.map((comment, id) => (
                   <>
                     <div className="post-container">
@@ -103,7 +103,9 @@ export function UserComments() {
                   </>
                 ))
               ) : (
-                <h1>No comments to show</h1>
+                <p className="post-page-no-post">
+                  Comment on a post! <br /> ※(^o^)/※
+                </p>
               )}
               <div className="your-post-b-cat">
                 <p className="your-post-p">

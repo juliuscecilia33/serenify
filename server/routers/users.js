@@ -138,9 +138,10 @@ router.get("/:userid/likepost", async (req, res) => {
       "SELECT postsliked FROM tblUser WHERE userid = $1",
       [userid]
     );
+    console.log(getAllUserLikePost.rows[0]);
 
-    if (getAllUserLikePost.rows[0].length == 0) {
-      return res.json("Empty Likes");
+    if (getAllUserLikePost.rows[0].postsliked === null) {
+      return res.json(getAllUserLikePost.rows[0]);
     }
 
     const result = getAllUserLikePost.rows[0].postsliked.map((item) =>

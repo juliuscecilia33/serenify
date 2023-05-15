@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { NavbarVTwo } from "../../components";
 import { motion, useMotionValue, useTransform } from "framer-motion";
+import DividerBig from "../../images/DividerBig.png";
 
 export function HomeVTwo() {
   const x = useMotionValue(0);
@@ -33,6 +34,11 @@ export function HomeVTwo() {
             <br />I am Serenify.
           </h1>
           <div className="profile-page-div">--------------</div>
+          {/* <img
+            className="divider-small negative-margin"
+            src={DividerBig}
+            alt="Divider Big"
+          /> */}
         </div>
         <div className="s2">
           <h1 className="big">Your</h1>

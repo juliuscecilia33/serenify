@@ -275,6 +275,36 @@ router.delete("/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
 
+    const userLiked = await pool.query(
+      "SELECT likedusers FROM tblPost WHERE postid = $1",
+      [postid]
+    );
+
+    console.log(userLiked.rows[0].likedusers);
+
+    /*
+    //get the user postsliked array
+    */
+    const updateEveryUser = userLiked.rows[0].likedusers.map(async (userid) => {
+      const userLikedPost = await pool.query(
+        "SELECT postsliked FROM tblUser WHERE userid = $1",
+        [userid]
+      );
+      console.log(userLikedPost.rows[0].postsliked);
+
+      //filter the postsliked array without the parameter postid
+      const newUserLikedPost = userLikedPost.rows[0].postsliked.filter(
+        (item) => JSON.parse(item).postid != postid
+      );
+      //console.log(newUserLikedPost);
+
+      //then insert the new array into the tblUser
+      const removeFromUserLikedPosts = await pool.query(
+        "UPDATE tblUser SET postsliked = $1 WHERE userid = $2 RETURNING *",
+        [newUserLikedPost, userid]
+      );
+    });
+
     const deletePost = await pool.query(
       "DELETE FROM tblPost WHERE postid = $1",
       [postid]

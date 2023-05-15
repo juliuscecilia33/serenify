@@ -25,11 +25,15 @@ export function UserLikes() {
         )
         .then((response) => {
           console.log("liked posts all: ", response);
-          setUserLikes(
-            response.data.sort(function (a, b) {
-              return new Date(b.posttime) - new Date(a.posttime);
-            })
-          );
+          if (response.data.postsliked) {
+            setUserLikes(
+              response.data.sort(function (a, b) {
+                return new Date(b.posttime) - new Date(a.posttime);
+              })
+            );
+          } else {
+            setUserLikes([]);
+          }
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -130,7 +134,9 @@ export function UserLikes() {
                   </>
                 ))
               ) : (
-                <h1>No Liked Posts</h1>
+                <p className="post-page-no-post">
+                  Like a post! <br /> ※(^o^)/※
+                </p>
               )}
               <div className="your-post-b-cat">
                 <p className="your-post-p">
