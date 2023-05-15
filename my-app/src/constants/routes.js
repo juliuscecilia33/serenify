@@ -14,3 +14,4 @@ export const USERPOSTS = "/:userid/profile/posts";
 export const USERLIKES = "/:userid/profile/likes";
 export const USERCOMMENTS = "/:userid/profile/comments";
 export const ADMINPAGE = "/admin";
+export const ABOUT = "/about";

@@ -54,7 +54,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Login User
+// regular login
 router.post("/login", async (req, res) => {
   const { useremail, userpassword } = req.body;
   const dateObject = new Date().toLocaleString();
@@ -72,11 +72,6 @@ router.post("/login", async (req, res) => {
       console.log("wrong email");
       return res.status(401).json("Invalid Credentials");
     }
-
-    // const validPassword = await bcrypt.compare(
-    //   user_password,
-    //   user.rows[0].user_password
-    // );
 
     if (user.rows[0].userpassword !== userpassword) {
       console.log("wrong password");
@@ -96,7 +91,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//firebase loging
+//firebase login
 router.post("/firebase/login", async (req, res) => {
   try {
     const { token } = req.body;
@@ -126,11 +121,7 @@ router.post("/firebase/login", async (req, res) => {
       );
       res.json(insertGoogle.rows[0]);
     }
-    // } else {
-    //   const getUser = await pool.query(
-    //     "SELECT * FROM tblUser WHERE uid = $1 AND useremail = $2",
-    //     [uid, email]
-    //   );
+
     res.json(checkEmail.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -142,11 +133,6 @@ router.post("/firebase/login", async (req, res) => {
 router.get("/:userid/likepost", async (req, res) => {
   try {
     const { userid } = req.params;
-
-    // const getAllUserLikePost = await pool.query(
-    //   "SELECT postsliked FROM tblUser WHERE userid = $1",
-    //   [userid]
-    // );
 
     const getAllUserLikePost = await pool.query(
       "SELECT postsliked FROM tblUser WHERE userid = $1",
@@ -168,23 +154,17 @@ router.get("/:userid/likepost", async (req, res) => {
   }
 });
 
-//change a password
+//change password routes
 router.put("/changePassword/:userid", async (req, res) => {
   try {
     const { userid } = req.params;
     const { userpassword } = req.body;
 
     //check if the password vaild
-
     const updatePassword = await pool.query(
       "UPDATE tbluser SET userpassword = $1 WHERE userid = $2 RETURNING *",
       [userpassword, userid]
     );
-
-    // const getNewUserInfo = await pool.query(
-    //   "SELECT * FROM tblUser WHERE userid = $1",
-    //   [userid]
-    // );
 
     res.json(updatePassword.rows[0]);
   } catch (err) {
@@ -192,14 +172,12 @@ router.put("/changePassword/:userid", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
-//Put the LoginTime
-//add a check
+
+//Update user login time route
 router.put("/logintime", async (req, res) => {
   const { useremail } = req.body;
   //generate the current timestamp
   const dateObject = new Date().toLocaleString();
-  //pgFormatDate(new Date());
-  //console.log("Date Object:", dateObject);
 
   try {
     //check whether user exist

@@ -86,14 +86,16 @@ export function UserLikes() {
                       </div> */}
                         <div className="middle-section">
                           <p className="post_text">{post.postdescription}</p>
-                          {post.attachment && (
-                            <iframe
-                              className="post-image-attachment"
-                              src={post.attachment}
-                              alt="post_image"
-                              title="attachment"
-                            />
-                          )}
+                          <div className="iframe-wrap">
+                            {post.attachment && (
+                              <iframe
+                                className="post-image-attachment"
+                                src={post.attachment}
+                                alt="post_image"
+                                title="attachment"
+                              />
+                            )}
+                          </div>
                         </div>
                         {post.ascii_mood && (
                           // <div className="mood-backing">

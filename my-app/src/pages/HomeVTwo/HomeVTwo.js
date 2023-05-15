@@ -19,6 +19,7 @@ export function HomeVTwo() {
     x.set(0);
   };
   const [rotate, setRotate] = useState(false);
+
   return (
     <>
       <NavbarVTwo />
@@ -99,6 +100,13 @@ export function HomeVTwo() {
           </p>
           <Link to={ROUTES.PROMPT}>
             <img className="cat" alt={"Cat"} src={Cat} />
+          </Link>
+        </div>
+
+        <div className="about-us">
+          <div className="profile-page-div">--------------</div>
+          <Link to={ROUTES.ABOUT}>
+            <span>(｡◕‿‿◕｡)About us(｡◕‿‿◕｡)</span>
           </Link>
         </div>
       </div>

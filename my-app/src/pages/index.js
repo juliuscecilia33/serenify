@@ -14,3 +14,4 @@ export { UserComments } from "./UserComments/UserComments";
 export { UserLikes } from "./UserLikes/UserLikes";
 export { UserPosts } from "./UserPosts/UserPosts";
 export { AdminPage } from "./AdminPage/AdminPage";
+export { About } from "./About/About";

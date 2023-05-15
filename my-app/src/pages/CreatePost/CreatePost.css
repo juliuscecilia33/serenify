@@ -33,6 +33,14 @@
   text-decoration: underline;
 }
 
+.post-send {
+  color: #f9f9f9;
+  padding: 4px 8px 6px 8px;
+  border-radius: 5px;
+  background-color: green;
+}
+
 .discard {
-  border: 1px solid #686868;
+  padding: 4px 8px 6px 8px;
+  border-radius: 5px;
 }

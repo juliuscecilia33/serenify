@@ -11,8 +11,6 @@ import Logo from "../../images/logo2.png";
 import { useToast } from "@chakra-ui/react";
 import { Link, Navigate } from "react-router-dom";
 import { NavbarVTwo } from "../../components";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import apiClient from "../../instance/config";
 
 export function Login() {
   const [userEmail, setUserEmail] = useState("");
@@ -23,109 +21,6 @@ export function Login() {
     useContext(Authentication);
   const [loginError, setLoginError] = useState(false);
   const toast = useToast();
-
-  // useEffect(() => {
-  //   auth.onAuthStateChanged((userCred) => {
-  //     if (userCred) {
-  //       auth.userCred
-  //         .getIdToken(true)
-  //         .then(function (idToken) {
-  //           apiClient
-  //             .post("users/firebase/login", { token: idToken })
-  //             .then((response) => {
-  //               console.log("login user response", response.data);
-  //               if (response.data.userid) {
-  //                 localStorage.setItem("userid", response.data.userid);
-  //                 setAuth(true);
-  //                 setLoading(false);
-  //                 if (response.data.isadmin === true) {
-  //                   localStorage.setItem("isAdmin", response.data.isadmin);
-  //                   setAdmin(true);
-  //                 } else {
-  //                   setAdmin(false);
-  //                 }
-  //               } else {
-  //                 setAuth(false);
-  //                 setLoading(false);
-  //               }
-
-  //               toast({
-  //                 title: "You are Logged in!",
-  //                 description: "You successfully logged in! :D",
-  //                 status: "success",
-  //                 duration: 2500,
-  //                 isClosable: true,
-  //               });
-
-  //               navigate(ROUTES.HOMEVTWO);
-  //             });
-  //         })
-  //         .catch(function (error) {
-  //           // Handle error
-  //           console.err(error.message);
-  //         });
-  //     } else {
-  //       setAuth(false);
-  //     }
-  //   });
-  // }, []);
-  const auth = getAuth();
-  const googleProvider = new GoogleAuthProvider();
-  const signInWithGoogle = async () => {
-    try {
-      const res = await signInWithPopup(auth, googleProvider);
-      //.then((result) => {
-      //if (result) {
-      const userCred = res.user;
-      if (userCred) {
-        auth.currentUser
-          .getIdToken(true)
-          .then(function (idToken) {
-            apiClient
-              .post("users/firebase/login", { token: idToken })
-              .then((response) => {
-                console.log("login user response", response.data);
-                if (response.data.userid) {
-                  localStorage.setItem("userid", response.data.userid);
-                  setAuth(true);
-                  setLoading(false);
-                  if (response.data.isadmin === true) {
-                    localStorage.setItem("isAdmin", response.data.isadmin);
-                    setAdmin(true);
-                  } else {
-                    setAdmin(false);
-                  }
-                } else {
-                  setAuth(false);
-                  setLoading(false);
-                }
-
-                toast({
-                  title: "You are Logged in!",
-                  description: "You successfully logged in! :D",
-                  status: "success",
-                  duration: 2500,
-                  isClosable: true,
-                });
-
-                navigate(ROUTES.HOMEVTWO);
-              });
-          })
-          .catch(function (error) {
-            // Handle error
-            console.err(error.message);
-          });
-      } else {
-        setAuth(false);
-      }
-      //}
-      // auth.user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-      //});
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -205,10 +100,7 @@ export function Login() {
               placeholder="Password"
               type="Password"
             />
-            <div>
-              Sign in with&nbsp;
-              <button onClick={signInWithGoogle}>Google</button>
-            </div>
+
             <button
               onClick={(e) => handleLogin(e)}
               className="login-text-wrapper-3"

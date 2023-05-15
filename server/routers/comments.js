@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-//1. create comment
+//create a comment
 router.post("/:postid/create", async (req, res) => {
   try {
     const { commentText, userid } = req.body;
@@ -36,11 +36,6 @@ router.get("/:userid", async (req, res) => {
   try {
     const { userid } = req.params;
 
-    // const getAllComment = await pool.query(
-    //   "SELECT * FROM tblComment WHERE userid = $1",
-    //   [userid]
-    // );
-
     const getCommentAndPost = await pool.query(
       "SELECT pc.commentid, pc.commenttext, pc.commenttime,  \
       pc.userid, po.postid, po.postdescription, po.attachment, \
@@ -58,7 +53,7 @@ router.get("/:userid", async (req, res) => {
   }
 });
 
-//get comments by postid
+//get all comments by postid
 router.get("/post/:postid", async (req, res) => {
   try {
     const { postid } = req.params;
@@ -75,7 +70,7 @@ router.get("/post/:postid", async (req, res) => {
   }
 });
 
-//get a comment
+//get a comment by commentid
 router.get("/:commentid", async (req, res) => {
   try {
     const { commentid } = req.params;
@@ -92,7 +87,7 @@ router.get("/:commentid", async (req, res) => {
   }
 });
 
-//3. delete comment
+//delete comment
 router.delete("/:commentid/:userid", async (req, res) => {
   try {
     const { commentid, userid } = req.params;
@@ -108,7 +103,5 @@ router.delete("/:commentid/:userid", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
-//4. edit a comment
 
 module.exports = router;

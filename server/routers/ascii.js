@@ -97,7 +97,7 @@ router.put("/add/reaction/:userid", async (req, res) => {
   }
 });
 
-//get a ascii_string info
+//get a ascii_string info for specific post
 router.get("/get", async (req, res) => {
   try {
     const { ascii_string, postid } = req.body;
@@ -114,7 +114,7 @@ router.get("/get", async (req, res) => {
   }
 });
 
-//get a ascii_string info
+//get all ascii_strings for specific post
 router.get("/:postid/reactions", async (req, res) => {
   try {
     const { postid } = req.params;

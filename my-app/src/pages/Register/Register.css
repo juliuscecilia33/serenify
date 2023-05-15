@@ -107,7 +107,7 @@
   border: none;
   outline: none;
   background: none;
-  margin-top: -3rem;
+  margin-top: -0.5rem;
 }
 
 .signup-text-wrapper-4 {
@@ -120,4 +120,17 @@ button:hover {
   background-color: none;
   border: none;
   color: none;
+}
+
+.password-format-announcement {
+  color: #282828;
+  line-height: 1.3;
+  font-size: xx-small;
+  margin-top: -3rem;
+  margin-bottom: -3rem;
+}
+
+.google-login {
+  margin-top: -4rem;
+  margin-bottom: -4rem;
 }

@@ -255,6 +255,7 @@ export function CreatePost({
               Discard
             </button>
             <button
+              className="post-send"
               onClick={(e) => {
                 handleSubmit(e);
               }}

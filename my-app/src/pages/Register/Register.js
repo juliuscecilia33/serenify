@@ -34,13 +34,16 @@ import {
 import { QuestionIcon } from "@chakra-ui/icons";
 import { NavbarVTwo } from "../../components";
 import { CommunityRule } from "../../components/CommunityRule/CommunityRule";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import apiClient from "../../instance/config";
 
 export function Register() {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userConfirmPassword, setUserConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { isAuthenticated, setAuth } = useContext(Authentication);
+  const { isAuthenticated, setAuth, admin, setAdmin } =
+    useContext(Authentication);
   const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
   const [agreeCommunityRule, setAgreeCommunityRule] = useState(false);
   const [showPop, setShowPop] = useState(false);
@@ -52,6 +55,61 @@ export function Register() {
   const handlePopover = (e) => {
     if (!userPassword) {
       setShowPop(true);
+    }
+  };
+
+  const auth = getAuth();
+  const googleProvider = new GoogleAuthProvider();
+  const signInWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      //.then((result) => {
+      //if (result) {
+      const userCred = res.user;
+      if (userCred) {
+        auth.currentUser
+          .getIdToken(true)
+          .then(function (idToken) {
+            apiClient
+              .post("users/firebase/login", { token: idToken })
+              .then((response) => {
+                console.log("login user response", response.data);
+                if (response.data.userid) {
+                  localStorage.setItem("userid", response.data.userid);
+                  setAuth(true);
+                  setLoading(false);
+                  if (response.data.isadmin === true) {
+                    localStorage.setItem("isAdmin", response.data.isadmin);
+                    setAdmin(true);
+                  } else {
+                    setAdmin(false);
+                  }
+                } else {
+                  setAuth(false);
+                  setLoading(false);
+                }
+
+                toast({
+                  title: "You are Logged in!",
+                  description: "You successfully logged in! :D",
+                  status: "success",
+                  duration: 2500,
+                  isClosable: true,
+                });
+
+                navigate(ROUTES.HOMEVTWO);
+              });
+          })
+          .catch(function (error) {
+            // Handle error
+            console.err(error.message);
+          });
+      } else {
+        setAuth(false);
+      }
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
     }
   };
 
@@ -143,6 +201,12 @@ export function Register() {
                 setShowPop(false);
               }}
             />
+            {!userPassword && (
+              <div className="password-format-announcement">
+                Your password should be set to 6 to 20 characters which contain
+                at least one numeric digit and a special character ٩(^‿^)۶
+              </div>
+            )}
             <input
               onChange={(e) => {
                 setUserPassword(e.target.value);
@@ -153,13 +217,6 @@ export function Register() {
               type="Password"
               onClick={(e) => handlePopover(e)}
             />
-            {!userPassword && (
-              <h3>
-                Your password should be set to 6 to 20 characters which contain
-                at least one numeric digit and a special character
-              </h3>
-            )}
-
             <input
               onChange={(e) => {
                 setUserConfirmPassword(e.target.value);
@@ -171,8 +228,10 @@ export function Register() {
             />
 
             <div>
-              Please Read and Agree the Privacy Policy and Serenify's Community
-              Guideline First~
+              <span>
+                Please Read and Agree the Privacy Policy and Serenify's
+                Community Guideline First ᕙ(`▽´)ᕗ
+              </span>
               {!agreePrivacyPolicy ? (
                 <h3>
                   <button onClick={onOpen}>
@@ -289,6 +348,13 @@ export function Register() {
                 Already have an account? <u>Log in here!</u>
               </h3>
             </Link>
+            <div className="google-login">
+              Sign in with your&nbsp;
+              <button onClick={signInWithGoogle}>
+                <u>Google</u>
+              </button>
+              &nbsp;account
+            </div>
             {agreeCommunityRule && agreePrivacyPolicy && (
               <button
                 onClick={(e) => handleRegister(e)}
