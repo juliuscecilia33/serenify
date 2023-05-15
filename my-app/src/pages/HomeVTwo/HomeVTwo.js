@@ -105,9 +105,11 @@ export function HomeVTwo() {
 
         <div className="about-us">
           <div className="profile-page-div">--------------</div>
-          <Link to={ROUTES.ABOUT}>
-            <span>(｡◕‿‿◕｡)About us(｡◕‿‿◕｡)</span>
-          </Link>
+          <div className="about-us-line">
+            <Link to={ROUTES.ABOUT}>
+              <span>ABOUT SERENIFY (｡◕‿‿◕｡)</span>
+            </Link>
+          </div>
         </div>
       </div>
     </>

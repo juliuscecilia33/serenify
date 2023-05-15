@@ -36,6 +36,7 @@ import { NavbarVTwo } from "../../components";
 import { CommunityRule } from "../../components/CommunityRule/CommunityRule";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import apiClient from "../../instance/config";
+import { modalTheme } from "./modalTheme";
 
 export function Register() {
   const [userEmail, setUserEmail] = useState("");
